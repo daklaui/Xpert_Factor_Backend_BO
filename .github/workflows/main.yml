@@ -1,7 +1,10 @@
 name: CI/CD
 
-on: push
-
+on:
+  push:
+    tags:
+      - '*prod*'
+      - '*stg*'
 jobs:
   build:
     name: Building image
