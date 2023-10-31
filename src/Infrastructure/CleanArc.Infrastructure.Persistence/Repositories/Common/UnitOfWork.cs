@@ -9,11 +9,14 @@ public class UnitOfWork : IUnitOfWork
     public IUserRefreshTokenRepository UserRefreshTokenRepository { get; }
     public IOrderRepository OrderRepository { get; }
 
+    public IIndividualRepository IndividualRepository { get; }
+
     public UnitOfWork(ApplicationDbContext db)
     {
         _db = db;
         UserRefreshTokenRepository = new UserRefreshTokenRepository(_db);
         OrderRepository= new OrderRepository(_db);
+        IndividualRepository= new IndividuRepository(_db);
     }
 
     public  Task CommitAsync()
