@@ -41,5 +41,5 @@ jobs:
             docker image pull 001919/xfactor_be
             docker container stop xfactor_be-prod
             docker container prune -f
-            docker run -d --name xfactor_be-prod --restart unless-stopped -p 80:80 -p 443:443 001919/xfactor_be
+            docker run -d --name xfactor_be-prod --restart unless-stopped -p 8089:80 -p 443:443 001919/xfactor_be
             docker image prune -f
