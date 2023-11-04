@@ -1,4 +1,6 @@
 ﻿using CleanArc.Application.Features.Individu.Commands.AddIndividuCommand;
+using CleanArc.Application.Features.Individu.Queries.GetAllIndividus;
+using CleanArc.Application.Features.Individu.Queries.GetByIdQuery;
 using CleanArc.Application.Features.Order.Commands;
 using CleanArc.Application.Features.Order.Queries.GetUserOrders;
 using CleanArc.WebFramework.BaseController;
@@ -31,11 +33,19 @@ public class IndividuController : BaseController
         return base.OperationResult(command);
     }
 
-    /*[HttpGet("GetUserOrders")]
-    public async Task<IActionResult> GetUserOrders()
+   [HttpGet("GetAllIndividus")]
+    public async Task<IActionResult> GetAllIndividus()
     {
-        var query = await _sender.Send(new GetUserOrdersQueryModel(UserId));
+        var query = await _sender.Send(new GetAllIndividusQuery());
 
         return base.OperationResult(query);
-    }*/
+    }
+
+    [HttpGet("GetIndividuById/{id}")]
+    public async Task<IActionResult> GetIndividuById(int id)
+    {
+        var query = await _sender.Send(new GetByIdQuery(id));
+
+        return base.OperationResult(query);
+    }
 }

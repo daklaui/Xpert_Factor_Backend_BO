@@ -2,8 +2,9 @@
 using CleanArc.Domain.Common;
 using CleanArc.Domain.Entities;
 
-public class TIndividu : BaseEntity
-    {
+public class TIndividu : BaseEntity, IEntity
+{
+    
         public string GenreInd { get; set; }
         public string TypDocIdInd { get; set; }
         public string NumDocIdInd { get; set; }
@@ -36,7 +37,8 @@ public class TIndividu : BaseEntity
         public string AdrInd { get; set; }
         public string CpInd { get; set; }
         public string RefAchInd { get; set; }
-        public virtual ICollection<TRib> ribs { get; set; }
+        public virtual ICollection<TRib> Ribs { get; set; }
+        public virtual ICollection<TContact> Contacts { get; set; }
 
 }
  

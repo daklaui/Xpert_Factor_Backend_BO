@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CleanArc.Infrastructure.Persistence.Repositories;
 
-internal class IndividuRepository:BaseAsyncRepository<TIndividu>,IIndividualRepository
+internal class IndividuRepository : BaseAsyncRepository<TIndividu>, IIndividualRepository
 {
     public IndividuRepository(ApplicationDbContext dbContext) : base(dbContext)
     {
@@ -16,8 +16,13 @@ internal class IndividuRepository:BaseAsyncRepository<TIndividu>,IIndividualRepo
         await base.AddAsync(individu);
     }
 
-    public Task<List<TIndividu>> GetAllIndividusAsync(int id)
+    public  async Task<List<TIndividu>> GetAllIndividusAsync()
     {
-        throw new NotImplementedException();
+      return  await  base.TableNoTracking.ToListAsync();
+    }
+
+    public async Task<TIndividu> GetIndividuById(int id)
+    {
+          return await base.TableNoTracking.FirstAsync(p=>p.Id == id);
     }
 }
