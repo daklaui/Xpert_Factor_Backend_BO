@@ -16,8 +16,8 @@ internal class IndividuRepository:BaseAsyncRepository<TIndividu>,IIndividualRepo
         await base.AddAsync(individu);
     }
 
-    public Task<List<TIndividu>> GetAllIndividusAsync(int id)
+    public  async Task<List<TIndividu>> GetAllIndividusAsync()
     {
-        throw new NotImplementedException();
+      return  await  base.TableNoTracking.ToListAsync();
     }
 }
