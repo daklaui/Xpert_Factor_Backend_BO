@@ -1,4 +1,5 @@
-﻿using CleanArc.Application.Contracts.Persistence;
+﻿using CleanArc.Application.Common;
+using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Domain.Entities.Order;
 using CleanArc.Infrastructure.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
@@ -16,9 +17,12 @@ internal class IndividuRepository : BaseAsyncRepository<TIndividu>, IIndividualR
         await base.AddAsync(individu);
     }
 
-    public  async Task<List<TIndividu>> GetAllIndividusAsync()
+    public  async Task<PagedList<TIndividu>> GetAllIndividusAsync(PaginationParams paginationParams)
     {
-      return  await  base.TableNoTracking.ToListAsync();
+        var query = base.TableNoTracking.AsQueryable();
+        var result = await PagedList<TIndividu>.CreateAsync(query, paginationParams.PageNumber, paginationParams.PageSize);
+        
+        return result;
     }
 
     public async Task<TIndividu> GetIndividuById(int id)
