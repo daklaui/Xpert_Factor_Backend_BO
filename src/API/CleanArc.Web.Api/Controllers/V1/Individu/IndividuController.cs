@@ -1,4 +1,5 @@
-﻿using CleanArc.Application.Features.Individu.Commands.AddIndividuCommand;
+﻿using CleanArc.Application.Common;
+using CleanArc.Application.Features.Individu.Commands.AddIndividuCommand;
 using CleanArc.Application.Features.Individu.Queries.GetAllIndividus;
 using CleanArc.Application.Features.Individu.Queries.GetByIdQuery;
 using CleanArc.Application.Features.Order.Commands;
@@ -34,9 +35,9 @@ public class IndividuController : BaseController
     }
 
    [HttpGet("GetAllIndividus")]
-    public async Task<IActionResult> GetAllIndividus()
+    public async Task<IActionResult> GetAllIndividus([FromQuery] PaginationParams paginationParams)
     {
-        var query = await _sender.Send(new GetAllIndividusQuery());
+        var query = await _sender.Send(new GetAllIndividusQuery(paginationParams));
 
         return base.OperationResult(query);
     }

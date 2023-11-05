@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CleanArc.Application.Common;
 using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Application.Features.Users.Queries.GetUsers;
 using CleanArc.Application.Models.Common;
@@ -7,7 +8,7 @@ using Mediator;
 
 namespace CleanArc.Application.Features.Individu.Queries.GetAllIndividus
 {
-    internal class GetAllIndividusQueryHandler : IRequestHandler<GetAllIndividusQuery,OperationResult<List<GetAllIndividusQueryResult>>>
+    internal class GetAllIndividusQueryHandler : IRequestHandler<GetAllIndividusQuery,OperationResult<PageInfo<GetAllIndividusQueryResult>>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -18,13 +19,20 @@ namespace CleanArc.Application.Features.Individu.Queries.GetAllIndividus
             _mapper = mapper;
         }
 
-        public async ValueTask<OperationResult<List<GetAllIndividusQueryResult>>> Handle(GetAllIndividusQuery request, CancellationToken cancellationToken)
+        public async ValueTask<OperationResult<PageInfo<GetAllIndividusQueryResult>>> Handle(GetAllIndividusQuery request, CancellationToken cancellationToken)
         {
-            var individus = await _unitOfWork.IndividualRepository.GetAllIndividusAsync();
+            var individus = await _unitOfWork.IndividualRepository.GetAllIndividusAsync(request.paginationParams);
+ 
+            var result = new PageInfo<GetAllIndividusQueryResult>
+            {
+                PageSize = individus.PageSize,
+                CurrentPage = individus.CurrentPage,
+                TotalPages = individus.TotalPages,
+                TotalCount = individus.TotalCount,
+                Result = individus.Select(_mapper.Map<TIndividu, GetAllIndividusQueryResult>).ToList()
 
-            var result = individus.Select(_mapper.Map<TIndividu, GetAllIndividusQueryResult>).ToList();
-
-            return OperationResult<List<GetAllIndividusQueryResult>>.SuccessResult(result);
+        };
+            return OperationResult<PageInfo<GetAllIndividusQueryResult>>.SuccessResult(result);
         }
     }
 }
