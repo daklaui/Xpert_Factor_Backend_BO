@@ -9,7 +9,8 @@ public class UnitOfWork : IUnitOfWork
     public IUserRefreshTokenRepository UserRefreshTokenRepository { get; }
     public IOrderRepository OrderRepository { get; }
     public IIndividualRepository IndividualRepository { get; }
-    public ITPostalCodesRepository TPostalCodesRepository { get; } // Nouvelle propriété
+    public ITPostalCodesRepository TPostalCodesRepository { get; }
+    public ITJobsRepository TJobsRepository { get; } // Nouvelle propriété
 
     public UnitOfWork(ApplicationDbContext db)
     {
@@ -17,7 +18,8 @@ public class UnitOfWork : IUnitOfWork
         UserRefreshTokenRepository = new UserRefreshTokenRepository(_db);
         OrderRepository = new OrderRepository(_db);
         IndividualRepository = new IndividuRepository(_db);
-        TPostalCodesRepository = new TPostalCodesRepository(_db); // Initialisation de TPostalCodesRepository
+        TPostalCodesRepository = new TPostalCodesRepository(_db);
+        TJobsRepository = new TJobsRepository(_db); // Initialisation de TJobsRepository
     }
 
     public Task CommitAsync()

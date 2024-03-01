@@ -18,6 +18,8 @@ public static class ServiceCollectionExtension
         });
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidateCommandBehavior<,>));
         services.AddAutoMapper(typeof(TPostalCodesProfile).Assembly);
+        services.AddAutoMapper(typeof(TJobsProfile).Assembly);
+        
 
         return services;
     }

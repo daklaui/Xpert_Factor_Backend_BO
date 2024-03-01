@@ -23,7 +23,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ITPostalCodesRepository, TPostalCodesRepository>(); // Remplacez TPostalCodesRepository par votre implémentation concrète
         services.AddScoped<AddTPostalCodesCommandHandler>();
         services.AddScoped<UpdateTPostalCodesCommandHandler>();
-        
+        services.AddScoped<ITJobsRepository, TJobsRepository>();
 
         return services;
     }
