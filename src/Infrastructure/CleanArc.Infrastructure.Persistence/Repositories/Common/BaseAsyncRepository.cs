@@ -34,4 +34,11 @@ internal abstract class BaseAsyncRepository<TEntity> where TEntity:class,IEntity
     {
         await Entities.Where(deleteExpression).ExecuteDeleteAsync();
     }
+
+    protected virtual async Task UpdateAsync(TEntity entity)
+    {
+        DbContext.Entry(entity).State = EntityState.Modified;
+        await DbContext.SaveChangesAsync();
+    }
+
 }

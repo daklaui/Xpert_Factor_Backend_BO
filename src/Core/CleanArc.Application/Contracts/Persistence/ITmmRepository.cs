@@ -10,9 +10,9 @@ namespace CleanArc.Application.Contracts.Persistence
 {
     public interface ITmmRepository
     {
-        Task<TMM> GetTmmByIdAsync(int id);
-        Task<PagedList<TMM>> GetAllTmmAsync(PaginationParams paginationParams);
-        Task AddTmmAsync(TMM tmm);
-        Task UpdateTmmAsync(TMM tmm);
+        Task<TTMM> GetTmmByIdAsync(int id);
+        Task<PagedList<TTMM>> GetAllTmmAsync(PaginationParams paginationParams);
+        Task AddTmmAsync(TTMM tmm);
+        Task UpdateTmmAsync(TTMM tmm);
     }
 }
