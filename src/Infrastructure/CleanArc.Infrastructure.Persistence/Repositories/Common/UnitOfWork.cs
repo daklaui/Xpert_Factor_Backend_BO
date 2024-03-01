@@ -10,6 +10,7 @@ public class UnitOfWork : IUnitOfWork
     public IOrderRepository OrderRepository { get; }
 
     public IIndividualRepository IndividualRepository { get; }
+    public ITmmRepository tmmRepository { get; }
 
     public UnitOfWork(ApplicationDbContext db)
     {
