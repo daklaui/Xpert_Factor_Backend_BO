@@ -2,6 +2,7 @@
 using System.Text;
 using CleanArc.Application.Contracts;
 using CleanArc.Application.Contracts.Identity;
+using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Application.Models.ApiResult;
 using CleanArc.Domain.Entities.User;
 using CleanArc.Infrastructure.Identity.Identity;
@@ -45,6 +46,8 @@ public static class ServiceCollectionExtension
         services.AddScoped<IRoleStore<Role>, RoleStore>();
         services.AddScoped<IUserStore<User>, AppUserStore>();
         services.AddScoped<IRoleManagerService, RoleManagerService>();
+        
+
 
 
         services.AddIdentity<User, Role>(options =>

@@ -1,4 +1,6 @@
 ﻿using CleanArc.Application.Contracts.Persistence;
+using CleanArc.Application.Features.TPostalCodes.Commands;
+using CleanArc.Infrastructure.Persistence.Repositories;
 using CleanArc.Infrastructure.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -17,7 +19,17 @@ public static class ServiceCollectionExtensions
             options
                 .UseSqlServer(configuration.GetConnectionString("SqlServer"));
         });
+        
+        services.AddScoped<ITPostalCodesRepository, TPostalCodesRepository>(); // Remplacez TPostalCodesRepository par votre implémentation concrète
+        services.AddScoped<AddTPostalCodesCommandHandler>();
+        services.AddScoped<UpdateTPostalCodesCommandHandler>();
+        services.AddScoped<ITJobsRepository, TJobsRepository>();
 
         return services;
     }
+    
+   
+        
+   
+
 }
