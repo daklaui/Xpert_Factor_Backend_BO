@@ -11,12 +11,15 @@ public class UnitOfWork : IUnitOfWork
 
     public IIndividualRepository IndividualRepository { get; }
 
+    public ITListValRepository TListValRepository { get; }
+
     public UnitOfWork(ApplicationDbContext db)
     {
         _db = db;
         UserRefreshTokenRepository = new UserRefreshTokenRepository(_db);
         OrderRepository= new OrderRepository(_db);
         IndividualRepository= new IndividuRepository(_db);
+        TListValRepository = new TListValRepository(_db);
     }
 
     public  Task CommitAsync()
