@@ -17,12 +17,11 @@ public static class ServiceCollectionExtension
             options.Namespace = "CleanArc.Application.Mediator";
         });
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidateCommandBehavior<,>));
-        //services.AddMediator(Assembly.GetExecutingAssembly());
-        services.AddAutoMapper(Assembly.GetExecutingAssembly());
-
+        services.AddAutoMapper(typeof(TPostalCodesProfile).Assembly);
 
         return services;
     }
+
 
    
 }
