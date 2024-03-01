@@ -127,6 +127,34 @@ namespace Persistence.Migrations
                     b.ToTable("TRibs");
                 });
 
+            modelBuilder.Entity("CleanArc.Domain.Entities.TTMM", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("EndDateTMM")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RateTMM")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("StartDateTMM")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TTMMS");
+                });
+
             modelBuilder.Entity("CleanArc.Domain.Entities.User.Role", b =>
                 {
                     b.Property<int>("Id")
