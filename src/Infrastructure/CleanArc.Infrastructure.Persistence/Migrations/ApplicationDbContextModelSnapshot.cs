@@ -97,6 +97,58 @@ namespace Persistence.Migrations
                     b.ToTable("TContacts");
                 });
 
+            modelBuilder.Entity("CleanArc.Domain.Entities.TGroupe", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NomGro")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TGrpUserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TGrpUserId");
+
+                    b.ToTable("TGroupes");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TGrpUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<byte>("ActifGrpUser")
+                        .HasColumnType("tinyint");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdGrpUser")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LibGrpUser")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TGrpUsers");
+                });
+
             modelBuilder.Entity("CleanArc.Domain.Entities.TRib", b =>
                 {
                     b.Property<int>("Id")
@@ -547,6 +599,23 @@ namespace Persistence.Migrations
                     b.Navigation("individu");
                 });
 
+            modelBuilder.Entity("CleanArc.Domain.Entities.TGroupe", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TGrpUser", "TGrpUser")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("CleanArc.Domain.Entities.TGrpUser", null)
+                        .WithMany("Groupe")
+                        .HasForeignKey("TGrpUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TGrpUser");
+                });
+
             modelBuilder.Entity("CleanArc.Domain.Entities.TRib", b =>
                 {
                     b.HasOne("TIndividu", "individu")
@@ -628,6 +697,11 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TGrpUser", b =>
+                {
+                    b.Navigation("Groupe");
                 });
 
             modelBuilder.Entity("CleanArc.Domain.Entities.User.Role", b =>

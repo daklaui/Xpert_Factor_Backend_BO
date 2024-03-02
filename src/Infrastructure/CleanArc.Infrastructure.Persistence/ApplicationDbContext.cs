@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using CleanArc.Domain.Common;
+using CleanArc.Domain.Entities;
 using CleanArc.Domain.Entities.User;
 using CleanArc.SharedKernel.Extensions;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -60,7 +61,10 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
         modelBuilder.AddRestrictDeleteBehaviorConvention();
         modelBuilder.AddPluralizingTableNameConvention();
 
-
+        modelBuilder.Entity<TGroupe>()
+            .HasOne<TGrpUser>(g => g.TGrpUser)
+            .WithMany() // As you mentioned it's a many-to-one relationship
+            .HasForeignKey(g => g.Id);
     }
 
     private void ConfigureEntityDates()
