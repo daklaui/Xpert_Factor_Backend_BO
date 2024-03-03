@@ -8,5 +8,6 @@ namespace CleanArc.Domain.Entities
         public Nullable<System.DateTime> StartDateTMM { get; set; }
         public Nullable<System.DateTime> EndDateTMM { get; set; }
         public string RateTMM { get; set; }
+        public TFactor Factor { get; set; }
     }
 }
