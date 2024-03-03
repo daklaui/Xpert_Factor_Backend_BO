@@ -9,32 +9,32 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 namespace CleanArc.Infrastructure.Persistence.Repositories
 {
 
-    internal class TmmRepository : BaseAsyncRepository<TTMM>, ITmmRepository
+    internal class TmmRepository : BaseAsyncRepository<TRTMM>, ITmmRepository
     {
         public TmmRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
         }
 
-        public async Task AddTmmAsync(TTMM tmm)
+        public async Task AddTmmAsync(TRTMM tmm)
         {
             await base.AddAsync(tmm);
         }
 
-        public async Task<PagedList<TTMM>> GetAllTmmAsync(PaginationParams paginationParams)
+        public async Task<PagedList<TRTMM>> GetAllTmmAsync(PaginationParams paginationParams)
         {
             var query = base.TableNoTracking.AsQueryable();
-            var result = await PagedList<TTMM>.CreateAsync(query, paginationParams.PageNumber, paginationParams.PageSize);
+            var result = await PagedList<TRTMM>.CreateAsync(query, paginationParams.PageNumber, paginationParams.PageSize);
 
             return result;
         }
 
-        public async Task<TTMM> GetTmmByIdAsync(int id)
+        public async Task<TRTMM> GetTmmByIdAsync(int id)
         {
             return await base.TableNoTracking.FirstAsync(p => p.Id == id);
 
         }
 
-        public async Task UpdateTmmAsync(TTMM tmm)
+        public async Task UpdateTmmAsync(TRTMM tmm)
         {
             await base.UpdateAsync(tmm);
         }

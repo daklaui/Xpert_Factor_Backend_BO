@@ -49,6 +49,394 @@ namespace Persistence.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("CleanArc.Domain.Entities.TAdresse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("ActifAd")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("CpAdr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdAdr")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdDele")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdGouv")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdLocA")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdNldp")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LibAdr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RefInd")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TAdresses");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TBordereau", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AnneeBord")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DatBord")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DatSaisie")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeviseAch")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Emetteur")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("MontTotB")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<short>("NbDocBor")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("NumBord")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RefAchBo")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RefAdhBo")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RefCtrBo")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("SoldeBord")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("TDetBordId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("ValideBor")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TDetBordId");
+
+                    b.ToTable("TBordereaus");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TCalcDispo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateCalcDispo")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("DispoCalcDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("FinanceCalcDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("IdCalcDispo")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("InteretJCalcDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MargeJCalcDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RefAdhCalcDispo")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RefCtrCalcDispo")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("SomAvoirCalcDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("SomCommFactorCalcDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("SomCreditCalcDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("SomDebitCalcDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("SomFactCalcDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("SomFdgFactCalcDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("SomFdgLibereCalcDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("SomTvaCommFactorCalcDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TmmJCalcDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TCalcDispos");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TCalcInt", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DatCalcInt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdCalcInt")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("MontCalcInt")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TCalcInts");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TCalcIntIR", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateEcheanceIr")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdCalcIr")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MajorIntIntFinIr")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("MontCalcIr")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MontOuvDetBordIr")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("RefCtrCalcIr")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RefDocumentDetBor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TCalcIntIRS");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TComFactoring", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ContactId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("FraisDiversId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("MontMinCtrCommFactoring")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MontMinDocCommFactoring")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("RefCtrCommFactoring")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TContratId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TxCommFactoring")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("TypCommFactoring")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContactId");
+
+                    b.HasIndex("FraisDiversId");
+
+                    b.HasIndex("TContratId");
+
+                    b.ToTable("TComFactorings");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TComMfg", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CodeMfg")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateEnvoieMfg")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateSaisieMfg")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("FlagMfg")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("IdMfg")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("MntCommMfg")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("NumBordMfg")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RefAdhMfg")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TContratRefCtr")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TypeActionMfg")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypeMfg")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TComMfgs");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TConfigurationEmai", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Enabl")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdFa")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Mdp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Port")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Smtp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TConfigurationEmais");
+                });
+
             modelBuilder.Entity("CleanArc.Domain.Entities.TContact", b =>
                 {
                     b.Property<int>("Id")
@@ -81,6 +469,9 @@ namespace Persistence.Migrations
                     b.Property<string>("PosContact")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("TDemLimiteId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Tel1Contact")
                         .HasColumnType("nvarchar(max)");
 
@@ -92,15 +483,1151 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("TDemLimiteId");
+
                     b.HasIndex("individuId");
 
                     b.ToTable("TContacts");
                 });
 
+            modelBuilder.Entity("CleanArc.Domain.Entities.TContrat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("BordereauId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("CaCtr")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("CaExpCtr")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("CaImpCtr")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("CalcDispoId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CalcIntId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CalcIntIrId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DatSignCtr")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DelaiMaxRegCtr")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DelaiMoyenRegCtr")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("DernMontDisp2")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("DetBordId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DeviseCtr")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<int?>("EcCptId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("EtatDispoId")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("FactRegCtr")
+                        .HasColumnType("tinyint");
+
+                    b.Property<int?>("FinancementId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("FraisPaimentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("FraisReleveId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IntFinancementId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("LimFinCtr")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("LitigeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("MvtCreditId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MvtDebitId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NbAchPrevuCtr")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NbAvoirsPrevuCtr")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NbFactPrevuCtr")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NbRemisesPrevuCtr")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RefCtr")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RefCtrPapierCtr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("RelanceId")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("ServiceCtr")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("StatutCtr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TJCirId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("datDebCtr")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("datProchVersCtr")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("datResilCtr")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BordereauId");
+
+                    b.HasIndex("CalcDispoId");
+
+                    b.HasIndex("CalcIntId");
+
+                    b.HasIndex("CalcIntIrId");
+
+                    b.HasIndex("DetBordId");
+
+                    b.HasIndex("EcCptId");
+
+                    b.HasIndex("EtatDispoId");
+
+                    b.HasIndex("FinancementId");
+
+                    b.HasIndex("FraisPaimentId");
+
+                    b.HasIndex("FraisReleveId");
+
+                    b.HasIndex("IntFinancementId");
+
+                    b.HasIndex("LitigeId");
+
+                    b.HasIndex("MvtCreditId");
+
+                    b.HasIndex("MvtDebitId");
+
+                    b.HasIndex("RelanceId");
+
+                    b.HasIndex("TJCirId");
+
+                    b.ToTable("TContrats");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TDemLimite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("ActifDemLimi")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DatAnnulDemLi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DatDemLim")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DatLastDemLim")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DatLimDemLim")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DecisionLim")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<short>("DelaisAcc")
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("DelaisDemLim")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("Devise")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModePayAcc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModePayDemLim")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("MontAcc")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MontDemLim")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MontLimAchAdh")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("RefAchLim")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RefCtrDemLim")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RefDemLim")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SortDemLim")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypDemLim")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TDemLimites");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TDetAss", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<short>("ActifAss")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<short>("DelaisDeclarationSinistreAs")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<short>("PrimeAss")
+                        .HasColumnType("smallint");
+
+                    b.Property<int>("RefAss")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RefCtrAss")
+                        .HasColumnType("int");
+
+                    b.Property<short>("TxCouvertureAss")
+                        .HasColumnType("smallint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TDetAsses");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TDetBord", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AnneeBord")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("AnnulDetBord")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("CommDetBord")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DatDetBord")
+                        .HasColumnType("datetime2");
+
+                    b.Property<short>("DelaiPaieDetBord")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("DeviseDetBord")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("EchAprProrogDetBord")
+                        .HasColumnType("datetime2");
+
+                    b.Property<short>("EchDetBord")
+                        .HasColumnType("smallint");
+
+                    b.Property<int>("IdCalcDispoDetBord")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdDetBord")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LettrageId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LitigeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ModeRegDetBord")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("MontCommFactDetBord")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MontFdgDetBord")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MontFdgLibereDetBord")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MontOuvDetBord")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MontTtcCommFactDetBor")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MontTtcDetBord")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MontTvaCommFactDetBor")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("NumBord")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NumCreanceAssBord")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PropagationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RefDetBord")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RefIndDetBord")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RetenuDetBord")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("TxCommFactDetBord")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TxFdgDetBord")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TxTvaCommFactDetBord")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("TypAssDetBord")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypDetBord")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypRegDetBord")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("ValideDetBord")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LettrageId");
+
+                    b.HasIndex("LitigeId");
+
+                    b.HasIndex("PropagationId");
+
+                    b.ToTable("TDetBords");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TDocGed", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AdressDocGed")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AemoireGed")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ArchiveGed")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataGed")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DateScanGed")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateTacheGed")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EtapeGed")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("EtatGed")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("EtgageGed")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("FinancementId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdAnneeBordGed")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdBorGed")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdCreditGed")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdCtrGed")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdDebitGed")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdDetBordGed")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IdEmetteurGed")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdEncGed")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdFinancementGed")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdGestionnaireGed")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdIndGed")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Libelle2Ged")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LibelleGed")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NameGed")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SalleGed")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TDetBordId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FinancementId");
+
+                    b.HasIndex("TDetBordId");
+
+                    b.ToTable("TDocGeds");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TEcCpt", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AnneeEcCpt")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CodeCentreAnalyse")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CodeDepEcCpt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CodeEcCpt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CodeJournalEcCpt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CodeTiersEcCpt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompteEcCpt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompteGenEcCpt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("CreditEcCpt")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("DateEcCpt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateEffetEcCpt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateSaisieEcCpt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DomaineEcCpt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IntituleEcCpt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LibelleeEcCpt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LotEcCpt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("MontantEcCpt")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("NomUserEcCpt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NumEcEcCpt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumLigneEcCpt")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RefAdhEcCpt")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RefMfgAdhEcCpt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RefPieceEcCpt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypeDocEcCpt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypeTransactionEcC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TEcCpts");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TEncaissement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BordEnc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DatRecepEnc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DatValEnc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeviseEnc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdEnc")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LettrageId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("MontEnc")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("Preavis")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("RefAchEnc")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RefAdhEnc")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RefCtrEnc")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RefEnc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RefSeqEnc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RibEnc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypEnc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("ValideEnc")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LettrageId");
+
+                    b.ToTable("TEncaissements");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TEtatDispo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateEtatDispo")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("DepassLimiteEtatDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("DisponibleEtatDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("IdEtatDispo")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RefCtrEtatDispo")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalAvEtatDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalCommEtatDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalCreditEtatDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalDebitEtatDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalDisponible2EtatDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalEncoursFactureEtatDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalFactureEtatDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalFdgEtatDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalFinEtatDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalFinancementDuMoisEtatDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalFondsReserveEtatDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalFraisEtatDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalInstruPaimentsImpEtatDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalInteretEtatDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalIrEtatDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalLitigesOuvertEtatDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalRetardPaiementAlgoEtatDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalRetenueEtatDispo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TEtatDispos");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TFactor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Adresse")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("AgBqId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Arbv")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Capital")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CapitalLettre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CnxDb")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CodeDouane")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CodeTva")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ContratId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CpId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Db")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("DetDocGed")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("Devise")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Exercice")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Fax")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdFactor")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Langue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Logo16")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Logo32")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Logo48")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MF")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MdpCnx")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("NldpId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ParamPieceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Pays")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RaisonSocial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("RibFactorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SiteWeb")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SrvDb")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TRListFraisDiversId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Tel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TrActprofBctId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TrComFactoringId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TrIntFinancementId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TvaId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AgBqId");
+
+                    b.HasIndex("ContratId");
+
+                    b.HasIndex("CpId");
+
+                    b.HasIndex("NldpId");
+
+                    b.HasIndex("ParamPieceId");
+
+                    b.HasIndex("RibFactorId");
+
+                    b.HasIndex("TRListFraisDiversId");
+
+                    b.HasIndex("TrActprofBctId");
+
+                    b.HasIndex("TrComFactoringId");
+
+                    b.HasIndex("TrIntFinancementId");
+
+                    b.HasIndex("TvaId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("TFactors");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TFinancement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DatFin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DatInstr")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EtatFin")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdDispo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("InstrFin")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("MontFin")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("RefCtrF")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RefInstr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypeEnc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TFinancements");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TFondGarantie", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ComMfgId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("EncaissementId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LibFdg")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("MontMaxFdg")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MontMinFdg")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("PropagationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RefCtrFdg")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TContratRefCtr")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TxFdg")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("TypDocRemisFdg")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypFdg")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ComMfgId");
+
+                    b.HasIndex("EncaissementId");
+
+                    b.HasIndex("PropagationId");
+
+                    b.ToTable("TFondGaranties");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TFraisDivers", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ContratId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LibFraisDivers")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("MontParInstrFraisDivers")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("RefCtrFraisDivers")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TypFraisDivers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContratId");
+
+                    b.ToTable("TFraisDivers");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TFraisPaiment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LibFraisPaie")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("MontParInstrFraisPaie")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("RefCtrFraisPaie")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TypFraisPaie")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TFraisPaiments");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TFraisReleve", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdFraisRel")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("MNTTCT")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("MontParInstrFraisPaie")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("NbPiece")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RefCtr")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TTCPP")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TVA")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TaxTva")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("TypEnc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("datRecepEnc")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TFraisReleves");
+                });
+
             modelBuilder.Entity("CleanArc.Domain.Entities.TGroupe", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
@@ -111,75 +1638,764 @@ namespace Persistence.Migrations
                     b.Property<string>("NomGro")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TGrpUserId")
+                    b.Property<int>("TSGrpUserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TGrpUserId");
+                    b.HasIndex("TSGrpUserId");
 
                     b.ToTable("TGroupes");
                 });
 
-            modelBuilder.Entity("CleanArc.Domain.Entities.TGrpUser", b =>
+            modelBuilder.Entity("CleanArc.Domain.Entities.TImpaye", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<byte>("ActifGrpUser")
-                        .HasColumnType("tinyint");
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdGrpUser")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LibGrpUser")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedDate")
+                    b.Property<DateTime?>("DateImp")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.Property<DateTime?>("DateResolImp")
+                        .HasColumnType("datetime2");
 
-                    b.ToTable("TGrpUsers");
-                });
+                    b.Property<DateTime?>("DateSaisiImp")
+                        .HasColumnType("datetime2");
 
-            modelBuilder.Entity("CleanArc.Domain.Entities.TRib", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int?>("EncaissementId")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<int>("IdDetBordImp")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("ActifRib")
+                    b.Property<int>("IdEncImp")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdImp")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IdNvEncs")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsResolu")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("MontImp")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EncaissementId");
+
+                    b.ToTable("TImpayes");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TIntFinancement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DatDebValidIntF")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DelaiMaxPaiIntFin")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("MajorIntIntFin")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("PreCompteIntFin")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("RefCtrIntFin")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TxIntMarcheIntFin")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TxMargeCtrIntFin")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("TypInstrIntFin")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TIntFinancements");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TJCir", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdCir")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdRoleCir")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RefCtrCir")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RefIndCir")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TJCirs");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TJLettrage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DatLet")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DatReconcil")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdDetBordLet")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdEncLet")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("MontTtcLet")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("TDetBordIdDetBord")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TDetBordRefCtrDetBord")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TEncaissementIdEnc")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("ValideLet")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ValideReconcil")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TJLettrages");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TLitige", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateLit")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("EchLit")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte>("EtatLit")
+                        .HasColumnType("tinyint");
+
+                    b.Property<int>("IdDetBordLit")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdLitiget")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("MontLt")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("RefCtrLit")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TypLit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TLitiges");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TMvtCredit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AvrvCerdit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateCredit")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateValEncCredit")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdCerdit")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LibelleLibreCredit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("MontCredit")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("RefCtrCerdit")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RefEncCredit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypCredit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TMvtCredits");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TMvtDebit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AbevDebit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateDebit")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdDebit")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("MontDebit")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("RefCtrDebit")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TypDebit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TMvtDebits");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TPermissions", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("RibRib")
+                    b.HasKey("Id");
+
+                    b.ToTable("TPermissions");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TPropagation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DatProg")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("EchProg")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("EtatProg")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("IdDetBordPr")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdProrogation")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MotifProg")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("individuId")
+                    b.Property<int>("RefCtrProg")
                         .HasColumnType("int");
+
+                    b.Property<int>("TContratRef")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TypProg")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("individuId");
-
-                    b.ToTable("TRibs");
+                    b.ToTable("TPropagations");
                 });
 
-            modelBuilder.Entity("CleanArc.Domain.Entities.TTMM", b =>
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRActprofBct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Classe")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("CodeActivite")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("CodeClasse")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("CodeClasse1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("CodeSousClasse")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("CodeSousSection")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Section")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("SousClasse")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("SousSection")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("codeSection")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TRActprofBcts");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRAgBq", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Agence")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("Banque")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("CodeAg")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("CodeBq")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("CodeBqAg")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TRAgBqs");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRComFactoring", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdCommFactoring")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("MontMinCtrCommFactoring")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MontMinDocCommFactoring")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("TxCommFactoring")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("TypCommFactoring")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TRComFactorings");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRCp", b =>
+                {
+                    b.Property<int>("IdCp")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCp"));
+
+                    b.Property<string>("CodeGouverno")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("CodeRegion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("Cp")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Region")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("Ville")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.HasKey("IdCp");
+
+                    b.ToTable("TRCps");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRIntFinancement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DatDebValidIntF")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DelaiMaxPaiIntFi")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("PreCompteIntFin")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TxIntMarcheIntF")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TxMargeCtrIntFi")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("TypInstrIntFin")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TRIntFinancements");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRListFraisDivers", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AbrevFraisDiv")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdListeFraisDivers")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LibFraisDivers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("MontFraisDive")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("TypeFraisDiver")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TRListFraisDivers");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRListVal", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AprListVal")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("ComListVal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LibListVal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("NbJourListVal")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrdListVal")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TPermissionsId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TypListVal")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("TypeRecouvreme")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TPermissionsId");
+
+                    b.ToTable("TRListVals");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRNldp", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AbrvD")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("AbrvLa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("AbrvN")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("AbrvPa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdNldp")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LibDevi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LibLan")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LibNt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LibPays")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TRNldps");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRParamPiece", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LibParamPie")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SignParamPi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("TypParamPie")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TRParamPieces");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRTMM", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -202,9 +2418,293 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("StartDateTMM")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("TFactorId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("TTMMS");
+                    b.HasIndex("TFactorId");
+
+                    b.ToTable("TRTMMS");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRTva", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdT")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LibT")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("ValT")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TRTvas");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRelance", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateRelance")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdRelance")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LibelleRelance")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RefCtrRelance")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RefDocRelance")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserRelance")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("ValidRelance")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TRelances");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRibFactor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdRibFactor")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RibFactor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("ValidRibFactor")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TRibFactors");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("CirId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("IdRole")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LibRole")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CirId");
+
+                    b.ToTable("TRoles");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TSGrpUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<byte>("ActifGrpUser")
+                        .HasColumnType("tinyint");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LibGrpUser")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("TPermissionsId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TPermissionsId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("TSGrpUsers");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("ActifUser")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("AgenceUser")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DirectionUser")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FonctionUser")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdGrpUser")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdUser")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LoginUser")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MailUser")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MdpUser")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MobileUser")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NomUser")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OneSignalPlayerId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhotoUser")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreUser")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ServiceUser")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TelFixeUser")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TsGrpUserIdGrpUs")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TUsers");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TUsersWeb", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("ActifUserWeb")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateFinCompte")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdUserWeb")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IndividuId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LoginWeb")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LogoWeb")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("OneSignalPlayerId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordWeb")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RefIndWeb")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IndividuId");
+
+                    b.ToTable("TUsersWebs");
                 });
 
             modelBuilder.Entity("CleanArc.Domain.Entities.User.Role", b =>
@@ -478,6 +2978,9 @@ namespace Persistence.Migrations
                     b.Property<string>("AdrInd")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CirId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CodSclas")
                         .HasColumnType("nvarchar(max)");
 
@@ -507,6 +3010,9 @@ namespace Persistence.Migrations
 
                     b.Property<string>("EmailInd")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("EncaissementId")
+                        .HasColumnType("int");
 
                     b.Property<bool?>("ExoInd")
                         .HasColumnType("bit");
@@ -568,6 +3074,12 @@ namespace Persistence.Migrations
                     b.Property<string>("RefAdhInd")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("TAdresseId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TDemLimiteId")
+                        .HasColumnType("int");
+
                     b.Property<string>("TelInd")
                         .HasColumnType("nvarchar(max)");
 
@@ -575,6 +3087,14 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CirId");
+
+                    b.HasIndex("EncaissementId");
+
+                    b.HasIndex("TAdresseId");
+
+                    b.HasIndex("TDemLimiteId");
 
                     b.ToTable("TIndividus");
                 });
@@ -590,8 +3110,38 @@ namespace Persistence.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("CleanArc.Domain.Entities.TBordereau", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TDetBord", null)
+                        .WithMany("Bordereaus")
+                        .HasForeignKey("TDetBordId");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TComFactoring", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TContact", "Contact")
+                        .WithMany()
+                        .HasForeignKey("ContactId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TFraisDivers", "FraisDivers")
+                        .WithMany()
+                        .HasForeignKey("FraisDiversId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TContrat", null)
+                        .WithMany("ComFactorings")
+                        .HasForeignKey("TContratId");
+
+                    b.Navigation("Contact");
+
+                    b.Navigation("FraisDivers");
+                });
+
             modelBuilder.Entity("CleanArc.Domain.Entities.TContact", b =>
                 {
+                    b.HasOne("CleanArc.Domain.Entities.TDemLimite", null)
+                        .WithMany("Contacts")
+                        .HasForeignKey("TDemLimiteId");
+
                     b.HasOne("TIndividu", "individu")
                         .WithMany("Contacts")
                         .HasForeignKey("individuId");
@@ -599,30 +3149,314 @@ namespace Persistence.Migrations
                     b.Navigation("individu");
                 });
 
-            modelBuilder.Entity("CleanArc.Domain.Entities.TGroupe", b =>
+            modelBuilder.Entity("CleanArc.Domain.Entities.TContrat", b =>
                 {
-                    b.HasOne("CleanArc.Domain.Entities.TGrpUser", "TGrpUser")
+                    b.HasOne("CleanArc.Domain.Entities.TBordereau", "Bordereau")
+                        .WithMany("Contrats")
+                        .HasForeignKey("BordereauId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TCalcDispo", "CalcDispo")
+                        .WithMany("Contrats")
+                        .HasForeignKey("CalcDispoId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TCalcInt", "CalcInt")
+                        .WithMany("Contrats")
+                        .HasForeignKey("CalcIntId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TCalcIntIR", "CalcIntIr")
+                        .WithMany("Contrats")
+                        .HasForeignKey("CalcIntIrId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TDetBord", "DetBord")
+                        .WithMany("Contrats")
+                        .HasForeignKey("DetBordId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TEcCpt", "EcCpt")
+                        .WithMany("Contrats")
+                        .HasForeignKey("EcCptId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TEtatDispo", "EtatDispo")
+                        .WithMany("Contrats")
+                        .HasForeignKey("EtatDispoId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TFinancement", "Financement")
+                        .WithMany("Contrats")
+                        .HasForeignKey("FinancementId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TFraisPaiment", "FraisPaiment")
+                        .WithMany("Contrats")
+                        .HasForeignKey("FraisPaimentId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TFraisReleve", "FraisReleve")
+                        .WithMany("Contrats")
+                        .HasForeignKey("FraisReleveId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TIntFinancement", "IntFinancement")
+                        .WithMany("Contrats")
+                        .HasForeignKey("IntFinancementId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TLitige", "Litige")
+                        .WithMany("Contrats")
+                        .HasForeignKey("LitigeId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TMvtCredit", "MvtCredit")
+                        .WithMany("Contrats")
+                        .HasForeignKey("MvtCreditId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TMvtDebit", "MvtDebit")
+                        .WithMany("Contrats")
+                        .HasForeignKey("MvtDebitId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TRelance", "Relance")
+                        .WithMany("Contrats")
+                        .HasForeignKey("RelanceId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TJCir", null)
+                        .WithMany("Contrats")
+                        .HasForeignKey("TJCirId");
+
+                    b.Navigation("Bordereau");
+
+                    b.Navigation("CalcDispo");
+
+                    b.Navigation("CalcInt");
+
+                    b.Navigation("CalcIntIr");
+
+                    b.Navigation("DetBord");
+
+                    b.Navigation("EcCpt");
+
+                    b.Navigation("EtatDispo");
+
+                    b.Navigation("Financement");
+
+                    b.Navigation("FraisPaiment");
+
+                    b.Navigation("FraisReleve");
+
+                    b.Navigation("IntFinancement");
+
+                    b.Navigation("Litige");
+
+                    b.Navigation("MvtCredit");
+
+                    b.Navigation("MvtDebit");
+
+                    b.Navigation("Relance");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TDetBord", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TJLettrage", "Lettrage")
+                        .WithMany("DetBords")
+                        .HasForeignKey("LettrageId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TLitige", "Litige")
                         .WithMany()
-                        .HasForeignKey("Id")
+                        .HasForeignKey("LitigeId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TPropagation", "Propagation")
+                        .WithMany("DetBords")
+                        .HasForeignKey("PropagationId");
+
+                    b.Navigation("Lettrage");
+
+                    b.Navigation("Litige");
+
+                    b.Navigation("Propagation");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TDocGed", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TFinancement", "Financement")
+                        .WithMany()
+                        .HasForeignKey("FinancementId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TDetBord", null)
+                        .WithMany("DocGeds")
+                        .HasForeignKey("TDetBordId");
+
+                    b.Navigation("Financement");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TEncaissement", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TJLettrage", "Lettrage")
+                        .WithMany("Encaissements")
+                        .HasForeignKey("LettrageId");
+
+                    b.Navigation("Lettrage");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TFactor", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TRAgBq", "AgBq")
+                        .WithMany("Factors")
+                        .HasForeignKey("AgBqId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TContrat", "Contrat")
+                        .WithMany("Factors")
+                        .HasForeignKey("ContratId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TRCp", "Cp")
+                        .WithMany("Factors")
+                        .HasForeignKey("CpId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("CleanArc.Domain.Entities.TGrpUser", null)
-                        .WithMany("Groupe")
-                        .HasForeignKey("TGrpUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("CleanArc.Domain.Entities.TRNldp", "Nldp")
+                        .WithMany("Factors")
+                        .HasForeignKey("NldpId");
 
-                    b.Navigation("TGrpUser");
+                    b.HasOne("CleanArc.Domain.Entities.TRParamPiece", "ParamPiece")
+                        .WithMany("Factors")
+                        .HasForeignKey("ParamPieceId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TRibFactor", "RibFactor")
+                        .WithMany("Factors")
+                        .HasForeignKey("RibFactorId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TRListFraisDivers", null)
+                        .WithMany("Factors")
+                        .HasForeignKey("TRListFraisDiversId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TRActprofBct", "TrActprofBct")
+                        .WithMany("Factors")
+                        .HasForeignKey("TrActprofBctId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TRComFactoring", "TrComFactoring")
+                        .WithMany("Factors")
+                        .HasForeignKey("TrComFactoringId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TRIntFinancement", "TrIntFinancement")
+                        .WithMany("Factors")
+                        .HasForeignKey("TrIntFinancementId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TRTva", "Tva")
+                        .WithMany("Factors")
+                        .HasForeignKey("TvaId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TUser", "User")
+                        .WithMany("Factors")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("AgBq");
+
+                    b.Navigation("Contrat");
+
+                    b.Navigation("Cp");
+
+                    b.Navigation("Nldp");
+
+                    b.Navigation("ParamPiece");
+
+                    b.Navigation("RibFactor");
+
+                    b.Navigation("TrActprofBct");
+
+                    b.Navigation("TrComFactoring");
+
+                    b.Navigation("TrIntFinancement");
+
+                    b.Navigation("Tva");
+
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CleanArc.Domain.Entities.TRib", b =>
+            modelBuilder.Entity("CleanArc.Domain.Entities.TFondGarantie", b =>
                 {
-                    b.HasOne("TIndividu", "individu")
-                        .WithMany("Ribs")
-                        .HasForeignKey("individuId");
+                    b.HasOne("CleanArc.Domain.Entities.TComMfg", "ComMfg")
+                        .WithMany("FondGaranties")
+                        .HasForeignKey("ComMfgId");
 
-                    b.Navigation("individu");
+                    b.HasOne("CleanArc.Domain.Entities.TEncaissement", "Encaissement")
+                        .WithMany("FondGaranties")
+                        .HasForeignKey("EncaissementId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TPropagation", "Propagation")
+                        .WithMany("FondGaranties")
+                        .HasForeignKey("PropagationId");
+
+                    b.Navigation("ComMfg");
+
+                    b.Navigation("Encaissement");
+
+                    b.Navigation("Propagation");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TFraisDivers", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TContrat", "Contrat")
+                        .WithMany("FraisDivers")
+                        .HasForeignKey("ContratId");
+
+                    b.Navigation("Contrat");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TGroupe", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TSGrpUser", "grpUser")
+                        .WithMany("Groupe")
+                        .HasForeignKey("TSGrpUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("grpUser");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TImpaye", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TEncaissement", "Encaissement")
+                        .WithMany()
+                        .HasForeignKey("EncaissementId");
+
+                    b.Navigation("Encaissement");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRListVal", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TPermissions", null)
+                        .WithMany("ListVals")
+                        .HasForeignKey("TPermissionsId");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRTMM", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TFactor", null)
+                        .WithMany("Ttmms")
+                        .HasForeignKey("TFactorId");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRole", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TJCir", "Cir")
+                        .WithMany("Roles")
+                        .HasForeignKey("CirId");
+
+                    b.Navigation("Cir");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TSGrpUser", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TPermissions", null)
+                        .WithMany("Groupe")
+                        .HasForeignKey("TPermissionsId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TUser", "User")
+                        .WithMany("TsGrpUsers")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TUsersWeb", b =>
+                {
+                    b.HasOne("TIndividu", "Individu")
+                        .WithMany()
+                        .HasForeignKey("IndividuId");
+
+                    b.Navigation("Individu");
                 });
 
             modelBuilder.Entity("CleanArc.Domain.Entities.User.RoleClaim", b =>
@@ -699,9 +3533,236 @@ namespace Persistence.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CleanArc.Domain.Entities.TGrpUser", b =>
+            modelBuilder.Entity("TIndividu", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TJCir", "Cir")
+                        .WithMany("Individus")
+                        .HasForeignKey("CirId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TEncaissement", "Encaissement")
+                        .WithMany("Individus")
+                        .HasForeignKey("EncaissementId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TAdresse", null)
+                        .WithMany("Individus")
+                        .HasForeignKey("TAdresseId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TDemLimite", null)
+                        .WithMany("Individus")
+                        .HasForeignKey("TDemLimiteId");
+
+                    b.Navigation("Cir");
+
+                    b.Navigation("Encaissement");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TAdresse", b =>
+                {
+                    b.Navigation("Individus");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TBordereau", b =>
+                {
+                    b.Navigation("Contrats");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TCalcDispo", b =>
+                {
+                    b.Navigation("Contrats");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TCalcInt", b =>
+                {
+                    b.Navigation("Contrats");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TCalcIntIR", b =>
+                {
+                    b.Navigation("Contrats");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TComMfg", b =>
+                {
+                    b.Navigation("FondGaranties");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TContrat", b =>
+                {
+                    b.Navigation("ComFactorings");
+
+                    b.Navigation("Factors");
+
+                    b.Navigation("FraisDivers");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TDemLimite", b =>
+                {
+                    b.Navigation("Contacts");
+
+                    b.Navigation("Individus");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TDetBord", b =>
+                {
+                    b.Navigation("Bordereaus");
+
+                    b.Navigation("Contrats");
+
+                    b.Navigation("DocGeds");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TEcCpt", b =>
+                {
+                    b.Navigation("Contrats");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TEncaissement", b =>
+                {
+                    b.Navigation("FondGaranties");
+
+                    b.Navigation("Individus");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TEtatDispo", b =>
+                {
+                    b.Navigation("Contrats");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TFactor", b =>
+                {
+                    b.Navigation("Ttmms");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TFinancement", b =>
+                {
+                    b.Navigation("Contrats");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TFraisPaiment", b =>
+                {
+                    b.Navigation("Contrats");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TFraisReleve", b =>
+                {
+                    b.Navigation("Contrats");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TIntFinancement", b =>
+                {
+                    b.Navigation("Contrats");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TJCir", b =>
+                {
+                    b.Navigation("Contrats");
+
+                    b.Navigation("Individus");
+
+                    b.Navigation("Roles");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TJLettrage", b =>
+                {
+                    b.Navigation("DetBords");
+
+                    b.Navigation("Encaissements");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TLitige", b =>
+                {
+                    b.Navigation("Contrats");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TMvtCredit", b =>
+                {
+                    b.Navigation("Contrats");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TMvtDebit", b =>
+                {
+                    b.Navigation("Contrats");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TPermissions", b =>
                 {
                     b.Navigation("Groupe");
+
+                    b.Navigation("ListVals");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TPropagation", b =>
+                {
+                    b.Navigation("DetBords");
+
+                    b.Navigation("FondGaranties");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRActprofBct", b =>
+                {
+                    b.Navigation("Factors");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRAgBq", b =>
+                {
+                    b.Navigation("Factors");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRComFactoring", b =>
+                {
+                    b.Navigation("Factors");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRCp", b =>
+                {
+                    b.Navigation("Factors");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRIntFinancement", b =>
+                {
+                    b.Navigation("Factors");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRListFraisDivers", b =>
+                {
+                    b.Navigation("Factors");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRNldp", b =>
+                {
+                    b.Navigation("Factors");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRParamPiece", b =>
+                {
+                    b.Navigation("Factors");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRTva", b =>
+                {
+                    b.Navigation("Factors");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRelance", b =>
+                {
+                    b.Navigation("Contrats");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRibFactor", b =>
+                {
+                    b.Navigation("Factors");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TSGrpUser", b =>
+                {
+                    b.Navigation("Groupe");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TUser", b =>
+                {
+                    b.Navigation("Factors");
+
+                    b.Navigation("TsGrpUsers");
                 });
 
             modelBuilder.Entity("CleanArc.Domain.Entities.User.Role", b =>
@@ -729,8 +3790,6 @@ namespace Persistence.Migrations
             modelBuilder.Entity("TIndividu", b =>
                 {
                     b.Navigation("Contacts");
-
-                    b.Navigation("Ribs");
                 });
 #pragma warning restore 612, 618
         }

@@ -60,11 +60,13 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         modelBuilder.AddRestrictDeleteBehaviorConvention();
         modelBuilder.AddPluralizingTableNameConvention();
-
-        modelBuilder.Entity<TGroupe>()
-            .HasOne<TGrpUser>(g => g.TGrpUser)
-            .WithMany() // As you mentioned it's a many-to-one relationship
-            .HasForeignKey(g => g.Id);
+        
+        modelBuilder.Entity<TSGrpUser>()
+            .HasMany(g => g.Groupe)
+            .WithOne(u => u.grpUser)
+            .HasForeignKey(u => u.TSGrpUserId)
+            .IsRequired();
+    
     }
 
     private void ConfigureEntityDates()

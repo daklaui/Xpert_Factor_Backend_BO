@@ -5,4 +5,4 @@ using Mediator;
 
 namespace CleanArc.Application.Features.TMM.Commands.AddTmmCommand;
 
-public record  AddTmmCommand(Domain.Entities.TTMM tmm) : IRequest<OperationResult<bool>>;
+public record  AddTmmCommand(Domain.Entities.TRTMM tmm) : IRequest<OperationResult<bool>>;

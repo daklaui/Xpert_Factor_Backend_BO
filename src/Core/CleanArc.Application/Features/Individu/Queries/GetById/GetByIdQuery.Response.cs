@@ -38,6 +38,5 @@ public record GetByIdQueryResult : ICreateMapper<TIndividu>
     public string CpInd { get; set; }
     public string RefAchInd { get; set; }
  
-    public virtual ICollection<TRib> Ribs { get; set; }
     public virtual ICollection<TContact> Contacts { get; set; } 
 }
