@@ -17,7 +17,6 @@ public class UnitOfWork : IUnitOfWork
         _db = db;
         UserRefreshTokenRepository = new UserRefreshTokenRepository(_db);
         OrderRepository = new OrderRepository(_db);
-        IndividualRepository = new IndividuRepository(_db);
         TPostalCodesRepository = new TPostalCodesRepository(_db);
         TJobsRepository = new TJobsRepository(_db); // Initialisation de TJobsRepository
     }
