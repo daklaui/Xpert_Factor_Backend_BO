@@ -12,7 +12,7 @@ namespace CleanArc.Web.Api.Controllers.V1.Admin
     [ApiVersion("1")]
     [ApiController]
     [Route("api/v{version:apiVersion}/OrderManagement")]
-    [Display(Description= "Managing Users related Orders")]
+    [Display(Description= "Managing Users related Order")]
     [Authorize(ConstantPolicies.DynamicPermission)]
     public class OrderManagementController : BaseController
     {
