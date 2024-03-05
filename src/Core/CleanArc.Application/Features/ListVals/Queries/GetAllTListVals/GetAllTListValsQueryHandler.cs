@@ -2,6 +2,7 @@
 using CleanArc.Application.Common;
 using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Application.Models.Common;
+using CleanArc.Domain.Entities;
 using Mediator;
 
 
@@ -43,7 +44,7 @@ namespace CleanArc.Application.Features.TListVal.Queries.GetAllTListVals
                 CurrentPage = tListVals.CurrentPage,
                 TotalPages = tListVals.TotalPages,
                 TotalCount = tListVals.TotalCount,
-                Result = tListVals.Select(_mapper.Map<Domain.Entities.ListVals, GetAllTListValsQueryResult>).ToList()
+                Result = tListVals.Select(_mapper.Map<TRListVals, GetAllTListValsQueryResult>).ToList()
             };
 
             return OperationResult<PageInfo<GetAllTListValsQueryResult>>.SuccessResult(result);

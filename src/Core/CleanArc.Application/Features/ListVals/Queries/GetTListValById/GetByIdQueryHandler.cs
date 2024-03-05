@@ -22,7 +22,7 @@ namespace CleanArc.Application.Features.TListVal.Queries.GetByIdQuery
         {
             var tListVal = await _unitOfWork.TListValRepository.GetTListValById(request.tListValId);
 
-            var result = _mapper.Map<Domain.Entities.ListVals, GetByIdQueryResult>(tListVal);
+            var result = _mapper.Map<TRListVals, GetByIdQueryResult>(tListVal);
 
             return OperationResult<GetByIdQueryResult>.SuccessResult(result);
         }

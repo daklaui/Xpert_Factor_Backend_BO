@@ -10,7 +10,7 @@ using CleanArc.Application.Features.ListVals.Commands.UpdateTListValCommand;
 
 namespace CleanArc.Infrastructure.Persistence.Repositories
 {
-    internal class TListValRepository : BaseAsyncRepository<ListVals>, ITListValRepository
+    internal class TListValRepository : BaseAsyncRepository<TRListVals>, ITListValRepository
     {
         private readonly ApplicationDbContext _dbContext;
         public TListValRepository(ApplicationDbContext dbContext) : base(dbContext)
@@ -18,13 +18,13 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
             _dbContext = dbContext;
         }
         
-        public async Task<PagedList<ListVals>> GetAllTListValsAsync(PaginationParams paginationParams)
+        public async Task<PagedList<TRListVals>> GetAllTListValsAsync(PaginationParams paginationParams)
         {
             var query = base.TableNoTracking.AsQueryable();
-            return await PagedList<ListVals>.CreateAsync(query, paginationParams.PageNumber, paginationParams.PageSize);
+            return await PagedList<TRListVals>.CreateAsync(query, paginationParams.PageNumber, paginationParams.PageSize);
         }
 
-        public async Task<ListVals> AddTListValAsync(ListVals tListVal)
+        public async Task<TRListVals> AddTListValAsync(TRListVals tListVal)
         {
             if (tListVal == null)
             {
@@ -36,14 +36,14 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
         }
 
 
-        public async Task<ListVals> GetTListValById(int id)
+        public async Task<TRListVals> GetTListValById(int id)
         {
             return await base.TableNoTracking.FirstOrDefaultAsync(p => p.Id == id);
         }
         
-        public async Task<ListVals> UpdateTListValAsync(int id, ListVals updatedTListVal)
+        public async Task<TRListVals> UpdateTListValAsync(int id, TRListVals updatedTListVal)
         {
-            var tListVal = await _dbContext.Set<ListVals>().FirstOrDefaultAsync(e => e.Id == id);
+            var tListVal = await _dbContext.Set<TRListVals>().FirstOrDefaultAsync(e => e.Id == id);
 
             if (tListVal == null)
             {

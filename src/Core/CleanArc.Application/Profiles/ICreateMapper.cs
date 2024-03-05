@@ -11,7 +11,7 @@ public interface ICreateMapper<TSource>
     {
         public MappingProfile()
         {
-            CreateMap<ListVals, GetAllTListValsQueryResult>();
+            CreateMap<TRListVals, GetAllTListValsQueryResult>();
         }
     }
     void Map(Profile profile)
@@ -23,6 +23,6 @@ public class UpdateTListValProfile : Profile
 {
     public UpdateTListValProfile()
     {
-        CreateMap<UpdateTListValCommand, ListVals>();
+        CreateMap<UpdateTListValCommand, TRListVals>();
     }
 }

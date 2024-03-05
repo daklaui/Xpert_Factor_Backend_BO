@@ -3,7 +3,7 @@ using CleanArc.Domain.Entities;
 
 namespace CleanArc.Application.Features.TListVal.Queries.GetAllTListVals
 {
-    public record GetAllTListValsQueryResult : ICreateMapper<Domain.Entities.ListVals>
+    public record GetAllTListValsQueryResult : ICreateMapper<Domain.Entities.TRListVals>
     {
         public int Id { get; set; }
         public string AbrListVal { get; set; }
