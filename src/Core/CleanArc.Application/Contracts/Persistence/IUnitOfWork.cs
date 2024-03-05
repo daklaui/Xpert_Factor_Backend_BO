@@ -8,6 +8,9 @@ public interface IUnitOfWork
     public ITPostalCodesRepository TPostalCodesRepository { get; }
     public ITJobsRepository TJobsRepository { get; } // Nouvelle propriété
 
+    
+    public ITListValRepository TListValRepository { get; }
+    
     Task CommitAsync();
     ValueTask RollBackAsync();
 }
