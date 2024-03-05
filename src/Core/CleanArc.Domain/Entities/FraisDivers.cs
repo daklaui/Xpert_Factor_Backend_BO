@@ -8,5 +8,12 @@ public class TFraisDivers:BaseEntity,IEntity
     public int RefCtrFraisDivers { get; set; }
     public string  LibFraisDivers { get; set; }
     public decimal MontParInstrFraisDivers { get; set; }
-    public TContrat Contrat { get; set; }
+    
+    public int idComFactoring{ get; set; }
+    public  TComFactoring ComFactoring { get; set; }= null!;
+    
+    
+    public  ICollection<TContrat> Contrats{ get; }= new List<TContrat>();
+
+   
 }

@@ -11,10 +11,10 @@ public class TLitige :BaseEntity,IEntity
     public decimal MontLt{ get; set; }
     public byte EtatLit{ get; set; }
     public int IdDetBordLit{ get; set; }
-    public int IdLitiget{ get; set; }
-    public virtual ICollection<TContrat> Contrats{ get; set; }
 
+    public int idContrat { get; set; } 
+    public TContrat Contrat { get; set; } = null!;
 
-
+    
 
 }

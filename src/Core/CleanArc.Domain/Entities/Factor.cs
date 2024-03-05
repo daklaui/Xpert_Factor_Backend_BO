@@ -4,7 +4,6 @@ namespace CleanArc.Domain.Entities;
 
 public class TFactor :BaseEntity,IEntity
 {
-   public int IdFactor { get; set; }
    public string RaisonSocial { get; set; }
    public string Arbv { get; set; }
    public string RC { get; set; }
@@ -30,17 +29,27 @@ public class TFactor :BaseEntity,IEntity
    public string CnxDb { get; set; }
    public string MdpCnx { get; set; }
    public byte DetDocGed { get; set; }
-   public virtual ICollection<TRTMM> Ttmms { get; set; }
-   public TRibFactor RibFactor { get; set; }
-   public TRComFactoring TrComFactoring { get; set; }
-   public TRIntFinancement TrIntFinancement { get; set; }
-   public TRActprofBct TrActprofBct { get; set; }
-   public TRAgBq AgBq { get; set; }
-   public TRTva Tva { get; set; }
-   public TRParamPiece ParamPiece { get; set; }
-   public TRNldp Nldp { get; set; }
-   public TRCp Cp { get; set; }
-   public int CpId { get; set; }
-   public TContrat Contrat { get; set; }
-   public TUser User { get; set; }
+   
+   public  ICollection<TRTva> Tvas { get; }= new List<TRTva>();
+   public  ICollection<TRAgBq> AgBqs { get; }= new List<TRAgBq>();
+   public  ICollection<TRListFraisDivers> FraisDiversCollection{ get; }= new List<TRListFraisDivers>();
+   public  ICollection<TRActprofBct> ActprofBcts{ get; }= new List<TRActprofBct>();
+   public  ICollection<TRIntFinancement> TrIntFinancements{ get; }= new List<TRIntFinancement>();
+   public  ICollection<TContrat> Contrats{ get; }= new List<TContrat>();
+   public  ICollection<TRComFactoring> ComFactorings{ get; }= new List<TRComFactoring>();
+   public  ICollection<TRibFactor> RibFactors{ get; }= new List<TRibFactor>();
+   public  ICollection<TConfigurationEmai> ConfigurationEmais { get; }= new List<TConfigurationEmai>();
+   public  ICollection<TRCp> Cps { get; }= new List<TRCp>();
+   public  ICollection<TRNldp> Nldps { get; }= new List<TRNldp>();
+   public  ICollection<TRParamPiece> TrParamPieces { get; }= new List<TRParamPiece>();
+   public  ICollection<TUser> Users { get; }= new List<TUser>();
+
+   
+   public int idTMM { get; set; }
+   public  TRTMM Trtmm { get; set; }= null!;
+ 
+   
+   
+   
+  
 }

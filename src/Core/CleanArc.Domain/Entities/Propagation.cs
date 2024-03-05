@@ -10,11 +10,13 @@ public class TPropagation:BaseEntity,IEntity
     public  Nullable<System.DateTime> DatProg { get; set; }
     public  Nullable<System.DateTime> EchProg { get; set; }
     public bool EtatProg { get; set; }
-    public int IdDetBordPr { get; set; }
-    public int IdProrogation { get; set; }
-    public int TContratRef { get; set; }
-    public virtual ICollection<TFondGarantie> FondGaranties { get; set; }
-    public virtual ICollection<TDetBord> DetBords { get; set; }
+   
 
+    
+    public int idContrat { get; set; } 
+    public TContrat Contrat { get; set; } = null!;
+    
+    public int idDetBord { get; set; } 
+    public TDetBord DetBord { get; set; } = null!;
 
 }

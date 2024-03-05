@@ -1,11 +1,10 @@
 ﻿using System.Linq.Expressions;
 using CleanArc.Domain.Common;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
 
 namespace CleanArc.Infrastructure.Persistence.Repositories.Common;
 
-internal abstract class BaseAsyncRepository<TEntity> where TEntity:class,IEntity
+public abstract class BaseAsyncRepository<TEntity> where TEntity:class,IEntity
 {
     public readonly ApplicationDbContext DbContext;
     protected DbSet<TEntity> Entities { get; }
@@ -28,8 +27,6 @@ internal abstract class BaseAsyncRepository<TEntity> where TEntity:class,IEntity
         await Entities.AddAsync(entity);
            
     }
-
-
     protected virtual async Task DeleteAsync(Expression<Func<TEntity,bool>> deleteExpression)
     {
         await Entities.Where(deleteExpression).ExecuteDeleteAsync();

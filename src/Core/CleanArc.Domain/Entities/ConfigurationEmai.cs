@@ -10,8 +10,9 @@ public class TConfigurationEmai:BaseEntity,IEntity
     public string Smtp { get; set; }
     public int Port { get; set; }
     public int Enabl { get; set; }
-    public int Id { get; set; }
-
+    
+    public int idFactor { get; set; }
+    public  TFactor Factor { get; set; }= null!;
 
 
     

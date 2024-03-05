@@ -17,7 +17,8 @@ namespace CleanArc.Domain.Entities
         public string Mail2Coontact { get; set; }
         public string FaxContact { get; set; }
         public bool ActifContact { get; set; }
-        public TIndividu individu { get; set; }
+        
+        public  ICollection<TIndividu> Individus { get; }= new List<TIndividu>();
 
     }
 }

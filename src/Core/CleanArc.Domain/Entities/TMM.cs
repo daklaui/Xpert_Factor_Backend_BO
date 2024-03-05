@@ -1,13 +1,13 @@
 ﻿using CleanArc.Domain.Common;
 
 
-namespace CleanArc.Domain.Entities
-{
+namespace CleanArc.Domain.Entities;
     public class TRTMM :BaseEntity,IEntity
     {
         public Nullable<System.DateTime> StartDateTMM { get; set; }
         public Nullable<System.DateTime> EndDateTMM { get; set; }
         public string RateTMM { get; set; }
-        public TFactor Factor { get; set; }
+        public  ICollection<TFactor> Factors{ get; }= new List<TFactor>();
+
     }
-}
+

@@ -1,4 +1,6 @@
 ﻿using CleanArc.Application.Features.TMM.Commands.AddTmmCommand;
+using CleanArc.Application.Features.TMM.Queries.GetAllTmmQueries;
+using CleanArc.Application.Features.TMM.Queries.GetTmmByIdQueries;
 
 namespace CleanArc.Web.Api.Controllers.V1.TMM;
 using CleanArc.Application.Common;
@@ -31,4 +33,19 @@ public class TmmController :BaseController
 
         return base.OperationResult(command);
     }
+    [HttpGet("GetAllTmm")]
+    public async Task<IActionResult> GetAllTmm([FromQuery] PaginationParams paginationParams)
+    {
+        var query = await _sender.Send(new GetAllTmmQuery(paginationParams));
+
+        return base.OperationResult(query);
+    }
+    
+    [HttpGet("GetTmmById/{id}")]
+    public async Task<IActionResult> GetTmmById(int id)
+    {
+        var query = await _sender.Send(new GetTmmByIdQuery(id));
+        return base.OperationResult(query);
+    }
+    
 }

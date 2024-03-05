@@ -14,7 +14,12 @@ public class TJLettrage:BaseEntity,IEntity
     public int TEncaissementIdEnc { get; set; }
     public int TDetBordIdDetBord { get; set; }
     public int TDetBordRefCtrDetBord { get; set; }
-    public virtual ICollection<TDetBord> DetBords { get; set; }
-    public virtual ICollection<TEncaissement>  Encaissements { get; set; }
+    
+    public int idEncaissement { get; set; } 
+    public TEncaissement Encaissement { get; set; } = null!;
+    
+    public int idDetBord { get; set; } 
+    public TDetBord DetBordt { get; set; } = null!;
+    
 
 }

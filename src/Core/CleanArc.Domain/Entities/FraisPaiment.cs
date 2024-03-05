@@ -9,8 +9,9 @@ public class TFraisPaiment:BaseEntity,IEntity
     public int RefCtrFraisPaie { get; set; }
     public decimal MontParInstrFraisPaie { get; set; }
     public string  LibFraisPaie { get; set; }
-    public virtual ICollection<TContrat> Contrats { get; set; }
 
+    public int idContrat { get; set; } 
+    public TContrat Contrat { get; set; } = null!;
 
 
 

@@ -1,9 +1,11 @@
-﻿using CleanArc.Domain.Common;
+﻿using System.ComponentModel.DataAnnotations;
+using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities;
 
 public class TRListVal :BaseEntity,IEntity
 {
+    
     public char AprListVal { get; set; }
     public char TypListVal { get; set; }
     public int OrdListVal { get; set; }
@@ -12,4 +14,6 @@ public class TRListVal :BaseEntity,IEntity
     public int NbJourListVal { get; set; }
     public string TypeRecouvreme { get; set; }
     
+ 
+    public  ICollection<TPermissions> Permissions { get; }  = new List<TPermissions>();
 }

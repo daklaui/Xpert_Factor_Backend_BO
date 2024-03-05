@@ -4,7 +4,6 @@ namespace CleanArc.Domain.Entities;
 
 public class TCalcDispo :BaseEntity,IEntity
 {
-    public int IdCalcDispo { get; set; }
     public Nullable<System.DateTime> DateCalcDispo { get; set; }
     public decimal DispoCalcDispo { get; set; }
     public int RefAdhCalcDispo { get; set; }
@@ -21,6 +20,7 @@ public class TCalcDispo :BaseEntity,IEntity
     public decimal InteretJCalcDispo { get; set; }
     public decimal MargeJCalcDispo { get; set; }
     public decimal TmmJCalcDispo { get; set; }
-    public virtual ICollection<TContrat> Contrats{ get; set; }
-
+    
+    public int idContrat { get; set; } 
+    public TContrat Contrat { get; set; } = null!;
 }

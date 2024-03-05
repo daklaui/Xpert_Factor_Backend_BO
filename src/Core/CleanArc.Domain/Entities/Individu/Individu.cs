@@ -37,9 +37,17 @@ public class TIndividu : BaseEntity, IEntity
         public string AdrInd { get; set; }
         public string CpInd { get; set; }
         public string RefAchInd { get; set; }
-        public virtual ICollection<TContact> Contacts { get; set; }
-        public TJCir Cir { get; set; }
-        public TEncaissement Encaissement { get; set; }
+        
+        public int idContact { get; set; } 
+        public TContact Contact { get; set; } = null!;
+        
+        public  ICollection<TJCir> Cirs { get; }= new List<TJCir>();
+        public  ICollection<TAdresse> Adresses { get; }= new List<TAdresse>();
+        public  ICollection<TDemLimite> DemLimites { get; }= new List<TDemLimite>();
+        public  ICollection<TUsersWeb> UsersWebs { get; }= new List<TUsersWeb>();
+        public  ICollection<TEncaissement> Encaissements { get; }= new List<TEncaissement>();
+
+      
 
 }
  

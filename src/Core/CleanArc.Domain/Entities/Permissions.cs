@@ -4,7 +4,11 @@ namespace CleanArc.Domain.Entities;
 
 public class TPermissions:BaseEntity,IEntity
 {
-    public virtual ICollection<TSGrpUser> Groupe { get; set; }
-    public virtual ICollection<TRListVal> ListVals { get; set; }
+    public int ListValId { get;set; } 
+    public TRListVal TrListVal { get; set; } = null!; 
+    
+    public int GrpUserId { get;set; } 
+    public TSGrpUser GrpUser { get; set; } = null!; 
 
+    
 }

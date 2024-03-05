@@ -4,10 +4,11 @@ namespace CleanArc.Domain.Entities;
 
 public class TRibFactor:BaseEntity,IEntity
 {
-    public int IdRibFactor { get; set; }
     public string RibFactor { get; set; }
     public byte ValidRibFactor { get; set; }
-    public virtual ICollection<TFactor> Factors { get; set; }
+    
+    public int idFactor { get; set; }
+    public  TFactor Factor { get; set; }= null!;
     
     
 }

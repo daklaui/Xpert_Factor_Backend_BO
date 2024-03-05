@@ -4,8 +4,6 @@ namespace CleanArc.Domain.Entities;
 
 public class TUser :BaseEntity,IEntity
 {
-    public int IdUser { get; set; }
-    public int IdGrpUser { get; set; }
     public string NomUser { get; set; }
     public string PreUser { get; set; }
     public string LoginUser { get; set; }
@@ -20,9 +18,13 @@ public class TUser :BaseEntity,IEntity
     public string MobileUser { get; set; }
     public string PhotoUser { get; set; }
     public string OneSignalPlayerId { get; set; }
-    public int TsGrpUserIdGrpUs { get; set; }
-    public virtual ICollection<TSGrpUser> TsGrpUsers { get; set; }
-    public virtual ICollection<TFactor> Factors { get; set; }
+    
+    public int idTSGrpUser { get; set; }
+    public  TSGrpUser TsGrpUser { get; set; }= null!;
+
+    public int idFactor { get; set; }
+    public  TFactor Factor { get; set; }= null!;
+
 
     
 }

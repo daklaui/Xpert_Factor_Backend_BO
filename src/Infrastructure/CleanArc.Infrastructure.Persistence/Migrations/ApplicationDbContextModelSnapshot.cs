@@ -66,9 +66,6 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdAdr")
-                        .HasColumnType("int");
-
                     b.Property<int>("IdDele")
                         .HasColumnType("int");
 
@@ -81,16 +78,21 @@ namespace Persistence.Migrations
                     b.Property<int>("IdNldp")
                         .HasColumnType("int");
 
+                    b.Property<int?>("IndividuId")
+                        .HasColumnType("int");
+
                     b.Property<string>("LibAdr")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("RefInd")
+                    b.Property<int>("idTIndividu")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IndividuId");
 
                     b.ToTable("TAdresses");
                 });
@@ -106,6 +108,9 @@ namespace Persistence.Migrations
                     b.Property<string>("AnneeBord")
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
+
+                    b.Property<int?>("ContratId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
@@ -146,15 +151,15 @@ namespace Persistence.Migrations
                     b.Property<bool>("SoldeBord")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("TDetBordId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("ValideBor")
                         .HasColumnType("bit");
 
+                    b.Property<int>("idContrat")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("TDetBordId");
+                    b.HasIndex("ContratId");
 
                     b.ToTable("TBordereaus");
                 });
@@ -167,6 +172,9 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("ContratId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
@@ -178,9 +186,6 @@ namespace Persistence.Migrations
 
                     b.Property<decimal>("FinanceCalcDispo")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("IdCalcDispo")
-                        .HasColumnType("int");
 
                     b.Property<decimal>("InteretJCalcDispo")
                         .HasColumnType("decimal(18,2)");
@@ -224,7 +229,12 @@ namespace Persistence.Migrations
                     b.Property<decimal>("TmmJCalcDispo")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("idContrat")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ContratId");
 
                     b.ToTable("TCalcDispos");
                 });
@@ -237,14 +247,14 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("ContratId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DatCalcInt")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("IdCalcInt")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
@@ -252,7 +262,12 @@ namespace Persistence.Migrations
                     b.Property<decimal>("MontCalcInt")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("idContrat")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ContratId");
 
                     b.ToTable("TCalcInts");
                 });
@@ -265,14 +280,14 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("ContratId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DateEcheanceIr")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("IdCalcIr")
-                        .HasColumnType("int");
 
                     b.Property<int>("MajorIntIntFinIr")
                         .HasColumnType("int");
@@ -292,7 +307,12 @@ namespace Persistence.Migrations
                     b.Property<string>("RefDocumentDetBor")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("idContrat")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ContratId");
 
                     b.ToTable("TCalcIntIRS");
                 });
@@ -305,14 +325,8 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ContactId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
-
-                    b.Property<int?>("FraisDiversId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
@@ -339,10 +353,6 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ContactId");
-
-                    b.HasIndex("FraisDiversId");
-
                     b.HasIndex("TContratId");
 
                     b.ToTable("TComFactorings");
@@ -359,6 +369,9 @@ namespace Persistence.Migrations
                     b.Property<string>("CodeMfg")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ContratId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
@@ -370,9 +383,6 @@ namespace Persistence.Migrations
 
                     b.Property<bool>("FlagMfg")
                         .HasColumnType("bit");
-
-                    b.Property<int>("IdMfg")
-                        .HasColumnType("int");
 
                     b.Property<decimal>("MntCommMfg")
                         .HasColumnType("decimal(18,2)");
@@ -386,16 +396,18 @@ namespace Persistence.Migrations
                     b.Property<string>("RefAdhMfg")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TContratRefCtr")
-                        .HasColumnType("int");
-
                     b.Property<string>("TypeActionMfg")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TypeMfg")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("idContrat")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ContratId");
 
                     b.ToTable("TComMfgs");
                 });
@@ -417,6 +429,9 @@ namespace Persistence.Migrations
                     b.Property<int>("Enabl")
                         .HasColumnType("int");
 
+                    b.Property<int?>("FactorId")
+                        .HasColumnType("int");
+
                     b.Property<int>("IdFa")
                         .HasColumnType("int");
 
@@ -432,7 +447,12 @@ namespace Persistence.Migrations
                     b.Property<string>("Smtp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("idFactor")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("FactorId");
 
                     b.ToTable("TConfigurationEmais");
                 });
@@ -469,7 +489,7 @@ namespace Persistence.Migrations
                     b.Property<string>("PosContact")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TDemLimiteId")
+                    b.Property<int?>("TComFactoringId")
                         .HasColumnType("int");
 
                     b.Property<string>("Tel1Contact")
@@ -478,14 +498,9 @@ namespace Persistence.Migrations
                     b.Property<string>("Tel2Contact")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("individuId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("TDemLimiteId");
-
-                    b.HasIndex("individuId");
+                    b.HasIndex("TComFactoringId");
 
                     b.ToTable("TContacts");
                 });
@@ -498,9 +513,6 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("BordereauId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("CaCtr")
                         .HasColumnType("decimal(18,2)");
 
@@ -509,15 +521,6 @@ namespace Persistence.Migrations
 
                     b.Property<decimal>("CaImpCtr")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("CalcDispoId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CalcIntId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CalcIntIrId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
@@ -534,48 +537,27 @@ namespace Persistence.Migrations
                     b.Property<decimal>("DernMontDisp2")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("DetBordId")
+                    b.Property<int?>("DetAssId")
                         .HasColumnType("int");
 
                     b.Property<string>("DeviseCtr")
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
-                    b.Property<int?>("EcCptId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("EtatDispoId")
-                        .HasColumnType("int");
-
                     b.Property<byte>("FactRegCtr")
                         .HasColumnType("tinyint");
 
-                    b.Property<int?>("FinancementId")
+                    b.Property<int?>("FactorId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("FraisPaimentId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("FraisReleveId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IntFinancementId")
+                    b.Property<int?>("FraisDiversId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("LimFinCtr")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("LitigeId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int?>("MvtCreditId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MvtDebitId")
-                        .HasColumnType("int");
 
                     b.Property<int>("NbAchPrevuCtr")
                         .HasColumnType("int");
@@ -595,16 +577,16 @@ namespace Persistence.Migrations
                     b.Property<string>("RefCtrPapierCtr")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("RelanceId")
-                        .HasColumnType("int");
-
                     b.Property<byte>("ServiceCtr")
                         .HasColumnType("tinyint");
 
                     b.Property<string>("StatutCtr")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TJCirId")
+                    b.Property<int?>("TFraisReleveId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TMvtDebitId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("datDebCtr")
@@ -616,39 +598,26 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("datResilCtr")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("idDetAss")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idFactor")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idFraisDivers")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("BordereauId");
+                    b.HasIndex("DetAssId");
 
-                    b.HasIndex("CalcDispoId");
+                    b.HasIndex("FactorId");
 
-                    b.HasIndex("CalcIntId");
+                    b.HasIndex("FraisDiversId");
 
-                    b.HasIndex("CalcIntIrId");
+                    b.HasIndex("TFraisReleveId");
 
-                    b.HasIndex("DetBordId");
-
-                    b.HasIndex("EcCptId");
-
-                    b.HasIndex("EtatDispoId");
-
-                    b.HasIndex("FinancementId");
-
-                    b.HasIndex("FraisPaimentId");
-
-                    b.HasIndex("FraisReleveId");
-
-                    b.HasIndex("IntFinancementId");
-
-                    b.HasIndex("LitigeId");
-
-                    b.HasIndex("MvtCreditId");
-
-                    b.HasIndex("MvtDebitId");
-
-                    b.HasIndex("RelanceId");
-
-                    b.HasIndex("TJCirId");
+                    b.HasIndex("TMvtDebitId");
 
                     b.ToTable("TContrats");
                 });
@@ -663,6 +632,9 @@ namespace Persistence.Migrations
 
                     b.Property<bool>("ActifDemLimi")
                         .HasColumnType("bit");
+
+                    b.Property<int?>("ContactId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
@@ -691,6 +663,9 @@ namespace Persistence.Migrations
                     b.Property<string>("Devise")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("IndividuId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ModePayAcc")
                         .HasColumnType("nvarchar(max)");
 
@@ -715,16 +690,23 @@ namespace Persistence.Migrations
                     b.Property<int>("RefCtrDemLim")
                         .HasColumnType("int");
 
-                    b.Property<int>("RefDemLim")
-                        .HasColumnType("int");
-
                     b.Property<string>("SortDemLim")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TypDemLim")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("idContact")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idIndividu")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ContactId");
+
+                    b.HasIndex("IndividuId");
 
                     b.ToTable("TDemLimites");
                 });
@@ -780,8 +762,14 @@ namespace Persistence.Migrations
                     b.Property<bool>("AnnulDetBord")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("BordereauId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CommDetBord")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ContratId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
@@ -795,19 +783,19 @@ namespace Persistence.Migrations
                     b.Property<string>("DeviseDetBord")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("DocGedId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("EchAprProrogDetBord")
                         .HasColumnType("datetime2");
 
                     b.Property<short>("EchDetBord")
                         .HasColumnType("smallint");
 
+                    b.Property<int>("ILitige")
+                        .HasColumnType("int");
+
                     b.Property<int>("IdCalcDispoDetBord")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdDetBord")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LettrageId")
                         .HasColumnType("int");
 
                     b.Property<int?>("LitigeId")
@@ -846,9 +834,6 @@ namespace Persistence.Migrations
                     b.Property<string>("NumCreanceAssBord")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PropagationId")
-                        .HasColumnType("int");
-
                     b.Property<string>("RefDetBord")
                         .HasColumnType("nvarchar(max)");
 
@@ -879,13 +864,24 @@ namespace Persistence.Migrations
                     b.Property<bool>("ValideDetBord")
                         .HasColumnType("bit");
 
+                    b.Property<int>("idBordereau")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idContrat")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idDocGed")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("LettrageId");
+                    b.HasIndex("BordereauId");
+
+                    b.HasIndex("ContratId");
+
+                    b.HasIndex("DocGedId");
 
                     b.HasIndex("LitigeId");
-
-                    b.HasIndex("PropagationId");
 
                     b.ToTable("TDetBords");
                 });
@@ -961,9 +957,6 @@ namespace Persistence.Migrations
                     b.Property<int>("IdGestionnaireGed")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdIndGed")
-                        .HasColumnType("int");
-
                     b.Property<string>("Libelle2Ged")
                         .HasColumnType("nvarchar(max)");
 
@@ -979,14 +972,12 @@ namespace Persistence.Migrations
                     b.Property<string>("SalleGed")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TDetBordId")
+                    b.Property<int>("idFinancement")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("FinancementId");
-
-                    b.HasIndex("TDetBordId");
 
                     b.ToTable("TDocGeds");
                 });
@@ -1022,6 +1013,9 @@ namespace Persistence.Migrations
 
                     b.Property<string>("CompteGenEcCpt")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ContratId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
@@ -1080,7 +1074,12 @@ namespace Persistence.Migrations
                     b.Property<string>("TypeTransactionEcC")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("idContrat")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ContratId");
 
                     b.ToTable("TEcCpts");
                 });
@@ -1096,6 +1095,9 @@ namespace Persistence.Migrations
                     b.Property<string>("BordEnc")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ContratId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
@@ -1108,10 +1110,7 @@ namespace Persistence.Migrations
                     b.Property<string>("DeviseEnc")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdEnc")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LettrageId")
+                    b.Property<int?>("IndividuId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedDate")
@@ -1147,9 +1146,17 @@ namespace Persistence.Migrations
                     b.Property<bool>("ValideEnc")
                         .HasColumnType("bit");
 
+                    b.Property<int>("idContrat")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idIndividu")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("LettrageId");
+                    b.HasIndex("ContratId");
+
+                    b.HasIndex("IndividuId");
 
                     b.ToTable("TEncaissements");
                 });
@@ -1162,6 +1169,9 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("ContratId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
@@ -1173,9 +1183,6 @@ namespace Persistence.Migrations
 
                     b.Property<decimal>("DisponibleEtatDispo")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("IdEtatDispo")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
@@ -1237,7 +1244,12 @@ namespace Persistence.Migrations
                     b.Property<decimal>("TotalRetenueEtatDispo")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("idContrat")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ContratId");
 
                     b.ToTable("TEtatDispos");
                 });
@@ -1252,9 +1264,6 @@ namespace Persistence.Migrations
 
                     b.Property<string>("Adresse")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("AgBqId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Arbv")
                         .HasColumnType("nvarchar(max)");
@@ -1273,12 +1282,6 @@ namespace Persistence.Migrations
 
                     b.Property<string>("CodeTva")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ContratId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CpId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
@@ -1301,9 +1304,6 @@ namespace Persistence.Migrations
                     b.Property<string>("Fax")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdFactor")
-                        .HasColumnType("int");
-
                     b.Property<string>("Langue")
                         .HasColumnType("nvarchar(max)");
 
@@ -1325,12 +1325,6 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("NldpId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ParamPieceId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Pays")
                         .HasColumnType("nvarchar(max)");
 
@@ -1340,61 +1334,24 @@ namespace Persistence.Migrations
                     b.Property<string>("RaisonSocial")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("RibFactorId")
-                        .HasColumnType("int");
-
                     b.Property<string>("SiteWeb")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SrvDb")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TRListFraisDiversId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Tel")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TrActprofBctId")
+                    b.Property<int?>("TrtmmId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TrComFactoringId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TrIntFinancementId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TvaId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId")
+                    b.Property<int>("idTMM")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AgBqId");
-
-                    b.HasIndex("ContratId");
-
-                    b.HasIndex("CpId");
-
-                    b.HasIndex("NldpId");
-
-                    b.HasIndex("ParamPieceId");
-
-                    b.HasIndex("RibFactorId");
-
-                    b.HasIndex("TRListFraisDiversId");
-
-                    b.HasIndex("TrActprofBctId");
-
-                    b.HasIndex("TrComFactoringId");
-
-                    b.HasIndex("TrIntFinancementId");
-
-                    b.HasIndex("TvaId");
-
-                    b.HasIndex("UserId");
+                    b.HasIndex("TrtmmId");
 
                     b.ToTable("TFactors");
                 });
@@ -1406,6 +1363,9 @@ namespace Persistence.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ContratId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
@@ -1440,7 +1400,12 @@ namespace Persistence.Migrations
                     b.Property<string>("TypeEnc")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("idContrat")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ContratId");
 
                     b.ToTable("TFinancements");
                 });
@@ -1453,14 +1418,11 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ComMfgId")
+                    b.Property<int?>("ContratId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
-
-                    b.Property<int?>("EncaissementId")
-                        .HasColumnType("int");
 
                     b.Property<string>("LibFdg")
                         .HasColumnType("nvarchar(max)");
@@ -1474,13 +1436,7 @@ namespace Persistence.Migrations
                     b.Property<decimal>("MontMinFdg")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("PropagationId")
-                        .HasColumnType("int");
-
                     b.Property<int>("RefCtrFdg")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TContratRefCtr")
                         .HasColumnType("int");
 
                     b.Property<decimal>("TxFdg")
@@ -1492,13 +1448,12 @@ namespace Persistence.Migrations
                     b.Property<string>("TypFdg")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("idContrat")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ComMfgId");
-
-                    b.HasIndex("EncaissementId");
-
-                    b.HasIndex("PropagationId");
+                    b.HasIndex("ContratId");
 
                     b.ToTable("TFondGaranties");
                 });
@@ -1511,7 +1466,7 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ContratId")
+                    b.Property<int?>("ComFactoringId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedTime")
@@ -1533,9 +1488,12 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
+                    b.Property<int>("idComFactoring")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ContratId");
+                    b.HasIndex("ComFactoringId");
 
                     b.ToTable("TFraisDivers");
                 });
@@ -1547,6 +1505,9 @@ namespace Persistence.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ContratId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
@@ -1567,7 +1528,12 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
+                    b.Property<int>("idContrat")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ContratId");
 
                     b.ToTable("TFraisPaiments");
                 });
@@ -1638,12 +1604,7 @@ namespace Persistence.Migrations
                     b.Property<string>("NomGro")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TSGrpUserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("TSGrpUserId");
 
                     b.ToTable("TGroupes");
                 });
@@ -1668,20 +1629,17 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("DateSaisiImp")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("EncaissementId")
-                        .HasColumnType("int");
-
                     b.Property<int>("IdDetBordImp")
                         .HasColumnType("int");
 
                     b.Property<int>("IdEncImp")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdImp")
-                        .HasColumnType("int");
-
                     b.Property<string>("IdNvEncs")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ImpayeId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsResolu")
                         .HasColumnType("bit");
@@ -1692,9 +1650,12 @@ namespace Persistence.Migrations
                     b.Property<decimal>("MontImp")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("idImpaye")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("EncaissementId");
+                    b.HasIndex("ImpayeId");
 
                     b.ToTable("TImpayes");
                 });
@@ -1706,6 +1667,9 @@ namespace Persistence.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ContratId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
@@ -1738,7 +1702,12 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
+                    b.Property<int>("idContrat")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ContratId");
 
                     b.ToTable("TIntFinancements");
                 });
@@ -1751,13 +1720,16 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("ContratId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdCir")
+                    b.Property<int>("IdRoleCir")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdRoleCir")
+                    b.Property<int?>("IndividuId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedDate")
@@ -1769,7 +1741,25 @@ namespace Persistence.Migrations
                     b.Property<int>("RefIndCir")
                         .HasColumnType("int");
 
+                    b.Property<int?>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idContrat")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idIndividu")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idTRole")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ContratId");
+
+                    b.HasIndex("IndividuId");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("TJCirs");
                 });
@@ -1790,6 +1780,12 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime?>("DatReconcil")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("DetBordtId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("EncaissementId")
+                        .HasColumnType("int");
 
                     b.Property<int>("IdDetBordLet")
                         .HasColumnType("int");
@@ -1818,7 +1814,17 @@ namespace Persistence.Migrations
                     b.Property<bool>("ValideReconcil")
                         .HasColumnType("bit");
 
+                    b.Property<int>("idDetBord")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idEncaissement")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("DetBordtId");
+
+                    b.HasIndex("EncaissementId");
 
                     b.ToTable("TJLettrages");
                 });
@@ -1830,6 +1836,9 @@ namespace Persistence.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ContratId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
@@ -1846,9 +1855,6 @@ namespace Persistence.Migrations
                     b.Property<int>("IdDetBordLit")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdLitiget")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
@@ -1862,7 +1868,12 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
+                    b.Property<int>("idContrat")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ContratId");
 
                     b.ToTable("TLitiges");
                 });
@@ -1878,6 +1889,9 @@ namespace Persistence.Migrations
                     b.Property<string>("AvrvCerdit")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ContratId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
@@ -1886,9 +1900,6 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime?>("DateValEncCredit")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("IdCerdit")
-                        .HasColumnType("int");
 
                     b.Property<string>("LibelleLibreCredit")
                         .HasColumnType("nvarchar(max)");
@@ -1909,7 +1920,12 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
+                    b.Property<int>("idContrat")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ContratId");
 
                     b.ToTable("TMvtCredits");
                 });
@@ -1930,9 +1946,6 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime?>("DateDebit")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("IdDebit")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
@@ -1963,10 +1976,23 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("GrpUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ListValId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("TrListValId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("GrpUserId");
+
+                    b.HasIndex("TrListValId");
 
                     b.ToTable("TPermissions");
                 });
@@ -1979,23 +2005,23 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("ContratId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DatProg")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("DetBordId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("EchProg")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("EtatProg")
                         .HasColumnType("bit");
-
-                    b.Property<int>("IdDetBordPr")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdProrogation")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
@@ -2006,13 +2032,20 @@ namespace Persistence.Migrations
                     b.Property<int>("RefCtrProg")
                         .HasColumnType("int");
 
-                    b.Property<int>("TContratRef")
-                        .HasColumnType("int");
-
                     b.Property<string>("TypProg")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("idContrat")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idDetBord")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ContratId");
+
+                    b.HasIndex("DetBordId");
 
                     b.ToTable("TPropagations");
                 });
@@ -2052,6 +2085,9 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("FactorId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
@@ -2071,7 +2107,12 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
+                    b.Property<int>("idFactor")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("FactorId");
 
                     b.ToTable("TRActprofBcts");
                 });
@@ -2107,10 +2148,18 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("FactorId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("idFactor")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("FactorId");
 
                     b.ToTable("TRAgBqs");
                 });
@@ -2126,7 +2175,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdCommFactoring")
+                    b.Property<int?>("FactorId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedDate")
@@ -2146,18 +2195,23 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
+                    b.Property<int>("idFactor")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("FactorId");
 
                     b.ToTable("TRComFactorings");
                 });
 
             modelBuilder.Entity("CleanArc.Domain.Entities.TRCp", b =>
                 {
-                    b.Property<int>("IdCp")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCp"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CodeGouverno")
                         .IsRequired()
@@ -2174,7 +2228,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Id")
+                    b.Property<int?>("FactorId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedDate")
@@ -2188,7 +2242,12 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
-                    b.HasKey("IdCp");
+                    b.Property<int>("idFactor")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FactorId");
 
                     b.ToTable("TRCps");
                 });
@@ -2210,6 +2269,9 @@ namespace Persistence.Migrations
                     b.Property<int>("DelaiMaxPaiIntFi")
                         .HasColumnType("int");
 
+                    b.Property<int?>("FactorId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
@@ -2226,7 +2288,12 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
+                    b.Property<int>("idFactor")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("FactorId");
 
                     b.ToTable("TRIntFinancements");
                 });
@@ -2246,7 +2313,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdListeFraisDivers")
+                    b.Property<int?>("FactorId")
                         .HasColumnType("int");
 
                     b.Property<string>("LibFraisDivers")
@@ -2263,7 +2330,12 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
+                    b.Property<int>("idFactor")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("FactorId");
 
                     b.ToTable("TRListFraisDivers");
                 });
@@ -2298,9 +2370,6 @@ namespace Persistence.Migrations
                     b.Property<int>("OrdListVal")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TPermissionsId")
-                        .HasColumnType("int");
-
                     b.Property<string>("TypListVal")
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
@@ -2309,8 +2378,6 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TPermissionsId");
 
                     b.ToTable("TRListVals");
                 });
@@ -2342,7 +2409,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdNldp")
+                    b.Property<int?>("FactorId")
                         .HasColumnType("int");
 
                     b.Property<string>("LibDevi")
@@ -2360,7 +2427,12 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("idFactor")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("FactorId");
 
                     b.ToTable("TRNldps");
                 });
@@ -2376,6 +2448,9 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("FactorId")
+                        .HasColumnType("int");
+
                     b.Property<string>("LibParamPie")
                         .HasColumnType("nvarchar(max)");
 
@@ -2390,7 +2465,12 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
+                    b.Property<int>("idFactor")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("FactorId");
 
                     b.ToTable("TRParamPieces");
                 });
@@ -2418,12 +2498,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("StartDateTMM")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("TFactorId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("TFactorId");
 
                     b.ToTable("TRTMMS");
                 });
@@ -2439,7 +2514,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdT")
+                    b.Property<int?>("FactorId")
                         .HasColumnType("int");
 
                     b.Property<string>("LibT")
@@ -2451,7 +2526,12 @@ namespace Persistence.Migrations
                     b.Property<decimal>("ValT")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("idFactor")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("FactorId");
 
                     b.ToTable("TRTvas");
                 });
@@ -2464,14 +2544,14 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("ContratId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DateRelance")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("IdRelance")
-                        .HasColumnType("int");
 
                     b.Property<string>("LibelleRelance")
                         .HasColumnType("nvarchar(max)");
@@ -2491,7 +2571,12 @@ namespace Persistence.Migrations
                     b.Property<byte>("ValidRelance")
                         .HasColumnType("tinyint");
 
+                    b.Property<int>("idContrat")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ContratId");
 
                     b.ToTable("TRelances");
                 });
@@ -2507,7 +2592,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdRibFactor")
+                    b.Property<int?>("FactorId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedDate")
@@ -2519,7 +2604,12 @@ namespace Persistence.Migrations
                     b.Property<byte>("ValidRibFactor")
                         .HasColumnType("tinyint");
 
+                    b.Property<int>("idFactor")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("FactorId");
 
                     b.ToTable("TRibFactors");
                 });
@@ -2532,14 +2622,8 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CirId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("IdRole")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LibRole")
                         .HasColumnType("nvarchar(max)");
@@ -2548,8 +2632,6 @@ namespace Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CirId");
 
                     b.ToTable("TRoles");
                 });
@@ -2568,23 +2650,18 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("GroupeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("LibGrpUser")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("TPermissionsId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("TPermissionsId");
-
-                    b.HasIndex("UserId");
+                    b.HasIndex("GroupeId");
 
                     b.ToTable("TSGrpUsers");
                 });
@@ -2609,14 +2686,11 @@ namespace Persistence.Migrations
                     b.Property<string>("DirectionUser")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("FactorId")
+                        .HasColumnType("int");
+
                     b.Property<string>("FonctionUser")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("IdGrpUser")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdUser")
-                        .HasColumnType("int");
 
                     b.Property<string>("LoginUser")
                         .HasColumnType("nvarchar(max)");
@@ -2651,10 +2725,20 @@ namespace Persistence.Migrations
                     b.Property<string>("TelFixeUser")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TsGrpUserIdGrpUs")
+                    b.Property<int?>("TsGrpUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idFactor")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idTSGrpUser")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FactorId");
+
+                    b.HasIndex("TsGrpUserId");
 
                     b.ToTable("TUsers");
                 });
@@ -2676,9 +2760,6 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("DateFinCompte")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdUserWeb")
-                        .HasColumnType("int");
-
                     b.Property<int?>("IndividuId")
                         .HasColumnType("int");
 
@@ -2698,6 +2779,9 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RefIndWeb")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idIndividu")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -2978,14 +3062,14 @@ namespace Persistence.Migrations
                     b.Property<string>("AdrInd")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CirId")
-                        .HasColumnType("int");
-
                     b.Property<string>("CodSclas")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CodTvaInd")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ContactId")
+                        .HasColumnType("int");
 
                     b.Property<string>("CpInd")
                         .HasColumnType("nvarchar(max)");
@@ -3010,9 +3094,6 @@ namespace Persistence.Migrations
 
                     b.Property<string>("EmailInd")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("EncaissementId")
-                        .HasColumnType("int");
 
                     b.Property<bool?>("ExoInd")
                         .HasColumnType("bit");
@@ -3074,27 +3155,18 @@ namespace Persistence.Migrations
                     b.Property<string>("RefAdhInd")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TAdresseId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TDemLimiteId")
-                        .HasColumnType("int");
-
                     b.Property<string>("TelInd")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TypDocIdInd")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("idContact")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CirId");
-
-                    b.HasIndex("EncaissementId");
-
-                    b.HasIndex("TAdresseId");
-
-                    b.HasIndex("TDemLimiteId");
+                    b.HasIndex("ContactId");
 
                     b.ToTable("TIndividus");
                 });
@@ -3110,350 +3182,474 @@ namespace Persistence.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("CleanArc.Domain.Entities.TAdresse", b =>
+                {
+                    b.HasOne("TIndividu", "Individu")
+                        .WithMany("Adresses")
+                        .HasForeignKey("IndividuId");
+
+                    b.Navigation("Individu");
+                });
+
             modelBuilder.Entity("CleanArc.Domain.Entities.TBordereau", b =>
                 {
-                    b.HasOne("CleanArc.Domain.Entities.TDetBord", null)
+                    b.HasOne("CleanArc.Domain.Entities.TContrat", "Contrat")
                         .WithMany("Bordereaus")
-                        .HasForeignKey("TDetBordId");
+                        .HasForeignKey("ContratId");
+
+                    b.Navigation("Contrat");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TCalcDispo", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TContrat", "Contrat")
+                        .WithMany("CalcDispos")
+                        .HasForeignKey("ContratId");
+
+                    b.Navigation("Contrat");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TCalcInt", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TContrat", "Contrat")
+                        .WithMany("CalcInts")
+                        .HasForeignKey("ContratId");
+
+                    b.Navigation("Contrat");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TCalcIntIR", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TContrat", "Contrat")
+                        .WithMany("CalcIntIrs")
+                        .HasForeignKey("ContratId");
+
+                    b.Navigation("Contrat");
                 });
 
             modelBuilder.Entity("CleanArc.Domain.Entities.TComFactoring", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TContrat", null)
+                        .WithMany("ComFactorings")
+                        .HasForeignKey("TContratId");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TComMfg", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TContrat", "Contrat")
+                        .WithMany("ComMfgs")
+                        .HasForeignKey("ContratId");
+
+                    b.Navigation("Contrat");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TConfigurationEmai", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TFactor", "Factor")
+                        .WithMany("ConfigurationEmais")
+                        .HasForeignKey("FactorId");
+
+                    b.Navigation("Factor");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TContact", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TComFactoring", null)
+                        .WithMany("Contacts")
+                        .HasForeignKey("TComFactoringId");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TContrat", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TDetAss", "DetAss")
+                        .WithMany()
+                        .HasForeignKey("DetAssId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TFactor", "Factor")
+                        .WithMany("Contrats")
+                        .HasForeignKey("FactorId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TFraisDivers", "FraisDivers")
+                        .WithMany("Contrats")
+                        .HasForeignKey("FraisDiversId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TFraisReleve", null)
+                        .WithMany("Contrats")
+                        .HasForeignKey("TFraisReleveId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TMvtDebit", null)
+                        .WithMany("Contrats")
+                        .HasForeignKey("TMvtDebitId");
+
+                    b.Navigation("DetAss");
+
+                    b.Navigation("Factor");
+
+                    b.Navigation("FraisDivers");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TDemLimite", b =>
                 {
                     b.HasOne("CleanArc.Domain.Entities.TContact", "Contact")
                         .WithMany()
                         .HasForeignKey("ContactId");
 
-                    b.HasOne("CleanArc.Domain.Entities.TFraisDivers", "FraisDivers")
-                        .WithMany()
-                        .HasForeignKey("FraisDiversId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TContrat", null)
-                        .WithMany("ComFactorings")
-                        .HasForeignKey("TContratId");
+                    b.HasOne("TIndividu", "Individu")
+                        .WithMany("DemLimites")
+                        .HasForeignKey("IndividuId");
 
                     b.Navigation("Contact");
 
-                    b.Navigation("FraisDivers");
-                });
-
-            modelBuilder.Entity("CleanArc.Domain.Entities.TContact", b =>
-                {
-                    b.HasOne("CleanArc.Domain.Entities.TDemLimite", null)
-                        .WithMany("Contacts")
-                        .HasForeignKey("TDemLimiteId");
-
-                    b.HasOne("TIndividu", "individu")
-                        .WithMany("Contacts")
-                        .HasForeignKey("individuId");
-
-                    b.Navigation("individu");
-                });
-
-            modelBuilder.Entity("CleanArc.Domain.Entities.TContrat", b =>
-                {
-                    b.HasOne("CleanArc.Domain.Entities.TBordereau", "Bordereau")
-                        .WithMany("Contrats")
-                        .HasForeignKey("BordereauId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TCalcDispo", "CalcDispo")
-                        .WithMany("Contrats")
-                        .HasForeignKey("CalcDispoId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TCalcInt", "CalcInt")
-                        .WithMany("Contrats")
-                        .HasForeignKey("CalcIntId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TCalcIntIR", "CalcIntIr")
-                        .WithMany("Contrats")
-                        .HasForeignKey("CalcIntIrId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TDetBord", "DetBord")
-                        .WithMany("Contrats")
-                        .HasForeignKey("DetBordId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TEcCpt", "EcCpt")
-                        .WithMany("Contrats")
-                        .HasForeignKey("EcCptId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TEtatDispo", "EtatDispo")
-                        .WithMany("Contrats")
-                        .HasForeignKey("EtatDispoId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TFinancement", "Financement")
-                        .WithMany("Contrats")
-                        .HasForeignKey("FinancementId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TFraisPaiment", "FraisPaiment")
-                        .WithMany("Contrats")
-                        .HasForeignKey("FraisPaimentId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TFraisReleve", "FraisReleve")
-                        .WithMany("Contrats")
-                        .HasForeignKey("FraisReleveId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TIntFinancement", "IntFinancement")
-                        .WithMany("Contrats")
-                        .HasForeignKey("IntFinancementId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TLitige", "Litige")
-                        .WithMany("Contrats")
-                        .HasForeignKey("LitigeId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TMvtCredit", "MvtCredit")
-                        .WithMany("Contrats")
-                        .HasForeignKey("MvtCreditId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TMvtDebit", "MvtDebit")
-                        .WithMany("Contrats")
-                        .HasForeignKey("MvtDebitId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TRelance", "Relance")
-                        .WithMany("Contrats")
-                        .HasForeignKey("RelanceId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TJCir", null)
-                        .WithMany("Contrats")
-                        .HasForeignKey("TJCirId");
-
-                    b.Navigation("Bordereau");
-
-                    b.Navigation("CalcDispo");
-
-                    b.Navigation("CalcInt");
-
-                    b.Navigation("CalcIntIr");
-
-                    b.Navigation("DetBord");
-
-                    b.Navigation("EcCpt");
-
-                    b.Navigation("EtatDispo");
-
-                    b.Navigation("Financement");
-
-                    b.Navigation("FraisPaiment");
-
-                    b.Navigation("FraisReleve");
-
-                    b.Navigation("IntFinancement");
-
-                    b.Navigation("Litige");
-
-                    b.Navigation("MvtCredit");
-
-                    b.Navigation("MvtDebit");
-
-                    b.Navigation("Relance");
+                    b.Navigation("Individu");
                 });
 
             modelBuilder.Entity("CleanArc.Domain.Entities.TDetBord", b =>
                 {
-                    b.HasOne("CleanArc.Domain.Entities.TJLettrage", "Lettrage")
+                    b.HasOne("CleanArc.Domain.Entities.TBordereau", "Bordereau")
                         .WithMany("DetBords")
-                        .HasForeignKey("LettrageId");
+                        .HasForeignKey("BordereauId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TContrat", "Contrat")
+                        .WithMany()
+                        .HasForeignKey("ContratId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TDocGed", "DocGed")
+                        .WithMany("DetBords")
+                        .HasForeignKey("DocGedId");
 
                     b.HasOne("CleanArc.Domain.Entities.TLitige", "Litige")
                         .WithMany()
                         .HasForeignKey("LitigeId");
 
-                    b.HasOne("CleanArc.Domain.Entities.TPropagation", "Propagation")
-                        .WithMany("DetBords")
-                        .HasForeignKey("PropagationId");
+                    b.Navigation("Bordereau");
 
-                    b.Navigation("Lettrage");
+                    b.Navigation("Contrat");
+
+                    b.Navigation("DocGed");
 
                     b.Navigation("Litige");
-
-                    b.Navigation("Propagation");
                 });
 
             modelBuilder.Entity("CleanArc.Domain.Entities.TDocGed", b =>
                 {
                     b.HasOne("CleanArc.Domain.Entities.TFinancement", "Financement")
-                        .WithMany()
-                        .HasForeignKey("FinancementId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TDetBord", null)
                         .WithMany("DocGeds")
-                        .HasForeignKey("TDetBordId");
+                        .HasForeignKey("FinancementId");
 
                     b.Navigation("Financement");
                 });
 
+            modelBuilder.Entity("CleanArc.Domain.Entities.TEcCpt", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TContrat", "Contrat")
+                        .WithMany("EcCpts")
+                        .HasForeignKey("ContratId");
+
+                    b.Navigation("Contrat");
+                });
+
             modelBuilder.Entity("CleanArc.Domain.Entities.TEncaissement", b =>
                 {
-                    b.HasOne("CleanArc.Domain.Entities.TJLettrage", "Lettrage")
-                        .WithMany("Encaissements")
-                        .HasForeignKey("LettrageId");
+                    b.HasOne("CleanArc.Domain.Entities.TContrat", "Contrat")
+                        .WithMany("Encaissementss")
+                        .HasForeignKey("ContratId");
 
-                    b.Navigation("Lettrage");
+                    b.HasOne("TIndividu", "Individu")
+                        .WithMany("Encaissements")
+                        .HasForeignKey("IndividuId");
+
+                    b.Navigation("Contrat");
+
+                    b.Navigation("Individu");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TEtatDispo", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TContrat", "Contrat")
+                        .WithMany("EtatDispos")
+                        .HasForeignKey("ContratId");
+
+                    b.Navigation("Contrat");
                 });
 
             modelBuilder.Entity("CleanArc.Domain.Entities.TFactor", b =>
                 {
-                    b.HasOne("CleanArc.Domain.Entities.TRAgBq", "AgBq")
+                    b.HasOne("CleanArc.Domain.Entities.TRTMM", "Trtmm")
                         .WithMany("Factors")
-                        .HasForeignKey("AgBqId");
+                        .HasForeignKey("TrtmmId");
 
+                    b.Navigation("Trtmm");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TFinancement", b =>
+                {
                     b.HasOne("CleanArc.Domain.Entities.TContrat", "Contrat")
-                        .WithMany("Factors")
+                        .WithMany("Financements")
                         .HasForeignKey("ContratId");
 
-                    b.HasOne("CleanArc.Domain.Entities.TRCp", "Cp")
-                        .WithMany("Factors")
-                        .HasForeignKey("CpId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("CleanArc.Domain.Entities.TRNldp", "Nldp")
-                        .WithMany("Factors")
-                        .HasForeignKey("NldpId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TRParamPiece", "ParamPiece")
-                        .WithMany("Factors")
-                        .HasForeignKey("ParamPieceId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TRibFactor", "RibFactor")
-                        .WithMany("Factors")
-                        .HasForeignKey("RibFactorId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TRListFraisDivers", null)
-                        .WithMany("Factors")
-                        .HasForeignKey("TRListFraisDiversId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TRActprofBct", "TrActprofBct")
-                        .WithMany("Factors")
-                        .HasForeignKey("TrActprofBctId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TRComFactoring", "TrComFactoring")
-                        .WithMany("Factors")
-                        .HasForeignKey("TrComFactoringId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TRIntFinancement", "TrIntFinancement")
-                        .WithMany("Factors")
-                        .HasForeignKey("TrIntFinancementId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TRTva", "Tva")
-                        .WithMany("Factors")
-                        .HasForeignKey("TvaId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TUser", "User")
-                        .WithMany("Factors")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("AgBq");
-
                     b.Navigation("Contrat");
-
-                    b.Navigation("Cp");
-
-                    b.Navigation("Nldp");
-
-                    b.Navigation("ParamPiece");
-
-                    b.Navigation("RibFactor");
-
-                    b.Navigation("TrActprofBct");
-
-                    b.Navigation("TrComFactoring");
-
-                    b.Navigation("TrIntFinancement");
-
-                    b.Navigation("Tva");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CleanArc.Domain.Entities.TFondGarantie", b =>
                 {
-                    b.HasOne("CleanArc.Domain.Entities.TComMfg", "ComMfg")
-                        .WithMany("FondGaranties")
-                        .HasForeignKey("ComMfgId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TEncaissement", "Encaissement")
-                        .WithMany("FondGaranties")
-                        .HasForeignKey("EncaissementId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TPropagation", "Propagation")
-                        .WithMany("FondGaranties")
-                        .HasForeignKey("PropagationId");
-
-                    b.Navigation("ComMfg");
-
-                    b.Navigation("Encaissement");
-
-                    b.Navigation("Propagation");
-                });
-
-            modelBuilder.Entity("CleanArc.Domain.Entities.TFraisDivers", b =>
-                {
                     b.HasOne("CleanArc.Domain.Entities.TContrat", "Contrat")
-                        .WithMany("FraisDivers")
+                        .WithMany("FondGaranties")
                         .HasForeignKey("ContratId");
 
                     b.Navigation("Contrat");
                 });
 
-            modelBuilder.Entity("CleanArc.Domain.Entities.TGroupe", b =>
+            modelBuilder.Entity("CleanArc.Domain.Entities.TFraisDivers", b =>
                 {
-                    b.HasOne("CleanArc.Domain.Entities.TSGrpUser", "grpUser")
-                        .WithMany("Groupe")
-                        .HasForeignKey("TSGrpUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.HasOne("CleanArc.Domain.Entities.TComFactoring", "ComFactoring")
+                        .WithMany("FraisDiversCollection")
+                        .HasForeignKey("ComFactoringId");
 
-                    b.Navigation("grpUser");
+                    b.Navigation("ComFactoring");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TFraisPaiment", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TContrat", "Contrat")
+                        .WithMany("FraisPaiments")
+                        .HasForeignKey("ContratId");
+
+                    b.Navigation("Contrat");
                 });
 
             modelBuilder.Entity("CleanArc.Domain.Entities.TImpaye", b =>
                 {
-                    b.HasOne("CleanArc.Domain.Entities.TEncaissement", "Encaissement")
+                    b.HasOne("CleanArc.Domain.Entities.TImpaye", "Impaye")
                         .WithMany()
+                        .HasForeignKey("ImpayeId");
+
+                    b.Navigation("Impaye");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TIntFinancement", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TContrat", "Contrat")
+                        .WithMany("IntFinancements")
+                        .HasForeignKey("ContratId");
+
+                    b.Navigation("Contrat");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TJCir", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TContrat", "Contrat")
+                        .WithMany()
+                        .HasForeignKey("ContratId");
+
+                    b.HasOne("TIndividu", "Individu")
+                        .WithMany("Cirs")
+                        .HasForeignKey("IndividuId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TRole", "Role")
+                        .WithMany("UCirs")
+                        .HasForeignKey("RoleId");
+
+                    b.Navigation("Contrat");
+
+                    b.Navigation("Individu");
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TJLettrage", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TDetBord", "DetBordt")
+                        .WithMany("JLettrage")
+                        .HasForeignKey("DetBordtId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TEncaissement", "Encaissement")
+                        .WithMany("Lettrages")
                         .HasForeignKey("EncaissementId");
+
+                    b.Navigation("DetBordt");
 
                     b.Navigation("Encaissement");
                 });
 
-            modelBuilder.Entity("CleanArc.Domain.Entities.TRListVal", b =>
+            modelBuilder.Entity("CleanArc.Domain.Entities.TLitige", b =>
                 {
-                    b.HasOne("CleanArc.Domain.Entities.TPermissions", null)
-                        .WithMany("ListVals")
-                        .HasForeignKey("TPermissionsId");
+                    b.HasOne("CleanArc.Domain.Entities.TContrat", "Contrat")
+                        .WithMany("Litiges")
+                        .HasForeignKey("ContratId");
+
+                    b.Navigation("Contrat");
                 });
 
-            modelBuilder.Entity("CleanArc.Domain.Entities.TRTMM", b =>
+            modelBuilder.Entity("CleanArc.Domain.Entities.TMvtCredit", b =>
                 {
-                    b.HasOne("CleanArc.Domain.Entities.TFactor", null)
-                        .WithMany("Ttmms")
-                        .HasForeignKey("TFactorId");
+                    b.HasOne("CleanArc.Domain.Entities.TContrat", "Contrat")
+                        .WithMany("MvtCredits")
+                        .HasForeignKey("ContratId");
+
+                    b.Navigation("Contrat");
                 });
 
-            modelBuilder.Entity("CleanArc.Domain.Entities.TRole", b =>
+            modelBuilder.Entity("CleanArc.Domain.Entities.TPermissions", b =>
                 {
-                    b.HasOne("CleanArc.Domain.Entities.TJCir", "Cir")
-                        .WithMany("Roles")
-                        .HasForeignKey("CirId");
+                    b.HasOne("CleanArc.Domain.Entities.TSGrpUser", "GrpUser")
+                        .WithMany("Permissions")
+                        .HasForeignKey("GrpUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Navigation("Cir");
+                    b.HasOne("CleanArc.Domain.Entities.TRListVal", "TrListVal")
+                        .WithMany("Permissions")
+                        .HasForeignKey("TrListValId");
+
+                    b.Navigation("GrpUser");
+
+                    b.Navigation("TrListVal");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TPropagation", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TContrat", "Contrat")
+                        .WithMany("Propagations")
+                        .HasForeignKey("ContratId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TDetBord", "DetBord")
+                        .WithMany("Propagations")
+                        .HasForeignKey("DetBordId");
+
+                    b.Navigation("Contrat");
+
+                    b.Navigation("DetBord");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRActprofBct", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TFactor", "Factor")
+                        .WithMany("ActprofBcts")
+                        .HasForeignKey("FactorId");
+
+                    b.Navigation("Factor");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRAgBq", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TFactor", "Factor")
+                        .WithMany("AgBqs")
+                        .HasForeignKey("FactorId");
+
+                    b.Navigation("Factor");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRComFactoring", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TFactor", "Factor")
+                        .WithMany("ComFactorings")
+                        .HasForeignKey("FactorId");
+
+                    b.Navigation("Factor");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRCp", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TFactor", "Factor")
+                        .WithMany("Cps")
+                        .HasForeignKey("FactorId");
+
+                    b.Navigation("Factor");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRIntFinancement", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TFactor", "Factor")
+                        .WithMany("TrIntFinancements")
+                        .HasForeignKey("FactorId");
+
+                    b.Navigation("Factor");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRListFraisDivers", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TFactor", "Factor")
+                        .WithMany("FraisDiversCollection")
+                        .HasForeignKey("FactorId");
+
+                    b.Navigation("Factor");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRNldp", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TFactor", "Factor")
+                        .WithMany("Nldps")
+                        .HasForeignKey("FactorId");
+
+                    b.Navigation("Factor");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRParamPiece", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TFactor", "Factor")
+                        .WithMany("TrParamPieces")
+                        .HasForeignKey("FactorId");
+
+                    b.Navigation("Factor");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRTva", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TFactor", "Factor")
+                        .WithMany("Tvas")
+                        .HasForeignKey("FactorId");
+
+                    b.Navigation("Factor");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRelance", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TContrat", "Contrat")
+                        .WithMany("Relances")
+                        .HasForeignKey("ContratId");
+
+                    b.Navigation("Contrat");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRibFactor", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TFactor", "Factor")
+                        .WithMany("RibFactors")
+                        .HasForeignKey("FactorId");
+
+                    b.Navigation("Factor");
                 });
 
             modelBuilder.Entity("CleanArc.Domain.Entities.TSGrpUser", b =>
                 {
-                    b.HasOne("CleanArc.Domain.Entities.TPermissions", null)
-                        .WithMany("Groupe")
-                        .HasForeignKey("TPermissionsId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TUser", "User")
+                    b.HasOne("CleanArc.Domain.Entities.TGroupe", "groupe")
                         .WithMany("TsGrpUsers")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("GroupeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("groupe");
+                });
+
+            modelBuilder.Entity("CleanArc.Domain.Entities.TUser", b =>
+                {
+                    b.HasOne("CleanArc.Domain.Entities.TFactor", "Factor")
+                        .WithMany("Users")
+                        .HasForeignKey("FactorId");
+
+                    b.HasOne("CleanArc.Domain.Entities.TSGrpUser", "TsGrpUser")
+                        .WithMany("TUsers")
+                        .HasForeignKey("TsGrpUserId");
+
+                    b.Navigation("Factor");
+
+                    b.Navigation("TsGrpUser");
                 });
 
             modelBuilder.Entity("CleanArc.Domain.Entities.TUsersWeb", b =>
                 {
                     b.HasOne("TIndividu", "Individu")
-                        .WithMany()
+                        .WithMany("UsersWebs")
                         .HasForeignKey("IndividuId");
 
                     b.Navigation("Individu");
@@ -3535,110 +3731,119 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("TIndividu", b =>
                 {
-                    b.HasOne("CleanArc.Domain.Entities.TJCir", "Cir")
+                    b.HasOne("CleanArc.Domain.Entities.TContact", "Contact")
                         .WithMany("Individus")
-                        .HasForeignKey("CirId");
+                        .HasForeignKey("ContactId");
 
-                    b.HasOne("CleanArc.Domain.Entities.TEncaissement", "Encaissement")
-                        .WithMany("Individus")
-                        .HasForeignKey("EncaissementId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TAdresse", null)
-                        .WithMany("Individus")
-                        .HasForeignKey("TAdresseId");
-
-                    b.HasOne("CleanArc.Domain.Entities.TDemLimite", null)
-                        .WithMany("Individus")
-                        .HasForeignKey("TDemLimiteId");
-
-                    b.Navigation("Cir");
-
-                    b.Navigation("Encaissement");
-                });
-
-            modelBuilder.Entity("CleanArc.Domain.Entities.TAdresse", b =>
-                {
-                    b.Navigation("Individus");
+                    b.Navigation("Contact");
                 });
 
             modelBuilder.Entity("CleanArc.Domain.Entities.TBordereau", b =>
                 {
-                    b.Navigation("Contrats");
+                    b.Navigation("DetBords");
                 });
 
-            modelBuilder.Entity("CleanArc.Domain.Entities.TCalcDispo", b =>
+            modelBuilder.Entity("CleanArc.Domain.Entities.TComFactoring", b =>
                 {
-                    b.Navigation("Contrats");
+                    b.Navigation("Contacts");
+
+                    b.Navigation("FraisDiversCollection");
                 });
 
-            modelBuilder.Entity("CleanArc.Domain.Entities.TCalcInt", b =>
+            modelBuilder.Entity("CleanArc.Domain.Entities.TContact", b =>
                 {
-                    b.Navigation("Contrats");
-                });
-
-            modelBuilder.Entity("CleanArc.Domain.Entities.TCalcIntIR", b =>
-                {
-                    b.Navigation("Contrats");
-                });
-
-            modelBuilder.Entity("CleanArc.Domain.Entities.TComMfg", b =>
-                {
-                    b.Navigation("FondGaranties");
+                    b.Navigation("Individus");
                 });
 
             modelBuilder.Entity("CleanArc.Domain.Entities.TContrat", b =>
                 {
+                    b.Navigation("Bordereaus");
+
+                    b.Navigation("CalcDispos");
+
+                    b.Navigation("CalcIntIrs");
+
+                    b.Navigation("CalcInts");
+
                     b.Navigation("ComFactorings");
 
-                    b.Navigation("Factors");
+                    b.Navigation("ComMfgs");
 
-                    b.Navigation("FraisDivers");
-                });
+                    b.Navigation("EcCpts");
 
-            modelBuilder.Entity("CleanArc.Domain.Entities.TDemLimite", b =>
-                {
-                    b.Navigation("Contacts");
+                    b.Navigation("Encaissementss");
 
-                    b.Navigation("Individus");
+                    b.Navigation("EtatDispos");
+
+                    b.Navigation("Financements");
+
+                    b.Navigation("FondGaranties");
+
+                    b.Navigation("FraisPaiments");
+
+                    b.Navigation("IntFinancements");
+
+                    b.Navigation("Litiges");
+
+                    b.Navigation("MvtCredits");
+
+                    b.Navigation("Propagations");
+
+                    b.Navigation("Relances");
                 });
 
             modelBuilder.Entity("CleanArc.Domain.Entities.TDetBord", b =>
                 {
-                    b.Navigation("Bordereaus");
+                    b.Navigation("JLettrage");
 
-                    b.Navigation("Contrats");
-
-                    b.Navigation("DocGeds");
+                    b.Navigation("Propagations");
                 });
 
-            modelBuilder.Entity("CleanArc.Domain.Entities.TEcCpt", b =>
+            modelBuilder.Entity("CleanArc.Domain.Entities.TDocGed", b =>
                 {
-                    b.Navigation("Contrats");
+                    b.Navigation("DetBords");
                 });
 
             modelBuilder.Entity("CleanArc.Domain.Entities.TEncaissement", b =>
                 {
-                    b.Navigation("FondGaranties");
-
-                    b.Navigation("Individus");
-                });
-
-            modelBuilder.Entity("CleanArc.Domain.Entities.TEtatDispo", b =>
-                {
-                    b.Navigation("Contrats");
+                    b.Navigation("Lettrages");
                 });
 
             modelBuilder.Entity("CleanArc.Domain.Entities.TFactor", b =>
                 {
-                    b.Navigation("Ttmms");
+                    b.Navigation("ActprofBcts");
+
+                    b.Navigation("AgBqs");
+
+                    b.Navigation("ComFactorings");
+
+                    b.Navigation("ConfigurationEmais");
+
+                    b.Navigation("Contrats");
+
+                    b.Navigation("Cps");
+
+                    b.Navigation("FraisDiversCollection");
+
+                    b.Navigation("Nldps");
+
+                    b.Navigation("RibFactors");
+
+                    b.Navigation("TrIntFinancements");
+
+                    b.Navigation("TrParamPieces");
+
+                    b.Navigation("Tvas");
+
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("CleanArc.Domain.Entities.TFinancement", b =>
                 {
-                    b.Navigation("Contrats");
+                    b.Navigation("DocGeds");
                 });
 
-            modelBuilder.Entity("CleanArc.Domain.Entities.TFraisPaiment", b =>
+            modelBuilder.Entity("CleanArc.Domain.Entities.TFraisDivers", b =>
                 {
                     b.Navigation("Contrats");
                 });
@@ -3648,35 +3853,9 @@ namespace Persistence.Migrations
                     b.Navigation("Contrats");
                 });
 
-            modelBuilder.Entity("CleanArc.Domain.Entities.TIntFinancement", b =>
+            modelBuilder.Entity("CleanArc.Domain.Entities.TGroupe", b =>
                 {
-                    b.Navigation("Contrats");
-                });
-
-            modelBuilder.Entity("CleanArc.Domain.Entities.TJCir", b =>
-                {
-                    b.Navigation("Contrats");
-
-                    b.Navigation("Individus");
-
-                    b.Navigation("Roles");
-                });
-
-            modelBuilder.Entity("CleanArc.Domain.Entities.TJLettrage", b =>
-                {
-                    b.Navigation("DetBords");
-
-                    b.Navigation("Encaissements");
-                });
-
-            modelBuilder.Entity("CleanArc.Domain.Entities.TLitige", b =>
-                {
-                    b.Navigation("Contrats");
-                });
-
-            modelBuilder.Entity("CleanArc.Domain.Entities.TMvtCredit", b =>
-                {
-                    b.Navigation("Contrats");
+                    b.Navigation("TsGrpUsers");
                 });
 
             modelBuilder.Entity("CleanArc.Domain.Entities.TMvtDebit", b =>
@@ -3684,85 +3863,26 @@ namespace Persistence.Migrations
                     b.Navigation("Contrats");
                 });
 
-            modelBuilder.Entity("CleanArc.Domain.Entities.TPermissions", b =>
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRListVal", b =>
                 {
-                    b.Navigation("Groupe");
-
-                    b.Navigation("ListVals");
+                    b.Navigation("Permissions");
                 });
 
-            modelBuilder.Entity("CleanArc.Domain.Entities.TPropagation", b =>
-                {
-                    b.Navigation("DetBords");
-
-                    b.Navigation("FondGaranties");
-                });
-
-            modelBuilder.Entity("CleanArc.Domain.Entities.TRActprofBct", b =>
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRTMM", b =>
                 {
                     b.Navigation("Factors");
                 });
 
-            modelBuilder.Entity("CleanArc.Domain.Entities.TRAgBq", b =>
+            modelBuilder.Entity("CleanArc.Domain.Entities.TRole", b =>
                 {
-                    b.Navigation("Factors");
-                });
-
-            modelBuilder.Entity("CleanArc.Domain.Entities.TRComFactoring", b =>
-                {
-                    b.Navigation("Factors");
-                });
-
-            modelBuilder.Entity("CleanArc.Domain.Entities.TRCp", b =>
-                {
-                    b.Navigation("Factors");
-                });
-
-            modelBuilder.Entity("CleanArc.Domain.Entities.TRIntFinancement", b =>
-                {
-                    b.Navigation("Factors");
-                });
-
-            modelBuilder.Entity("CleanArc.Domain.Entities.TRListFraisDivers", b =>
-                {
-                    b.Navigation("Factors");
-                });
-
-            modelBuilder.Entity("CleanArc.Domain.Entities.TRNldp", b =>
-                {
-                    b.Navigation("Factors");
-                });
-
-            modelBuilder.Entity("CleanArc.Domain.Entities.TRParamPiece", b =>
-                {
-                    b.Navigation("Factors");
-                });
-
-            modelBuilder.Entity("CleanArc.Domain.Entities.TRTva", b =>
-                {
-                    b.Navigation("Factors");
-                });
-
-            modelBuilder.Entity("CleanArc.Domain.Entities.TRelance", b =>
-                {
-                    b.Navigation("Contrats");
-                });
-
-            modelBuilder.Entity("CleanArc.Domain.Entities.TRibFactor", b =>
-                {
-                    b.Navigation("Factors");
+                    b.Navigation("UCirs");
                 });
 
             modelBuilder.Entity("CleanArc.Domain.Entities.TSGrpUser", b =>
                 {
-                    b.Navigation("Groupe");
-                });
+                    b.Navigation("Permissions");
 
-            modelBuilder.Entity("CleanArc.Domain.Entities.TUser", b =>
-                {
-                    b.Navigation("Factors");
-
-                    b.Navigation("TsGrpUsers");
+                    b.Navigation("TUsers");
                 });
 
             modelBuilder.Entity("CleanArc.Domain.Entities.User.Role", b =>
@@ -3789,7 +3909,15 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("TIndividu", b =>
                 {
-                    b.Navigation("Contacts");
+                    b.Navigation("Adresses");
+
+                    b.Navigation("Cirs");
+
+                    b.Navigation("DemLimites");
+
+                    b.Navigation("Encaissements");
+
+                    b.Navigation("UsersWebs");
                 });
 #pragma warning restore 612, 618
         }

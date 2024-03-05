@@ -4,7 +4,6 @@ namespace CleanArc.Domain.Entities;
 
 public class TEtatDispo :BaseEntity,IEntity
 {
-    public int IdEtatDispo { get; set; }
     public int RefCtrEtatDispo { get; set; }
     public decimal TotalFactureEtatDispo { get; set; }
     public decimal TotalFinEtatDispo { get; set; }
@@ -27,6 +26,7 @@ public class TEtatDispo :BaseEntity,IEntity
     public decimal TotalDisponible2EtatDispo { get; set; }
     public decimal TotalFondsReserveEtatDispo { get; set; }
     public decimal TotalFinancementDuMoisEtatDispo { get; set; }
-    public virtual ICollection<TContrat> Contrats{ get; set; }
 
+    public int idContrat { get; set; } 
+    public TContrat Contrat { get; set; } = null!;
 }

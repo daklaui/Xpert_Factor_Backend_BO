@@ -61,11 +61,7 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
         modelBuilder.AddRestrictDeleteBehaviorConvention();
         modelBuilder.AddPluralizingTableNameConvention();
         
-        modelBuilder.Entity<TSGrpUser>()
-            .HasMany(g => g.Groupe)
-            .WithOne(u => u.grpUser)
-            .HasForeignKey(u => u.TSGrpUserId)
-            .IsRequired();
+       
     
     }
 

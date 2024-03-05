@@ -13,7 +13,11 @@ public class TFinancement:BaseEntity,IEntity
     public string EtatFin { get; set; }
     public int IdDispo { get; set; }
     public string TypeEnc { get; set; }
-    public virtual ICollection<TContrat> Contrats{ get; set; }
+    
+    public int idContrat { get; set; } 
+    public TContrat Contrat { get; set; } = null!;
+    
+    public  ICollection<TDocGed> DocGeds{ get; }= new List<TDocGed>();
 
 
     

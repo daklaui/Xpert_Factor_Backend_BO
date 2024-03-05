@@ -22,9 +22,10 @@
     <PackageReference Include="System.Linq.Async" Version="6.0.1" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Features\BankAgency\Commands\UpdateBankAgencyCommand\" />
+    <Folder Include="Features\BankAgency\Queries\GetAllBankAgencyQueries\" />
+    <Folder Include="Features\BankAgency\Queries\GetBankAgencyByIdQueries\" />
     <Folder Include="Features\TMM\Commands\UpdateTmmCommand\" />
-    <Folder Include="Features\TMM\Queries\GetAllTmmQuerie\" />
-    <Folder Include="Features\TMM\Queries\GetTmmByIdQuerie\" />
   </ItemGroup>
 
 </Project>

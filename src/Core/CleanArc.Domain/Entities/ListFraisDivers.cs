@@ -8,7 +8,7 @@ public class TRListFraisDivers:BaseEntity,IEntity
     public char  LibFraisDivers{ get; set; }
     public decimal MontFraisDive{ get; set; }
     public char  TypeFraisDiver{ get; set; }
-    public int  IdListeFraisDivers{ get; set; }
-    public virtual ICollection<TFactor> Factors { get; set; }
+    public int idFactor { get; set; }
+    public  TFactor Factor { get; set; }= null!;
 
 }

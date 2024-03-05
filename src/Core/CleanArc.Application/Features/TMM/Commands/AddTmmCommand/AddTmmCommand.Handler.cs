@@ -1,13 +1,6 @@
-﻿using CleanArc.Application.Contracts.Identity;
-using CleanArc.Application.Contracts.Persistence;
-using CleanArc.Application.Features.Individu.Commands.AddIndividuCommand;
+﻿using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Application.Models.Common;
 using Mediator;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleanArc.Application.Features.TMM.Commands.AddTmmCommand
 {
@@ -23,7 +16,7 @@ namespace CleanArc.Application.Features.TMM.Commands.AddTmmCommand
 
             public async ValueTask<OperationResult<bool>> Handle(AddTmmCommand request, CancellationToken cancellationToken)
         {
-            await _unitOfWork.tmmRepository.AddTmmAsync(request.tmm);
+            await _unitOfWork.TmmRepository.AddTmmAsync(request.Trtmm);
 
             await _unitOfWork.CommitAsync();
 

@@ -11,8 +11,8 @@ public class TFondGarantie :BaseEntity,IEntity
     public decimal MontMaxFdg { get; set; }
     public decimal MontMinFdg { get; set; }
     public string TypDocRemisFdg { get; set; }
-    public int TContratRefCtr { get; set; }
-    public TComMfg ComMfg { get; set; }
-    public TPropagation Propagation { get; set; }
-    public TEncaissement  Encaissement { get; set; }
+
+    
+    public int idContrat { get; set; } 
+    public TContrat Contrat { get; set; } = null!;
 }

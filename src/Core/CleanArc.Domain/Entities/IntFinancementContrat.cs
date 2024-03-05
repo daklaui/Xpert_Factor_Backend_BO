@@ -12,7 +12,8 @@ public class TIntFinancement :BaseEntity,IEntity
     public decimal  PreCompteIntFin{ get; set; }
     public decimal  MajorIntIntFin{ get; set; }
     public Nullable<System.DateTime>  DatDebValidIntF{ get; set; }
-    public virtual ICollection<TContrat> Contrats{ get; set; }
 
+    public int idContrat { get; set; } 
+    public TContrat Contrat { get; set; } = null!;
     
 }

@@ -17,6 +17,10 @@ public class TBordereau :BaseEntity,IEntity
     public bool ValideBor { get; set; }
     public Nullable<System.DateTime> DatSaisie { get; set; }
     public string Emetteur { get; set; }
-    public virtual ICollection<TContrat> Contrats{ get; set; }
+    
+    public int idContrat { get; set; } 
+    public TContrat Contrat { get; set; } = null!;
+    
+    public  ICollection<TDetBord>DetBords{ get; }= new List<TDetBord>();
 
 }

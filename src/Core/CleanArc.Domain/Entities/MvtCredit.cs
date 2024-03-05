@@ -4,7 +4,6 @@ namespace CleanArc.Domain.Entities;
 
 public class TMvtCredit :BaseEntity,IEntity 
 {
-    public int IdCerdit{ get; set; }
     public int RefCtrCerdit{ get; set; }
     public string AvrvCerdit{ get; set; }
     public char TypCredit { get; set; }
@@ -13,8 +12,8 @@ public class TMvtCredit :BaseEntity,IEntity
     public string LibelleLibreCredit { get; set; }
     public Nullable<System.DateTime> DateValEncCredit { get; set; }
     public Nullable<System.DateTime> DateCredit { get; set; }
-    public virtual ICollection<TContrat> Contrats{ get; set; }
 
-
+    public int idContrat { get; set; } 
+    public TContrat Contrat { get; set; } = null!;
 
 }

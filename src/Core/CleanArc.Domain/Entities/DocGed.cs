@@ -4,7 +4,6 @@ namespace CleanArc.Domain.Entities;
 
 public class TDocGed:BaseEntity,IEntity
 {
-    public int IdIndGed { get; set; }
     public int IdCtrGed { get; set; }
     public int IdBorGed { get; set; }
     public int IdDetBordGed { get; set; }
@@ -28,9 +27,11 @@ public class TDocGed:BaseEntity,IEntity
     public string IdEmetteurGed { get; set; }
     public string EtapeGed { get; set; }
     public byte EtatGed { get; set; }
-    public TFinancement Financement { get; set; }
 
+    public int idFinancement { get; set; } 
+    public TFinancement Financement { get; set; } = null!;
 
+    public  ICollection<TDetBord>  DetBords{ get; }= new List<TDetBord>();
 
 
 

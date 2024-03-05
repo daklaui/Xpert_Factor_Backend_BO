@@ -3,7 +3,6 @@ namespace CleanArc.Domain.Entities;
 
 public class TUsersWeb : BaseEntity,IEntity
 {
-    public int IdUserWeb { get; set; }
     public int RefIndWeb { get; set; }
     public string LoginWeb { get; set; }
     public string PasswordWeb { get; set; }
@@ -11,7 +10,8 @@ public class TUsersWeb : BaseEntity,IEntity
     public bool ActifUserWeb { get; set; }
     public Nullable<System.DateTime> DateFinCompte { get; set; }
     public string OneSignalPlayerId { get; set; }
-    //public int TIndividuRefInd { get; set; }
-    public TIndividu Individu { get; set; }
+    
+    public int idIndividu { get; set; } 
+    public TIndividu Individu { get; set; } = null!;
     
 }

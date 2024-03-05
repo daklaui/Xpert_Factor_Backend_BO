@@ -14,6 +14,7 @@ public class TRActprofBct:BaseEntity,IEntity
     public char  CodeClasse1{ get; set; }
     public char  CodeSousClasse{ get; set; }
     public char  SousClasse{ get; set; }
-    public virtual ICollection<TFactor> Factors { get; set; }
-
+    
+    public int idFactor { get; set; }
+    public  TFactor Factor { get; set; }= null!;
 }

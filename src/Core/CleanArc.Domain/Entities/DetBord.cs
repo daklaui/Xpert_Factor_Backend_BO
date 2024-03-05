@@ -4,7 +4,6 @@ namespace CleanArc.Domain.Entities;
 
 public class TDetBord :BaseEntity,IEntity
 {
-    public int IdDetBord { get; set; }
     public string AnneeBord { get; set; }
     public string NumBord { get; set; }
     public string TypDetBord { get; set; }
@@ -34,13 +33,16 @@ public class TDetBord :BaseEntity,IEntity
     public string RefDetBord { get; set; }
     public string CommDetBord { get; set; }
     public string RetenuDetBord { get; set; }
-    public virtual ICollection<TContrat> Contrats{ get; set; }
-    public virtual ICollection<TDocGed> DocGeds{ get; set; }
-    public virtual ICollection<TBordereau> Bordereaus{ get; set; }
-    public TLitige Litige { get; set; }
-    public TPropagation Propagation { get; set; }
-    public TJLettrage Lettrage { get; set; }
-
-
     
+    public virtual ICollection<TPropagation> Propagations{ get; set; }
+    public virtual ICollection<TJLettrage> JLettrage{ get; set; }
+
+    public int ILitige { get; set; } 
+    public TLitige Litige { get; set; } = null!;
+    public int idDocGed { get; set; } 
+    public TDocGed DocGed { get; set; } = null!;
+    public int idContrat { get; set; } 
+    public TContrat Contrat { get; set; } = null!;
+    public int idBordereau { get; set; } 
+    public TBordereau Bordereau { get; set; } = null!;
 }

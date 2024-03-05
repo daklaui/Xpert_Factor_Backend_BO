@@ -4,7 +4,6 @@ namespace CleanArc.Domain.Entities;
 
 public class TEncaissement :BaseEntity,IEntity
 {
-    public int IdEnc { get; set; }
     public int RefCtrEnc { get; set; }
     public int RefAdhEnc { get; set; }
     public int RefAchEnc { get; set; }
@@ -19,8 +18,13 @@ public class TEncaissement :BaseEntity,IEntity
     public string BordEnc { get; set; }
     public string RefSeqEnc { get; set; }
     public bool Preavis { get; set; }
-    public virtual ICollection<TIndividu> Individus { get; set; }
-    public virtual ICollection<TFondGarantie> FondGaranties { get; set; }
-    public TJLettrage Lettrage { get; set; }
+    
+    public int idIndividu { get; set; } 
+    public TIndividu Individu { get; set; } = null!;
+    
+    public int idContrat { get; set; } 
+    public TContrat Contrat { get; set; } = null!;
+    
+    public  ICollection<TJLettrage> Lettrages { get; }= new List<TJLettrage>();
 
 }

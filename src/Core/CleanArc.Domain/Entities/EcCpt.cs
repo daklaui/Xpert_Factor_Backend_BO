@@ -29,6 +29,7 @@ public class TEcCpt:BaseEntity,IEntity
     public string CodeEcCpt { get; set; }
     public string IntituleEcCpt { get; set; }
     public string RefMfgAdhEcCpt { get; set; }
-    public virtual ICollection<TContrat> Contrats{ get; set; }
-
+    
+    public int idContrat { get; set; } 
+    public TContrat Contrat { get; set; } = null!;
 }

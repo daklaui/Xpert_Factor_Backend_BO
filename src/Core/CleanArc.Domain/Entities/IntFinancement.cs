@@ -10,6 +10,9 @@ public class TRIntFinancement:BaseEntity,IEntity
    public int DelaiMaxPaiIntFi { get; set; }
    public decimal  PreCompteIntFin{ get; set; }
    public Nullable<System.DateTime>  DatDebValidIntF{ get; set; }
-   public virtual ICollection<TFactor> Factors { get; set; }
+   
+   public int idFactor { get; set; }
+   public  TFactor Factor { get; set; }= null!;
+  
 
 }

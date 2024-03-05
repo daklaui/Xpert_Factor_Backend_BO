@@ -4,9 +4,8 @@ namespace CleanArc.Domain.Entities;
 
 public class TDemLimite :BaseEntity,IEntity
 {
-    public virtual ICollection<TIndividu>  Individus { get; set; }
-    public virtual ICollection<TContact>  Contacts { get; set; }
-    public int RefDemLim { get; set; }
+  
+   
     public int RefCtrDemLim { get; set; }
     public string TypDemLim { get; set; }
     public Nullable<System.DateTime> DatDemLim { get; set; }
@@ -25,4 +24,10 @@ public class TDemLimite :BaseEntity,IEntity
     public string ModePayAcc { get; set; }
     public bool ActifDemLimi { get; set; }
     public int RefAchLim { get; set; }
+    
+    
+    public int idContact { get; set; } 
+    public TContact Contact { get; set; } = null!;
+    public int idIndividu { get; set; } 
+    public TIndividu Individu { get; set; } = null!;
 }
