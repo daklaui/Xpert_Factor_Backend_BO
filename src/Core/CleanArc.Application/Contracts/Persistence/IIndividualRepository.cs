@@ -1,13 +1,14 @@
 ﻿
 
 using CleanArc.Application.Common;
+using CleanArc.Domain.Entities;
 
 namespace CleanArc.Application.Contracts.Persistence;
 
 public interface IIndividualRepository
 {
-    Task AddIIndividualAsync(TIndividu individu);
-    Task<PagedList<TIndividu>> GetAllIndividusAsync(PaginationParams paginationParams);
-    Task<TIndividu> GetIndividuById(int id);
+    Task AddIIndividualAsync(T_INDIVIDU individu);
+    Task<PagedList<T_INDIVIDU>> GetAllIndividusAsync(PaginationParams paginationParams);
+    Task<T_INDIVIDU> GetIndividuById(int id);
     //Task<List<Individu>> GetAllOrdersWithRelatedUserAsync();
 }
