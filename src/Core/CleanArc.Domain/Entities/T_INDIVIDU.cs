@@ -1,9 +1,10 @@
-﻿using CleanArc.Application.Profiles;
-using CleanArc.Domain.Entities;
+﻿using CleanArc.Domain.Common;
+using System;
+using System.Collections.Generic;
 
-namespace CleanArc.Application.Features.Individu.Queries.GetAllIndividus;
+namespace CleanArc.Domain.Entities;
 
-public record GetAllIndividusQueryResult : ICreateMapper<T_INDIVIDU>
+public partial class T_INDIVIDU : IEntity
 {
     public int REF_IND { get; set; }
 
@@ -41,6 +42,9 @@ public record GetAllIndividusQueryResult : ICreateMapper<T_INDIVIDU>
 
     public string ABRV_IND { get; set; }
 
+    public byte[] LOGO_IND { get; set; }
+
+    public byte[] PHOTO_IND { get; set; }
 
     public string MF_IND { get; set; }
 
