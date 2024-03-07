@@ -6,7 +6,7 @@ using CleanArc.Domain.Entities;
 using Mediator;
 
 
-namespace CleanArc.Application.Features.TListVal.Queries.GetAllTListVals
+namespace CleanArc.Application.Features.ListVals.Queries.GetAllTListVals
 {
     internal class GetAllTListValsQueryHandler : IRequestHandler<GetAllTListValsQuery, OperationResult<PageInfo<GetAllTListValsQueryResult>>>
     {

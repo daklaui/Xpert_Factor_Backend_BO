@@ -8,18 +8,18 @@ namespace CleanArc.Application.Features.TJobs.Commands.AddTJobs
 {
     public class AddTJobsCommandHandler : IRequestHandler<AddTJobsCommand, OperationResult<bool>>
     {
-        private readonly ITJobsRepository _tJobsRepository;
+        
         private readonly IUnitOfWork _unitOfWork;
 
         public AddTJobsCommandHandler(ITJobsRepository tJobsRepository, IUnitOfWork unitOfWork)
         {
-            _tJobsRepository = tJobsRepository;
+           
             _unitOfWork = unitOfWork;
         }
 
         public async ValueTask<OperationResult<bool>> Handle(AddTJobsCommand request, CancellationToken cancellationToken)
         {
-            await _tJobsRepository.AddTJobsAsync(request.TJobs);
+            await _unitOfWork.TJobsRepository.AddTJobsAsync(request.TJobs);
             await _unitOfWork.CommitAsync();
             return OperationResult<bool>.SuccessResult(true);
         }

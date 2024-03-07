@@ -20,7 +20,7 @@ public class UnitOfWork : IUnitOfWork
         UserRefreshTokenRepository = new UserRefreshTokenRepository(_db);
         OrderRepository = new OrderRepository(_db);
         TPostalCodesRepository = new TPostalCodesRepository(_db);
-        TJobsRepository = new TJobsRepository(_db); // Initialisation de TJobsRepository
+        TJobsRepository = new TJobsRepository(_db); 
         OrderRepository= new OrderRepository(_db);
         IndividualRepository= new IndividuRepository(_db);
         TListValRepository = new TListValRepository(_db);

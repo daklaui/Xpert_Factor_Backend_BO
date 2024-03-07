@@ -1,8 +1,8 @@
 ﻿using CleanArc.Application.Common;
 using CleanArc.Application.Features.ListVals.Commands.UpdateTListValCommand;
-using CleanArc.Application.Features.TListVal.Commands;
-using CleanArc.Application.Features.TListVal.Queries.GetAllTListVals;
-using CleanArc.Application.Features.TListVal.Queries.GetByIdQuery;
+using CleanArc.Application.Features.ListVals.Commands;
+using CleanArc.Application.Features.ListVals.Queries.GetAllTListVals;
+using CleanArc.Application.Features.ListVals.Queries.GetByIdQuery;
 using CleanArc.WebFramework.BaseController;
 using Mediator;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +11,7 @@ namespace CleanArc.Web.Api.Controllers.V1.TListVal
 {
     [ApiVersion("1")]
     [ApiController]
-    [Route("api/v{version:apiVersion}/TListVal")]
+    [Route("api/v{version:apiVersion}/TRListVals")]
     public class TListValController : BaseController
     {
         private readonly ISender _sender;

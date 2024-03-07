@@ -9,6 +9,13 @@
     <Compile Remove="Common\ValidationBase\**" />
     <EmbeddedResource Remove="Common\ValidationBase\**" />
     <None Remove="Common\ValidationBase\**" />
+    <Compile Remove="Contracts\Persistence\ITContratsRepository.cs" />
+    <Compile Remove="Features\Contracts\Commands\UpdateTContratsCommand\UpdateTContratsCommand.Handler.cs" />
+    <Compile Remove="Features\Contracts\Commands\AddTContractCommand\AddTContactCommand.Handler.cs" />
+    <Compile Remove="Features\Contracts\Queries\GetTContratsById\GetTContratsByIdQuery.cs" />
+    <Compile Remove="Features\Contracts\Queries\GetTContratsById\GetByIdQuery.Response.cs" />
+    <Compile Remove="Features\Contracts\Queries\GetAllTContrats\GetAllTContratsQuery.Response.cs" />
+    <Compile Remove="Features\Contracts\Queries\GetAllTContrats\GetAllTContratsQuery.Handler.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CleanArc.Domain\CleanArc.Domain.csproj" />
@@ -18,6 +25,12 @@
     </PackageReference>
     <PackageReference Include="Mediator.Abstractions" Version="2.1.1" />
     <PackageReference Include="System.Linq.Async" Version="6.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\Contracts\Commands\AddTContractCommand\" />
+    <Folder Include="Features\Contracts\Commands\UpdateTContratsCommand\" />
+    <Folder Include="Features\Contracts\Queries\GetAllTContrats\" />
+    <Folder Include="Features\Contracts\Queries\GetTContratsById\" />
   </ItemGroup>
 
 </Project>

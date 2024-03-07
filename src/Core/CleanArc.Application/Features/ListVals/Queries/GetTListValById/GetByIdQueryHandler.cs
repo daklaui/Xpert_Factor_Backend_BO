@@ -5,7 +5,7 @@ using CleanArc.Application.Common;
 using CleanArc.Domain.Entities;
 using Mediator;
 
-namespace CleanArc.Application.Features.TListVal.Queries.GetByIdQuery
+namespace CleanArc.Application.Features.ListVals.Queries.GetByIdQuery
 {
     internal class GetByIdQueryHandler : IRequestHandler<GetTListValByIdQuery, OperationResult<GetByIdQueryResult>>
     {

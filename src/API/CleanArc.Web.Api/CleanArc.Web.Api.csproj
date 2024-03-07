@@ -32,4 +32,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Controllers\V1\Contracts\TContractsController.cs" />
+  </ItemGroup>
+
 </Project>

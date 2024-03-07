@@ -2,11 +2,7 @@
 using CleanArc.Domain.Entities;
 using CleanArc.Infrastructure.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
 using CleanArc.Application.Common;
-using CleanArc.Application.Features.ListVals.Commands.UpdateTListValCommand;
 
 namespace CleanArc.Infrastructure.Persistence.Repositories
 {

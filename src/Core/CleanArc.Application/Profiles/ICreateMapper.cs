@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CleanArc.Application.Features.ListVals.Commands.UpdateTListValCommand;
-using CleanArc.Application.Features.TListVal.Queries.GetAllTListVals;
+using CleanArc.Application.Features.ListVals.Queries.GetAllTListVals;
 using CleanArc.Domain.Entities;
 
 namespace CleanArc.Application.Profiles;

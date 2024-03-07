@@ -10,7 +10,7 @@ namespace Persistence.Migrations
             migrationBuilder.EnsureSchema(
                 name: "usr");
 
-            migrationBuilder.CreateTable(
+           /* migrationBuilder.CreateTable(
                 name: "Roles",
                 schema: "usr",
                 columns: table => new
@@ -253,7 +253,7 @@ namespace Persistence.Migrations
                 table: "Users",
                 column: "NormalizedUserName",
                 unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                filter: "[NormalizedUserName] IS NOT NULL");*/
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
