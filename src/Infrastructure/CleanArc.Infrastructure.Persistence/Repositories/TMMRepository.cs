@@ -6,15 +6,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CleanArc.Infrastructure.Persistence.Repositories;
 
-public class TMMRepository :BaseAsyncRepository<TR_TMM>, ITMMRepository
+public class TmmRepository :BaseAsyncRepository<TR_TMM>, ITMMRepository
 {
-    public TMMRepository(ApplicationDbContext dbContext) : base(dbContext)
+    public TmmRepository(ApplicationDbContext dbContext) : base(dbContext)
     {
     }
 
-    public async Task AddTrTmmAsync(TR_TMM trTmm)
+    public async  Task <TR_TMM> AddTrTmmAsync(TR_TMM trTmm)
     {
+        trTmm.ID_TMM = 0;
+        if (trTmm == null)
+        {
+            throw new ArgumentNullException(nameof(trTmm), "Cannot add a null entity");
+        }
+
         await base.AddAsync(trTmm);
+        return trTmm;
     }
 
     public async Task<PagedList<TR_TMM>> GetAllTrTmmAsync(PaginationParams paginationParams)
@@ -27,12 +34,12 @@ public class TMMRepository :BaseAsyncRepository<TR_TMM>, ITMMRepository
 
     public async Task<TR_TMM> GetTrTmmById(int id)
     {
-        return await base.TableNoTracking.FirstAsync(p=>p.ID_TMM == id);
+        return await base.TableNoTracking.FirstOrDefaultAsync(p => p.ID_TMM == id);
 
     }
 
     public  async Task UpdateTrTmmAsync(TR_TMM trTmm)
     {
-        throw new NotImplementedException();
+        await base.UpdateAsync1(trTmm);
     }
 }
