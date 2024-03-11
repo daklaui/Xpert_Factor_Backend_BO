@@ -10,6 +10,8 @@ public class UnitOfWork : IUnitOfWork
     public IOrderRepository OrderRepository { get; }
 
     public IIndividualRepository IndividualRepository { get; }
+    
+    public IAgencyBankRepository AgencyBankRepository { get; }
 
     public UnitOfWork(ApplicationDbContext db)
     {
@@ -17,6 +19,7 @@ public class UnitOfWork : IUnitOfWork
         UserRefreshTokenRepository = new UserRefreshTokenRepository(_db);
         OrderRepository= new OrderRepository(_db);
         IndividualRepository= new IndividuRepository(_db);
+        AgencyBankRepository = new AgencyBankRepositoryRepository(_db);
     }
 
     public  Task CommitAsync()

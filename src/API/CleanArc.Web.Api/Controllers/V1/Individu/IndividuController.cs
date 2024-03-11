@@ -1,4 +1,5 @@
 ﻿using CleanArc.Application.Common;
+using CleanArc.Application.Features.AgencyBank.Queries.GetAgnecyBankByIdQuerie;
 using CleanArc.Application.Features.Individu.Commands.AddIndividuCommand;
 using CleanArc.Application.Features.Individu.Queries.GetAllIndividus;
 using CleanArc.Application.Features.Individu.Queries.GetByIdQuery;
@@ -43,10 +44,12 @@ public class IndividuController : BaseController
     }
 
     [HttpGet("GetIndividuById/{id}")]
-    public async Task<IActionResult> GetIndividuById(int id)
+    public async Task<IActionResult> GetIndividuById(string id)
     {
-        var query = await _sender.Send(new GetByIdQuery(id));
+        var query = await _sender.Send(new GetAgencyBankByIdQuery(id));
 
         return base.OperationResult(query);
     }
+    
+    
 }
