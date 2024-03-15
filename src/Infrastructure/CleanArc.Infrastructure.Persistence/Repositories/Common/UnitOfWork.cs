@@ -12,7 +12,9 @@ public class UnitOfWork : IUnitOfWork
     public IIndividualRepository IndividualRepository { get; }
     
     public ITMMRepository TmmRepository { get; }
-
+  
+    public IFinancementRepository FinancementRepository { get; }
+   
     public UnitOfWork(ApplicationDbContext db)
     {
         _db = db;
@@ -20,6 +22,7 @@ public class UnitOfWork : IUnitOfWork
         OrderRepository= new OrderRepository(_db);
         IndividualRepository= new IndividuRepository(_db);
         TmmRepository = new TmmRepository(_db);
+        FinancementRepository = new FinancementRepository(_db);
     }
 
     public  Task CommitAsync()

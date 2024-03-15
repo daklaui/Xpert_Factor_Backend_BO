@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class T_DEM_LIMITE
+public partial class T_DEM_LIMITE : IEntity
 {
     public int REF_DEM_LIM { get; set; }
 

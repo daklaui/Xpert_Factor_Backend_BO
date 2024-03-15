@@ -6,6 +6,8 @@ public interface IUnitOfWork
     public IOrderRepository OrderRepository { get; }
     public IIndividualRepository IndividualRepository { get; }
     public ITMMRepository TmmRepository { get; }
+    public IFinancementRepository FinancementRepository { get; }
+
     Task CommitAsync();
     ValueTask RollBackAsync();
 }
