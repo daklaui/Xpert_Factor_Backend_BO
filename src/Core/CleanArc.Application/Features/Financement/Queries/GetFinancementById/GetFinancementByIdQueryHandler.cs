@@ -2,6 +2,7 @@
 using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Application.Models.Common;
 using CleanArc.Domain.Entities;
+using CleanArc.Infrastructure.Identity.Identity.Dtos;
 using Mediator;
 
 namespace CleanArc.Application.Features.Financement.Queries
@@ -21,9 +22,9 @@ namespace CleanArc.Application.Features.Financement.Queries
 
         public async ValueTask<OperationResult<GetFinancementByIdQueryResult>> Handle(GetFinancementByIdQuery request, CancellationToken cancellationToken)
         {
-            var financement = await  _unitOfWork.FinancementRepository.GetFinancementById(request.id);
+            var financement = await  _unitOfWork.FinancementRepository.AllRecord(request.id);
 
-            var result =   _mapper.Map<T_FINANCEMENT, GetFinancementByIdQueryResult>(financement);
+            var result =   _mapper.Map<FinancementDto, GetFinancementByIdQueryResult>(financement);
 
             return OperationResult<GetFinancementByIdQueryResult>.SuccessResult(result);
         }

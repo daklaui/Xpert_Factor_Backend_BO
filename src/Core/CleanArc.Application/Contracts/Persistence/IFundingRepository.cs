@@ -1,10 +1,8 @@
-﻿using CleanArc.Domain.Entities;
-
+﻿using CleanArc.Infrastructure.Identity.Identity.Dtos;
 namespace CleanArc.Application.Contracts.Persistence;
 
 public interface IFinancementRepository
 {
-    Task<T_FINANCEMENT> GetFinancementById(int REF_CTR);
+    Task<FinancementDto> AllRecord(int ref_ctr);
 
-    Task AddFinancementAsync(T_FINANCEMENT financement);
 }

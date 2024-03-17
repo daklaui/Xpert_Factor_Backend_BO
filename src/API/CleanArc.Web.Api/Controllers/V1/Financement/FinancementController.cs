@@ -1,5 +1,4 @@
-﻿using CleanArc.Application.Features.Financement.Commands.AddFinancementCommand;
-using CleanArc.Application.Features.Financement.Queries;
+﻿using CleanArc.Application.Features.Financement.Queries;
 using CleanArc.WebFramework.BaseController;
 using Mediator;
 using Microsoft.AspNetCore.Mvc;
@@ -25,14 +24,6 @@ public class FinancementController:BaseController
         return base.OperationResult(query);
     }
     
-    
-    [HttpPost("CreateNewFinancement")]
-    public async Task<IActionResult> CreateNewFinancement(AddFinancementCommand model)
-    {
-    
-        var command = await _sender.Send(model);
-
-        return base.OperationResult(command);
-    }
+ 
     
 }
