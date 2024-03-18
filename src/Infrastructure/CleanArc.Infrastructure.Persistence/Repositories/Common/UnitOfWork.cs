@@ -10,13 +10,15 @@ public class UnitOfWork : IUnitOfWork
     public IOrderRepository OrderRepository { get; }
 
     public IIndividualRepository IndividualRepository { get; }
-
+    
+    public ILimiteRepository LimiteRepository { get; }
     public UnitOfWork(ApplicationDbContext db)
     {
         _db = db;
         UserRefreshTokenRepository = new UserRefreshTokenRepository(_db);
         OrderRepository= new OrderRepository(_db);
         IndividualRepository= new IndividuRepository(_db);
+        LimiteRepository = new LimiteRepository(_db);
     }
 
     public  Task CommitAsync()
