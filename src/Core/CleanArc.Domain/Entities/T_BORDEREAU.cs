@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class T_BORDEREAU
+public partial class T_BORDEREAU : IEntity
 {
     public string NUM_BORD { get; set; }
 
