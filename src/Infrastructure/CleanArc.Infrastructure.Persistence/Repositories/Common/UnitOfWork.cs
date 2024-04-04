@@ -10,13 +10,17 @@ public class UnitOfWork : IUnitOfWork
     public IOrderRepository OrderRepository { get; }
 
     public IIndividualRepository IndividualRepository { get; }
-
+  
+    public IT_DET_BORD_Repository TDetBordRepository { get; }
+    public IBordereauxRepository BordereauxRepository { get; }
     public UnitOfWork(ApplicationDbContext db)
     {
         _db = db;
         UserRefreshTokenRepository = new UserRefreshTokenRepository(_db);
         OrderRepository= new OrderRepository(_db);
         IndividualRepository= new IndividuRepository(_db);
+        BordereauxRepository = new BordereauxRepository(_db);
+        TDetBordRepository = new TDetBordRepository(_db);
     }
 
     public  Task CommitAsync()

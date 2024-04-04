@@ -22,10 +22,8 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
 
         public async Task<PagedList<T_BORDEREAU>> GetAllBordereauxAsync(PaginationParams paginationParams)
         {
-            // Assuming BaseAsyncRepository provides basic query functionality
+           
             var query = base.TableNoTracking.AsQueryable();
-
-            // Apply filtering, sorting, etc. based on paginationParams (if needed)
 
             var result = await PagedList<T_BORDEREAU>.CreateAsync(query, paginationParams.PageNumber, paginationParams.PageSize);
 
