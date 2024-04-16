@@ -11,12 +11,21 @@ public class UnitOfWork : IUnitOfWork
 
     public IIndividualRepository IndividualRepository { get; }
 
+    public IContactRepository contactRepository { get; }
+
+    public IRibRepository ribRepository { get; }
+
+    public IAdhAuthRepository adhAuthRepository { get; }
+
     public UnitOfWork(ApplicationDbContext db)
     {
         _db = db;
         UserRefreshTokenRepository = new UserRefreshTokenRepository(_db);
         OrderRepository= new OrderRepository(_db);
         IndividualRepository= new IndividuRepository(_db);
+        contactRepository = new ContactRepository(_db);
+        ribRepository = new RibRepository(_db);
+        adhAuthRepository = new AdhAuthRepository(_db);
     }
 
     public  Task CommitAsync()
