@@ -26,7 +26,7 @@ public class IndividuController : BaseController
     }
 
     [HttpPost("CreateNewIndividu")]
-    public async Task<IActionResult> CreateNewIndividu(AddContactCommand model)
+    public async Task<IActionResult> CreateNewIndividu(AddIndividuCommand model)
     {
     
         var command = await _sender.Send(model);

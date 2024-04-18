@@ -5,9 +5,9 @@ using CleanArc.Domain.Entities.User;
 using CleanArc.SharedKernel.Extensions;
 using Mediator;
 
-namespace CleanArc.Application.Features.Individu.Commands.AddContactCommand
+namespace CleanArc.Application.Features.Individu.Commands.AddIndividuCommand
 {
-    internal class AddContactCommandHandler : IRequestHandler<AddRibCommand, OperationResult<bool>>
+    internal class AddContactCommandHandler : IRequestHandler<AddIndividuCommand, OperationResult<bool>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppUserManager _userManager;
@@ -18,7 +18,7 @@ namespace CleanArc.Application.Features.Individu.Commands.AddContactCommand
             _userManager = userManager;
         }
 
-        public async ValueTask<OperationResult<bool>> Handle(AddRibCommand request, CancellationToken cancellationToken)
+        public async ValueTask<OperationResult<bool>> Handle(AddIndividuCommand request, CancellationToken cancellationToken)
         {
              await _unitOfWork.IndividualRepository.AddIIndividualAsync(request.Individu);
 

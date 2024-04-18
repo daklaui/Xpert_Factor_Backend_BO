@@ -20,9 +20,9 @@ namespace CleanArc.Application.Features.Individu.Commands.AddRibCommand
 
         public async ValueTask<OperationResult<bool>> Handle(AddRibCommand request, CancellationToken cancellationToken)
         {
-             await _unitOfWork.IndividualRepository.AddIIndividualAsync(request.Individu);
+           //  await _unitOfWork.IndividualRepository.AddIIndividualAsync(request.Individu);
 
-             await _unitOfWork.CommitAsync();
+            // await _unitOfWork.CommitAsync();
 
              return OperationResult<bool>.SuccessResult(true);
         }
