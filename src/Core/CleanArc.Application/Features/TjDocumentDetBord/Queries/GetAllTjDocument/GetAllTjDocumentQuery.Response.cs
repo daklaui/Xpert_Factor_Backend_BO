@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using CleanArc.Domain.Common;
+using CleanArc.Application.Profiles;
+using CleanArc.Domain.Entities;
 
-namespace CleanArc.Domain.Entities;
+namespace CleanArc.Application.Features.TjDocumentDetBord.Queries.GetAllTjDocument;
 
-public partial class TJ_DOCUMENT_DET_BORD : IEntity
+public record GetAllTjDocumentQueryResult : ICreateMapper<TJ_DOCUMENT_DET_BORD>
 {
     public int ID_DOCUMENT_DET_BORD { get; set; }
 

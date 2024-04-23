@@ -33,7 +33,13 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
         public async Task<T_BORDEREAU> GetBordereauxById(string id)
         {
             return await base.TableNoTracking.FirstOrDefaultAsync(p => p.NUM_BORD == id); // Assuming Id property
+        }       
+        
+        public async Task<T_BORDEREAU> GetBordereauxByPK(string numBord, int refCtr , string yearBord)
+        {
+            return await base.TableNoTracking.FirstOrDefaultAsync(p => p.NUM_BORD == numBord && p.ANNEE_BORD == yearBord && p.REF_CTR_BORD == refCtr); // Assuming Id property
         }
+
 
         public async Task DeleteBordereaux(T_BORDEREAU bordereau)
         {

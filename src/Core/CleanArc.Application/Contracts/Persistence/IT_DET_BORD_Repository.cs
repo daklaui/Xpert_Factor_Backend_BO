@@ -10,6 +10,7 @@ public interface IT_DET_BORD_Repository
     Task<PagedList<T_DET_BORD>> GetAllT_DET_BORD_Async(PaginationParams paginationParams);
 
     Task<T_DET_BORD> GetT_DET_BORD_Byid(string id);
+    Task<int> getMaxDocs();
 
     Task DeleteT_DET_BORD(T_DET_BORD detBord);
 }

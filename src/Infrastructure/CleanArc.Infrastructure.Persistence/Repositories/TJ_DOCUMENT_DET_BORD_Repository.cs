@@ -1,0 +1,41 @@
+using CleanArc.Application.Common;
+using CleanArc.Application.Contracts.Persistence;
+using CleanArc.Domain.Entities;
+using CleanArc.Infrastructure.Persistence.Repositories.Common;
+using Microsoft.EntityFrameworkCore;
+
+namespace CleanArc.Infrastructure.Persistence.Repositories;
+
+internal class TJ_DOCUMENT_DET_BORD_Repository : BaseAsyncRepository<TJ_DOCUMENT_DET_BORD>, ITJ_DOCUMENT_DET_BORD_Repository
+{
+    private readonly ApplicationDbContext _dbContext;
+
+    public TJ_DOCUMENT_DET_BORD_Repository(ApplicationDbContext dbContext) : base(dbContext)
+    {
+        _dbContext = dbContext;
+    }
+    public async Task addTj_documentAsync(TJ_DOCUMENT_DET_BORD Tj_document)
+    {
+        await base.AddAsync(Tj_document);
+    }
+    
+    public async Task<PagedList<TJ_DOCUMENT_DET_BORD>> GetAllTj_documentAsync(PaginationParams paginationParams)
+    {
+           
+        var query = base.TableNoTracking.AsQueryable();
+
+        var result = await PagedList<TJ_DOCUMENT_DET_BORD>.CreateAsync(query, paginationParams.PageNumber, paginationParams.PageSize);
+
+        return result;
+    }
+    
+    public async Task<TJ_DOCUMENT_DET_BORD> GetTj_documentById(int id)
+    {
+        return await base.TableNoTracking.FirstOrDefaultAsync(p => p.ID_DOCUMENT_DET_BORD == id); // Assuming Id property
+    }
+    
+    public async Task DeleteTj_document(TJ_DOCUMENT_DET_BORD Tj_document)
+    {
+        _dbContext.Set<TJ_DOCUMENT_DET_BORD>().Remove(Tj_document);
+    }
+}

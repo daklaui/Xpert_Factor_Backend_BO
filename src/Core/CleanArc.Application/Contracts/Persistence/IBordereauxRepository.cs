@@ -10,6 +10,8 @@ public interface IBordereauxRepository
     Task<PagedList<T_BORDEREAU>> GetAllBordereauxAsync(PaginationParams paginationParams);
 
     Task<T_BORDEREAU> GetBordereauxById(string id);
+    Task<T_BORDEREAU> GetBordereauxByPK(string numBord, int refCtr , string yearBord);
     
     Task DeleteBordereaux(T_BORDEREAU bordereau);
+
 }

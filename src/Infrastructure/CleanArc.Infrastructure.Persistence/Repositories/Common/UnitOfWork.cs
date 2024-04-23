@@ -10,8 +10,9 @@ public class UnitOfWork : IUnitOfWork
     public IOrderRepository OrderRepository { get; }
 
     public IIndividualRepository IndividualRepository { get; }
-  
+    
     public IT_DET_BORD_Repository TDetBordRepository { get; }
+    public ITJ_DOCUMENT_DET_BORD_Repository TjDocumentDetBordRepository { get; }
     public IBordereauxRepository BordereauxRepository { get; }
     public UnitOfWork(ApplicationDbContext db)
     {

@@ -34,6 +34,11 @@ internal class TDetBordRepository :BaseAsyncRepository<T_DET_BORD> ,IT_DET_BORD_
         return await base.TableNoTracking.FirstOrDefaultAsync(p => p.ID_DET_BORD == id);
     }
    
+    public async Task<int> getMaxDocs()
+    {
+        return base.TableNoTracking.Select(p => Convert.ToInt32(p.ID_DET_BORD)).DefaultIfEmpty().Max();
+    }
+
    public async  Task DeleteT_DET_BORD(T_DET_BORD detBord)
    {
        _dbContext.Set<T_DET_BORD>().Remove(detBord);
