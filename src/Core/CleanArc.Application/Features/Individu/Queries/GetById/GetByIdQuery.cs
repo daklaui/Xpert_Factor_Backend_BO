@@ -4,4 +4,4 @@ using Mediator;
 
 namespace CleanArc.Application.Features.Individu.Queries.GetByIdQuery;
 
-public record GetByIdQuery(int individuId) :IRequest<OperationResult<GetByIdQueryResult>>;
+public abstract partial record GetByIdQuery(int individuId) :IRequest<OperationResult<GetByIdQueryResult>>;
