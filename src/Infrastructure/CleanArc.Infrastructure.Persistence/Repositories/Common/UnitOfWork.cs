@@ -16,8 +16,9 @@ public class UnitOfWork : IUnitOfWork
     public IRibRepository ribRepository { get; }
 
     public IAdhAuthRepository adhAuthRepository { get; }
-    public object TJcirRepository { get; set; }
+    public ITjcirRepository tjcirRepository { get; }
 
+ 
     public UnitOfWork(ApplicationDbContext db)
     {
         _db = db;
@@ -26,6 +27,7 @@ public class UnitOfWork : IUnitOfWork
         IndividualRepository= new IndividuRepository(_db);
         contactRepository = new ContactRepository(_db);
         ribRepository = new RibRepository(_db);
+        tjcirRepository = new TJcirRepository(_db);
         adhAuthRepository = new AdhAuthRepository(_db);
     }
 

@@ -4,4 +4,4 @@ using Mediator;
 
 namespace CleanArc.Application.Features.buyer.Commands.AddBuyer;
 
-public record AddBuyerCommand(List<TJ_CIR> Buyer) : IRequest<OperationResult<bool>>;
+public record AddBuyerCommand(TJ_CIR Buyer) : IRequest<OperationResult<bool>>;

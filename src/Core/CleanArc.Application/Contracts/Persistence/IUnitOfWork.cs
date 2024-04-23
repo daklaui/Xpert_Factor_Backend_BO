@@ -9,9 +9,9 @@ public interface IUnitOfWork
     public IRibRepository ribRepository { get; }
     public IAdhAuthRepository adhAuthRepository { get; }
     
-    public ITjcirRepository TjTjcirRepository { get; }
+    public ITjcirRepository tjcirRepository { get; }
     
-    object TJcirRepository  { get; set; }
+ 
     Task CommitAsync();
     ValueTask RollBackAsync();
 }
