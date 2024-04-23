@@ -6,7 +6,7 @@ namespace CleanArc.Application.Features.Financement.Queries;
 
 public class GetFinancementRefCtrQueryResult: ICreateMapper<FinancementDto>
 {
-    public int Total_Dipo { get; set; }
+    public int Total_Dispo { get; set; }
     public int Encours_Factures { get; set; }
     public int Depass_Lim_Ach { get; set; }
     public int Fonds_Reserve{ get; set; }

@@ -51,6 +51,7 @@ public class FinancementController:BaseController
 
         return Ok("TPostalCode updated successfully");
     }
+
     [HttpPut("RejectFinancement/{id}")]
     public async Task<IActionResult> RejectFinancement(int id, RejectFinanceCommand model)
     {
@@ -70,6 +71,7 @@ public class FinancementController:BaseController
 
         return Ok("TPostalCode updated successfully");
     }
+
     [HttpGet("GetAllFinancement")]
     public async Task<IActionResult> GetAllFinancement([FromQuery] PaginationParams paginationParams)
     {
