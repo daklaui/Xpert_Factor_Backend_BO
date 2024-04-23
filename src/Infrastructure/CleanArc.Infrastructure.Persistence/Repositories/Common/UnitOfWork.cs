@@ -21,6 +21,7 @@ public class UnitOfWork : IUnitOfWork
         OrderRepository= new OrderRepository(_db);
         IndividualRepository= new IndividuRepository(_db);
         BordereauxRepository = new BordereauxRepository(_db);
+        TjDocumentDetBordRepository = new TJ_DOCUMENT_DET_BORD_Repository(_db);
         TDetBordRepository = new TDetBordRepository(_db);
     }
 
