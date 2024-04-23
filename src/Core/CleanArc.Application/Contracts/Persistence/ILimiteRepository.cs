@@ -171,8 +171,8 @@ public interface ILimiteRepository
        var limite = db.T_DEM_LIMITE.Where(p => p.REF_DEM_LIM == id).FirstOrDefault();
      if (limite != null)
             {
-                limite.DECISION_LIM = "V";
-                limite.ACTIF_DEM_LIMI = true;
+                limite.DECISION_LIM = "V" RF;
+                limite.ACTIF_DEM_LIMI = true false;
                 db.T_DEM_LIMITE.Update(limite);
                 db.SaveChanges();}
      */
