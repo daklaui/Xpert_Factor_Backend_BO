@@ -8,21 +8,21 @@ using Mediator;
 namespace CleanArc.Application.Features.Financement.Queries
 {
 
-    internal  class GetFinancementByIdQueryHandler : IRequestHandler <GetFinancementByIdQuery,OperationResult<GetFinancementByIdQueryResult>>
+    internal  class GetFundingByIdQueryHandler : IRequestHandler <GetFundingByIdQuery,OperationResult<GetFinancementByIdQueryResult>>
     {
         
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public GetFinancementByIdQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public GetFundingByIdQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
-        public async ValueTask<OperationResult<GetFinancementByIdQueryResult>> Handle(GetFinancementByIdQuery request, CancellationToken cancellationToken)
+        public async ValueTask<OperationResult<GetFinancementByIdQueryResult>> Handle(GetFundingByIdQuery request, CancellationToken cancellationToken)
         {
-            var financement = await  _unitOfWork.FinancementRepository.AllRecord(request.id);
+            var financement = await  _unitOfWork.FundingRepository.AllRecord(request.id);
 
             var result =   _mapper.Map<FinancementDto, GetFinancementByIdQueryResult>(financement);
 

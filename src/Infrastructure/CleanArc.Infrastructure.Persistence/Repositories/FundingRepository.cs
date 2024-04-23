@@ -5,18 +5,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CleanArc.Infrastructure.Persistence.Repositories;
 
-public class FinancementRepository : IFinancementRepository
+public class FundingRepository : IFundingRepository
 {
 
     private readonly ApplicationDbContext _db;
 
-    public FinancementRepository(ApplicationDbContext db)
+    public FundingRepository(ApplicationDbContext db)
     {
         _db = db;
     }
     private string buildProcedureName(int ref_ctr)
     {
-        return $"NomDeLaProcedureStockee_{ref_ctr}";
+        return $"exec All_Ecran_Financements @Ref_Ctr={ref_ctr}";
     }
 public  async Task<FinancementDto>  AllRecord(int ref_ctr)
 {
@@ -53,7 +53,7 @@ public  async Task<FinancementDto>  AllRecord(int ref_ctr)
 
     FinancementDto financementDto = new FinancementDto
     {
-        Total_Dipo = Total_Dipo,
+        Total_Dispo  = Total_Dipo,
         Encours_Factures = (decimal)all.Encours_Facture,
         Depass_Lim_Ach = (decimal)_db.usp_Etat_Depass_Lim_ACH.FromSql($"exec usp_Etat_Depass_Lim_ACH @param_Port_Ref_CTR = {ref_ctr}").AsEnumerable().Sum(p => p.DepassLim),
         Fonds_Reserve = (decimal)all.Toatl_FDG,
@@ -68,7 +68,7 @@ public  async Task<FinancementDto>  AllRecord(int ref_ctr)
         Total_Facture = (decimal)all.Total_Facture,
         Total_Financement = (decimal)all.Total_Financement,
         Total_Avoir = (decimal)all.Total_Avoir,
-        Total_Com8factoring = (decimal)all.Total_Commission,
+        Total_Com_factoring = (decimal)all.Total_Commission,
         Total_Frais_Divers = (decimal)t_fraisdivers,
         Total_Frais = (decimal)(t_fraisdiversT + t_fraisdiversV + t_fraisdiversC),
         Total_Credit = (decimal)all.Total_Credit,

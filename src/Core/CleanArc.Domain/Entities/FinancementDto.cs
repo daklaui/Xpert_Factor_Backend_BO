@@ -1,8 +1,10 @@
-﻿namespace CleanArc.Infrastructure.Identity.Identity.Dtos;
+﻿using Microsoft.EntityFrameworkCore;
 
+namespace CleanArc.Infrastructure.Identity.Identity.Dtos;
+[Keyless]
 public class FinancementDto
 {
-    public decimal Total_Dipo { get; set; }
+    public decimal Total_Dispo { get; set; }
     public decimal Encours_Factures { get; set; }
     public decimal Depass_Lim_Ach { get; set; }
     public decimal Fonds_Reserve{ get; set; }
@@ -17,7 +19,7 @@ public class FinancementDto
     public decimal Total_Facture { get; set; }
     public decimal Total_Financement { get; set; }
     public decimal Total_Avoir { get; set; }
-    public decimal Total_Com8factoring { get; set; }
+    public decimal Total_Com_factoring { get; set; }
     public decimal Total_Frais_Divers { get; set; }
     public decimal Total_Frais{ get; set; }
     public decimal Total_Credit { get; set; }

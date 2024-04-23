@@ -29,19 +29,12 @@ public abstract class BaseAsyncRepository<TEntity> where TEntity:class,IEntity
            
     }
 
-    protected virtual async Task UpdateAsync(
-        Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> updateExpression)
-    {
-        await Entities.ExecuteUpdateAsync(updateExpression);
-    }
+
 
     protected virtual async Task DeleteAsync(Expression<Func<TEntity,bool>> deleteExpression)
     {
         await Entities.Where(deleteExpression).ExecuteDeleteAsync();
     }
-    protected virtual async Task UpdateAsync1(TEntity entity)
-    {
-        DbContext.Entry(entity).State = EntityState.Modified;
-        await DbContext.SaveChangesAsync();
-    }
+   
+    
 }

@@ -1,5 +1,7 @@
-﻿namespace CleanArc.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
 
+namespace CleanArc.Domain.Entities;
+[Keyless]
 public class SumOfMnt
 {
     public decimal SumMntImpaye { get; set; }

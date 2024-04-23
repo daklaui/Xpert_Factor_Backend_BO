@@ -3,4 +3,4 @@ using Mediator;
 
 namespace CleanArc.Application.Features.Financement.Queries;
 
-public record GetFinancementByIdQuery(int id) : IRequest<OperationResult<GetFinancementByIdQueryResult>>;
+public record GetFundingByIdQuery(int id) : IRequest<OperationResult<GetFinancementByIdQueryResult>>;

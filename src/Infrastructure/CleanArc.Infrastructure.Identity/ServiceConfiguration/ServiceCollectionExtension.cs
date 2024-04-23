@@ -2,6 +2,7 @@
 using System.Text;
 using CleanArc.Application.Contracts;
 using CleanArc.Application.Contracts.Identity;
+using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Application.Models.ApiResult;
 using CleanArc.Domain.Entities.User;
 using CleanArc.Infrastructure.Identity.Identity;
@@ -14,6 +15,7 @@ using CleanArc.Infrastructure.Identity.Identity.Store;
 using CleanArc.Infrastructure.Identity.Identity.validator;
 using CleanArc.Infrastructure.Identity.Jwt;
 using CleanArc.Infrastructure.Identity.UserManager;
+using CleanArc.Infrastructure.Persistence.Repositories;
 using CleanArc.SharedKernel.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -45,6 +47,7 @@ public static class ServiceCollectionExtension
         services.AddScoped<IRoleStore<Role>, RoleStore>();
         services.AddScoped<IUserStore<User>, AppUserStore>();
         services.AddScoped<IRoleManagerService, RoleManagerService>();
+
 
 
         services.AddIdentity<User, Role>(options =>

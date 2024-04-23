@@ -1,8 +1,10 @@
-﻿namespace CleanArc.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
 
+namespace CleanArc.Domain.Entities;
+[Keyless]
 public class All_Ecran_Financements
 {
-    public int Id { get; set; }
+     
     public decimal Encours_Facture { get; set; }
     public decimal Toatl_FDG { get; set; }
     public decimal Total_Avoir { get; set; }
