@@ -1,7 +1,4 @@
-﻿using System.Reflection;
-using CleanArc.Application.Common;
-using CleanArc.SharedKernel.Extensions;
-using FluentValidation;
+﻿using CleanArc.Application.Common;
 using Mediator;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,7 +16,6 @@ public static class ServiceCollectionExtension
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidateCommandBehavior<,>));
         services.AddAutoMapper(typeof(TPostalCodesProfile).Assembly);
         services.AddAutoMapper(typeof(TJobsProfile).Assembly);
-        
 
         return services;
     }

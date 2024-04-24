@@ -10,9 +10,14 @@ public class UnitOfWork : IUnitOfWork
     public IOrderRepository OrderRepository { get; }
     public IIndividualRepository IndividualRepository { get; }
     public ITPostalCodesRepository TPostalCodesRepository { get; }
-    public ITJobsRepository TJobsRepository { get; } // Nouvelle propriété
-
-    public ITListValRepository TListValRepository { get; }
+    public ITJobsRepository TJobsRepository { get; } 
+    
+    public ITR_CPRepository TR_CPRepository { get; }
+    public IContratRepository ContratRepository { get; }
+    public IFraisDiversRepository FraisDiversRepository { get; }
+    public IListValueRepository ListValueRepository { get; }
+    
+    public IFactoringCommissionRepository FactoringCommissionRepository { get; }
 
     public UnitOfWork(ApplicationDbContext db)
     {
@@ -23,7 +28,11 @@ public class UnitOfWork : IUnitOfWork
         TJobsRepository = new TJobsRepository(_db); 
         OrderRepository= new OrderRepository(_db);
         IndividualRepository= new IndividuRepository(_db);
-        TListValRepository = new TListValRepository(_db);
+        ListValueRepository = new ListValueRepository(_db);
+        TR_CPRepository = new TR_CPRepository(_db);
+        ContratRepository = new ContratRepository(_db);
+        FraisDiversRepository = new FraisDiversRepository(_db);
+        FactoringCommissionRepository = new FactoringCommissionRepository(_db);
     }
 
     public Task CommitAsync()

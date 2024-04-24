@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class T_COMM_FACTORING
+public partial class T_COMM_FACTORING : IEntity
 {
     public string TYP_COMM_FACTORING { get; set; }
 

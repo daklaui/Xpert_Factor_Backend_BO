@@ -124,7 +124,7 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
 
     public virtual DbSet<T_FOND_GARANTIE> T_FOND_GARANTIEs { get; set; }
 
-    public virtual DbSet<T_FRAIS_DIVER> T_FRAIS_DIVERs { get; set; }
+    public virtual DbSet<T_FRAIS_DIVERS> T_FRAIS_DIVERs { get; set; }
 
     public virtual DbSet<T_FRAIS_PAIEMENT> T_FRAIS_PAIEMENTs { get; set; }
 
@@ -907,8 +907,7 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
 
         modelBuilder.Entity<T_COMM_FACTORING>(entity =>
         {
-            entity.HasKey(e => new { e.TYP_COMM_FACTORING, e.REF_CTR_COMM_FACTORING }).HasName("PK__T_COMM_F__C4A21010206A2EA6");
-
+            entity.HasKey(e => e.REF_CTR_COMM_FACTORING).HasName("PK__T_COMM_F__REF_CTR_COMM_FACTORING");
             entity.ToTable("T_COMM_FACTORING");
 
             entity.Property(e => e.TYP_COMM_FACTORING)
@@ -1037,9 +1036,7 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
         modelBuilder.Entity<T_CONTRAT>(entity =>
         {
             entity.HasKey(e => e.REF_CTR).HasName("PK__T_CONTRA__C374064F18EBB532");
-
             entity.ToTable("T_CONTRAT");
-
             entity.Property(e => e.CA_CTR).HasColumnType("decimal(15, 3)");
             entity.Property(e => e.CA_EXP_CTR).HasColumnType("decimal(15, 3)");
             entity.Property(e => e.CA_IMP_CTR).HasColumnType("decimal(15, 3)");
@@ -1069,6 +1066,7 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
                 .IsUnicode(false)
                 .IsFixedLength();
         });
+        
 
         modelBuilder.Entity<T_Comm_MFG>(entity =>
         {
@@ -1623,7 +1621,7 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<T_FRAIS_DIVER>(entity =>
+        modelBuilder.Entity<T_FRAIS_DIVERS>(entity =>
         {
             entity.HasKey(e => new { e.TYP_FRAIS_DIVERS, e.REF_CTR_FRAIS_DIVERS }).HasName("PK__T_FRAIS___B72D5284465B0E76");
 

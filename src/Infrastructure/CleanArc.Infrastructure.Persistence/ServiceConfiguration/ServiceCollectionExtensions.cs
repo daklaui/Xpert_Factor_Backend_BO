@@ -24,14 +24,12 @@ public static class ServiceCollectionExtensions
         services.AddScoped<AddTPostalCodesCommandHandler>();
         services.AddScoped<UpdateTPostalCodesCommandHandler>();
         services.AddScoped<ITJobsRepository, TJobsRepository>();
-        services.AddScoped<ITListValRepository, TListValRepository>();
+
+
 
 
         return services;
     }
-    
-   
-        
-   
 
+    
 }

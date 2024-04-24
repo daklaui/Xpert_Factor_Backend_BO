@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class T_CONTRAT
+public partial class T_CONTRAT : IEntity
 {
     public int REF_CTR { get; set; }
 
@@ -60,6 +61,8 @@ public partial class T_CONTRAT
     public int? RESP_CTR_1 { get; set; }
 
     public int? RESP_CTR_2 { get; set; }
+    
+   
 
     public virtual ICollection<TJ_CIR> TJ_CIRs { get; } = new List<TJ_CIR>();
 

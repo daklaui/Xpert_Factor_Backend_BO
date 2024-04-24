@@ -1,13 +1,10 @@
 ﻿using CleanArc.Application.Common;
 using CleanArc.Application.Features.Individu.Commands.AddIndividuCommand;
+using CleanArc.Application.Features.Individu.Commands.UpdateIndividuCommand;
 using CleanArc.Application.Features.Individu.Queries.GetAllIndividus;
 using CleanArc.Application.Features.Individu.Queries.GetByIdQuery;
-using CleanArc.Application.Features.Order.Commands;
-using CleanArc.Application.Features.Order.Queries.GetUserOrders;
 using CleanArc.WebFramework.BaseController;
-using CleanArc.WebFramework.WebExtensions;
 using Mediator;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArc.Web.Api.Controllers.V1.Individu;
@@ -49,4 +46,14 @@ public class IndividuController : BaseController
 
         return base.OperationResult(query);
     }
+    
+    [HttpPut("UpdateIndividu")]
+    public async Task<IActionResult> UpdateIndividu(UpdateIndividuCommand command)
+    {
+     
+        var result = await _sender.Send(command);
+
+        return base.OperationResult(result);
+    }
+
 }
