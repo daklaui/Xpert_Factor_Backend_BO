@@ -1,9 +1,10 @@
-﻿using System;
+﻿using CleanArc.Domain.Common;
+using System;
 using System.Collections.Generic;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class TS_USERS_WEB
+public partial class TS_USERS_WEB: IEntity
 {
     public int ID_USER_WEB { get; set; }
 

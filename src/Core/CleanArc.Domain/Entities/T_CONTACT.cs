@@ -1,9 +1,10 @@
-﻿using System;
+﻿using CleanArc.Domain.Common;
+using System;
 using System.Collections.Generic;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class T_CONTACT
+public  class T_CONTACT : IEntity
 {
     public short ID_CONTACT { get; set; }
 
