@@ -9,6 +9,7 @@ namespace CleanArc.Application.Contracts.Persistence
         Task AddFraisDiversAsync(T_FRAIS_DIVERS fraisDivers);
         Task<PagedList<T_FRAIS_DIVERS>> GetAllFraisDiversAsync(PaginationParams paginationParams);
         Task<T_FRAIS_DIVERS> GetFraisDiversById(int id);
-        Task<bool> UpdateFraisDiversAsync(int id, T_FRAIS_DIVERS updatedFraisDivers);
+        Task<T_FRAIS_DIVERS> GetFraisDiversByRefCtrAndType(int id, string type);
+        Task<bool> UpdateFraisDiversAsync(T_FRAIS_DIVERS updatedFraisDivers);
     }
 }
