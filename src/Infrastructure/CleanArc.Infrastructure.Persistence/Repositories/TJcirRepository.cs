@@ -24,6 +24,12 @@ internal class TJcirRepository: BaseAsyncRepository<TJ_CIR> , ITjcirRepository
         var result = await PagedList<TJ_CIR>.CreateAsync(query, paginationParams.PageNumber, paginationParams.PageSize);
         
         return result;
+    }   
+    
+    public async Task<TJ_CIR> GetExistingActorsByRefCtr(string role, int refCtr)
+    {
+        var query = base.TableNoTracking.Where(p => p.ID_ROLE_CIR == role.ToUpper() && p.REF_CTR_CIR == refCtr);
+        return await query.FirstOrDefaultAsync() ;
     }
 
     public Task AddICIRlAsync(TJ_CIR buyer)
@@ -40,6 +46,18 @@ internal class TJcirRepository: BaseAsyncRepository<TJ_CIR> , ITjcirRepository
     {
         return await base.TableNoTracking.FirstAsync(p=>p.ID_CIR == id);
     }
+    public async Task<bool> UpdateCirAsync(TJ_CIR updatedCir)
+    {
+        var existingCir = await base.Table.FirstOrDefaultAsync(p => p.REF_CTR_CIR == updatedCir.REF_CTR_CIR && p.REF_IND_CIR == updatedCir.REF_IND_CIR && p.ID_ROLE_CIR == updatedCir.ID_ROLE_CIR);
 
-  
+        if (existingCir == null)
+        {
+            throw new InvalidOperationException("");
+        }
+
+        await base.UpdateAsync(existingCir);
+
+        return true;
+    }
+
 }

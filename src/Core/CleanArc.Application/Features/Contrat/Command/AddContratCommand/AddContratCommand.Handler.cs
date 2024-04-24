@@ -66,6 +66,51 @@ namespace CleanArc.Application.Features.Contrat.Commands.AddContratCommand
                 Console.WriteLine("Error d'enregistrement Frais divers.", e);
             }
         }
+        private void AddAdherent(int refContract, TJ_CIR individualRelationContract, int adherentRefId, string type_contrat)
+        {
+            try
+            {
+                var currentCir = _unitOfWork.tjcirRepository.GetExistingActorsByRefCtr("ADH" ,refContract);
+
+                if (currentCir == null)
+                {
+                    individualRelationContract.REF_CTR_CIR = refContract;
+                    individualRelationContract.ID_ROLE_CIR = "ADH";
+                    individualRelationContract.REF_IND_CIR = adherentRefId;
+                    _unitOfWork.tjcirRepository.UpdateCirAsync(individualRelationContract);
+ 
+                }
+                else
+                {
+                    if (currentCir.REF_IND_CIR != adherentRefId)
+                    {
+                        currentCir.REF_IND_CIR = adherentRefId;
+                        db.TJ_CIR.Update(currentCir);
+                        db.SaveChanges();
+                    }
+                }
+
+
+
+                if (type_contrat.Contains("Contrat_Reverse"))
+                {
+                    TJ_CIR cir2 = new TJ_CIR();
+                    cir2.REF_CTR_CIR = refContract;
+                    cir2.ID_ROLE_CIR = "ACH";
+                    cir2.REF_IND_CIR = adherentRefId;
+                    db.TJ_CIR.Add(cir2);
+                    db.SaveChanges();
+                }
+
+
+            }
+            catch (Exception e)
+            {
+
+                HandleError("   Error d enregistrement Adhérent ");
+            }
+
+        }
 
 
         public async ValueTask<OperationResult<bool>> Handle(AddContratCommand request, CancellationToken cancellationToken)

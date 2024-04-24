@@ -16,8 +16,11 @@ public class UnitOfWork : IUnitOfWork
     public IContratRepository ContratRepository { get; }
     public IFraisDiversRepository FraisDiversRepository { get; }
     public IListValueRepository ListValueRepository { get; }
-    
+    public ITjcirRepository tjcirRepository { get; }
     public IFactoringCommissionRepository FactoringCommissionRepository { get; }
+    public IContactRepository contactRepository { get; }
+    public IRibRepository ribRepository { get; }
+    public IAdhAuthRepository adhAuthRepository { get; }
 
     public UnitOfWork(ApplicationDbContext db)
     {
@@ -32,7 +35,11 @@ public class UnitOfWork : IUnitOfWork
         TR_CPRepository = new TR_CPRepository(_db);
         ContratRepository = new ContratRepository(_db);
         FraisDiversRepository = new FraisDiversRepository(_db);
+        tjcirRepository = new TJcirRepository(_db);
         FactoringCommissionRepository = new FactoringCommissionRepository(_db);
+        contactRepository = new ContactRepository(_db);
+        ribRepository = new RibRepository(_db);
+        adhAuthRepository = new AdhAuthRepository(_db);
     }
 
     public Task CommitAsync()

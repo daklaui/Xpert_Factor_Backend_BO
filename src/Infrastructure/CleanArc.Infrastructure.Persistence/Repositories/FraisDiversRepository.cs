@@ -46,9 +46,6 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
                 throw new InvalidOperationException($"Frais divers with ref_ctr {updatedFraisDivers.REF_CTR_FRAIS_DIVERS} and type {updatedFraisDivers.TYP_FRAIS_DIVERS} not found");
             }
 
-            // Mettez à jour les propriétés de l'entité existante avec les nouvelles valeurs
-            // existingFraisDivers.Property = updatedFraisDivers.Property;
-
             await base.UpdateAsync(existingFraisDivers);
 
             return true;
