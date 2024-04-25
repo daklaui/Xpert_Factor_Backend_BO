@@ -6,7 +6,6 @@ public interface IUnitOfWork
     public IOrderRepository OrderRepository { get; }
     public IIndividualRepository IndividualRepository { get; }
     public ITMMRepository TmmRepository { get; }
-    public IFundingRepository FundingRepository { get; }
     
     public IFinancementRepository FinancementRepository { get; }
 

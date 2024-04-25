@@ -13,7 +13,6 @@ public class UnitOfWork : IUnitOfWork
     
     public ITMMRepository TmmRepository { get; }
   
-    public IFundingRepository FundingRepository { get; }
     
     public IFinancementRepository FinancementRepository { get; }
 
@@ -24,7 +23,6 @@ public class UnitOfWork : IUnitOfWork
         OrderRepository= new OrderRepository(_db);
         IndividualRepository= new IndividuRepository(_db);
         TmmRepository = new TmmRepository(_db);
-        FundingRepository = new FundingRepository(_db);
         FinancementRepository = new FinancementRepository(_db);
     }
 

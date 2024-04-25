@@ -23,6 +23,14 @@ public class FinancementController:BaseController
     
     
     
+    [HttpGet("GetFundingByRefCTr/{id}")]
+    public async Task<IActionResult> GetFundingByRefCTr(int id)
+    {
+        var query = await _sender.Send(new GetFundingByRefCtrQuery(id));
+
+        return base.OperationResult(query);
+    }
+    
     [HttpPost("CreateNewFinancement")]
     public async Task<IActionResult> CreateNewFinancement(AddFinancementCommand model)
     {
