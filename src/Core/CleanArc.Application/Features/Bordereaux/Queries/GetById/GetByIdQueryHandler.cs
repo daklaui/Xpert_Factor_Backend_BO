@@ -1,6 +1,7 @@
 using AutoMapper;
 using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Application.Models.Common;
+using CleanArc.Domain.DTO;
 using CleanArc.Domain.Entities;
 using Mediator;
 
@@ -18,10 +19,46 @@ internal class GetByIdQueryHandler : IRequestHandler<GetByIdQuery, OperationResu
     }
     public async ValueTask<OperationResult<GetByIdQueryResult>> Handle(GetByIdQuery request, CancellationToken cancellationToken)
     {
-        var borderaux = await _unitOfWork.BordereauxRepository.GetBordereauxById(request.BordereauxId);
+        try
+        {
+            var bordereaux = await _unitOfWork.BordereauxRepository.GetBordereauxByPK(
+                request.BordereauxId.NUM_BORD,
+                request.BordereauxId.REF_CTR_BORD,
+                request.BordereauxId.ANNEE_BORD);
 
-        var result =   _mapper.Map<T_BORDEREAU, GetByIdQueryResult>(borderaux);
+            if (bordereaux != null)
+            {
+                // Retrieve related T_DET_BORD entries
+                var detBords = await _unitOfWork.TDetBordRepository.GetDetBordByPK(
+                    request.BordereauxId.NUM_BORD,
+                    request.BordereauxId.REF_CTR_BORD,
+                    request.BordereauxId.ANNEE_BORD);
 
-        return OperationResult<GetByIdQueryResult>.SuccessResult(result);
+                // Assuming DetBords property in BordereauDTO expects a list of DTOs
+                var detBordDtos = _mapper.Map<List<T_det_bord_DTO>>(detBords); // Map to DTO if needed
+
+                var result = new GetByIdQueryResult
+                {
+                    Bordereau = _mapper.Map<BordereauDTO>(bordereaux, opt =>
+                    {
+                        opt.AfterMap((src, dest) =>
+                        {
+                            // Assuming DetBords property in BordereauDTO expects a list of DTOs
+                            dest.DetBords = _mapper.Map<List<T_det_bord_DTO>>(detBords); // Map to DTO if needed
+                        });
+                    })
+                };
+                return OperationResult<GetByIdQueryResult>.SuccessResult(result);
+            }
+            else
+            {
+                return OperationResult<GetByIdQueryResult>.NotFoundResult("Bordereau not found.");
+            }
+        }
+        catch (Exception ex)
+        {
+            return OperationResult<GetByIdQueryResult>.NotFoundResult("Error retrieving bordereau.");
+        }
     }
+
 }

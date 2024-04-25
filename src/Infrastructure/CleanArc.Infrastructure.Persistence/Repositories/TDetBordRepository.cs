@@ -33,7 +33,15 @@ internal class TDetBordRepository :BaseAsyncRepository<T_DET_BORD> ,IT_DET_BORD_
     {
         return await base.TableNoTracking.FirstOrDefaultAsync(p => p.ID_DET_BORD == id);
     }
-   
+    public async Task<IEnumerable<T_DET_BORD>> GetDetBordByPK(string numBord, int refCtr , string yearBord)
+    {
+        var query = _dbContext.T_DET_BORDs.Where(x => 
+            x.NUM_BORD == numBord && 
+            x.REF_CTR_DET_BORD == refCtr && 
+            x.ANNEE_BORD == yearBord);
+
+        return await query.ToListAsync();
+    }
     public async Task<int> getMaxDocs()
     {
         return base.TableNoTracking.Select(p => Convert.ToInt32(p.ID_DET_BORD)).DefaultIfEmpty().Max();

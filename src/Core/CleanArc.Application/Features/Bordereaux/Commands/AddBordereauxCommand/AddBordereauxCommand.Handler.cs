@@ -82,7 +82,7 @@ public class AddBordereauxCommandHandler : IRequestHandler<AddBordereauxCommand,
         }
         catch (Exception ex)
         {
-            return OperationResult<bool>.NotFoundResult("hooooy moshkla");
+            return OperationResult<bool>.NotFoundResult("error");
 
         }
 

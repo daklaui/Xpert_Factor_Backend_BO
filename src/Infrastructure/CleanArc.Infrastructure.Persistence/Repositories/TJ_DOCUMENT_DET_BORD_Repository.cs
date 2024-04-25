@@ -18,7 +18,14 @@ internal class TJ_DOCUMENT_DET_BORD_Repository : BaseAsyncRepository<TJ_DOCUMENT
     {
         await base.AddAsync(Tj_document);
     }
-    
+    public async Task<IEnumerable<TJ_DOCUMENT_DET_BORD>> GetDocumentDetBordByPK(string numBord, int refCtr)
+    {
+        var query = _dbContext.TJ_DOCUMENT_DET_BORDs.Where(x => 
+            x.NUM_BORD == numBord && 
+            x.REF_CTR_DET_BORD == refCtr);
+
+        return await query.ToListAsync();
+    }
     public async Task<PagedList<TJ_DOCUMENT_DET_BORD>> GetAllTj_documentAsync(PaginationParams paginationParams)
     {
            
