@@ -28,14 +28,12 @@ internal class GetByIdQueryHandler : IRequestHandler<GetByIdQuery, OperationResu
 
             if (bordereaux != null)
             {
-                // Retrieve related T_DET_BORD entries
                 var detBords = await _unitOfWork.TDetBordRepository.GetDetBordByPK(
                     request.BordereauxId.NUM_BORD,
                     request.BordereauxId.REF_CTR_BORD,
                     request.BordereauxId.ANNEE_BORD);
 
-                // Assuming DetBords property in BordereauDTO expects a list of DTOs
-                var detBordDtos = _mapper.Map<List<T_det_bord_DTO>>(detBords); // Map to DTO if needed
+                var detBordDtos = detBords != null ? _mapper.Map<List<T_det_bord_DTO>>(detBords) : new List<T_det_bord_DTO>(); // Handle empty list
 
                 var result = new GetByIdQueryResult
                 {
@@ -43,8 +41,7 @@ internal class GetByIdQueryHandler : IRequestHandler<GetByIdQuery, OperationResu
                     {
                         opt.AfterMap((src, dest) =>
                         {
-                            // Assuming DetBords property in BordereauDTO expects a list of DTOs
-                            dest.DetBords = _mapper.Map<List<T_det_bord_DTO>>(detBords); // Map to DTO if needed
+                            dest.DetBords = detBordDtos;
                         });
                     })
                 };
@@ -60,5 +57,6 @@ internal class GetByIdQueryHandler : IRequestHandler<GetByIdQuery, OperationResu
             return OperationResult<GetByIdQueryResult>.NotFoundResult("Error retrieving bordereau.");
         }
     }
+
 
 }
