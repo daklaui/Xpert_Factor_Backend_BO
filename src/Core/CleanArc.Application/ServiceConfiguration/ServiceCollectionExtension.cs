@@ -19,6 +19,7 @@ public static class ServiceCollectionExtension
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidateCommandBehavior<,>));
         //services.AddMediator(Assembly.GetExecutingAssembly());
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        services.AddAutoMapper(typeof(LimiteProfile).Assembly);
 
 
         return services;
