@@ -3,7 +3,6 @@ using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Domain.Entities;
 using CleanArc.Infrastructure.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
 namespace CleanArc.Infrastructure.Persistence.Repositories;
 
