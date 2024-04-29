@@ -1,5 +1,6 @@
 using CleanArc.Application.Common;
 using CleanArc.Application.Contracts.Persistence;
+using CleanArc.Domain.DTO;
 using CleanArc.Domain.Entities;
 using CleanArc.Infrastructure.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +25,7 @@ internal class TJ_DOCUMENT_DET_BORD_Repository : BaseAsyncRepository<TJ_DOCUMENT
             x.NUM_BORD == numBord && 
             x.REF_CTR_DET_BORD == refCtr);
 
-        return await query.ToListAsync();
+        return await query.ToListAsync();   
     }
     public async Task<PagedList<TJ_DOCUMENT_DET_BORD>> GetAllTj_documentAsync(PaginationParams paginationParams)
     {
@@ -35,6 +36,26 @@ internal class TJ_DOCUMENT_DET_BORD_Repository : BaseAsyncRepository<TJ_DOCUMENT
 
         return result;
     }
+    public async Task<bool> UpdateDocumentDetBordAsync(PksTjDetBord pksDto, TJ_DOCUMENT_DET_BORD updatedDocumentDetBord)
+    {
+      
+        var existingDocumentDetBordList = await GetDocumentDetBordByPK(pksDto.NUM_BORD, pksDto.REF_CTR_DET_BORD);
+        
+        if (existingDocumentDetBordList == null || !existingDocumentDetBordList.Any())
+        {
+            throw new InvalidOperationException($"DocumentDetBord with primary keys (NUM_BORD: {pksDto.NUM_BORD}, REF_CTR_DET_BORD: {pksDto.REF_CTR_DET_BORD}) not found.");
+        }
+        
+        foreach (var existingDocumentDetBord in existingDocumentDetBordList)
+        {
+            existingDocumentDetBord.ID_DET_BORD = updatedDocumentDetBord.ID_DET_BORD;
+            existingDocumentDetBord.REF_DOCUMENT_DET_BORD = updatedDocumentDetBord.REF_DOCUMENT_DET_BORD;
+            _dbContext.Entry(existingDocumentDetBord).State = EntityState.Modified;
+        }
+        await _dbContext.SaveChangesAsync();
+        return true;
+    }
+
     
     public async Task<TJ_DOCUMENT_DET_BORD> GetTj_documentById(int id)
     {

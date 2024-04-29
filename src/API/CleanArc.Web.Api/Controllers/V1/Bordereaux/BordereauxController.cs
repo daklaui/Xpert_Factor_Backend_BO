@@ -1,6 +1,7 @@
 using CleanArc.Application.Common;
 using CleanArc.Application.Features.Bordereaux.Commands.AddBordereauxCommand;
 using CleanArc.Application.Features.Bordereaux.Commands.DeleteBordereauxCommand;
+using CleanArc.Application.Features.Bordereaux.Commands.UpdateBordereauxCommand;
 using CleanArc.Application.Features.Bordereaux.Queries.GetAllBordereaux;
 using CleanArc.Application.Features.Bordereaux.Queries.GetById;
 using CleanArc.Domain.DTO;
@@ -81,7 +82,12 @@ public class BordereauxController : BaseController
 
         return base.OperationResult<bool>(result);
     }
-
+    [HttpPut("UpdateBordereaux")]
+    public async Task<IActionResult> UpdateBordereaux([FromBody] UpdateBordereauxCommand model)
+    {
+        var command = await _sender.Send(model);
+        return base.OperationResult(command);
+    }
 
     private (string NumBord, int RefCtrBord, string AnneeBord) ParseDeletionCriteria(string id)
     {

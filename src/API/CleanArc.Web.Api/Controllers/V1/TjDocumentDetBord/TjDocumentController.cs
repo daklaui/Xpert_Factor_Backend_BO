@@ -1,6 +1,7 @@
 using CleanArc.Application.Common;
 using CleanArc.Application.Features.TjDocumentDetBord.Commands.AddTjDocumentCommand;
 using CleanArc.Application.Features.TjDocumentDetBord.Commands.DeleteTjDocumentCommand;
+using CleanArc.Application.Features.TjDocumentDetBord.Commands.UpdateTjDocumentCommand;
 using CleanArc.Application.Features.TjDocumentDetBord.Queries.GetAllTjDocument;
 using CleanArc.Application.Features.TjDocumentDetBord.Queries.GetById;
 using CleanArc.WebFramework.BaseController;
@@ -43,7 +44,12 @@ public class TjDocumentController : BaseController
 
         return base.OperationResult(query);
     }
-    
+    [HttpPut("UpdateTDetBord")]
+    public async Task<IActionResult> UpdateTjDetDocument([FromBody] UpdateTjDocumentCommand model)
+    {
+        var command = await _sender.Send(model);
+        return base.OperationResult(command);
+    }
     [HttpDelete("DeleteTjDocument/{id}")]
     public async Task<IActionResult> DeleteTjDocument(int id)
     {

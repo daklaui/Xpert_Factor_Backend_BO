@@ -1,5 +1,6 @@
 using CleanArc.Application.Common;
 using CleanArc.Application.Contracts.Persistence;
+using CleanArc.Domain.DTO;
 using CleanArc.Domain.Entities;
 using CleanArc.Infrastructure.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +47,56 @@ internal class TDetBordRepository :BaseAsyncRepository<T_DET_BORD> ,IT_DET_BORD_
     {
         return base.TableNoTracking.Select(p => Convert.ToInt32(p.ID_DET_BORD)).DefaultIfEmpty().Max();
     }
+    public async Task<bool> UpdateDetBordAsync(PksDetBordDto pksDto, T_DET_BORD updatedDetBord)
+    {
+    
+    var existingDetBordList = await GetDetBordByPK(pksDto.NUM_BORD, pksDto.REF_CTR_DET_BORD, pksDto.ANNEE_BORD);
+    
+   
+    if (existingDetBordList == null || !existingDetBordList.Any())
+    {
+        throw new InvalidOperationException($"DetBord with primary key (NUM_BORD: {pksDto.NUM_BORD}, REF_CTR_DET_BORD: {pksDto.REF_CTR_DET_BORD}, ANNEE_BORD: {pksDto.ANNEE_BORD}) not found.");
+    }
+
+   
+    foreach (var existingDetBord in existingDetBordList)
+    {
+       
+        existingDetBord.TYP_DET_BORD = updatedDetBord.TYP_DET_BORD;
+        existingDetBord.NUM_CREANCE_ASS_BORD = updatedDetBord.NUM_CREANCE_ASS_BORD;
+        existingDetBord.TYP_ASS_DET_BORD = updatedDetBord.TYP_ASS_DET_BORD;
+        existingDetBord.DAT_DET_BORD = updatedDetBord.DAT_DET_BORD;
+        existingDetBord.MONT_TTC_DET_BORD = updatedDetBord.MONT_TTC_DET_BORD;
+        existingDetBord.DEVISE_DET_BORD = updatedDetBord.DEVISE_DET_BORD;
+        existingDetBord.ECH_DET_BORD = updatedDetBord.ECH_DET_BORD;
+        existingDetBord.ECH_APR_PROROG_DET_BORD = updatedDetBord.ECH_APR_PROROG_DET_BORD;
+        existingDetBord.MONT_OUV_DET_BORD = updatedDetBord.MONT_OUV_DET_BORD;
+        existingDetBord.DELAI_PAIE_DET_BORD = updatedDetBord.DELAI_PAIE_DET_BORD;
+        existingDetBord.MODE_REG_DET_BORD = updatedDetBord.MODE_REG_DET_BORD;
+        existingDetBord.TYP_REG_DET_BORD = updatedDetBord.TYP_REG_DET_BORD;
+        existingDetBord.TX_FDG_DET_BORD = updatedDetBord.TX_FDG_DET_BORD;
+        existingDetBord.TX_COMM_FACT_DET_BORD = updatedDetBord.TX_COMM_FACT_DET_BORD;
+        existingDetBord.ANNUL_DET_BORD = updatedDetBord.ANNUL_DET_BORD;
+        existingDetBord.VALIDE_DET_BORD = updatedDetBord.VALIDE_DET_BORD;
+        existingDetBord.REF_IND_DET_BORD = updatedDetBord.REF_IND_DET_BORD;
+        existingDetBord.MONT_FDG_DET_BORD = updatedDetBord.MONT_FDG_DET_BORD;
+        existingDetBord.MONT_FDG_LIBERE_DET_BORD = updatedDetBord.MONT_FDG_LIBERE_DET_BORD;
+        existingDetBord.MONT_COMM_FACT_DET_BORD = updatedDetBord.MONT_COMM_FACT_DET_BORD;
+        existingDetBord.TX_TVA_COMM_FACT_DET_BORD = updatedDetBord.TX_TVA_COMM_FACT_DET_BORD;
+        existingDetBord.MONT_TVA_COMM_FACT_DET_BORD = updatedDetBord.MONT_TVA_COMM_FACT_DET_BORD;
+        existingDetBord.MONT_TTC_COMM_FACT_DET_BORD = updatedDetBord.MONT_TTC_COMM_FACT_DET_BORD;
+        existingDetBord.ID_CALC_DISPO_DET_BORD = updatedDetBord.ID_CALC_DISPO_DET_BORD;
+        existingDetBord.REF_DET_BORD = updatedDetBord.REF_DET_BORD;
+        existingDetBord.COMM_DET_BORD = updatedDetBord.COMM_DET_BORD;
+        existingDetBord.RETENU_DET_BORD = updatedDetBord.RETENU_DET_BORD;
+
+        
+        _dbContext.Entry(existingDetBord).State = EntityState.Modified;
+    }
+    await _dbContext.SaveChangesAsync();
+    return true;
+}
+
 
    public async  Task DeleteT_DET_BORD(T_DET_BORD detBord)
    {

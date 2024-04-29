@@ -1,6 +1,7 @@
 using CleanArc.Application.Common;
 using CleanArc.Application.Features.TDetBord.Commands.AddTDetBordCommand;
 using CleanArc.Application.Features.TDetBord.Commands.DeleteTDetBordCommand;
+using CleanArc.Application.Features.TDetBord.Commands.UpdateTDetBordCommand;
 using CleanArc.Application.Features.TDetBord.Queries.GetAllTDetBord;
 using CleanArc.Application.Features.TDetBord.Queries.GetById;
 using CleanArc.WebFramework.BaseController;
@@ -44,7 +45,12 @@ public class TDetBordController : BaseController
 
         return base.OperationResult(query);
     }
-    
+    [HttpPut("UpdateTDetBord")]
+    public async Task<IActionResult> UpdateTDetBord([FromBody] UpdateTDetBordCommand model)
+    {
+        var command = await _sender.Send(model);
+        return base.OperationResult(command);
+    }
     [HttpDelete("DeleteTDetBord/{id}")]
     public async Task<IActionResult> DeleteTDetBord(string id)
     {

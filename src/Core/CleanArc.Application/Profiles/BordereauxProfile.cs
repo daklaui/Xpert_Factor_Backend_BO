@@ -9,6 +9,8 @@ public class BordereauxProfile : AutoMapper.Profile
     {
         CreateMap<T_BORDEREAU, BordereauDTO>();
         CreateMap<T_DET_BORD, T_det_bord_DTO>();
-
+        CreateMap<PksBordereauxDto, T_BORDEREAU>();
+        CreateMap<T_det_bord_DTO, T_DET_BORD>()
+            .ReverseMap();
     }
 }
