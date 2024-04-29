@@ -26,9 +26,37 @@ public class LimiteRepository : BaseAsyncRepository<T_DEM_LIMITE> ,ILimiteReposi
         return demLimite;
     }
 
-    public Task<T_DEM_LIMITE_DTO> checkExistingLimiteNoActif(int refCtr, int refInd)
+    public async Task<T_DEM_LIMITE_DTO> checkExistingLimiteNoActif(int refCtr, int refInd)
     {
-        throw new NotImplementedException();
+        var tab = from dem in _dbContext.T_DEM_LIMITEs
+            join iach in _dbContext.T_INDIVIDUs on dem.REF_ACH_LIM equals iach.REF_IND
+            join cach in _dbContext.TJ_CIRs on dem.REF_CTR_DEM_LIM equals cach.REF_CTR_CIR
+            where (cach.ID_ROLE_CIR == "ACH" && cach.REF_IND_CIR == refCtr && cach.REF_IND_CIR == dem.REF_ACH_LIM
+                   && dem.ACTIF_DEM_LIMI == false
+                   && (dem.DECISION_LIM != "RF" && dem.DECISION_LIM != "V" && dem.DECISION_LIM != "C")
+                   && dem.REF_CTR_DEM_LIM == refInd)
+            select new T_DEM_LIMITE_DTO
+            {
+                REF_CTR_DEM_LIM = dem.REF_CTR_DEM_LIM,
+                REF_ACH_LIM = dem.REF_ACH_LIM,
+                ACTIF_DEM_LIMI = dem.ACTIF_DEM_LIMI,
+                DAT_DEM_LIM = dem.DAT_DEM_LIM,
+                REF_DEM_LIM = dem.REF_DEM_LIM,
+                DECISION_LIM = dem.DECISION_LIM,
+                DELAIS_DEM_LIM = dem.DELAIS_DEM_LIM,
+                DEVISE = dem.DEVISE,
+                MODE_PAY_DEM_LIM = dem.MODE_PAY_DEM_LIM,
+                //MONT_DEM_LIM = dem.MONT_DEM_LIM,
+                SORT_DEM_LIM = dem.SORT_DEM_LIM,
+                TYP_DEM_LIM = dem.TYP_DEM_LIM,
+                DELAIS_ACC = dem.DELAIS_ACC,
+               // MONT_ACC = dem.MONT_ACC,
+                MODE_PAY_ACC = dem.MODE_PAY_ACC,
+                NOM_IND = iach.NOM_IND
+            };
+
+        var result = await tab.FirstOrDefaultAsync();
+        return result;
     }
     
     public async Task<PagedList<T_DEM_LIMITE_DTO>> getListOfDemLimitNoActif(PaginationParams paginationParam)

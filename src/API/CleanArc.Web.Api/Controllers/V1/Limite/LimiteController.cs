@@ -2,6 +2,7 @@ using CleanArc.Application.Common;
 using CleanArc.Application.Features.Limite.Commands.AddLimiteCommand;
 using CleanArc.Application.Features.Limite.Commands.ValidateLimiteCommand;
 using CleanArc.Application.Features.Limite.Queries;
+using CleanArc.Application.Features.Limite.Queries.checkExistingLimiteNoActif;
 using CleanArc.Application.Features.Limite.Queries.GetListOfDemLimit;
 using CleanArc.WebFramework.BaseController;
 using Mediator;
@@ -65,5 +66,15 @@ public class LimiteController:BaseController
 
         return base.OperationResult(query);
     }
+    
+    [HttpGet("checkExistingLimiteNoActif/{REF_DEM_LIM,REF_CTR_DEM_LIM}")]
+    public async Task<IActionResult> checkExistingLimiteNoActif(int REF_DEM_LIM, int REF_CTR_DEM_LIM)
+    {
+        var query = await _sender.Send(new CheckExistingLimiteNoActifQuery(REF_DEM_LIM,  REF_CTR_DEM_LIM));
+
+        return base.OperationResult(query);
+    }
+    
+
     
 }
