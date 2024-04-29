@@ -2,8 +2,10 @@ using CleanArc.Application.Common;
 using CleanArc.Application.Features.Bordereaux.Commands.AddBordereauxCommand;
 using CleanArc.Application.Features.Bordereaux.Commands.DeleteBordereauxCommand;
 using CleanArc.Application.Features.Bordereaux.Commands.UpdateBordereauxCommand;
+using CleanArc.Application.Features.Bordereaux.Commands.ValidateBordereauCommand;
 using CleanArc.Application.Features.Bordereaux.Queries.GetAllBordereaux;
 using CleanArc.Application.Features.Bordereaux.Queries.GetById;
+using CleanArc.Application.Models.Common;
 using CleanArc.Domain.DTO;
 using CleanArc.WebFramework.BaseController;
 using Mediator;
@@ -39,8 +41,8 @@ public class BordereauxController : BaseController
         return base.OperationResult(query);
     }
     
-    [HttpGet("GetBordereauxById/{id}")]
-    public async Task<IActionResult> GetBordereauxById(string id)
+    [HttpGet("GetBordereauxById")]
+    public async Task<IActionResult> GetBordereauxById([FromQuery] PksDetBordDto id)
     {
         // Parse the id string to extract deletion criteria (assuming specific format)
         var criteria = ParseDeletionCriteria(id);
@@ -61,8 +63,8 @@ public class BordereauxController : BaseController
         return base.OperationResult(result);
     }
     
-    [HttpDelete("DeleteBordereaux/{id}")]
-    public async Task<IActionResult> DeleteBordereaux(string id)
+    [HttpDelete("DeleteBordereaux")]
+    public async Task<IActionResult> DeleteBordereaux([FromQuery] PksDetBordDto id)
     {
         
         var criteria = ParseDeletionCriteria(id);
@@ -88,12 +90,41 @@ public class BordereauxController : BaseController
         var command = await _sender.Send(model);
         return base.OperationResult(command);
     }
+    /*[HttpPatch("ValidateBordereau/{id}")]
+    public async Task<IActionResult> ValidateBordereau(string id)
+    {
+        // Parse the id string to extract the primary key criteria
+        var criteria = ParseDeletionCriteria(id);
 
-    private (string NumBord, int RefCtrBord, string AnneeBord) ParseDeletionCriteria(string id)
+        // Create PksBordereauxDto with the extracted criteria
+        var pksBordereauxDto = new PksBordereauxDto
+        {
+            NUM_BORD = criteria.NumBord,
+            REF_CTR_BORD = criteria.RefCtrBord,
+            ANNEE_BORD = criteria.AnneeBord
+        };
+
+        // Create a ValidateBordereauCommand with the PksBordereauxDto
+        var command = new ValidateBordereauCommand(pksBordereauxDto);
+
+        // Send the command using the sender and await the result
+        var operationResult = await _sender.Send(command);
+
+        // Return the operationResult using the base controller's OperationResult method
+        // Return directly since operationResult is already an OperationResult<bool> type
+        return base.OperationResult<bool>(operationResult);
+
+    }*/
+
+
+
+
+
+
+    private (string NumBord, int RefCtrBord, string AnneeBord) ParseDeletionCriteria(PksDetBordDto id)
     {
         
-        var parts = id.Split('-');
-        return (parts[0], int.Parse(parts[1]), parts[2]);
+        return (id.NUM_BORD, id.REF_CTR_DET_BORD,  id.ANNEE_BORD);
     }
 
 }

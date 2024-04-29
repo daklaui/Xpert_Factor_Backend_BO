@@ -12,7 +12,7 @@ public interface IBordereauxRepository
      Task<bool> UpdateBordereauxAsync(PksBordereauxDto pksDto, T_BORDEREAU updatedBordereau);
     Task<T_BORDEREAU> GetBordereauxById(string id);
     Task<T_BORDEREAU> GetBordereauxByPK(string numBord, int refCtr , string yearBord);
-    
+    Task<bool> ValidateBordereauAsync(string numBord, int refCtr, string yearBord);
     Task DeleteBordereaux(T_BORDEREAU bordereau);
 
 }

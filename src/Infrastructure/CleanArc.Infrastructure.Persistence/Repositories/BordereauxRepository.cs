@@ -72,5 +72,19 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
             await _dbContext.SaveChangesAsync();
             return true;
         }
+        public async Task<bool> ValidateBordereauAsync(string numBord, int refCtr, string yearBord)
+        {
+           
+            var existingBordereau = await GetBordereauxByPK(numBord, refCtr, yearBord);
+            if (existingBordereau == null)
+            {
+                return false;
+            }
+            existingBordereau.VALIDE_BORD = true;
+            _dbContext.Entry(existingBordereau).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
+
     }
 }

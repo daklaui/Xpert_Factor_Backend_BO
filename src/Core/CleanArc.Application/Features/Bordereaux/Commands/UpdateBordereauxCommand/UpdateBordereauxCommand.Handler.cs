@@ -36,7 +36,7 @@ public class UpdateBordereauxCommandHandler: IRequestHandler<UpdateBordereauxCom
             }
 
            
-            _mapper.Map(request.BordereauToUpdate.Bordereau, existingBordereau);
+           
 
             PksBordereauxDto pksBordereauxDto = new PksBordereauxDto
             {
@@ -45,12 +45,12 @@ public class UpdateBordereauxCommandHandler: IRequestHandler<UpdateBordereauxCom
                 ANNEE_BORD = request.BordereauToUpdate.Bordereau.ANNEE_BORD
             };
 
-            await _unitOfWork.BordereauxRepository.UpdateBordereauxAsync(pksBordereauxDto, existingBordereau);
+            await _unitOfWork.BordereauxRepository.UpdateBordereauxAsync(pksBordereauxDto, request.BordereauToUpdate.Bordereau);
 
-            
+            //Tdet
             foreach (var updatedDetBordDto in request.BordereauToUpdate.DetBords)
             {
-               
+
                 var existingDetBordList = await _unitOfWork.TDetBordRepository.GetDetBordByPK(
                     updatedDetBordDto.NUM_BORD,
                     updatedDetBordDto.REF_CTR_DET_BORD,
@@ -79,7 +79,7 @@ public class UpdateBordereauxCommandHandler: IRequestHandler<UpdateBordereauxCom
                 }
             }
 
-          
+          //tjdoc
             foreach (var updatedDocument in request.UpdatedDocuments)
             {
               
@@ -96,7 +96,7 @@ public class UpdateBordereauxCommandHandler: IRequestHandler<UpdateBordereauxCom
                 foreach (var existingDocumentDetBord in existingDocumentDetBordList)
                 {
                   
-                    _mapper.Map(updatedDocument, existingDocumentDetBord);
+                  //  _mapper.Map(updatedDocument, existingDocumentDetBord);
 
                   
                     PksTjDetBord pksTjDetBord = new PksTjDetBord
@@ -106,7 +106,7 @@ public class UpdateBordereauxCommandHandler: IRequestHandler<UpdateBordereauxCom
                     };
 
                    
-                    await _unitOfWork.TjDocumentDetBordRepository.UpdateDocumentDetBordAsync(pksTjDetBord, existingDocumentDetBord);
+                    await _unitOfWork.TjDocumentDetBordRepository.UpdateDocumentDetBordAsync(pksTjDetBord, updatedDocument);
                 }
             }
 

@@ -34,13 +34,14 @@ internal class GetByIdQueryHandler : IRequestHandler<GetByIdQuery, OperationResu
                     request.BordereauxId.ANNEE_BORD);
 
                 var detBordDtos = detBords != null ? _mapper.Map<List<T_det_bord_DTO>>(detBords) : new List<T_det_bord_DTO>(); // Handle empty list
-
+            
                 var result = new GetByIdQueryResult
                 {
                     Bordereau = _mapper.Map<BordereauDTO>(bordereaux, opt =>
                     {
                         opt.AfterMap((src, dest) =>
                         {
+                            dest.Bordereau = bordereaux;
                             dest.DetBords = detBordDtos;
                         });
                     })
