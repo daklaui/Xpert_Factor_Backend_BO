@@ -13,7 +13,7 @@ internal class TJcirRepository: BaseAsyncRepository<TJ_CIR> , ITjcirRepository
         
     }
 
-    public async Task AddTJCIRsync(TJ_CIR buyer)
+    public async Task AddICirAsync(TJ_CIR buyer)
     {
         await base.AddAsync(buyer);
     }
@@ -41,5 +41,8 @@ internal class TJcirRepository: BaseAsyncRepository<TJ_CIR> , ITjcirRepository
         return await base.TableNoTracking.FirstAsync(p=>p.ID_CIR == id);
     }
 
-  
+    public Task<TJ_CIR> AddTJCIRsync(TJ_CIR Buyer)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -32,7 +32,7 @@ namespace CleanArc.Application.Features.Individu.Queries.GetAllIndividus
                 TotalCount = individus.TotalCount,
                 Result = individus.Select(_mapper.Map<T_INDIVIDU, GetAllIndividusQueryResult>).ToList()
 
-        };
+            };
             return OperationResult<PageInfo<GetAllIndividusQueryResult>>.SuccessResult(result);
         }
     }
