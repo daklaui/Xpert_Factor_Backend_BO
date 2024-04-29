@@ -18,18 +18,10 @@ namespace CleanArc.Application.Features.Buyer.Commands.AddBuyer
 
         public async ValueTask<OperationResult<bool>> Handle(AddBuyerCommand request, CancellationToken cancellationToken)
         {
-            try
-            {
-                await _unitOfWork.tjcirRepository.AddTJCIRsync(request.Buyer);
-                await _unitOfWork.CommitAsync();
+            await _unitOfWork.TJcirRepository.AddTJCIRsync(request.Buyer);
+            await _unitOfWork.CommitAsync();
 
-                return OperationResult<bool>.SuccessResult(true);
-            }
-            catch (Exception ex)
-            {
-
-                return OperationResult<bool>.FailureResult("moshklaaaaaaaaaaaaaaaaaaaaaaa");
-            }
+            return OperationResult<bool>.SuccessResult(true);
         }
     }
 }

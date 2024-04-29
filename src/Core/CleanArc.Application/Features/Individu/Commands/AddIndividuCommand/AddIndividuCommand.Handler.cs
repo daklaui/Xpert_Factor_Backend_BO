@@ -1,8 +1,7 @@
 ﻿using CleanArc.Application.Contracts.Identity;
 using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Application.Models.Common;
-using CleanArc.Domain.Entities.User;
-using CleanArc.SharedKernel.Extensions;
+using CleanArc.Domain.Entities;
 using Mediator;
 
 namespace CleanArc.Application.Features.Individu.Commands.AddIndividuCommand
@@ -20,10 +19,8 @@ namespace CleanArc.Application.Features.Individu.Commands.AddIndividuCommand
 
         public async ValueTask<OperationResult<bool>> Handle(AddIndividuCommand request, CancellationToken cancellationToken)
         {
-             await _unitOfWork.IndividualRepository.AddIIndividualAsync(request.Individu);
-
+            await _unitOfWork.IndividualRepository.AddIIndividualAsync(request.Individu);
              await _unitOfWork.CommitAsync();
-
              return OperationResult<bool>.SuccessResult(true);
         }
     }
