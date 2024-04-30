@@ -1,8 +1,10 @@
-﻿using CleanArc.Application.Common;
+﻿using System.Text.Json;
+using CleanArc.Application.Common;
 using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Domain.Entities;
 using CleanArc.Infrastructure.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace CleanArc.Infrastructure.Persistence.Repositories;
 
@@ -36,6 +38,42 @@ internal class AgencyBankRepositoryRepository : BaseAsyncRepository<TR_Ag_Bq>, I
     public async Task<TR_Ag_Bq> GetTrAgencyBankById(string code)
     {
         return await base.TableNoTracking.FirstOrDefaultAsync(p => p.Code_Bq_Ag == code);
+    }
+
+    public async Task<string> RechercheBanque(string id)
+    {
+        string nomBanque = "";
+        try
+        {
+            nomBanque = await _dbContext.TR_Ag_Bqs
+                .Where(p => p.Code_Bq == id)
+                .Select(p => p.Banque)
+                .FirstOrDefaultAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+        return nomBanque;
+    }
+    public async Task <string>  RechercheAgence(string id)
+    {
+        string nom_Agence = "";
+       
+        try
+        {
+            nom_Agence =  _dbContext.TR_Ag_Bqs
+                .Where(p => p.Code_Bq_Ag == id)
+                .Select(p => p.Agence)
+                .FirstOrDefault();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+
+        return nom_Agence;
+
     }
 
     public async Task UpdateTrAgencyBankAsync(TR_Ag_Bq updateTrAgBq)

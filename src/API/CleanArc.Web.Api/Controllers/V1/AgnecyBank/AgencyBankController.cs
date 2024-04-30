@@ -2,6 +2,8 @@
 using CleanArc.Application.Features.AgencyBank.Commands.AddAgencyBankCommand;
 using CleanArc.Application.Features.AgencyBank.Commands.UpdateAgencyBankCommand;
 using CleanArc.Application.Features.AgencyBank.Queries.GetAgnecyBankByIdQuerie;
+using CleanArc.Application.Features.AgencyBank.Queries.RechercheBanqueQuerie;
+using CleanArc.Application.Features.AgencyBank.Queries.SearchAgencyQuerie;
 using CleanArc.WebFramework.BaseController;
 using Mediator;
 using Microsoft.AspNetCore.Mvc;
@@ -39,6 +41,22 @@ public class AgencyBankController : BaseController
     public async Task<IActionResult> GetIndividuById(string code )
     {
         var query = await _sender.Send(new GetAgencyBankByIdQuery(code));
+
+        return base.OperationResult(query);
+    }
+    
+    [HttpGet("SearchBank")]
+    public async Task<IActionResult> SearchBank(string code )
+    {
+        var query = await _sender.Send(new SearchBankQuery(code));
+
+        return base.OperationResult(query);
+    }
+     
+    [HttpGet("SearchAgency")]
+    public async Task<IActionResult> SearchAgency(string code )
+    {
+        var query = await _sender.Send(new SearchAgencyQuery(code));
 
         return base.OperationResult(query);
     }
