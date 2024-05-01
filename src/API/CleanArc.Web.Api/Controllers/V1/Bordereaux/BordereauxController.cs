@@ -44,10 +44,10 @@ public class BordereauxController : BaseController
     [HttpGet("GetBordereauxById")]
     public async Task<IActionResult> GetBordereauxById([FromQuery] PksDetBordDto id)
     {
-        // Parse the id string to extract deletion criteria (assuming specific format)
+        
         var criteria = ParseDeletionCriteria(id);
 
-        // Create PksBordereauxDto with extracted criteria
+       
         var bordereauxDto = new PksBordereauxDto
         {
             NUM_BORD = criteria.NumBord,
@@ -55,7 +55,7 @@ public class BordereauxController : BaseController
             ANNEE_BORD = criteria.AnneeBord
         };
 
-        // Create GetByIdQuery with the PksBordereauxDto (assuming query now accepts DTO)
+       
         var query = new GetByIdQuery(bordereauxDto);
 
         var result = await _sender.Send(query);
@@ -90,27 +90,23 @@ public class BordereauxController : BaseController
         var command = await _sender.Send(model);
         return base.OperationResult(command);
     }
-   /* [HttpPatch("ValidateBordereau/{id}")]
-    public async Task<IActionResult> ValidateBordereau(string id)
+    
+ /*   [HttpPut("ValidateBordereau")]
+    public async Task<IActionResult> ValidateBordereau([FromBody] PksBordereauxDto pksBordereauxDto)
     {
-        
-        var criteria = ParseDeletionCriteria(id);
-
-        
-        var pksBordereauxDto = new PksBordereauxDto
-        {
-            NUM_BORD = criteria.NumBord,
-            REF_CTR_BORD = criteria.RefCtrBord,
-            ANNEE_BORD = criteria.AnneeBord
-        };
-        
+        // Create the command
         var command = new ValidateBordereauCommand(pksBordereauxDto);
 
-        var operationResult = await _sender.Send(command);
+        // Send the command using _sender
+        var result = await _sender.Send(command);
 
-        return base.OperationResult<bool>(operationResult);
-
+        // Return the result using base.OperationResult<bool>
+        return base.OperationResult<bool>(result);
     }*/
+
+
+
+
     private (string NumBord, int RefCtrBord, string AnneeBord) ParseDeletionCriteria(PksDetBordDto id)
     {
         

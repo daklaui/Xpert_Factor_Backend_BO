@@ -12,10 +12,12 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
     internal class BordereauxRepository : BaseAsyncRepository<T_BORDEREAU>, IBordereauxRepository
     {
         private readonly ApplicationDbContext _dbContext;
+      
 
         public BordereauxRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
+            
         }
 
         public async Task addBordereauxAsync(T_BORDEREAU bordereau)
@@ -72,19 +74,24 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
             await _dbContext.SaveChangesAsync();
             return true;
         }
-            public async Task<bool> ValidateBordereauAsync(string numBord, int refCtr, string yearBord)
+        public async Task ValidateBordereauAsync(T_BORDEREAU existingBordereau, List<T_DET_BORD> detBordList)
+        {
+            // Update the Bordereau entity
+            existingBordereau.VALIDE_BORD = true;
+            _dbContext.Entry(existingBordereau).State = EntityState.Modified;
+
+            // Update each T_DET_BORD entity
+            foreach (var detBord in detBordList)
             {
-               
-                var existingBordereau = await GetBordereauxByPK(numBord, refCtr, yearBord);
-                if (existingBordereau == null)
-                {
-                    return false;
-                }
-                existingBordereau.VALIDE_BORD = true;
-                _dbContext.Entry(existingBordereau).State = EntityState.Modified;
-                await _dbContext.SaveChangesAsync();
-                return true;
+                detBord.VALIDE_DET_BORD = true;
+                _dbContext.Entry(detBord).State = EntityState.Modified;
             }
+
+            // Save the changes to the database
+            await _dbContext.SaveChangesAsync();
+        }
+        
+
 
     }
 }

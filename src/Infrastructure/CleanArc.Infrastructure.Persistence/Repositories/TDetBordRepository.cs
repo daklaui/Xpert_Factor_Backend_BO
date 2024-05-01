@@ -135,4 +135,6 @@ internal class TDetBordRepository :BaseAsyncRepository<T_DET_BORD> ,IT_DET_BORD_
  
        return result;
    }
+   
+  
 }

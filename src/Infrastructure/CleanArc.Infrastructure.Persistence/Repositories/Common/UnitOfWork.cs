@@ -14,7 +14,7 @@ public class UnitOfWork : IUnitOfWork
     public IT_DET_BORD_Repository TDetBordRepository { get; }
     public ITJ_DOCUMENT_DET_BORD_Repository TjDocumentDetBordRepository { get; }
     public IBordereauxRepository BordereauxRepository { get; }
-    public UnitOfWork(ApplicationDbContext db)
+    public UnitOfWork(ApplicationDbContext db )
     {
         _db = db;
         UserRefreshTokenRepository = new UserRefreshTokenRepository(_db);
