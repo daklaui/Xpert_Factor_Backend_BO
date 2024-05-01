@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class T_INT_FINANCEMENT
+public partial class T_INT_FINANCEMENT : IEntity
 {
     public string TYP_INSTR_INT_FIN { get; set; }
 
