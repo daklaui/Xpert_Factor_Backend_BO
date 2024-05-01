@@ -14,4 +14,5 @@ public interface IT_DET_BORD_Repository
     Task<int> getMaxDocs();
     Task<bool> UpdateDetBordAsync(PksDetBordDto pksDto, T_DET_BORD updatedDetBord);
     Task DeleteT_DET_BORD(T_DET_BORD detBord);
+    Task<IEnumerable<DetailsDetBordDto>> getDetailsDetBord(PksDetBordDto pksDto);
 }

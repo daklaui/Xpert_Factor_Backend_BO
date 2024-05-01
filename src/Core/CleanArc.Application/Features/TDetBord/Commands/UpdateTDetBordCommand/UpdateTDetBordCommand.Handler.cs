@@ -21,7 +21,7 @@ public class UpdateTDetBordCommandHandler: IRequestHandler<UpdateTDetBordCommand
     {
         var updateCriteria = request.TdetBordToUpdate;
 
-        // Retrieve the existing T_DET_BORD entity using the provided primary key information
+       
         var existingDetBordList = await _unitOfWork.TDetBordRepository.GetDetBordByPK(
             updateCriteria.NUM_BORD,
             updateCriteria.REF_CTR_DET_BORD,
@@ -33,10 +33,9 @@ public class UpdateTDetBordCommandHandler: IRequestHandler<UpdateTDetBordCommand
             return OperationResult<bool>.NotFoundResult("T_DET_BORD not found.");
         }
 
-        // Assuming you want to update one of the entities from the list (first one, for example)
+        
         var existingDetBord = existingDetBordList.First();
-
-        // Update the existing T_DET_BORD entity using the data from the request
+        
         existingDetBord.TYP_DET_BORD = request.updatedDetBord.TYP_DET_BORD;
         existingDetBord.NUM_CREANCE_ASS_BORD = request.updatedDetBord.NUM_CREANCE_ASS_BORD;
         existingDetBord.TYP_ASS_DET_BORD = request.updatedDetBord.TYP_ASS_DET_BORD;
@@ -65,18 +64,17 @@ public class UpdateTDetBordCommandHandler: IRequestHandler<UpdateTDetBordCommand
         existingDetBord.COMM_DET_BORD = request.updatedDetBord.COMM_DET_BORD;
         existingDetBord.RETENU_DET_BORD = request.updatedDetBord.RETENU_DET_BORD;
 
-        // Save the changes using the repository
+       
         await _unitOfWork.TDetBordRepository.UpdateDetBordAsync(request.TdetBordToUpdate, existingDetBord);
         
-        // Commit the changes
+        
         await _unitOfWork.CommitAsync();
 
-        // Return success result
+        
         return OperationResult<bool>.SuccessResult(true);
     }
     catch (Exception ex)
     {
-        // Return failure result with error message
         return OperationResult<bool>.FailureResult($"Error updating T_DET_BORD: {ex.Message}");
     }
 }

@@ -2,8 +2,10 @@ using CleanArc.Application.Common;
 using CleanArc.Application.Features.TDetBord.Commands.AddTDetBordCommand;
 using CleanArc.Application.Features.TDetBord.Commands.DeleteTDetBordCommand;
 using CleanArc.Application.Features.TDetBord.Commands.UpdateTDetBordCommand;
+using CleanArc.Application.Features.TDetBord.Queries.DetailsDetBord;
 using CleanArc.Application.Features.TDetBord.Queries.GetAllTDetBord;
 using CleanArc.Application.Features.TDetBord.Queries.GetById;
+using CleanArc.Domain.DTO;
 using CleanArc.WebFramework.BaseController;
 using Mediator;
 using Microsoft.AspNetCore.Mvc;
@@ -57,5 +59,13 @@ public class TDetBordController : BaseController
         var command = await _sender.Send(new DeleteTDetBordCommand { TDetBordId = id });
         return base.OperationResult<bool>(command);
 
+    }
+    
+    [HttpGet("GetDetailsDetBord")]
+    public async Task<IActionResult> GetDetailsDetBord([FromQuery] PksDetBordDto id)
+    {
+        var query = new GetDetailsDetBordQuery(id);
+        var result = await _sender.Send(query);
+        return base.OperationResult(result);
     }
 }

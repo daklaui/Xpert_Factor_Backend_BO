@@ -90,37 +90,27 @@ public class BordereauxController : BaseController
         var command = await _sender.Send(model);
         return base.OperationResult(command);
     }
-    /*[HttpPatch("ValidateBordereau/{id}")]
+   /* [HttpPatch("ValidateBordereau/{id}")]
     public async Task<IActionResult> ValidateBordereau(string id)
     {
-        // Parse the id string to extract the primary key criteria
+        
         var criteria = ParseDeletionCriteria(id);
 
-        // Create PksBordereauxDto with the extracted criteria
+        
         var pksBordereauxDto = new PksBordereauxDto
         {
             NUM_BORD = criteria.NumBord,
             REF_CTR_BORD = criteria.RefCtrBord,
             ANNEE_BORD = criteria.AnneeBord
         };
-
-        // Create a ValidateBordereauCommand with the PksBordereauxDto
+        
         var command = new ValidateBordereauCommand(pksBordereauxDto);
 
-        // Send the command using the sender and await the result
         var operationResult = await _sender.Send(command);
 
-        // Return the operationResult using the base controller's OperationResult method
-        // Return directly since operationResult is already an OperationResult<bool> type
         return base.OperationResult<bool>(operationResult);
 
     }*/
-
-
-
-
-
-
     private (string NumBord, int RefCtrBord, string AnneeBord) ParseDeletionCriteria(PksDetBordDto id)
     {
         

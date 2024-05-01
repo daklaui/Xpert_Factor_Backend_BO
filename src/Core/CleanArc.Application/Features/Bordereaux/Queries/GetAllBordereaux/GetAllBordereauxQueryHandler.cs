@@ -22,38 +22,16 @@ internal class GetAllBordereauxQueryHandler : IRequestHandler<GetAllBordereauxQu
 
     public async ValueTask<OperationResult<PageInfo<GetAllBordereauxQueryResult>>> Handle(GetAllBordereauxQuery request, CancellationToken cancellationToken)
     {
-        
-        var bordereauxTask = _unitOfWork.BordereauxRepository.GetAllBordereauxAsync(request.paginationParams);
-        var detBordsTask = _unitOfWork.TDetBordRepository.GetAllT_DET_BORD_Async(request.paginationParams);
-
-       
-        await Task.WhenAll(bordereauxTask, detBordsTask);
-
-        var bordereaux = await bordereauxTask;
-        var detBords = await detBordsTask;
-
-        
-        var mappedBordereaux = bordereaux.Select(b =>
-        {
-            var dto = _mapper.Map<T_BORDEREAU, BordereauDTO>(b);
-            dto.DetBords = _mapper.Map<List<T_DET_BORD>, List<T_det_bord_DTO>>(detBords.Where(d =>
-                d.NUM_BORD == b.NUM_BORD &&
-                d.REF_CTR_DET_BORD == b.REF_CTR_BORD &&
-                d.ANNEE_BORD == b.ANNEE_BORD
-            ).ToList());
-            return dto;
-        }).ToList();
-
-
+        var TBordereau = await _unitOfWork.BordereauxRepository.GetAllBordereauxAsync(request.paginationParams);
         var result = new PageInfo<GetAllBordereauxQueryResult>
         {
-            PageSize = bordereaux.PageSize,
-            CurrentPage = bordereaux.CurrentPage,
-            TotalPages = bordereaux.TotalPages,
-            TotalCount = bordereaux.TotalCount,
-            Result = mappedBordereaux.Select(dto => new GetAllBordereauxQueryResult { Bordereau = dto }).ToList()
-        };
+            PageSize = TBordereau.PageSize,
+            CurrentPage = TBordereau.CurrentPage,
+            TotalPages = TBordereau.TotalPages,
+            TotalCount = TBordereau.TotalCount,
+            Result = TBordereau.Select(_mapper.Map<T_BORDEREAU, GetAllBordereauxQueryResult>).ToList()
 
+        };
         return OperationResult<PageInfo<GetAllBordereauxQueryResult>>.SuccessResult(result);
     }
 }

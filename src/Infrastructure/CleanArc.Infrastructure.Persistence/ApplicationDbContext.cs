@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using CleanArc.Domain.Common;
+using CleanArc.Domain.DTO;
 using CleanArc.Domain.Entities;
 using CleanArc.Domain.Entities.User;
 using CleanArc.SharedKernel.Extensions;
@@ -163,6 +164,7 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
     public virtual DbSet<T_RIB_FACTOR> T_RIB_FACTORs { get; set; }
 
     public virtual DbSet<T_ROLE> T_ROLEs { get; set; }
+    public virtual DbSet<DetailsDetBordDto> DetailsDetBordDto { get; set; }
 
     public ApplicationDbContext(DbContextOptions options)
         : base(options)

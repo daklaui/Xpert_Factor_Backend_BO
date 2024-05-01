@@ -1,3 +1,4 @@
+using AutoMapper;
 using CleanArc.Application.Common;
 using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Domain.DTO;
@@ -10,10 +11,11 @@ namespace CleanArc.Infrastructure.Persistence.Repositories;
 internal class TDetBordRepository :BaseAsyncRepository<T_DET_BORD> ,IT_DET_BORD_Repository
 {
     private readonly ApplicationDbContext _dbContext;
-
+   
     public TDetBordRepository(ApplicationDbContext dbContext) : base(dbContext)
     {
         _dbContext = dbContext;
+      
     }
 
     public async Task addT_DET_BORD_Async(T_DET_BORD detBord)
@@ -36,7 +38,7 @@ internal class TDetBordRepository :BaseAsyncRepository<T_DET_BORD> ,IT_DET_BORD_
     }
     public async Task<IEnumerable<T_DET_BORD>> GetDetBordByPK(string numBord, int refCtr , string yearBord)
     {
-        var query = _dbContext.T_DET_BORDs.Where(x => 
+        var query =base.TableNoTracking.Where(x => 
             x.NUM_BORD == numBord && 
             x.REF_CTR_DET_BORD == refCtr && 
             x.ANNEE_BORD == yearBord);
@@ -101,5 +103,36 @@ internal class TDetBordRepository :BaseAsyncRepository<T_DET_BORD> ,IT_DET_BORD_
    public async  Task DeleteT_DET_BORD(T_DET_BORD detBord)
    {
        _dbContext.Set<T_DET_BORD>().Remove(detBord);
+   }
+   
+   public async Task<IEnumerable<DetailsDetBordDto>> getDetailsDetBord(PksDetBordDto pksDto)
+   {
+       string sqlQuery = $@"
+                SELECT 
+                    ID_DET_BORD,
+                    NUM_BORD,
+                    (SELECT REF_DOCUMENT_DET_BORD FROM TJ_DOCUMENT_DET_BORD WHERE ID_DET_BORD = T_DET_BORD.ID_DET_BORD) AS REF_DET_BORD,
+                    TYP_DET_BORD,
+                    DAT_DET_BORD,
+                    MONT_TTC_DET_BORD,
+                    ANNEE_BORD,
+                    REF_CTR_DET_BORD,
+                    ECH_DET_BORD,
+                    MODE_REG_DET_BORD,
+                    (SELECT NOM_IND FROM T_INDIVIDU WHERE REF_IND = REF_IND_DET_BORD) AS nomind,
+                    REF_CTR_PAPIER_CTR
+                FROM
+                    T_DET_BORD
+                    JOIN T_CONTRAT ON T_CONTRAT.REF_CTR = T_DET_BORD.REF_CTR_DET_BORD
+                WHERE
+                    NUM_BORD = '{pksDto.NUM_BORD}' AND
+                    REF_CTR_DET_BORD = {pksDto.REF_CTR_DET_BORD} AND
+                    ANNEE_BORD = '{pksDto.ANNEE_BORD}' AND
+                    VALIDE_DET_BORD = 0;
+            ";
+       var result = await _dbContext.DetailsDetBordDto.FromSqlRaw(sqlQuery).ToListAsync();
+
+ 
+       return result;
    }
 }
