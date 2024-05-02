@@ -8,6 +8,7 @@ public interface IUnitOfWork
     public IContactRepository contactRepository { get; }
     public IRibRepository ribRepository { get; }
     public IAdhAuthRepository adhAuthRepository { get; }
+    public  IimpayeRepository ImpayeRepository { get; }
     Task CommitAsync();
     ValueTask RollBackAsync();
 }
