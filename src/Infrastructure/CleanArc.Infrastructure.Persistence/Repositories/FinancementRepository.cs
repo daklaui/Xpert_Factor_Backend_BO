@@ -159,6 +159,7 @@ public class FinancementRepository :BaseAsyncRepository<T_FINANCEMENT>,IFinancem
             t_fraisdiversV = (decimal)_dbContext.usp_FRAIS_PAIEMENT_V
                 .FromSql($"exec usp_FRAIS_PAIEMENT_V @param_Port_Ref_CTR = {ref_ctr}").AsEnumerable().FirstOrDefault()
                 .FaisPaiV;
+            
         }
         catch (Exception)
         {
