@@ -3,6 +3,7 @@ using CleanArc.Application.Common;
 using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Application.Models.Common;
 using CleanArc.Domain.Entities;
+using CleanArc.Domain.Entities.DTO;
 using Mediator;
 
 namespace CleanArc.Application.Features.Impaye.Queries;
@@ -28,7 +29,7 @@ internal class GetListOfImpayeQuey_Handler :IRequestHandler<GetListOfImpayeQuery
             CurrentPage = impaye.CurrentPage,
             TotalPages = impaye.TotalPages,
             TotalCount = impaye.TotalCount,
-            Result = impaye.Select(_mapper.Map<ListeDesImpayes, GetListOfImpayeQuery_Response>).ToList()
+            Result = impaye.Select(_mapper.Map<T_IMPAYE_DTO, GetListOfImpayeQuery_Response>).ToList()
 
         };
         return OperationResult<PageInfo<GetListOfImpayeQuery_Response>>.SuccessResult(result);

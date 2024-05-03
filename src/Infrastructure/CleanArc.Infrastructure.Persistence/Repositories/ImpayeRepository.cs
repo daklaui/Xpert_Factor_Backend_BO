@@ -22,11 +22,11 @@ internal class ImpayeRepository :BaseAsyncRepository<T_IMPAYE>,IimpayeRepository
         await base.AddAsync(impaye);
 
     }
-    public async Task<PagedList<ListeDesImpayes>> GetListeDesImpayesAsync( PaginationParams paginationParams)
+    public async Task<PagedList<T_IMPAYE_DTO>> GetListeDesImpayesAsync( PaginationParams paginationParams)
     {
         var liste = await _dbContext.ListeDesImpayes.FromSqlRaw("exec ListeDesImpayes").ToListAsync();
         
-        var result = await PagedList<ListeDesImpayes>.CreateAsync(liste, paginationParams.PageNumber, paginationParams.PageSize);
+        var result = await PagedList<T_IMPAYE_DTO>.CreateAsync(liste, paginationParams.PageNumber, paginationParams.PageSize);
 
         return result;
     }
