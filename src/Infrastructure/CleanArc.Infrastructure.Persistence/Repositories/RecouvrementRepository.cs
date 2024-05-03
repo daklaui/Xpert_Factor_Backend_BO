@@ -13,6 +13,11 @@ internal class RecouvrementRepository: BaseAsyncRepository<TR_LIST_VAL>, IRecouv
     {
         _dbContext = dbContext;
     }
+    public async Task AddRecouvrementAsync(TR_LIST_VAL Recouvrement)
+    {
+        await base.AddAsync(Recouvrement);
+    }
+
 
     public async Task<PagedList<TR_LIST_VAL>> GetAllRecAsync(PaginationParams paginationParams)
     {
