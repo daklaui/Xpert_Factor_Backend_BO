@@ -24,51 +24,7 @@ public class FinancementRepository :BaseAsyncRepository<T_FINANCEMENT>,IFinancem
 
         return result;
     }
-   /* public async Task<All_Ecran_Financements> GetAllEcranFinancements(int refCtr)
-    {
-        try
-        {
-            return  _dbContext.All_Ecran_Financements
-                .FromSqlRaw(buildProcedureName(refCtr))
-                .AsEnumerable()
-                .FirstOrDefault();
-        }
-        catch (Exception ex)
-        {
-            throw new Exception("Error retrieving AllEcranFinancements data", ex);
-        }
-    }*/
-  /*  public async Task<SumOfMnt> GetSumOfMnt(int refCtr)
-    {
-        try
-        {
-            return  _dbContext.SumOfMnts
-                .FromSqlRaw($"exec SumOfMnt @RefCtr={refCtr}")
-                .AsEnumerable()
-                .FirstOrDefault();
-        }
-        catch (Exception ex)
-        {
-            throw new Exception("Error retrieving SumOfMnt data", ex);
-        }
-    }
-    public async Task<decimal> GetFraisDivers(string procedureName, int paramPortRefCtr)
-    {
-        try
-        {
-            return (decimal) _dbContext.Database
-                .SqlQuery<decimal>($"exec {procedureName} @param_Port_Ref_CTR = {paramPortRefCtr}")
-                .AsEnumerable()
-                .FirstOrDefault();
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Error retrieving data from procedure '{procedureName}'", ex);
-        }
-    }*/
 
-
-    //add
     public async Task<T_FINANCEMENT> AddFinanceAsync(T_FINANCEMENT finance)
     {
         finance.ID_FIN = 0;
@@ -81,13 +37,13 @@ public class FinancementRepository :BaseAsyncRepository<T_FINANCEMENT>,IFinancem
    
         return finance;    
     }
-    //get
+    
     public async Task<T_FINANCEMENT> GetFinanceById(int id)
     {
         return await base.TableNoTracking.FirstOrDefaultAsync(p => p.ID_FIN == id);
 
     }
-    //validate
+    
     public async Task<T_FINANCEMENT> ValidateFinanceAsync(int id, T_FINANCEMENT finance)   
     {
         var tFinance = await _dbContext.Set<T_FINANCEMENT>().FirstOrDefaultAsync(e => e.ID_FIN == id);
@@ -102,8 +58,7 @@ public class FinancementRepository :BaseAsyncRepository<T_FINANCEMENT>,IFinancem
         await _dbContext.SaveChangesAsync();
         return tFinance;
     }
-    //reject
-
+    
     public async Task<T_FINANCEMENT> RejectFinanceAsync(int id, T_FINANCEMENT finance)
     {
         var tFinance = await _dbContext.Set<T_FINANCEMENT>().FirstOrDefaultAsync(e => e.ID_FIN == id);
@@ -118,7 +73,6 @@ public class FinancementRepository :BaseAsyncRepository<T_FINANCEMENT>,IFinancem
         await _dbContext.SaveChangesAsync();
         return tFinance;
     }
- //AllRecord
     public async Task<FinancementDto> AllRecord(int ref_ctr)
     {
 
@@ -211,7 +165,6 @@ public class FinancementRepository :BaseAsyncRepository<T_FINANCEMENT>,IFinancem
             t_fraisdiversV = 0;
         }
 
-        //var depassLimResults = _db.usp_Etat_Depass_Lim_ACH.FromSql($"exec usp_Etat_Depass_Lim_ACH @param_Port_Ref_CTR = {ref_ctr}").AsEnumerable();
         FinancementDto financementDto = new FinancementDto
         {
             Total_Dispo = disponible,
@@ -229,7 +182,7 @@ public class FinancementRepository :BaseAsyncRepository<T_FINANCEMENT>,IFinancem
 
             Interet_Retard_Annee_EnCours = GetSumFromDatabase(
                 $"SELECT ISNULL(SUM(mont_calc_ir), 0) FROM T_CALC_INT_IR WHERE REF_CTR_CALC_IR = {ref_ctr} AND MONTH(Date_Echeance_IR) < {currentMonth} AND YEAR(Date_Echeance_IR) = {currentYear}"),
-            Instruments_Paiement_Impayes = 0, // TODO: Add your logic here
+            Instruments_Paiement_Impayes = 0, 
             Retard_Paiement_Algorithme = sumMntFactDepAlgo,
             Litiges_Overts_Depassement = sumMntLitige,
             Total_Dispo2 = disponible - sumMntImpaye - sumMntLitige - sumMntFactDepAlgo,
