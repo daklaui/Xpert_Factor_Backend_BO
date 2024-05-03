@@ -2,7 +2,7 @@
 using CleanArc.Application.Common;
 using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Application.Models.Common;
-using CleanArc.Domain.Entities.DTO;
+using CleanArc.Domain.Entities;
 using Mediator;
 
 namespace CleanArc.Application.Features.Impaye.Queries;
@@ -21,14 +21,14 @@ internal class GetListOfImpayeQuey_Handler :IRequestHandler<GetListOfImpayeQuery
 
     public async ValueTask<OperationResult<PageInfo<GetListOfImpayeQuery_Response>>> Handle(GetListOfImpayeQuery request, CancellationToken cancellationToken)
     {
-        var impaye = await _unitOfWork.ImpayeRepository.getListOfImpaye(request.PaginationParams);
+        var impaye = await _unitOfWork.ImpayeRepository.GetListeDesImpayesAsync(request.PaginationParams);
         var result = new PageInfo<GetListOfImpayeQuery_Response>()
         {
             PageSize = impaye.PageSize,
             CurrentPage = impaye.CurrentPage,
             TotalPages = impaye.TotalPages,
             TotalCount = impaye.TotalCount,
-            Result = impaye.Select(_mapper.Map<T_IMPAYE_DTO, GetListOfImpayeQuery_Response>).ToList()
+            Result = impaye.Select(_mapper.Map<ListeDesImpayes, GetListOfImpayeQuery_Response>).ToList()
 
         };
         return OperationResult<PageInfo<GetListOfImpayeQuery_Response>>.SuccessResult(result);
