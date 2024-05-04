@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class T_DOC_GED
+public partial class T_DOC_GED : IEntity
 {
     public int id { get; set; }
 

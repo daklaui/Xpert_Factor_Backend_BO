@@ -1,10 +1,12 @@
 ﻿using System.Reflection;
 using CleanArc.Domain.Common;
+using CleanArc.Domain.DTO;
 using CleanArc.Domain.Entities;
 using CleanArc.Domain.Entities.User;
 using CleanArc.SharedKernel.Extensions;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace CleanArc.Infrastructure.Persistence;
 
@@ -244,7 +246,9 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
                 .HasMaxLength(300)
                 .IsUnicode(false);
         });
-
+        modelBuilder.Entity<GEDNumerisationDTO>().HasNoKey().ToView(null);
+        modelBuilder.Entity<GEDValidationDTO>().HasNoKey().ToView(null);
+    
         modelBuilder.Entity<TJ_ACH_EX>(entity =>
         {
             entity

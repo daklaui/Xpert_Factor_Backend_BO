@@ -8,6 +8,7 @@ public class UnitOfWork : IUnitOfWork
        
     public IUserRefreshTokenRepository UserRefreshTokenRepository { get; }
     public IOrderRepository OrderRepository { get; }
+    public IGEDRepository GEDRepository { get; }
 
     public IIndividualRepository IndividualRepository { get; }
 
@@ -17,6 +18,7 @@ public class UnitOfWork : IUnitOfWork
         UserRefreshTokenRepository = new UserRefreshTokenRepository(_db);
         OrderRepository= new OrderRepository(_db);
         IndividualRepository= new IndividuRepository(_db);
+        GEDRepository = new GEDRepository(_db);
     }
 
     public  Task CommitAsync()
