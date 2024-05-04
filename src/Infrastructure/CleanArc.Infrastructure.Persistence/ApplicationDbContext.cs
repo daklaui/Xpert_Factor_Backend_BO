@@ -2,6 +2,7 @@
 using CleanArc.Domain;
 using CleanArc.Domain.Common;
 using CleanArc.Domain.Entities;
+using CleanArc.Domain.Entities.DTO;
 using CleanArc.Domain.Entities.User;
 using CleanArc.Domain.StoredProcuderModel;
 using CleanArc.SharedKernel.Extensions;
@@ -165,15 +166,6 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
     public virtual DbSet<T_RIB_FACTOR> T_RIB_FACTORs { get; set; }
 
     public virtual DbSet<T_ROLE> T_ROLEs { get; set; }
-    public DbSet<SumOfMnt> SumOfMnts { get; set; }
-    public DbSet<usp_FRAIS_DIVERS> usp_FRAIS_DIVERS { get; set; }
-    public DbSet<usp_FRAIS_PAIEMENT_V> usp_FRAIS_PAIEMENT_V { get; set; }
-    public DbSet<usp_FRAIS_PAIEMENT_T> usp_FRAIS_PAIEMENT_T { get; set; }
-    public DbSet<usp_FRAIS_PAIEMENT_C> usp_FRAIS_PAIEMENT_C { get; set; }
-    public  DbSet<All_Ecran_Financements> All_Ecran_Financements { get; set; }
-    public  DbSet<UspEtatDepassLimACHResult> usp_Etat_Depass_Lim_ACH{ get; set; }
-
-
 
     public ApplicationDbContext(DbContextOptions options)
         : base(options)
@@ -2061,9 +2053,6 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
                 .HasMaxLength(20)
                 .IsUnicode(false);
         });
-        modelBuilder.Entity<SumOfMnt>().HasNoKey();
-        modelBuilder.Entity<UspEtatDepassLimACHResult>().HasNoKey();
-
 
         base.OnModelCreating(modelBuilder);
 

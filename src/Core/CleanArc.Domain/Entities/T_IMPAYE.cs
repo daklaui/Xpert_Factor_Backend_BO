@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class T_IMPAYE
-{
+public partial class T_IMPAYE :IEntity
+{  
     public int ID_IMP { get; set; }
 
     public int ID_ENC_IMP { get; set; }
+    
 
     public int? ID_DET_BORD_IMP { get; set; }
+    public decimal? MONT_IMP { get; set; }
 
     public DateTime? DATE_IMP { get; set; }
 
     public DateTime? DATE_SAISI_IMP { get; set; }
-
-    public decimal? MONT_IMP { get; set; }
 
     public DateTime? DATE_RESOL_IMP { get; set; }
 
