@@ -54,6 +54,7 @@ builder.Services.RegisterValidatorsAsServices();
 
 
 
+
 builder.Services.AddAutoMapper(typeof(User), typeof(JwtService), typeof(UserController));
 
 var app = builder.Build();

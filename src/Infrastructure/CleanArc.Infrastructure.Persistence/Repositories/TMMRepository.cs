@@ -40,6 +40,6 @@ public class TmmRepository :BaseAsyncRepository<TR_TMM>, ITMMRepository
 
     public  async Task UpdateTrTmmAsync(TR_TMM trTmm)
     {
-        await base.UpdateAsync1(trTmm);
+       //await base.UpdateAsync1(trTmm);
     }
 }

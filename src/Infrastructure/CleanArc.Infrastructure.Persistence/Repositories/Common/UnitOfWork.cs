@@ -12,6 +12,9 @@ public class UnitOfWork : IUnitOfWork
     public IIndividualRepository IndividualRepository { get; }
     
     public ITMMRepository TmmRepository { get; }
+  
+    
+    public IFinancementRepository FinancementRepository { get; }
 
     public IContactRepository contactRepository { get; }
 
@@ -33,6 +36,7 @@ public class UnitOfWork : IUnitOfWork
         OrderRepository= new OrderRepository(_db);
         IndividualRepository= new IndividuRepository(_db);
         TmmRepository = new TmmRepository(_db);
+        FinancementRepository = new FinancementRepository(_db);
         contactRepository = new ContactRepository(_db);
         ribRepository = new RibRepository(_db);
         adhAuthRepository = new AdhAuthRepository(_db);

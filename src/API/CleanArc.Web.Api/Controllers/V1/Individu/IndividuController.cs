@@ -3,12 +3,8 @@ using CleanArc.Application.Features.AgencyBank.Queries.GetAgnecyBankByIdQuerie;
 using CleanArc.Application.Features.Individu.Commands.AddIndividuCommand;
 using CleanArc.Application.Features.Individu.Queries.GetAllIndividus;
 using CleanArc.Application.Features.Individu.Queries.GetByIdQuery;
-using CleanArc.Application.Features.Order.Commands;
-using CleanArc.Application.Features.Order.Queries.GetUserOrders;
 using CleanArc.WebFramework.BaseController;
-using CleanArc.WebFramework.WebExtensions;
 using Mediator;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArc.Web.Api.Controllers.V1.Individu;

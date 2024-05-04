@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using CleanArc.Application.Common;
+using CleanArc.Domain.Entities;
 using CleanArc.SharedKernel.Extensions;
 using FluentValidation;
 using Mediator;
@@ -19,6 +20,7 @@ public static class ServiceCollectionExtension
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidateCommandBehavior<,>));
         //services.AddMediator(Assembly.GetExecutingAssembly());
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        services.AddAutoMapper(typeof(FinancementProfile).Assembly);
 
 
         return services;

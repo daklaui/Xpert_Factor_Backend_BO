@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using CleanArc.Domain.Common;
+﻿using CleanArc.Application.Profiles;
+using CleanArc.Domain.Entities;
 
-namespace CleanArc.Domain.Entities;
+namespace CleanArc.Application.Features.Financement.Queries;
 
-public partial class T_FINANCEMENT : IEntity
+public class GetAllFinancementQueryResult: ICreateMapper<T_FINANCEMENT>
 {
     public int ID_FIN { get; set; }
 

@@ -8,6 +8,8 @@ public class OperationResult<TResult>
     public string ErrorMessage { get; private set; }
     public bool IsException { get; set; }
     public bool IsNotFound { get; private set; }
+    public bool Data { get; set; }
+
     public static OperationResult<TResult> SuccessResult(TResult result)
     {
         return new OperationResult<TResult>{Result = result,IsSuccess = true};
