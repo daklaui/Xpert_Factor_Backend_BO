@@ -9,6 +9,10 @@
     <Compile Remove="Common\ValidationBase\**" />
     <EmbeddedResource Remove="Common\ValidationBase\**" />
     <None Remove="Common\ValidationBase\**" />
+    <EmbeddedResource Update="Features\AgencyBank\Queries\RechercheBanqueQuerie\SearchBankQuery.cs">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SearchBankQuery.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CleanArc.Domain\CleanArc.Domain.csproj" />

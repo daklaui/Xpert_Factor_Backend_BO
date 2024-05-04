@@ -10,12 +10,8 @@ public class UnitOfWork : IUnitOfWork
     public IOrderRepository OrderRepository { get; }
 
     public IIndividualRepository IndividualRepository { get; }
-
-    public IContactRepository contactRepository { get; }
-
-    public IRibRepository ribRepository { get; }
-
-    public IAdhAuthRepository adhAuthRepository { get; }
+    
+    public IAgencyBankRepository AgencyBankRepository { get; }
 
     public UnitOfWork(ApplicationDbContext db)
     {
@@ -23,9 +19,7 @@ public class UnitOfWork : IUnitOfWork
         UserRefreshTokenRepository = new UserRefreshTokenRepository(_db);
         OrderRepository= new OrderRepository(_db);
         IndividualRepository= new IndividuRepository(_db);
-        contactRepository = new ContactRepository(_db);
-        ribRepository = new RibRepository(_db);
-        adhAuthRepository = new AdhAuthRepository(_db);
+        AgencyBankRepository = new AgencyBankRepositoryRepository(_db);
     }
 
     public  Task CommitAsync()
