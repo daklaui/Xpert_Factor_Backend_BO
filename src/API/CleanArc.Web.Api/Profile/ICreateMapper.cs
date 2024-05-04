@@ -3,7 +3,6 @@ using CleanArc.Application.Features.Financement.Commands.RejectFinancementComman
 using CleanArc.Domain.Entities;
 using ValidateFinanceCommand = CleanArc.Application.Features.Financement.Commands.UpdateFinancementCommand.ValidateFinanceCommand;
 
-using CleanArc.Application.Features.TPostalCodes.Commands;
 using CleanArc.Domain.Entities;
 
 namespace CleanArc.Web.Api.Profile;
@@ -16,7 +15,6 @@ public interface ICreateMapper<TSource>
         profile.CreateMap<ValidateFinanceCommand, T_FINANCEMENT>();
         profile.CreateMap<RejectFinanceCommand, T_FINANCEMENT>();
 
-        profile.CreateMap<UpdateTPostalCodesCommand, TPostalCodes>();
     }
     
     

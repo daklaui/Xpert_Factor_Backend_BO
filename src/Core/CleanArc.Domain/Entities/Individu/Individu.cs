@@ -37,7 +37,7 @@ public class TIndividu : BaseEntity, IEntity
         public string AdrInd { get; set; }
         public string CpInd { get; set; }
         public string RefAchInd { get; set; }
-        public virtual ICollection<TRib> Ribs { get; set; }
+        public virtual ICollection<TR_RIB> Ribs { get; set; }
         public virtual ICollection<TContact> Contacts { get; set; }
 
 }

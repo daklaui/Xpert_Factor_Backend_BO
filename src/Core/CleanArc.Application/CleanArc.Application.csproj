@@ -28,5 +28,8 @@
     <Folder Include="Features\Credit\Queries\" />
     <Folder Include="Features\Debit\Queries\" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\Encaissement\Queries" />
+  </ItemGroup>
 
 </Project>

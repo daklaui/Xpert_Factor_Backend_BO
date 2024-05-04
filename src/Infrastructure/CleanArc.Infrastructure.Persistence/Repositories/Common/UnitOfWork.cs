@@ -20,8 +20,9 @@ public class UnitOfWork : IUnitOfWork
     public IDebitRepository DebitRepository { get; }
     public IExtraitRepository ExtraitRepository { get; }
     public IAgencyBankRepository AgencyBankRepository { get; }
-    public ITPostalCodesRepository TPostalCodesRepository { get; }
-    public ITJobsRepository TJobsRepository { get; } // Nouvelle propriété
+    //public ITPostalCodesRepository TPostalCodesRepository { get; }
+    //public ITJobsRepository TJobsRepository { get; } // Nouvelle propriété
+    public IEncaissement EncaissementRepository { get; }
 
     public UnitOfWork(ApplicationDbContext db)
     {
@@ -41,8 +42,9 @@ public class UnitOfWork : IUnitOfWork
         AgencyBankRepository = new AgencyBankRepositoryRepository(_db);
         OrderRepository = new OrderRepository(_db);
         IndividualRepository = new IndividuRepository(_db);
-        TPostalCodesRepository = new TPostalCodesRepository(_db);
-        TJobsRepository = new TJobsRepository(_db); // Initialisation de TJobsRepository
+        //TPostalCodesRepository = new TPostalCodesRepository(_db);
+        //TJobsRepository = new TJobsRepository(_db); // Initialisation de TJobsRepository
+        EncaissementRepository = new EncaissementReposiotry(_db);
     }
 
     public Task CommitAsync()

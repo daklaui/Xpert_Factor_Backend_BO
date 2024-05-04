@@ -8,6 +8,7 @@ using CleanArc.Domain.StoredProcuderModel;
 using CleanArc.SharedKernel.Extensions;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using T_ENCAISSEMENT = CleanArc.Domain.Entities.T_ENCAISSEMENT;
 
 namespace CleanArc.Infrastructure.Persistence;
 

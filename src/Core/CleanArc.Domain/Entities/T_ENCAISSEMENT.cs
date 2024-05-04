@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class T_ENCAISSEMENT
+public partial class T_ENCAISSEMENT : IEntity
 {
     public short ID_ENC { get; set; }
 

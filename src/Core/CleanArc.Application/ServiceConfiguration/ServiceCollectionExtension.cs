@@ -12,7 +12,8 @@ public static class ServiceCollectionExtension
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-        services.AddMediator(options =>
+        services.AddMediator
+        (options =>
         {
             options.ServiceLifetime = ServiceLifetime.Scoped;
             options.Namespace = "CleanArc.Application.Mediator";
@@ -22,8 +23,6 @@ public static class ServiceCollectionExtension
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddAutoMapper(typeof(FinancementProfile).Assembly);
 
-        services.AddAutoMapper(typeof(TPostalCodesProfile).Assembly);
-        services.AddAutoMapper(typeof(TJobsProfile).Assembly);
         
 
         return services;
