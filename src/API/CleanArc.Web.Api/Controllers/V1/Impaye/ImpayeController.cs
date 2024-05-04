@@ -1,6 +1,8 @@
 ﻿using CleanArc.Application.Common;
 using CleanArc.Application.Features.Impaye.Commands.AddImpayeCommand;
 using CleanArc.Application.Features.Impaye.Queries;
+using CleanArc.Application.Features.Impaye.Queries.GetListehistorical;
+using CleanArc.Application.Features.Impaye.Queries.GetListeResolutionDesImpayes;
 using CleanArc.WebFramework.BaseController;
 using Mediator;
 using Microsoft.AspNetCore.Mvc;
@@ -36,6 +38,21 @@ public class ImpayeController:BaseController
 
         return base.OperationResult(query);
     }
+    [HttpGet("GetListeHistorical")]
+    public async Task<IActionResult> GetListeHistorical([FromQuery] PaginationParams paginationParams)
+    {
+        var query = await _sender.Send(new GetListeHistoricalQuery(paginationParams));
+
+        return base.OperationResult(query);
+    }
+    [HttpGet("GetListeResolutionDesImpayesQuery")]
+    public async Task<IActionResult> GetListeResolutionDesImpayesQuery([FromQuery] PaginationParams paginationParams)
+    {
+        var query = await _sender.Send(new GetListeResolutionDesImpayesQuery(paginationParams));
+
+        return base.OperationResult(query);
+    }
+
     
  
 }

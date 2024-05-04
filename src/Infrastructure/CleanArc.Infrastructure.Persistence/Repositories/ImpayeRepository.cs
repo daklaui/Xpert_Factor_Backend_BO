@@ -22,14 +22,29 @@ internal class ImpayeRepository :BaseAsyncRepository<T_IMPAYE>,IimpayeRepository
         await base.AddAsync(impaye);
 
     }
-    public async Task<PagedList<T_IMPAYE_DTO>> GetListeDesImpayesAsync( PaginationParams paginationParams)
+ 
+    public  List<T_IMPAYE_DTO> GetListeResolutionDesImpayes()
     {
-        var liste = await _dbContext.ListeDesImpayes.FromSqlRaw("exec ListeDesImpayes").ToListAsync();
-        
-        var result = await PagedList<T_IMPAYE_DTO>.CreateAsync(liste, paginationParams.PageNumber, paginationParams.PageSize);
-
-        return result;
+        return _dbContext.ListeDesImpayes.FromSql($"exec ListeDesImpayes").ToList();
+       
+      
     }
+
+    public  List<T_IMPAYE_DTO> GetListehistorical()
+    {
+        return  _dbContext.ListeDesImpayes
+            .FromSql($"exec ListeDesImpayes")
+            .AsEnumerable()
+            .Where(imp => imp.IS_RESOLU != null && imp.IS_RESOLU == true )
+            .ToList();
+        
+    }
+    
+   public List<T_IMPAYE_DTO> Listedesimpaye()
+   {
+    var ListImpaye = _dbContext.ListeDesImpayes.FromSql($"exec ListeDesImpayes").AsEnumerable().Where(imp => imp.IS_RESOLU == null).ToList();
+    return ListImpaye;
+   }
 
 
 }

@@ -22,15 +22,14 @@ internal class GetListOfImpayeQuey_Handler :IRequestHandler<GetListOfImpayeQuery
 
     public async ValueTask<OperationResult<PageInfo<GetListOfImpayeQuery_Response>>> Handle(GetListOfImpayeQuery request, CancellationToken cancellationToken)
     {
-        var impaye = await _unitOfWork.ImpayeRepository.GetListeDesImpayesAsync(request.PaginationParams);
+        var impayeDtoList = _unitOfWork.ImpayeRepository.Listedesimpaye();
         var result = new PageInfo<GetListOfImpayeQuery_Response>()
         {
-            PageSize = impaye.PageSize,
-            CurrentPage = impaye.CurrentPage,
-            TotalPages = impaye.TotalPages,
-            TotalCount = impaye.TotalCount,
-            Result = impaye.Select(_mapper.Map<T_IMPAYE_DTO, GetListOfImpayeQuery_Response>).ToList()
-
+            PageSize = impayeDtoList.Count,
+            CurrentPage = 1, 
+            TotalPages = 1, 
+            TotalCount = impayeDtoList.Count,
+            Result = impayeDtoList.Select(_mapper.Map<T_IMPAYE_DTO, GetListOfImpayeQuery_Response>).ToList()
         };
         return OperationResult<PageInfo<GetListOfImpayeQuery_Response>>.SuccessResult(result);
         

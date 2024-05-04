@@ -1,10 +1,9 @@
 ﻿using CleanArc.Application.Profiles;
-using CleanArc.Domain.Entities;
 using CleanArc.Domain.Entities.DTO;
 
-namespace CleanArc.Application.Features.Impaye.Queries;
+namespace CleanArc.Application.Features.Impaye.Queries.GetListeResolutionDesImpayes;
 
-public record GetListOfImpayeQuery_Response :ICreateMapper<ListeDesImpayes>
+public record GetListeResolutionDesImpayesQuery_Response:ICreateMapper<T_IMPAYE_DTO>
 {
     public int ID_IMP { get; set; }
     public int ID_ENC_IMP { get; set; }

@@ -7,6 +7,7 @@ namespace CleanArc.Application.Contracts.Persistence;
 public interface IimpayeRepository
 {
     Task AddImpayeAsync(T_IMPAYE impaye);
-   // Task<List<ListeDesImpayes>> GetListeDesImpayesAsync(PaginationParams paginationParams);
-   Task<PagedList<T_IMPAYE_DTO>> GetListeDesImpayesAsync(PaginationParams paginationParams);
+     List<T_IMPAYE_DTO> Listedesimpaye();
+    List<T_IMPAYE_DTO> GetListehistorical();
+   List<T_IMPAYE_DTO> GetListeResolutionDesImpayes();
 }
