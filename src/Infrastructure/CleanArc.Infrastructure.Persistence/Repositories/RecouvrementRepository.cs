@@ -21,6 +21,11 @@ internal class RecouvrementRepository: BaseAsyncRepository<TR_LIST_VAL>, IRecouv
     public async Task<bool> UpdateDocumentDetBordAsync(int id , TR_LIST_VAL updatedRecouvrement)
     {
         var existingRecouvrement = await GetRecouvrementById(id);
+        
+        if (existingRecouvrement == null)
+        {
+            throw new InvalidOperationException($"Recouvrement with primary key ({id}) not found.");
+        }
         existingRecouvrement.ABR_LIST_VAL = updatedRecouvrement.ABR_LIST_VAL;
         existingRecouvrement.TYP_LIST_VAL = updatedRecouvrement.TYP_LIST_VAL;
         existingRecouvrement.ORD_LIST_VAL = updatedRecouvrement.ORD_LIST_VAL;
@@ -38,7 +43,7 @@ internal class RecouvrementRepository: BaseAsyncRepository<TR_LIST_VAL>, IRecouv
     }
     public async Task<PagedList<TR_LIST_VAL>> GetAllRecAsync(PaginationParams paginationParams)
     {
-        var query = base.TableNoTracking.AsQueryable().Where(p => p.TYP_LIST_VAL == "COMM_RECOV"); 
+        var query = base.TableNoTracking.AsQueryable().Where(p => p.TYP_LIST_VAL == "COMM_RECOUV"); 
         var result = await PagedList<TR_LIST_VAL>.CreateAsync(query, paginationParams.PageNumber, paginationParams.PageSize);
     
         return result;
