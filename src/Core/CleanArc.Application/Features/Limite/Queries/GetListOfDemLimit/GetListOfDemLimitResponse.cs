@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using CleanArc.Domain.Common;
+﻿using CleanArc.Application.Profiles;
+using CleanArc.Domain.Entities;
 
-namespace CleanArc.Domain.Entities;
+namespace CleanArc.Application.Features.Limite.Queries.GetListOfDemLimit;
 
-public partial class T_DEM_LIMITE : IEntity
+public class GetListOfDemLimitQueryResult: ICreateMapper<T_DEM_LIMITE>
 {
     public int REF_DEM_LIM { get; set; }
 
@@ -43,6 +42,4 @@ public partial class T_DEM_LIMITE : IEntity
     public bool? ACTIF_DEM_LIMI { get; set; }
 
     public int? REF_ACH_LIM { get; set; }
-    //public string COMMENT { get; set; }
-
 }

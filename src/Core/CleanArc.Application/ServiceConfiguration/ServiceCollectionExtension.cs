@@ -22,6 +22,7 @@ public static class ServiceCollectionExtension
         //services.AddMediator(Assembly.GetExecutingAssembly());
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddAutoMapper(typeof(FinancementProfile).Assembly);
+        services.AddAutoMapper(typeof(LimiteProfile).Assembly);
 
         
 

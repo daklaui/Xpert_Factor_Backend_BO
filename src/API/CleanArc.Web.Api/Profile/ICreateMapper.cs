@@ -5,6 +5,9 @@ using ValidateFinanceCommand = CleanArc.Application.Features.Financement.Command
 
 using CleanArc.Domain.Entities;
 
+using CleanArc.Application.Features.Limite.Commands.ValidateLimiteCommand;
+using CleanArc.Domain.Entities;
+
 namespace CleanArc.Web.Api.Profile;
 
 public interface ICreateMapper<TSource>
@@ -14,6 +17,8 @@ public interface ICreateMapper<TSource>
         profile.CreateMap(typeof(TSource), GetType()).ReverseMap();
         profile.CreateMap<ValidateFinanceCommand, T_FINANCEMENT>();
         profile.CreateMap<RejectFinanceCommand, T_FINANCEMENT>();
+
+        profile.CreateMap<ValidateLimiteCommand, T_DEM_LIMITE>();
 
     }
     

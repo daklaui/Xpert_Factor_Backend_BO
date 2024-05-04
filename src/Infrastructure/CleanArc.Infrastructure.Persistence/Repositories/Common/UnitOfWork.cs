@@ -24,6 +24,8 @@ public class UnitOfWork : IUnitOfWork
     //public ITJobsRepository TJobsRepository { get; } // Nouvelle propriété
     public IEncaissement EncaissementRepository { get; }
 
+    
+    public ILimiteRepository LimiteRepository { get; }
     public UnitOfWork(ApplicationDbContext db)
     {
         _db = db;
@@ -45,6 +47,9 @@ public class UnitOfWork : IUnitOfWork
         //TPostalCodesRepository = new TPostalCodesRepository(_db);
         //TJobsRepository = new TJobsRepository(_db); // Initialisation de TJobsRepository
         EncaissementRepository = new EncaissementReposiotry(_db);
+        OrderRepository= new OrderRepository(_db);
+        IndividualRepository= new IndividuRepository(_db);
+        LimiteRepository = new LimiteRepository(_db);
     }
 
     public Task CommitAsync()

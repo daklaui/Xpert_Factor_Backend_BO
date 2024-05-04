@@ -22,6 +22,7 @@ public interface IUnitOfWork
 
     
     public  IEncaissement EncaissementRepository { get; }
+    public ILimiteRepository LimiteRepository { get; }
     Task CommitAsync();
     ValueTask RollBackAsync();
 }
