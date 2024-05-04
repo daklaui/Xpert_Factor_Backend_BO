@@ -7,19 +7,19 @@ namespace CleanArc.Application.Features.Financement.Commands.UpdateFinancementCo
 
 public class ValidateFinanceCommandHandler : IRequestHandler<ValidateFinanceCommand,OperationResult<Unit>>
 {
-    private readonly IFinancementRepository _financementRepository;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
-    public ValidateFinanceCommandHandler(IFinancementRepository financementRepository, IMapper mapper)
+   
+    public ValidateFinanceCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
-        _financementRepository = financementRepository ?? throw new ArgumentNullException(nameof( financementRepository));
+        _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 
-
     public async ValueTask<OperationResult<Unit>> Handle(ValidateFinanceCommand request, CancellationToken cancellationToken)
     {
-        var finance = await _financementRepository.GetFinanceById(request.ID_FIN);
+        var finance = await _unitOfWork.FundingRepository.GetFinanceById(request.ID_FIN);
 
         if (finance == null)
         {
@@ -32,7 +32,7 @@ public class ValidateFinanceCommandHandler : IRequestHandler<ValidateFinanceComm
             _mapper.Map(request, finance);
             try
             {
-                await _financementRepository.ValidateFinanceAsync(finance.ID_FIN, finance);
+                await  _unitOfWork.FundingRepository.ValidateFinanceAsync(finance.ID_FIN, finance);
                 return OperationResult<Unit>.SuccessResult(Unit.Value);
             }
             catch (Exception ex)

@@ -166,6 +166,17 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
     public virtual DbSet<T_RIB_FACTOR> T_RIB_FACTORs { get; set; }
 
     public virtual DbSet<T_ROLE> T_ROLEs { get; set; }
+    public DbSet<SumOfMnt> SumOfMnts { get; set; }
+    public DbSet<usp_FRAIS_DIVERS> usp_FRAIS_DIVERS { get; set; }
+    public DbSet<usp_FRAIS_PAIEMENT_V> usp_FRAIS_PAIEMENT_V { get; set; }
+    public DbSet<usp_FRAIS_PAIEMENT_T> usp_FRAIS_PAIEMENT_T { get; set; }
+    public DbSet<usp_FRAIS_PAIEMENT_C> usp_FRAIS_PAIEMENT_C { get; set; }
+
+    public  DbSet<All_Ecran_Financements> All_Ecran_Financements { get; set; }
+    
+    public  DbSet<UspEtatDepassLimACHResult> usp_Etat_Depass_Lim_ACH{ get; set; }
+    public DbSet<T_IMPAYE_DTO> ListeDesImpayes { get; set; }
+
 
     public ApplicationDbContext(DbContextOptions options)
         : base(options)

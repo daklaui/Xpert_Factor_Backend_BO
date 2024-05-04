@@ -7,19 +7,19 @@ namespace CleanArc.Application.Features.Financement.Commands.RejectFinancementCo
 
 public class RejectFinanceCommandHandler :IRequestHandler<RejectFinanceCommand,OperationResult<Unit>>
 {
-    private readonly IFinancementRepository _financementRepository;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
-    public RejectFinanceCommandHandler(IFinancementRepository financementRepository, IMapper mapper)
+    public RejectFinanceCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
-        _financementRepository = financementRepository;
+        _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
 
 
     public async ValueTask<OperationResult<Unit>> Handle(RejectFinanceCommand request, CancellationToken cancellationToken)
     {
-        var finance = await _financementRepository.GetFinanceById(request.ID_FIN);
+        var finance = await _unitOfWork.FundingRepository.GetFinanceById(request.ID_FIN);
 
         if (finance == null)
         {
@@ -32,7 +32,7 @@ public class RejectFinanceCommandHandler :IRequestHandler<RejectFinanceCommand,O
             _mapper.Map(request, finance);
             try
             {
-                await _financementRepository.RejectFinanceAsync(finance.ID_FIN, finance);
+                await _unitOfWork.FundingRepository.RejectFinanceAsync(finance.ID_FIN, finance);
                 return OperationResult<Unit>.SuccessResult(Unit.Value);
             }
             catch (Exception ex)

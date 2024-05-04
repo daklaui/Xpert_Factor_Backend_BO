@@ -7,7 +7,7 @@ public interface IUnitOfWork
     public IIndividualRepository IndividualRepository { get; }
     public ITMMRepository TmmRepository { get; }
     
-    public IFinancementRepository FinancementRepository { get; }
+    public IFundingRepository FundingRepository { get; }
 
     public IContactRepository contactRepository { get; }
     public IRibRepository ribRepository { get; }
@@ -16,6 +16,7 @@ public interface IUnitOfWork
     public ICreditRepository CreditRepository { get; }
     public IDebitRepository DebitRepository { get; }
     public IExtraitRepository ExtraitRepository { get; }
+    public IAgencyBankRepository AgencyBankRepository { get; }
     Task CommitAsync();
     ValueTask RollBackAsync();
 }

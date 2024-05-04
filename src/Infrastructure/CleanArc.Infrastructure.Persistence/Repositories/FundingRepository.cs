@@ -6,11 +6,11 @@ using CleanArc.Infrastructure.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
 namespace CleanArc.Infrastructure.Persistence.Repositories;
 
-public class FinancementRepository :BaseAsyncRepository<T_FINANCEMENT>,IFinancementRepository
+public class FundingRepository :BaseAsyncRepository<T_FINANCEMENT>,IFundingRepository
 {
     private readonly ApplicationDbContext _dbContext;
 
-    public FinancementRepository(ApplicationDbContext dbContext) : base(dbContext)
+    public FundingRepository(ApplicationDbContext dbContext) : base(dbContext)
     {
         _dbContext = dbContext;
     }

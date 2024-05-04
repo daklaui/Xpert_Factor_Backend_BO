@@ -4,7 +4,7 @@ using CleanArc.Infrastructure.Identity.Identity.Dtos;
 
 namespace CleanArc.Application.Contracts.Persistence;
 
-public interface IFinancementRepository
+public interface IFundingRepository
 {
     Task<PagedList<T_FINANCEMENT>> GetAllFinancementAsync(PaginationParams paginationParams);
     Task<T_FINANCEMENT> AddFinanceAsync(T_FINANCEMENT finance);

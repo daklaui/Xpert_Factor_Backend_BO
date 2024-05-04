@@ -16,7 +16,7 @@ public class AddFinancementCommand_Handler:IRequestHandler<AddFinancementCommand
 
     public async ValueTask<OperationResult<bool>> Handle(AddFinancementCommand request, CancellationToken cancellationToken)
     {
-        await _unitOfWork.FinancementRepository.AddFinanceAsync(request.Financement);
+        await _unitOfWork.FundingRepository.AddFinanceAsync(request.Financement);
 
         await _unitOfWork.CommitAsync();
 

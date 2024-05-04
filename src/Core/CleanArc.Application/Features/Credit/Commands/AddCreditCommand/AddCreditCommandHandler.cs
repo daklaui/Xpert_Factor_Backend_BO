@@ -8,12 +8,10 @@ namespace CleanArc.Application.Features.Credit.Commands.AddCreditCommand;
 public class AddCreditCommandHandler: IRequestHandler<AddCreditCommand,OperationResult<bool>>
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IAppUserManager _userManager;
     
-    public AddCreditCommandHandler(IUnitOfWork unitOfWork, IAppUserManager userManager)
+    public AddCreditCommandHandler(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
-        _userManager = userManager;
     }
     
     public async ValueTask<OperationResult<bool>> Handle(AddCreditCommand request, CancellationToken cancellationToken)

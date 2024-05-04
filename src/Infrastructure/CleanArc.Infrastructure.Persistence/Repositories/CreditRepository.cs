@@ -7,7 +7,7 @@ using CleanArc.Infrastructure.Persistence.Repositories.Common;
 namespace CleanArc.Infrastructure.Persistence.Repositories
 
 {
-    internal class CreditRepository : BaseAsyncRepository<T_MVT_CREDIT>, ICreditRepository
+    public class CreditRepository : BaseAsyncRepository<T_MVT_CREDIT>, ICreditRepository
     {
         private readonly ApplicationDbContext _dbContext;
 

@@ -20,7 +20,7 @@ namespace CleanArc.Application.Features.Financement.Queries
 
         public async ValueTask<OperationResult<PageInfo<GetAllFinancementQueryResult>>> Handle(GetAllFinancementQuery request, CancellationToken cancellationToken)
         {
-            var financement = await _unitOfWork.FinancementRepository.GetAllFinancementAsync(request.paginationParams);
+            var financement = await _unitOfWork.FundingRepository.GetAllFinancementAsync(request.paginationParams);
 
             var result = new PageInfo<GetAllFinancementQueryResult>
             {
