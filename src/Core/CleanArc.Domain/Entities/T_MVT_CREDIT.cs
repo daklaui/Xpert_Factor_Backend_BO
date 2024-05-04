@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class T_MVT_CREDIT
+public partial class T_MVT_CREDIT :IEntity
 {
     public int ID_CREDIT { get; set; }
 

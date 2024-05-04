@@ -16,6 +16,9 @@ public class UnitOfWork : IUnitOfWork
     public IRibRepository ribRepository { get; }
 
     public IAdhAuthRepository adhAuthRepository { get; }
+    
+    public ICreditRepository CreditRepository { get; }
+    public IDebitRepository DebitRepository { get; }
 
     public UnitOfWork(ApplicationDbContext db)
     {
@@ -26,6 +29,8 @@ public class UnitOfWork : IUnitOfWork
         contactRepository = new ContactRepository(_db);
         ribRepository = new RibRepository(_db);
         adhAuthRepository = new AdhAuthRepository(_db);
+        CreditRepository = new CreditRepository(_db);
+        DebitRepository = new DebitRepository(_db);
     }
 
     public  Task CommitAsync()

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class T_MVT_DEBIT
+public partial class T_MVT_DEBIT :IEntity
 {
     public int ID_DEBIT { get; set; }
 
