@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Query;
 
 namespace CleanArc.Infrastructure.Persistence.Repositories.Common;
 
-internal abstract class BaseAsyncRepository<TEntity> where TEntity:class,IEntity
+public abstract class BaseAsyncRepository<TEntity> where TEntity:class,IEntity
 {
     public readonly ApplicationDbContext DbContext;
     protected DbSet<TEntity> Entities { get; }

@@ -5,7 +5,12 @@ public interface IUnitOfWork
     public IUserRefreshTokenRepository UserRefreshTokenRepository { get; }
     public IOrderRepository OrderRepository { get; }
     public IIndividualRepository IndividualRepository { get; }
-    public IAgencyBankRepository AgencyBankRepository { get; }
+    public IContactRepository contactRepository { get; }
+    public IRibRepository ribRepository { get; }
+    public IAdhAuthRepository adhAuthRepository { get; }
+    public ICreditRepository CreditRepository { get; }
+    public IDebitRepository DebitRepository { get; }
+    public IExtraitRepository ExtraitRepository { get; }
     Task CommitAsync();
     ValueTask RollBackAsync();
 }

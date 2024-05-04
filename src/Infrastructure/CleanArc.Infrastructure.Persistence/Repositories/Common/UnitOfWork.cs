@@ -10,16 +10,29 @@ public class UnitOfWork : IUnitOfWork
     public IOrderRepository OrderRepository { get; }
 
     public IIndividualRepository IndividualRepository { get; }
-    
-    public IAgencyBankRepository AgencyBankRepository { get; }
 
-    public UnitOfWork(ApplicationDbContext db)
+    public IContactRepository contactRepository { get; }
+
+    public IRibRepository ribRepository { get; }
+
+    public IAdhAuthRepository adhAuthRepository { get; }
+    public ICreditRepository CreditRepository { get; }
+    public IDebitRepository DebitRepository { get; }
+    public IExtraitRepository ExtraitRepository { get; }
+
+
+    public UnitOfWork(ApplicationDbContext db, ICreditRepository creditRepository, IDebitRepository debitRepository, IExtraitRepository extraitRepository)
     {
         _db = db;
+        CreditRepository = new CreditRepository(_db);
+        DebitRepository = new DebitRepository(_db);
+        ExtraitRepository = new ExtraitRepository(_db);
         UserRefreshTokenRepository = new UserRefreshTokenRepository(_db);
         OrderRepository= new OrderRepository(_db);
         IndividualRepository= new IndividuRepository(_db);
-        AgencyBankRepository = new AgencyBankRepositoryRepository(_db);
+        contactRepository = new ContactRepository(_db);
+        ribRepository = new RibRepository(_db);
+        adhAuthRepository = new AdhAuthRepository(_db);
     }
 
     public  Task CommitAsync()

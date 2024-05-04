@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class T_EXTRAIT
+public partial class T_EXTRAIT : IEntity
 {
     public long ID_EXTRAIT { get; set; }
 
