@@ -47,6 +47,8 @@ public static class ServiceCollectionExtension
         services.AddScoped<IRoleStore<Role>, RoleStore>();
         services.AddScoped<IUserStore<User>, AppUserStore>();
         services.AddScoped<IRoleManagerService, RoleManagerService>();
+        
+
 
 
 

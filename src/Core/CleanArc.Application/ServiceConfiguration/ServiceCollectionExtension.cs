@@ -22,9 +22,13 @@ public static class ServiceCollectionExtension
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddAutoMapper(typeof(FinancementProfile).Assembly);
 
+        services.AddAutoMapper(typeof(TPostalCodesProfile).Assembly);
+        services.AddAutoMapper(typeof(TJobsProfile).Assembly);
+        
 
         return services;
     }
+
 
    
 }

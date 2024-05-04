@@ -6,6 +6,7 @@ public class UnitOfWork : IUnitOfWork
 {
     private readonly ApplicationDbContext _db;
     
+
     public IUserRefreshTokenRepository UserRefreshTokenRepository { get; }
     public IOrderRepository OrderRepository { get; }
     public IIndividualRepository IndividualRepository { get; }
@@ -19,6 +20,8 @@ public class UnitOfWork : IUnitOfWork
     public IDebitRepository DebitRepository { get; }
     public IExtraitRepository ExtraitRepository { get; }
     public IAgencyBankRepository AgencyBankRepository { get; }
+    public ITPostalCodesRepository TPostalCodesRepository { get; }
+    public ITJobsRepository TJobsRepository { get; } // Nouvelle propriété
 
     public UnitOfWork(ApplicationDbContext db)
     {
@@ -36,9 +39,13 @@ public class UnitOfWork : IUnitOfWork
         DebitRepository =new DebitRepository(_db);
         ExtraitRepository = new ExtraitRepository(_db);
         AgencyBankRepository = new AgencyBankRepositoryRepository(_db);
+        OrderRepository = new OrderRepository(_db);
+        IndividualRepository = new IndividuRepository(_db);
+        TPostalCodesRepository = new TPostalCodesRepository(_db);
+        TJobsRepository = new TJobsRepository(_db); // Initialisation de TJobsRepository
     }
 
-    public  Task CommitAsync()
+    public Task CommitAsync()
     {
         return _db.SaveChangesAsync();
     }

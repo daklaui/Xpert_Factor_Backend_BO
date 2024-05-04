@@ -17,6 +17,9 @@ public interface IUnitOfWork
     public IDebitRepository DebitRepository { get; }
     public IExtraitRepository ExtraitRepository { get; }
     public IAgencyBankRepository AgencyBankRepository { get; }
+    public ITPostalCodesRepository TPostalCodesRepository { get; }
+    public ITJobsRepository TJobsRepository { get; } // Nouvelle propriété
+
     Task CommitAsync();
     ValueTask RollBackAsync();
 }
