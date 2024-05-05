@@ -3,7 +3,7 @@ using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities
 {
-    public class TJobs : IEntity
+    public class TR_ACTPROF_BCT : IEntity
     {
         public int Id { get; set; }
         public string Code_Section { get; set; }

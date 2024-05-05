@@ -22,14 +22,14 @@ namespace CleanArc.Application.Features.TJobs.Queries.GetTJobsById
 
         public async ValueTask<OperationResult<GetTJobsByIdQueryResult>> Handle(GetTJobsByIdQuery request, CancellationToken cancellationToken)
         {
-            var tJob = await _unitOfWork.TJobsRepository.GetTJobsById(request.TJobsId);
+            var actprofBcts = await _unitOfWork.TJobsRepository.GetTJobsById(request.TJobsId);
 
-            if (tJob == null)
+            if (actprofBcts == null)
             {
                 return OperationResult<GetTJobsByIdQueryResult>.FailureResult($"TJob with id {request.TJobsId} not found.");
             }
 
-            var result = _mapper.Map<Domain.Entities.TJobs, GetTJobsByIdQueryResult>(tJob);
+            var result = _mapper.Map<Domain.Entities.TR_ACTPROF_BCT, GetTJobsByIdQueryResult>(actprofBcts);
 
             return OperationResult<GetTJobsByIdQueryResult>.SuccessResult(result);
         }

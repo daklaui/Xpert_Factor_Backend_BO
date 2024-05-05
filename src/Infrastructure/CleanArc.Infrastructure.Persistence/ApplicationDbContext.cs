@@ -10,7 +10,7 @@ namespace CleanArc.Infrastructure.Persistence;
 
 public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
 {
-    public DbSet<TRListVals> TRListVals { get; set; }
+    public DbSet<TR_LIST_VAL> TRListVals { get; set; }
     public ApplicationDbContext(DbContextOptions options)
         : base(options)
     {

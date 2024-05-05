@@ -8,7 +8,7 @@ namespace CleanArc.Application.ServiceConfiguration
     {
         public TJobsProfile()
         {
-            CreateMap<UpdateTJobsCommand, TJobs>();
+            CreateMap<UpdateTJobsCommand, TR_ACTPROF_BCT>();
         }
     }
 }

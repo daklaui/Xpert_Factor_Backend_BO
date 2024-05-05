@@ -6,9 +6,9 @@ namespace CleanArc.Application.Contracts.Persistence
 {
     public interface ITListValRepository 
     {
-        Task<TRListVals> AddTListValAsync(TRListVals tListVal);
-        Task<PagedList<TRListVals>> GetAllTListValsAsync(PaginationParams paginationParams);
-        Task<TRListVals> GetTListValById(int id);
-        Task<TRListVals> UpdateTListValAsync(int id, TRListVals updatedTListVal);
+        Task<TR_LIST_VAL> AddTListValAsync(TR_LIST_VAL listVal);
+        Task<PagedList<TR_LIST_VAL>> GetAllTListValsAsync(PaginationParams paginationParams);
+        Task<TR_LIST_VAL> GetTListValById(int id);
+        Task<TR_LIST_VAL> UpdateTListValAsync(int id, TR_LIST_VAL updatedTListVal);
     }
 }

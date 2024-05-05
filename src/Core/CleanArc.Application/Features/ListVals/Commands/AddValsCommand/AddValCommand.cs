@@ -3,5 +3,5 @@ using CleanArc.Domain.Entities;
 using Mediator;
 namespace CleanArc.Application.Features.TListVal.Commands;
 
-public record AddTListValCommand(Domain.Entities.TRListVals ListVals) : IRequest<OperationResult<bool>>;
+public record AddTListValCommand(Domain.Entities.TR_LIST_VAL listVal) : IRequest<OperationResult<bool>>;
 

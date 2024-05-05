@@ -2,7 +2,7 @@
 
 namespace CleanArc.Domain.Entities;
 
-public class TRListVals : BaseEntity
+public class TR_LIST_VAL : BaseEntity
 {
     public int Id { get; set; }
     public string AbrListVal { get; set; }

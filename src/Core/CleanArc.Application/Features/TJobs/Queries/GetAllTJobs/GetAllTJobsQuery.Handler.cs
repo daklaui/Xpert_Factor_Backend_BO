@@ -23,20 +23,20 @@ namespace CleanArc.Application.Features.TJobs.Queries.GetAllTJobs
 
         public async ValueTask<OperationResult<PageInfo<GetAllTJobsQueryResult>>> Handle(GetAllTJobsQuery request, CancellationToken cancellationToken)
         {
-            var tJobs = await _unitOfWork.TJobsRepository.GetAllTJobsAsync(request.PaginationParams);
+            var actprofBcts = await _unitOfWork.TJobsRepository.GetAllTJobsAsync(request.PaginationParams);
 
-            if (tJobs == null)
+            if (actprofBcts == null)
             {
                 return OperationResult<PageInfo<GetAllTJobsQueryResult>>.FailureResult("Failed to retrieve TJobs");
             }
 
             var result = new PageInfo<GetAllTJobsQueryResult>
             {
-                PageSize = tJobs.PageSize,
-                CurrentPage = tJobs.CurrentPage,
-                TotalPages = tJobs.TotalPages,
-                TotalCount = tJobs.TotalCount,
-                Result = tJobs.Select(_mapper.Map<Domain.Entities.TJobs, GetAllTJobsQueryResult>).ToList()
+                PageSize = actprofBcts.PageSize,
+                CurrentPage = actprofBcts.CurrentPage,
+                TotalPages = actprofBcts.TotalPages,
+                TotalCount = actprofBcts.TotalCount,
+                Result = actprofBcts.Select(_mapper.Map<Domain.Entities.TR_ACTPROF_BCT, GetAllTJobsQueryResult>).ToList()
             };
 
             return OperationResult<PageInfo<GetAllTJobsQueryResult>>.SuccessResult(result);

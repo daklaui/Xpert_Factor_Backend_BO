@@ -23,20 +23,20 @@ namespace CleanArc.Application.Features.TPostalCodes.Queries.GetAllTPostalCodes
 
         public async ValueTask<OperationResult<PageInfo<GetAllTPostalCodesQueryResult>>> Handle(GetAllTPostalCodesQuery request, CancellationToken cancellationToken)
         {
-            var tPostalCodes = await _unitOfWork.TPostalCodesRepository.GetAllTPostalCodesAsync(request.PaginationParams);
+            var trCp = await _unitOfWork.TPostalCodesRepository.GetAllTPostalCodesAsync(request.PaginationParams);
 
-            if (tPostalCodes == null)
+            if (trCp == null)
             {
                 return OperationResult<PageInfo<GetAllTPostalCodesQueryResult>>.FailureResult("Failed to retrieve TPostalCodes");
             }
 
             var result = new PageInfo<GetAllTPostalCodesQueryResult>
             {
-                PageSize = tPostalCodes.PageSize,
-                CurrentPage = tPostalCodes.CurrentPage,
-                TotalPages = tPostalCodes.TotalPages,
-                TotalCount = tPostalCodes.TotalCount,
-                Result = tPostalCodes.Select(_mapper.Map<Domain.Entities.TPostalCodes, GetAllTPostalCodesQueryResult>).ToList()
+                PageSize = trCp.PageSize,
+                CurrentPage = trCp.CurrentPage,
+                TotalPages = trCp.TotalPages,
+                TotalCount = trCp.TotalCount,
+                Result = trCp.Select(_mapper.Map<Domain.Entities.TR_CP, GetAllTPostalCodesQueryResult>).ToList()
             };
 
             return OperationResult<PageInfo<GetAllTPostalCodesQueryResult>>.SuccessResult(result);

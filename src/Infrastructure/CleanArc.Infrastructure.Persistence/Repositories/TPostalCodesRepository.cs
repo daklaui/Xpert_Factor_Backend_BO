@@ -9,7 +9,7 @@ using CleanArc.Application.Common;
 
 namespace CleanArc.Infrastructure.Persistence.Repositories
 {
-    internal class TPostalCodesRepository : BaseAsyncRepository<TPostalCodes>, ITPostalCodesRepository
+    internal class TPostalCodesRepository : BaseAsyncRepository<TR_CP>, ITPostalCodesRepository
     {
         private readonly ApplicationDbContext _dbContext;
 
@@ -18,31 +18,31 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<PagedList<TPostalCodes>> GetAllTPostalCodesAsync(PaginationParams paginationParams)
+        public async Task<PagedList<TR_CP>> GetAllTPostalCodesAsync(PaginationParams paginationParams)
         {
             var query = base.TableNoTracking.AsQueryable();
-            return await PagedList<TPostalCodes>.CreateAsync(query, paginationParams.PageNumber, paginationParams.PageSize);
+            return await PagedList<TR_CP>.CreateAsync(query, paginationParams.PageNumber, paginationParams.PageSize);
         }
 
-        public async Task<TPostalCodes> AddTPostalCodesAsync(TPostalCodes tPostalCodes)
+        public async Task<TR_CP> AddTPostalCodesAsync(TR_CP trCp)
         {
-            if (tPostalCodes == null)
+            if (trCp == null)
             {
-                throw new ArgumentNullException(nameof(tPostalCodes), "Cannot add a null entity");
+                throw new ArgumentNullException(nameof(trCp), "Cannot add a null entity");
             }
 
-            await base.AddAsync(tPostalCodes);
-            return tPostalCodes;
+            await base.AddAsync(trCp);
+            return trCp;
         }
 
-        public async Task<TPostalCodes> GetTPostalCodesById(int id)
+        public async Task<TR_CP> GetTPostalCodesById(int id)
         {
             return await base.TableNoTracking.FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public async Task<TPostalCodes> UpdateTPostalCodesAsync(int id, TPostalCodes updatedTPostalCodes)
+        public async Task<TR_CP> UpdateTPostalCodesAsync(int id, TR_CP updatedTPostalCodes)
         {
-            var tPostalCodes = await _dbContext.Set<TPostalCodes>().FirstOrDefaultAsync(e => e.Id == id);
+            var tPostalCodes = await _dbContext.Set<TR_CP>().FirstOrDefaultAsync(e => e.Id == id);
 
             if (tPostalCodes == null)
             {

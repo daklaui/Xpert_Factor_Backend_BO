@@ -9,7 +9,7 @@ using CleanArc.Application.Common;
 
 namespace CleanArc.Infrastructure.Persistence.Repositories
 {
-    internal class TJobsRepository : BaseAsyncRepository<TJobs>, ITJobsRepository
+    internal class TJobsRepository : BaseAsyncRepository<TR_ACTPROF_BCT>, ITJobsRepository
     {
         private readonly ApplicationDbContext _dbContext;
 
@@ -18,31 +18,31 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<PagedList<TJobs>> GetAllTJobsAsync(PaginationParams paginationParams)
+        public async Task<PagedList<TR_ACTPROF_BCT>> GetAllTJobsAsync(PaginationParams paginationParams)
         {
             var query = base.TableNoTracking.AsQueryable();
-            return await PagedList<TJobs>.CreateAsync(query, paginationParams.PageNumber, paginationParams.PageSize);
+            return await PagedList<TR_ACTPROF_BCT>.CreateAsync(query, paginationParams.PageNumber, paginationParams.PageSize);
         }
 
-        public async Task<TJobs> AddTJobsAsync(TJobs tJobs)
+        public async Task<TR_ACTPROF_BCT> AddTJobsAsync(TR_ACTPROF_BCT actprofBct)
         {
-            if (tJobs == null)
+            if (actprofBct == null)
             {
-                throw new ArgumentNullException(nameof(tJobs), "Cannot add a null entity");
+                throw new ArgumentNullException(nameof(actprofBct), "Cannot add a null entity");
             }
 
-            await base.AddAsync(tJobs);
-            return tJobs;
+            await base.AddAsync(actprofBct);
+            return actprofBct;
         }
 
-        public async Task<TJobs> GetTJobsById(int id)
+        public async Task<TR_ACTPROF_BCT> GetTJobsById(int id)
         {
             return await base.TableNoTracking.FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public async Task<TJobs> UpdateTJobsAsync(int id, TJobs updatedTJobs)
+        public async Task<TR_ACTPROF_BCT> UpdateTJobsAsync(int id, TR_ACTPROF_BCT updatedTJobs)
         {
-            var tJobs = await _dbContext.Set<TJobs>().FirstOrDefaultAsync(e => e.Id == id);
+            var tJobs = await _dbContext.Set<TR_ACTPROF_BCT>().FirstOrDefaultAsync(e => e.Id == id);
 
             if (tJobs == null)
             {

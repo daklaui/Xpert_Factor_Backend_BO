@@ -2,7 +2,7 @@
 
 namespace CleanArc.Application.Features.TPostalCodes.Queries.GetAllTPostalCodes
 {
-    public record GetAllTPostalCodesQueryResult : ICreateMapper<Domain.Entities.TPostalCodes>
+    public record GetAllTPostalCodesQueryResult : ICreateMapper<Domain.Entities.TR_CP>
     {
         public int Id { get; set; }
         public string CodeGouvernorat { get; set; }
@@ -14,6 +14,5 @@ namespace CleanArc.Application.Features.TPostalCodes.Queries.GetAllTPostalCodes
         public System.DateTime CreatedTime { get; set; }
         public System.DateTime? ModifiedDate { get; set; }
 
-        // Ajoutez d'autres propriétés de TPostalCodes si nécessaire
     }
 }

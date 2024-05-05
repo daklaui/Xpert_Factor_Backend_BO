@@ -31,20 +31,20 @@ namespace CleanArc.Application.Features.TListVal.Queries.GetAllTListVals
                 throw new ArgumentNullException(nameof(_mapper), "Mapper is null");
             }
 
-            var tListVals = await _unitOfWork.TListValRepository.GetAllTListValsAsync(request.PaginationParams);
+            var listVal = await _unitOfWork.TListValRepository.GetAllTListValsAsync(request.PaginationParams);
 
-            if (tListVals == null)
+            if (listVal == null)
             {
                 return OperationResult<PageInfo<GetAllTListValsQueryResult>>.FailureResult("Failed to retrieve TListVals");
             }
 
             var result = new PageInfo<GetAllTListValsQueryResult>
             {
-                PageSize = tListVals.PageSize,
-                CurrentPage = tListVals.CurrentPage,
-                TotalPages = tListVals.TotalPages,
-                TotalCount = tListVals.TotalCount,
-                Result = tListVals.Select(_mapper.Map<TRListVals, GetAllTListValsQueryResult>).ToList()
+                PageSize = listVal.PageSize,
+                CurrentPage = listVal.CurrentPage,
+                TotalPages = listVal.TotalPages,
+                TotalCount = listVal.TotalCount,
+                Result = listVal.Select(_mapper.Map<TR_LIST_VAL, GetAllTListValsQueryResult>).ToList()
             };
 
             return OperationResult<PageInfo<GetAllTListValsQueryResult>>.SuccessResult(result);

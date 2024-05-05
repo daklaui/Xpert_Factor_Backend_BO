@@ -4,7 +4,7 @@ using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities
 {
-    public class TPostalCodes : IEntity
+    public class TR_CP : IEntity
     {
         public int Id { get; set; }
         public DateTime CreatedTime { get; set; }

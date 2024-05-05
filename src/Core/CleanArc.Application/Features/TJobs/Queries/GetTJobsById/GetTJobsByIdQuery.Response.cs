@@ -4,7 +4,7 @@ using System;
 
 namespace  CleanArc.Application.Features.TJobs.Queries.GetTJobsById
 {
-    public record GetTJobsByIdQueryResult : ICreateMapper<Domain.Entities.TJobs>
+    public record GetTJobsByIdQueryResult : ICreateMapper<Domain.Entities.TR_ACTPROF_BCT>
     {
         public string Code_Section { get; set; }
         public string Section { get; set; }

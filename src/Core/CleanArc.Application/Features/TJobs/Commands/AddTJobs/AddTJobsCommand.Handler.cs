@@ -19,7 +19,7 @@ namespace CleanArc.Application.Features.TJobs.Commands.AddTJobs
 
         public async ValueTask<OperationResult<bool>> Handle(AddTJobsCommand request, CancellationToken cancellationToken)
         {
-            await _tJobsRepository.AddTJobsAsync(request.TJobs);
+            await _tJobsRepository.AddTJobsAsync(request.ActprofBct);
             await _unitOfWork.CommitAsync();
             return OperationResult<bool>.SuccessResult(true);
         }

@@ -5,5 +5,5 @@ using Mediator;
 
 namespace CleanArc.Application.Features.TPostalCodes.Commands
 {
-    public record AddTPostalCodesCommand(Domain.Entities.TPostalCodes TPostalCodes) : IRequest<OperationResult<bool>>;
+    public record AddTPostalCodesCommand(Domain.Entities.TR_CP trCp) : IRequest<OperationResult<bool>>;
 }

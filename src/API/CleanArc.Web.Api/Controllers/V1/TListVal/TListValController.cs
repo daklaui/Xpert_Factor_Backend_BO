@@ -75,7 +75,7 @@ namespace CleanArc.Web.Api.Controllers.V1.TListVal
                 return BadRequest("Invalid model");
             }
 
-            model.Id = id; // Assign the id to the command model
+            model.Id = id; 
 
             var commandResult = await _sender.Send(model);
 

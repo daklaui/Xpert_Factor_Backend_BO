@@ -2,7 +2,7 @@
 
 namespace CleanArc.Application.Features.TJobs.Queries.GetAllTJobs
 {
-    public record GetAllTJobsQueryResult : ICreateMapper<Domain.Entities.TJobs>
+    public record GetAllTJobsQueryResult : ICreateMapper<Domain.Entities.TR_ACTPROF_BCT>
     {
         public int Id { get; set; }
         public string Code_Section { get; set; }

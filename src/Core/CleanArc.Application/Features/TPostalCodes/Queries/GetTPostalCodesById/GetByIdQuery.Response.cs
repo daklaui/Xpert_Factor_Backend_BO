@@ -4,7 +4,7 @@ using System;
 
 namespace CleanArc.Application.Features.TPostalCodes.Queries.GetTPostalCodesById
 {
-    public record GetByIdQueryResult : ICreateMapper<Domain.Entities.TPostalCodes>
+    public record GetByIdQueryResult : ICreateMapper<Domain.Entities.TR_CP>
     {
         public string CodeGouvernorat { get; set; }
         public string CodeRegion { get; set; }

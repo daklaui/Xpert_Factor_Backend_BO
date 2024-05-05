@@ -9,7 +9,7 @@ namespace CleanArc.Application.ServiceConfiguration
     {
         public TPostalCodesProfile()
         {
-            CreateMap<UpdateTPostalCodesCommand, TPostalCodes>();
+            CreateMap<UpdateTPostalCodesCommand, TR_CP>();
             
         }
     }

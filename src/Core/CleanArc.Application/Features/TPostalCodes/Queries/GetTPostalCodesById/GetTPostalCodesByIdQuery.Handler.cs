@@ -22,14 +22,14 @@ namespace CleanArc.Application.Features.TPostalCodes.Queries.GetTPostalCodesById
 
         public async ValueTask<OperationResult<GetByIdQueryResult>> Handle(GetTPostalCodesByIdQuery request, CancellationToken cancellationToken)
         {
-            var tPostalCodes = await _unitOfWork.TPostalCodesRepository.GetTPostalCodesById(request.TPostalCodesId);
+            var trCp = await _unitOfWork.TPostalCodesRepository.GetTPostalCodesById(request.TPostalCodesId);
 
-            if (tPostalCodes == null)
+            if (trCp == null)
             {
                 return OperationResult<GetByIdQueryResult>.FailureResult($"TPostalCodes with id {request.TPostalCodesId} not found.");
             }
 
-            var result = _mapper.Map<Domain.Entities.TPostalCodes, GetByIdQueryResult>(tPostalCodes);
+            var result = _mapper.Map<Domain.Entities.TR_CP, GetByIdQueryResult>(trCp);
 
             return OperationResult<GetByIdQueryResult>.SuccessResult(result);
         }

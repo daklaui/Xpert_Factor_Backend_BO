@@ -9,7 +9,7 @@ public interface ICreateMapper<TSource>
     void Map(AutoMapper.Profile profile)
     {
         profile.CreateMap(typeof(TSource), GetType()).ReverseMap();
-        profile.CreateMap<UpdateTPostalCodesCommand, TPostalCodes>();
+        profile.CreateMap<UpdateTPostalCodesCommand, TR_CP>();
     }
     
     

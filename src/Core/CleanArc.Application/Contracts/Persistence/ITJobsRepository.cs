@@ -5,9 +5,9 @@ namespace CleanArc.Application.Contracts.Persistence
 {
     public interface ITJobsRepository
     {
-        Task<TJobs> AddTJobsAsync(TJobs tJobs);
-        Task<PagedList<TJobs>> GetAllTJobsAsync(PaginationParams paginationParams);
-        Task<TJobs> GetTJobsById(int id);
-        Task<TJobs> UpdateTJobsAsync(int id, TJobs updatedTJobs);
+        Task<TR_ACTPROF_BCT> AddTJobsAsync(TR_ACTPROF_BCT actprofBct);
+        Task<PagedList<TR_ACTPROF_BCT>> GetAllTJobsAsync(PaginationParams paginationParams);
+        Task<TR_ACTPROF_BCT> GetTJobsById(int id);
+        Task<TR_ACTPROF_BCT> UpdateTJobsAsync(int id, TR_ACTPROF_BCT updatedTJobs);
     }
 }

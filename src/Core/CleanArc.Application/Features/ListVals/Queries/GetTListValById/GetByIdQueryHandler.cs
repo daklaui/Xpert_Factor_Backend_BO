@@ -20,9 +20,9 @@ namespace CleanArc.Application.Features.TListVal.Queries.GetByIdQuery
 
         public async ValueTask<OperationResult<GetByIdQueryResult>> Handle(GetTListValByIdQuery request, CancellationToken cancellationToken)
         {
-            var tListVal = await _unitOfWork.TListValRepository.GetTListValById(request.tListValId);
+            var listVal = await _unitOfWork.TListValRepository.GetTListValById(request.tListValId);
 
-            var result = _mapper.Map<TRListVals, GetByIdQueryResult>(tListVal);
+            var result = _mapper.Map<TR_LIST_VAL, GetByIdQueryResult>(listVal);
 
             return OperationResult<GetByIdQueryResult>.SuccessResult(result);
         }

@@ -1,4 +1,5 @@
-﻿using CleanArc.Application.Common;
+﻿
+using CleanArc.Application.Common;
 using CleanArc.Application.Features.TPostalCodes.Commands;
 using CleanArc.Application.Features.TPostalCodes.Queries.GetAllTPostalCodes;
 using CleanArc.WebFramework.BaseController;
@@ -72,7 +73,7 @@ namespace CleanArc.Web.Api.Controllers.V1.TPostalCodesController
                 return BadRequest("Invalid model");
             }
 
-            model.Id = id; // Assign the id to the command model
+            model.Id = id; 
 
             var commandResult = await _sender.Send(model);
 

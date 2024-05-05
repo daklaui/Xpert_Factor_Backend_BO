@@ -10,7 +10,7 @@ using CleanArc.Application.Features.ListVals.Commands.UpdateTListValCommand;
 
 namespace CleanArc.Infrastructure.Persistence.Repositories
 {
-    internal class TListValRepository : BaseAsyncRepository<TRListVals>, ITListValRepository
+    internal class TListValRepository : BaseAsyncRepository<TR_LIST_VAL>, ITListValRepository
     {
         private readonly ApplicationDbContext _dbContext;
         public TListValRepository(ApplicationDbContext dbContext) : base(dbContext)
@@ -18,48 +18,48 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
             _dbContext = dbContext;
         }
         
-        public async Task<PagedList<TRListVals>> GetAllTListValsAsync(PaginationParams paginationParams)
+        public async Task<PagedList<TR_LIST_VAL>> GetAllTListValsAsync(PaginationParams paginationParams)
         {
             var query = base.TableNoTracking.AsQueryable();
-            return await PagedList<TRListVals>.CreateAsync(query, paginationParams.PageNumber, paginationParams.PageSize);
+            return await PagedList<TR_LIST_VAL>.CreateAsync(query, paginationParams.PageNumber, paginationParams.PageSize);
         }
 
-        public async Task<TRListVals> AddTListValAsync(TRListVals tListVal)
+        public async Task<TR_LIST_VAL> AddTListValAsync(TR_LIST_VAL listVal)
         {
-            if (tListVal == null)
+            if (listVal == null)
             {
-                throw new ArgumentNullException(nameof(tListVal), "Cannot add a null entity");
+                throw new ArgumentNullException(nameof(listVal), "Cannot add a null entity");
             }
 
-            await base.AddAsync(tListVal);
-            return tListVal;
+            await base.AddAsync(listVal);
+            return listVal;
         }
 
 
-        public async Task<TRListVals> GetTListValById(int id)
+        public async Task<TR_LIST_VAL> GetTListValById(int id)
         {
             return await base.TableNoTracking.FirstOrDefaultAsync(p => p.Id == id);
         }
         
-        public async Task<TRListVals> UpdateTListValAsync(int id, TRListVals updatedTListVal)
+        public async Task<TR_LIST_VAL> UpdateTListValAsync(int id, TR_LIST_VAL updatedTListVal)
         {
-            var tListVal = await _dbContext.Set<TRListVals>().FirstOrDefaultAsync(e => e.Id == id);
+            var listVal = await _dbContext.Set<TR_LIST_VAL>().FirstOrDefaultAsync(e => e.Id == id);
 
-            if (tListVal == null)
+            if (listVal == null)
             {
                 throw new InvalidOperationException($"ListVals with id {id} not found");
             }
 
-            tListVal.AbrListVal = updatedTListVal.AbrListVal;
-            tListVal.TypListVal = updatedTListVal.TypListVal;
-            tListVal.OrdListVal = updatedTListVal.OrdListVal;
-            tListVal.LibListVal = updatedTListVal.LibListVal;
-            tListVal.ComListVal = updatedTListVal.ComListVal;
-            tListVal.ModifiedDate = DateTime.Now;
+            listVal.AbrListVal = updatedTListVal.AbrListVal;
+            listVal.TypListVal = updatedTListVal.TypListVal;
+            listVal.OrdListVal = updatedTListVal.OrdListVal;
+            listVal.LibListVal = updatedTListVal.LibListVal;
+            listVal.ComListVal = updatedTListVal.ComListVal;
+            listVal.ModifiedDate = DateTime.Now;
 
             await _dbContext.SaveChangesAsync();
 
-            return tListVal;
+            return listVal;
         }
 
 
