@@ -1,6 +1,8 @@
 ﻿using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Domain.Entities;
+using CleanArc.Domain.Entities.DTO;
 using CleanArc.Infrastructure.Persistence.Repositories.Common;
+using Microsoft.EntityFrameworkCore;
 
 namespace CleanArc.Infrastructure.Persistence.Repositories;
 
@@ -65,5 +67,23 @@ public class EncaissementReposiotry:BaseAsyncRepository<T_ENCAISSEMENT>, IEncais
 
         return false;
     }
+    public async Task<List<T_RECOUVREMENT_DTO>> GetAllRecouvrementFactures()
+    {
+        var ListeFacture =  _dbContext.Recouvrement_All_Factures.FromSql($"exec Recouvrement_All_Factures").ToList();
+        return ListeFacture;
+    } 
+    public  async  Task<List<T_RECOUVREMENT_DTO>>GetAllFacturesEchu()
+    {
+        var ListeFactureEch = _dbContext.FacturesEchu.FromSql($"exec FacturesEchu").ToList();
+        return ListeFactureEch;
+    }
+    public  async  Task<List<T_RECOUVREMENT_DTO>>GetAllFacturesNonEchu()
+    {
+        var listefactureNonEchu = _dbContext.FacturesNonEchu.FromSql($"exec FacturesNonEchu").ToList();
+
+        return listefactureNonEchu;
+    }
+    
+    
 
 }

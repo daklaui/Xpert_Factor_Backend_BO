@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using CleanArc.Domain.Common;
+﻿using CleanArc.Application.Profiles;
+using CleanArc.Domain.Entities;
 
-namespace CleanArc.Domain.Entities;
+namespace CleanArc.Application.Features.ListVal.Queries.GetAllRecouvrement;
 
-public partial class TR_LIST_VAL : IEntity
+public record GetAllRecouvrementQuery_Response:ICreateMapper<TR_LIST_VAL>
 {
     public string ABR_LIST_VAL { get; set; }
 
@@ -24,3 +23,5 @@ public partial class TR_LIST_VAL : IEntity
 
     public virtual ICollection<TJ_GRP_PERMISSION> TJ_GRP_PERMISSIONs { get; } = new List<TJ_GRP_PERMISSION>();
 }
+
+    

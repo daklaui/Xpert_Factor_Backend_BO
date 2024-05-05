@@ -27,6 +27,8 @@
   <ItemGroup>
     <Folder Include="Features\Credit\Queries\" />
     <Folder Include="Features\Debit\Queries\" />
+    <Folder Include="Features\ListVal\Commands" />
+    <Folder Include="Features\RecouvrementList\Commands" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\Encaissement\Queries" />

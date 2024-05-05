@@ -5,7 +5,8 @@ namespace CleanArc.Infrastructure.Persistence.Repositories.Common;
 public class UnitOfWork : IUnitOfWork
 {
     private readonly ApplicationDbContext _db;
-    
+    private IUnitOfWork _unitOfWorkImplementation;
+
 
     public IUserRefreshTokenRepository UserRefreshTokenRepository { get; }
     public IOrderRepository OrderRepository { get; }
@@ -27,6 +28,8 @@ public class UnitOfWork : IUnitOfWork
     
     public TJcirRepository  JcirRepository{ get; set; }
     public ILimiteRepository LimiteRepository { get; }
+    public IListValRepository ListValRepository { get; }
+
     public UnitOfWork(ApplicationDbContext db)
     {
         _db = db;
@@ -52,6 +55,7 @@ public class UnitOfWork : IUnitOfWork
         OrderRepository= new OrderRepository(_db);
         IndividualRepository= new IndividuRepository(_db);
         LimiteRepository = new LimiteRepository(_db);
+        ListValRepository = new ListValRepository(_db);
     }
 
     public Task CommitAsync()

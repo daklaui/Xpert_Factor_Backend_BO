@@ -177,6 +177,11 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
     
     public  DbSet<UspEtatDepassLimACHResult> usp_Etat_Depass_Lim_ACH{ get; set; }
     public DbSet<T_IMPAYE_DTO> ListeDesImpayes { get; set; }
+    public DbSet<T_RECOUVREMENT_DTO> Recouvrement_All_Factures { get; set; } 
+    public DbSet<T_RECOUVREMENT_DTO>FacturesEchu { get; set; }
+    
+    public DbSet<T_RECOUVREMENT_DTO>FacturesNonEchu { get; set; }
+    
 
 
     public ApplicationDbContext(DbContextOptions options)
