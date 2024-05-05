@@ -27,7 +27,7 @@ namespace CleanArc.Application.Features.Financement.Queries
 
             var financement = await  _unitOfWork.FundingRepository.AllRecord(request.id);
 
-            var result =   _mapper.Map<FinancementDto, GetFinancementRefCtrQueryResult>(financement);
+            var result =   _mapper.Map<T_FINANCEMENT_DTO, GetFinancementRefCtrQueryResult>(financement);
 
             return OperationResult<GetFinancementRefCtrQueryResult>.SuccessResult(result);
         }

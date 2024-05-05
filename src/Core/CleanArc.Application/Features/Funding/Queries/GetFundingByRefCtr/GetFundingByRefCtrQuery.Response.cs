@@ -4,7 +4,7 @@ using CleanArc.Infrastructure.Identity.Identity.Dtos;
 
 namespace CleanArc.Application.Features.Financement.Queries;
 
-public class GetFinancementRefCtrQueryResult: ICreateMapper<FinancementDto>
+public class GetFinancementRefCtrQueryResult: ICreateMapper<T_FINANCEMENT_DTO>
 {
     public int Total_Dispo { get; set; }
     public int Encours_Factures { get; set; }

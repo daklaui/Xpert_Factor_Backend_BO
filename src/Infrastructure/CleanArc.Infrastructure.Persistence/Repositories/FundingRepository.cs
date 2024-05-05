@@ -73,7 +73,7 @@ public class FundingRepository :BaseAsyncRepository<T_FINANCEMENT>,IFundingRepos
         await _dbContext.SaveChangesAsync();
         return tFinance;
     }
-    public async Task<FinancementDto> AllRecord(int ref_ctr)
+    public async Task<T_FINANCEMENT_DTO> AllRecord(int ref_ctr)
     {
 
         DateTime currentDate = DateTime.Today;
@@ -166,7 +166,7 @@ public class FundingRepository :BaseAsyncRepository<T_FINANCEMENT>,IFundingRepos
             t_fraisdiversV = 0;
         }
 
-        FinancementDto financementDto = new FinancementDto
+        T_FINANCEMENT_DTO financementDto = new T_FINANCEMENT_DTO
         {
             Total_Dispo = disponible,
             Encours_Factures = all?.Encours_Facture ?? 0,

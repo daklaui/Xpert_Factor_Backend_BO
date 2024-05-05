@@ -11,6 +11,6 @@ public interface IFundingRepository
     Task<T_FINANCEMENT> GetFinanceById(int id);
     Task <T_FINANCEMENT> ValidateFinanceAsync(int id ,T_FINANCEMENT finance);
     Task <T_FINANCEMENT> RejectFinanceAsync(int id ,T_FINANCEMENT finance);
-    Task<FinancementDto> AllRecord(int ref_ctr);
+    Task<T_FINANCEMENT_DTO> AllRecord(int ref_ctr);
     
 }

@@ -755,35 +755,7 @@ namespace Persistence.Migrations
                     b.ToTable("TR_TVA", (string)null);
                 });
 
-            modelBuilder.Entity("CleanArc.Domain.Entities.TRib", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("ActifRib")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("CreatedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("RibRib")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("individuId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("individuId");
-
-                    b.ToTable("TRib");
-                });
+         
 
             modelBuilder.Entity("CleanArc.Domain.Entities.TS_GRP_USER", b =>
                 {
@@ -4223,15 +4195,7 @@ namespace Persistence.Migrations
                     b.Navigation("ID_PERMISSIONNavigation");
                 });
 
-            modelBuilder.Entity("CleanArc.Domain.Entities.TRib", b =>
-                {
-                    b.HasOne("TIndividu", "individu")
-                        .WithMany("Ribs")
-                        .HasForeignKey("individuId");
-
-                    b.Navigation("individu");
-                });
-
+         
             modelBuilder.Entity("CleanArc.Domain.Entities.TS_USER", b =>
                 {
                     b.HasOne("CleanArc.Domain.Entities.TS_GRP_USER", "ID_GRP_USERNavigation")
@@ -4403,12 +4367,7 @@ namespace Persistence.Migrations
                     b.Navigation("UserRoles");
                 });
 
-            modelBuilder.Entity("TIndividu", b =>
-                {
-                    b.Navigation("Contacts");
-
-                    b.Navigation("Ribs");
-                });
+          
 #pragma warning restore 612, 618
         }
     }

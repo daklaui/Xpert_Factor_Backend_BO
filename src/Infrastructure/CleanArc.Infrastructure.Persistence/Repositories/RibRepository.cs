@@ -23,11 +23,11 @@ internal class RibRepository : BaseAsyncRepository<TR_RIB>, IRibRepository
         {
             var ribs = new TR_RIB_DTO();
             var fullRib = ribs.RIB_RIB1 + ribs.RIB_RIB2 + ribs.RIB_RIB3;
-            ribs.RIB_RIB = fullRib;
 
-            if (!await verifExistingRib(ribs.RIB_RIB))
+            if (!await verifExistingRib(fullRib))
             {
-                ribs.ACTIF_RIB = true;
+                rib.RIB_RIB = fullRib;
+                rib.ACTIF_RIB = true;
                 _dbContext.TR_RIBs.Add(rib);
                 await _dbContext.SaveChangesAsync();
                 return true;
@@ -37,8 +37,9 @@ internal class RibRepository : BaseAsyncRepository<TR_RIB>, IRibRepository
                 return false;
             }
         }
-        catch (Exception e)
-        { return false;
+        catch (Exception ex)
+        {
+            throw new Exception("Erreur lors de l'ajout du RIB.", ex);
         }
     }
     

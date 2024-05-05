@@ -2,7 +2,7 @@
 
 namespace CleanArc.Infrastructure.Identity.Identity.Dtos;
 [Keyless]
-public class FinancementDto
+public class T_FINANCEMENT_DTO
 {
     public decimal Total_Dispo { get; set; }
     public decimal Encours_Factures { get; set; }
