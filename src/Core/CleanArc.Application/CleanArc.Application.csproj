@@ -21,6 +21,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\buyer\Queries\" />
+    <Folder Include="Features\Recouvrement\queries\" />
   </ItemGroup>
 
 </Project>

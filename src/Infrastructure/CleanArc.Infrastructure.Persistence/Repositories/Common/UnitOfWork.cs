@@ -16,6 +16,7 @@ public class UnitOfWork : IUnitOfWork
     public IRibRepository ribRepository { get; }
 
     public IAdhAuthRepository adhAuthRepository { get; }
+    public ITjcirRepository tjcirRepository { get; }
     public object TJcirRepository { get; set; }
 
     public UnitOfWork(ApplicationDbContext db)

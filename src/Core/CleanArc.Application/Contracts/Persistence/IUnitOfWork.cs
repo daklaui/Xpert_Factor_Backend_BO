@@ -10,8 +10,9 @@ public interface IUnitOfWork
     public IAdhAuthRepository adhAuthRepository { get; }
     
     public ITjcirRepository tjcirRepository { get; }
-    
- 
+    object RecouvrementRepository { get; set; }
+
+
     Task CommitAsync();
     ValueTask RollBackAsync();
 }
