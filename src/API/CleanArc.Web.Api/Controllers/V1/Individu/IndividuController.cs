@@ -32,7 +32,7 @@ public class IndividuController : BaseController
         return base.OperationResult(command);
     }
 
-    [HttpGet("GetAllIndividus")]
+   [HttpGet("GetAllIndividus")]
     public async Task<IActionResult> GetAllIndividus([FromQuery] PaginationParams paginationParams)
     {
         var query = await _sender.Send(new GetAllIndividusQuery(paginationParams));
@@ -42,16 +42,10 @@ public class IndividuController : BaseController
 
     [HttpGet("GetIndividuById/{id}")]
     public async Task<IActionResult> GetIndividuById(string id)
-   
-    
-    [HttpPut("UpdateIndividu")]
-    public async Task<IActionResult> UpdateIndividu(UpdateIndividuCommand command)
     {
         var query = await _sender.Send(new GetAgencyBankByIdQuery(id));
-     
-        var result = await _sender.Send(command);
 
-        return base.OperationResult(result);
+        return base.OperationResult(query);
     }
     
     

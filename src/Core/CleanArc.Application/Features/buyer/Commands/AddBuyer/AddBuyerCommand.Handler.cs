@@ -18,7 +18,7 @@ namespace CleanArc.Application.Features.Buyer.Commands.AddBuyer
 
         public async ValueTask<OperationResult<bool>> Handle(AddBuyerCommand request, CancellationToken cancellationToken)
         {
-            await _unitOfWork.TJcirRepository.AddTJCIRsync(request.Buyer);
+            await _unitOfWork.tjcirRepository.AddTJCIRsync(request.Buyer);
             await _unitOfWork.CommitAsync();
 
             return OperationResult<bool>.SuccessResult(true);

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CleanArc.Infrastructure.Persistence.Repositories;
 
-internal class TJcirRepository: BaseAsyncRepository<TJ_CIR> , ITjcirRepository
+public class TJcirRepository: BaseAsyncRepository<TJ_CIR> , ITjcirRepository
 {
     public TJcirRepository(ApplicationDbContext dbContext): base(dbContext)
     {

@@ -15,6 +15,7 @@ public class UnitOfWork : IUnitOfWork
     public IContactRepository contactRepository { get; }
     public IRibRepository ribRepository { get; }
     public IAdhAuthRepository adhAuthRepository { get; }
+    public ITjcirRepository tjcirRepository { get; }
     public IimpayeRepository ImpayeRepository { get; }
     public ICreditRepository CreditRepository { get; }
     public IDebitRepository DebitRepository { get; }
@@ -23,13 +24,13 @@ public class UnitOfWork : IUnitOfWork
     //public ITPostalCodesRepository TPostalCodesRepository { get; }
     //public ITJobsRepository TJobsRepository { get; } // Nouvelle propriété
     public IEncaissement EncaissementRepository { get; }
-    public object TJcirRepository { get; set; }
-
     
+    public TJcirRepository  JcirRepository{ get; set; }
     public ILimiteRepository LimiteRepository { get; }
     public UnitOfWork(ApplicationDbContext db)
     {
         _db = db;
+        JcirRepository = new TJcirRepository(_db);
         UserRefreshTokenRepository = new UserRefreshTokenRepository(_db);
         OrderRepository = new OrderRepository(_db);
         IndividualRepository = new IndividuRepository(_db);

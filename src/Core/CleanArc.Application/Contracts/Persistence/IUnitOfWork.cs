@@ -6,13 +6,10 @@ public interface IUnitOfWork
     public IOrderRepository OrderRepository { get; }
     public IIndividualRepository IndividualRepository { get; }
     public ITMMRepository TmmRepository { get; }
-    
     public IFundingRepository FundingRepository { get; }
-
     public IContactRepository contactRepository { get; }
     public IRibRepository ribRepository { get; }
     public IAdhAuthRepository adhAuthRepository { get; }
-    
     public ITjcirRepository tjcirRepository { get; }
     
  
