@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class T_PROROGATION
+public partial class T_PROROGATION : IEntity
 {
     public int REF_CTR_PROG { get; set; }
 
@@ -18,6 +21,7 @@ public partial class T_PROROGATION
     public bool? ETAT_PROG { get; set; }
 
     public int ID_DET_BORD_PROG { get; set; }
-
+    
+ 
     public int ID_PROROGATION { get; set; }
 }

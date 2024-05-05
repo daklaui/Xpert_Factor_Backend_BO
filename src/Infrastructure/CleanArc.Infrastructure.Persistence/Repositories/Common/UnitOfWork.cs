@@ -29,6 +29,8 @@ public class UnitOfWork : IUnitOfWork
     public TJcirRepository  JcirRepository{ get; set; }
     public ILimiteRepository LimiteRepository { get; }
     public IListValRepository ListValRepository { get; }
+    public IProrogationsRepository ProrogationsRepository { get; }
+    public ILitigesRepository LitigesRepository { get; }
 
     public UnitOfWork(ApplicationDbContext db)
     {
@@ -56,6 +58,8 @@ public class UnitOfWork : IUnitOfWork
         IndividualRepository= new IndividuRepository(_db);
         LimiteRepository = new LimiteRepository(_db);
         ListValRepository = new ListValRepository(_db);
+        ProrogationsRepository = new ProrogationsRepository(_db);
+        LitigesRepository = new LitigesRepository(_db);
     }
 
     public Task CommitAsync()

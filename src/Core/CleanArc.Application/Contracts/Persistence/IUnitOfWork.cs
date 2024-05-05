@@ -25,6 +25,8 @@ public interface IUnitOfWork
     public  IEncaissement EncaissementRepository { get; }
     public ILimiteRepository LimiteRepository { get; }
     public  IListValRepository ListValRepository { get; }
+    public  IProrogationsRepository ProrogationsRepository { get; }
+    public ILitigesRepository LitigesRepository { get; }
     Task CommitAsync();
     ValueTask RollBackAsync();
 }

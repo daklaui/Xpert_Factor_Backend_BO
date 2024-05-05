@@ -28,6 +28,8 @@
     <Folder Include="Features\Credit\Queries\" />
     <Folder Include="Features\Debit\Queries\" />
     <Folder Include="Features\ListVal\Commands" />
+    <Folder Include="Features\Litige\Queries" />
+    <Folder Include="Features\Prorogation\Queries" />
     <Folder Include="Features\RecouvrementList\Commands" />
   </ItemGroup>
   <ItemGroup>
