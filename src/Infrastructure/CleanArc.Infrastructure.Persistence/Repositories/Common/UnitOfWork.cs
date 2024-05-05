@@ -23,6 +23,7 @@ public class UnitOfWork : IUnitOfWork
     //public ITPostalCodesRepository TPostalCodesRepository { get; }
     //public ITJobsRepository TJobsRepository { get; } // Nouvelle propriété
     public IEncaissement EncaissementRepository { get; }
+    public object TJcirRepository { get; set; }
 
     
     public ILimiteRepository LimiteRepository { get; }

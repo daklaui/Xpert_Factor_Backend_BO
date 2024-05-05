@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class TJ_CIR
+public partial class TJ_CIR : IEntity
 {
     public int ID_CIR { get; set; }
 
@@ -18,4 +19,5 @@ public partial class TJ_CIR
     public virtual T_CONTRAT REF_CTR_CIRNavigation { get; set; }
 
     public virtual T_INDIVIDU REF_IND_CIRNavigation { get; set; }
+    
 }

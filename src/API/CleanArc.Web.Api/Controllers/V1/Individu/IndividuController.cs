@@ -1,6 +1,7 @@
 ﻿using CleanArc.Application.Common;
 using CleanArc.Application.Features.AgencyBank.Queries.GetAgnecyBankByIdQuerie;
 using CleanArc.Application.Features.Individu.Commands.AddIndividuCommand;
+using CleanArc.Application.Features.Individu.Commands.UpdateIndividuCommand;
 using CleanArc.Application.Features.Individu.Queries.GetAllIndividus;
 using CleanArc.Application.Features.Individu.Queries.GetByIdQuery;
 using CleanArc.WebFramework.BaseController;
@@ -31,7 +32,7 @@ public class IndividuController : BaseController
         return base.OperationResult(command);
     }
 
-   [HttpGet("GetAllIndividus")]
+    [HttpGet("GetAllIndividus")]
     public async Task<IActionResult> GetAllIndividus([FromQuery] PaginationParams paginationParams)
     {
         var query = await _sender.Send(new GetAllIndividusQuery(paginationParams));
@@ -41,11 +42,18 @@ public class IndividuController : BaseController
 
     [HttpGet("GetIndividuById/{id}")]
     public async Task<IActionResult> GetIndividuById(string id)
+   
+    
+    [HttpPut("UpdateIndividu")]
+    public async Task<IActionResult> UpdateIndividu(UpdateIndividuCommand command)
     {
         var query = await _sender.Send(new GetAgencyBankByIdQuery(id));
+     
+        var result = await _sender.Send(command);
 
-        return base.OperationResult(query);
+        return base.OperationResult(result);
     }
     
     
+
 }
