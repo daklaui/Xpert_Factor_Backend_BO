@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class TR_ACTPROF_BCT
+public partial class TR_ACTPROF_BCT : IEntity
 {
     public string Code_Section { get; set; }
 

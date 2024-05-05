@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class TR_LIST_VAL
+public partial class TR_LIST_VAL : IEntity
 {
     public string ABR_LIST_VAL { get; set; }
 

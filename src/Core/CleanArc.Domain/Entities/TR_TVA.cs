@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class TR_TVA
+public partial class TR_TVA : IEntity
 {
     public short ID_TVA { get; set; }
 

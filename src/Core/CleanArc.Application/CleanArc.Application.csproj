@@ -21,6 +21,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\Limite\Queries\" />
+    <Folder Include="Features\Litiges\Queries\" />
+    <Folder Include="Features\Prorogations\Queries\" />
+    <Folder Include="Features\ResolutionLitiges\Commands\" />
+    <Folder Include="Features\ResolutionLitiges\Queries\" />
   </ItemGroup>
 
 </Project>

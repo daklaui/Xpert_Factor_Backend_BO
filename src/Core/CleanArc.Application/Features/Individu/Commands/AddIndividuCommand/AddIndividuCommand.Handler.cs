@@ -1,8 +1,6 @@
 ﻿using CleanArc.Application.Contracts.Identity;
 using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Application.Models.Common;
-using CleanArc.Domain.Entities.User;
-using CleanArc.SharedKernel.Extensions;
 using Mediator;
 
 namespace CleanArc.Application.Features.Individu.Commands.AddIndividuCommand

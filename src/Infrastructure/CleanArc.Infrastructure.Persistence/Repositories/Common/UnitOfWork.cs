@@ -10,8 +10,13 @@ public class UnitOfWork : IUnitOfWork
     public IOrderRepository OrderRepository { get; }
 
     public IIndividualRepository IndividualRepository { get; }
-    
     public ILimiteRepository LimiteRepository { get; }
+    public IValuesListRepository ValuesListRepository { get; }
+    public IActProfRepository ActProfRepository { get; }
+    public ICpRepository CpRepository { get; }
+   public ILitigesRepository LitigesRepository { get; }
+    public IProrogationsRepository ProrogationsRepository { get; }
+    public IResolustionLitigeRepository ResolustionLitigeRepository { get; }
     public UnitOfWork(ApplicationDbContext db)
     {
         _db = db;
@@ -19,6 +24,13 @@ public class UnitOfWork : IUnitOfWork
         OrderRepository= new OrderRepository(_db);
         IndividualRepository= new IndividuRepository(_db);
         LimiteRepository = new LimiteRepository(_db);
+        ValuesListRepository = new ValuesListRepository(_db);
+        CpRepository = new CpRepository(_db);
+       // ActProfRepository = new ActProfRepository(_db);
+        LitigesRepository = new LitigesRepository(_db);
+        ProrogationsRepository = new ProrogationsRepository(_db);
+       // ResolustionLitigeRepository = new ResolutionLitigeRepository(_db);
+
     }
 
     public  Task CommitAsync()

@@ -15,7 +15,7 @@ public abstract class BaseAsyncRepository<TEntity> where TEntity:class,IEntity
     protected BaseAsyncRepository(ApplicationDbContext dbContext)
     {
         DbContext = dbContext;
-        Entities = DbContext.Set<TEntity>(); // City => Cities
+        Entities = DbContext.Set<TEntity>(); 
     }
 
     protected virtual async Task<List<TEntity>> ListAllAsync()
@@ -33,6 +33,12 @@ public abstract class BaseAsyncRepository<TEntity> where TEntity:class,IEntity
         Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> updateExpression)
     {
         await Entities.ExecuteUpdateAsync(updateExpression);
+    }
+    
+    protected virtual async Task UpdateAsync1(TEntity entity)
+    {
+        DbContext.Entry(entity).State = EntityState.Modified;
+        await DbContext.SaveChangesAsync();
     }
 
     protected virtual async Task DeleteAsync(Expression<Func<TEntity,bool>> deleteExpression)

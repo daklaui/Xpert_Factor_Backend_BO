@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class T_PROROGATION
+public partial class T_PROROGATION :IEntity
 {
     public int REF_CTR_PROG { get; set; }
 

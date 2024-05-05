@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace CleanArc.Domain.DTO
 {
-    public class DemandeLimiteDTO
+    public class T_DEM_LIMITE_DTO
     {
         public int REF_DEM_LIM { get; set; }
         public int REF_CTR_DEM_LIM { get; set; }
         public string TYP_DEM_LIM { get; set; }
         public string REF_CTR_PAPIER_CTR { get; set; }
-        public string COMMENT { get; set; }
+        public string COM { get; set; }
         public System.DateTime DAT_DEM_LIM { get; set; }
         public System.DateTime DAT_DEM_LIMC { get; set; }
         public string SORT_DEM_LIM { get; set; }

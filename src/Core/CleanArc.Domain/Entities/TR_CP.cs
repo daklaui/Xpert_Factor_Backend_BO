@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class TR_CP
+public partial class TR_CP : IEntity
 {
     public string CP { get; set; }
 

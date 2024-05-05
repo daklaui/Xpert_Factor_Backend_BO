@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class TR_NLDP
+public partial class TR_NLDP 
 {
     public int ID_NLDP { get; set; }
 
