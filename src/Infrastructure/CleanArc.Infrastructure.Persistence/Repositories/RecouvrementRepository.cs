@@ -12,7 +12,7 @@ internal class RecouvrementRepository : BaseAsyncRepository<RecouvrementDto>, IR
 
     public RecouvrementRepository(ApplicationDbContext dbContext) : base(dbContext)
     {
-        _dbContext = dbContext;
+        _dbContext =dbContext;
     }
     public async Task<List<RecouvrementDto>> GetAllRecouvrementAsync(PaginationParams paginationParams)
     {
