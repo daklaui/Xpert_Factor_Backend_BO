@@ -28,6 +28,7 @@ public interface IUnitOfWork
     public  IListValRepository ListValRepository { get; }
     public  IProrogationsRepository ProrogationsRepository { get; }
     public ILitigesRepository LitigesRepository { get; }
+    public IRecouvrementRepository RecouvrementRepository { get; }
     Task CommitAsync();
     ValueTask RollBackAsync();
 }

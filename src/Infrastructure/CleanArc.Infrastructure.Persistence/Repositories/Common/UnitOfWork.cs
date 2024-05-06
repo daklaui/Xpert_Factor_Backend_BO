@@ -33,6 +33,8 @@ public class UnitOfWork : IUnitOfWork
     public IListValRepository ListValRepository { get; }
     public IProrogationsRepository ProrogationsRepository { get; }
     public ILitigesRepository LitigesRepository { get; }
+    
+    public IRecouvrementRepository RecouvrementRepository { get; }
 
     public UnitOfWork(ApplicationDbContext db)
     {
@@ -63,6 +65,7 @@ public class UnitOfWork : IUnitOfWork
         ProrogationsRepository = new ProrogationsRepository(_db);
         LitigesRepository = new LitigesRepository(_db);
         GEDRepository = new GEDRepository(_db);
+        RecouvrementRepository = new RecouvrementRepository(_db);
     }
 
     public Task CommitAsync()

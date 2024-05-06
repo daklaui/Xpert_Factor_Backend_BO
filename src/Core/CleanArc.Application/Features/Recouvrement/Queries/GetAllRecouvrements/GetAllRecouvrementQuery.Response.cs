@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using CleanArc.Domain.Common;
+using CleanArc.Application.Profiles;
+using CleanArc.Domain.Entities;
 
-namespace CleanArc.Domain.Entities;
+namespace CleanArc.Application.Features.Recouvrement.Queries.GetAllRecouvrements;
 
-public partial class TR_LIST_VAL : IEntity
-public partial class TR_LIST_VAL: IEntity
+public record GetAllRecouvrementQueryResult : ICreateMapper<TR_LIST_VAL>
 {
     public string ABR_LIST_VAL { get; set; }
 
