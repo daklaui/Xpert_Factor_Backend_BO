@@ -44,33 +44,32 @@ public class FundingRepository :BaseAsyncRepository<T_FINANCEMENT>,IFundingRepos
 
     }
     
-    public async Task<T_FINANCEMENT> ValidateFinanceAsync(int id, T_FINANCEMENT finance)   
+    public async Task<T_FINANCEMENT> ValidateFinanceAsync(int id)   
     {
-        var tFinance = await _dbContext.Set<T_FINANCEMENT>().FirstOrDefaultAsync(e => e.ID_FIN == id);
-        
+       // var tFinance = await _dbContext.Set<T_FINANCEMENT>().FirstOrDefaultAsync(e => e.ID_FIN == id);
+        var tFinance =await base.TableNoTracking.FirstOrDefaultAsync(p => p.ID_FIN == id);
         if (tFinance == null)
         {
             
             throw new InvalidOperationException($"Financement with id {id} not found");
         }
 
-        tFinance.ETAT_FIN = "valider";
-        await _dbContext.SaveChangesAsync();
+        tFinance.ETAT_FIN = "1";
+        await base.UpdateAsync(tFinance);
         return tFinance;
     }
     
-    public async Task<T_FINANCEMENT> RejectFinanceAsync(int id, T_FINANCEMENT finance)
+    public async Task<T_FINANCEMENT> RejectFinanceAsync(int id)
     {
-        var tFinance = await _dbContext.Set<T_FINANCEMENT>().FirstOrDefaultAsync(e => e.ID_FIN == id);
-        
+     var tFinance = await base.Table.FirstOrDefaultAsync(e => e.ID_FIN == id);
         if (tFinance == null)
         {
             
             throw new InvalidOperationException($"Financement with id {id} not found");
         }
 
-        tFinance.ETAT_FIN = "rejeter";
-        await _dbContext.SaveChangesAsync();
+        tFinance.ETAT_FIN = "0";
+        await base.UpdateAsync(tFinance);
         return tFinance;
     }
     public async Task<T_FINANCEMENT_DTO> AllRecord(int ref_ctr)

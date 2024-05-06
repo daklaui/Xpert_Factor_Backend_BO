@@ -1,23 +1,25 @@
 ﻿using AutoMapper;
 using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Application.Models.Common;
+using CleanArc.Domain.Entities;
 using Mediator;
 
 namespace CleanArc.Application.Features.Financement.Commands.UpdateFinancementCommand;
 
-public class ValidateFinanceCommandHandler : IRequestHandler<ValidateFinanceCommand,OperationResult<Unit>>
+public class ValidateFinanceCommandHandler : IRequestHandler<ValidateFinanceCommand,OperationResult<bool>>
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IMapper _mapper;
+
 
    
     public ValidateFinanceCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
-        _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
-        _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+        _unitOfWork = unitOfWork;
+ 
     }
 
-    public async ValueTask<OperationResult<Unit>> Handle(ValidateFinanceCommand request, CancellationToken cancellationToken)
+    public async ValueTask<OperationResult<bool>> Handle(ValidateFinanceCommand request,
+        CancellationToken cancellationToken)
     {
         var finance = await _unitOfWork.FundingRepository.GetFinanceById(request.ID_FIN);
 
@@ -25,23 +27,13 @@ public class ValidateFinanceCommandHandler : IRequestHandler<ValidateFinanceComm
         {
             throw new KeyNotFoundException($"Finance with ID {request.ID_FIN} not found");
         }
-
-        if (finance.ETAT_FIN != "valider")
-        {
-            finance.ETAT_FIN = "valider";
-            _mapper.Map(request, finance);
-            try
-            {
-                await  _unitOfWork.FundingRepository.ValidateFinanceAsync(finance.ID_FIN, finance);
-                return OperationResult<Unit>.SuccessResult(Unit.Value);
-            }
-            catch (Exception ex)
-            {
-                return OperationResult<Unit>.FailureResult($"Error updating TPostalCodes: {ex.Message}");
-            }
-        }
-    
-        return OperationResult<Unit>.SuccessResult(Unit.Value);
         
+        finance.ETAT_FIN = "valider";
+
+        await _unitOfWork.FundingRepository.ValidateFinanceAsync(finance.ID_FIN);
+        await _unitOfWork.CommitAsync();
+        return OperationResult<bool>.SuccessResult(true);
+
     }
+
 }

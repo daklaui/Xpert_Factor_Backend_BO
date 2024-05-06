@@ -15,11 +15,7 @@ public interface ICreateMapper<TSource>
     void Map(AutoMapper.Profile profile)
     {
         profile.CreateMap(typeof(TSource), GetType()).ReverseMap();
-        profile.CreateMap<ValidateFinanceCommand, T_FINANCEMENT>();
-        profile.CreateMap<RejectFinanceCommand, T_FINANCEMENT>();
-
-        profile.CreateMap<ValidateLimiteCommand, T_DEM_LIMITE>();
-
+        
     }
     
     

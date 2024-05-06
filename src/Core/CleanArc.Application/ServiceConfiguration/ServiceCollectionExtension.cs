@@ -1,8 +1,6 @@
 ﻿using System.Reflection;
 using CleanArc.Application.Common;
-using CleanArc.Domain.Entities;
-using CleanArc.SharedKernel.Extensions;
-using FluentValidation;
+
 using Mediator;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,8 +10,7 @@ public static class ServiceCollectionExtension
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-        services.AddMediator
-        (options =>
+        services.AddMediator(options =>
         {
             options.ServiceLifetime = ServiceLifetime.Scoped;
             options.Namespace = "CleanArc.Application.Mediator";
@@ -21,14 +18,8 @@ public static class ServiceCollectionExtension
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidateCommandBehavior<,>));
         //services.AddMediator(Assembly.GetExecutingAssembly());
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
-        services.AddAutoMapper(typeof(FinancementProfile).Assembly);
-        services.AddAutoMapper(typeof(LimiteProfile).Assembly);
 
-        
 
         return services;
     }
-
-
-   
 }

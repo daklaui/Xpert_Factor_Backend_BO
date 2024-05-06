@@ -48,16 +48,9 @@ public class FinancementController:BaseController
             return BadRequest("Invalid model");
         }
 
-        model.ID_FIN = id; 
+        var command = await _sender.Send(model);
 
-        var commandResult = await _sender.Send(model);
-
-        if (commandResult == null || !commandResult.IsSuccess)
-        {
-            return BadRequest("Failed to update TPostalCode");
-        }
-
-        return Ok("TPostalCode updated successfully");
+        return base.OperationResult(command);
     }
 
     [HttpPut("RejectFinancement/{id}")]
@@ -68,16 +61,9 @@ public class FinancementController:BaseController
             return BadRequest("Invalid model");
         }
 
-        model.ID_FIN = id; 
+        var command = await _sender.Send(model);
 
-        var commandResult = await _sender.Send(model);
-
-        if (commandResult == null || !commandResult.IsSuccess)
-        {
-            return BadRequest("Failed to update TPostalCode");
-        }
-
-        return Ok("TPostalCode updated successfully");
+        return base.OperationResult(command);
     }
 
     [HttpGet("GetAllFinancement")]

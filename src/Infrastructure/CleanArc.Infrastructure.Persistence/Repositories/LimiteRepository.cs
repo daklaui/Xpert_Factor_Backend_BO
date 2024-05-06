@@ -106,17 +106,17 @@ public class LimiteRepository : BaseAsyncRepository<T_DEM_LIMITE> ,ILimiteReposi
         return result;
     }
 
-    public async Task<T_DEM_LIMITE> validateLimite(int id, T_DEM_LIMITE demLimite)
+    public async Task<T_DEM_LIMITE> validateLimite(int id)
     {
-        var limite = await _dbContext.Set<T_DEM_LIMITE>().FirstOrDefaultAsync(p => p.REF_DEM_LIM == id);
-        if (limite == null)
+        var limite = await  base.Table.FirstOrDefaultAsync(p => p.REF_DEM_LIM == id);
+       if (limite == null)
         {
             throw new InvalidOperationException($"Limite with id {id} not found");
 
         }
         limite.DECISION_LIM = "V";
         limite.ACTIF_DEM_LIMI = true;
-        _dbContext.SaveChanges();
+       await base.UpdateAsync(limite);
         return limite;
         
     }

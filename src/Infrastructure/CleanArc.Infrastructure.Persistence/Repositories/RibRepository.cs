@@ -28,8 +28,8 @@ internal class RibRepository : BaseAsyncRepository<TR_RIB>, IRibRepository
             {
                 rib.RIB_RIB = fullRib;
                 rib.ACTIF_RIB = true;
-                _dbContext.TR_RIBs.Add(rib);
-                await _dbContext.SaveChangesAsync();
+                //_dbContext.TR_RIBs.Add(rib);
+                await base.AddAsync(rib);
                 return true;
             }
             else
@@ -63,7 +63,7 @@ internal class RibRepository : BaseAsyncRepository<TR_RIB>, IRibRepository
 
     public async Task<TR_RIB_DTO> EditRibIndividu(TR_RIB_DTO rib)
     {
-        var currentRib = _dbContext.TR_RIBs.FirstOrDefault(p => p.RIB_RIB == rib.OLD_RIB_RIB);
+        var currentRib = base.Table.FirstOrDefault(p => p.RIB_RIB == rib.OLD_RIB_RIB);
         var newRib = rib.RIB_RIB1 + rib.RIB_RIB2 + rib.RIB_RIB3;
         if (currentRib != null)
         {

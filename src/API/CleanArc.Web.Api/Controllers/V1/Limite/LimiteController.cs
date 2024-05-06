@@ -47,18 +47,11 @@ public class LimiteController:BaseController
         {
             return BadRequest("Invalid model");
         }
+        var command = await _sender.Send(model);
 
-        model.REF_DEM_LIM = id; 
-
-        var commandResult = await _sender.Send(model);
-
-        if (commandResult == null || !commandResult.IsSuccess)
-        {
-            return BadRequest("Failed to update Limite");
-        }
-
-        return Ok("Limite updated successfully");
+        return base.OperationResult(command);
     }
+    
     [HttpGet("GetAllLimite")]
     public async Task<IActionResult> GetAllLimite([FromQuery] PaginationParams paginationParams)
     {

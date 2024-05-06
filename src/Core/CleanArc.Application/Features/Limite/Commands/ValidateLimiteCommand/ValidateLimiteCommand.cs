@@ -3,7 +3,7 @@ using Mediator;
 
 namespace CleanArc.Application.Features.Limite.Commands.ValidateLimiteCommand;
 
-public class ValidateLimiteCommand:IRequest<OperationResult<Unit>>
+public class ValidateLimiteCommand:IRequest<OperationResult<bool>>
 {
     public int REF_DEM_LIM { get; set; }
     public string DECISION_LIM { get; set; }

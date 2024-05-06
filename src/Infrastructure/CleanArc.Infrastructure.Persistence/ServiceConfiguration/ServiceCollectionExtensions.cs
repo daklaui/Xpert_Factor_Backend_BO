@@ -14,10 +14,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddPersistenceServices(this IServiceCollection services,IConfiguration configuration)
     {
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.AddScoped<IFundingRepository, FundingRepository>();
-        services.AddScoped<ValidateFinanceCommandHandler>();
-        services.AddScoped<RejectFinanceCommandHandler>();
-
+        
         services.AddDbContext<ApplicationDbContext>(options =>
         {
             options
@@ -27,9 +24,4 @@ public static class ServiceCollectionExtensions
 
         return services;
     }
-    
-   
-        
-   
-
 }
