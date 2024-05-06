@@ -10,7 +10,7 @@ public class RejectFinanceCommandHandler :IRequestHandler<RejectFinanceCommand,O
     private readonly IUnitOfWork _unitOfWork;
    
 
-    public RejectFinanceCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public RejectFinanceCommandHandler(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
     

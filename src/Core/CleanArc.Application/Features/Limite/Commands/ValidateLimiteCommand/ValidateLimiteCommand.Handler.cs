@@ -9,7 +9,7 @@ internal class ValidateLimite_Handler : IRequestHandler<ValidateLimiteCommand, O
 {
     private readonly IUnitOfWork _unitOfWork;
 
-    public ValidateLimite_Handler(IUnitOfWork unitOfWork, IMapper mapper)
+    public ValidateLimite_Handler(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
     }
@@ -27,7 +27,6 @@ internal class ValidateLimite_Handler : IRequestHandler<ValidateLimiteCommand, O
 
             await _unitOfWork.LimiteRepository.validateLimite(limite.REF_DEM_LIM);
             await _unitOfWork.CommitAsync();
-
             return OperationResult<bool>.SuccessResult(true);
             
 
