@@ -3,6 +3,7 @@ using System.Text;
 using CleanArc.Application.Contracts;
 using CleanArc.Application.Contracts.Identity;
 using CleanArc.Application.Models.ApiResult;
+using CleanArc.Domain.Entities;
 using CleanArc.Domain.Entities.User;
 using CleanArc.Infrastructure.Identity.Identity;
 using CleanArc.Infrastructure.Identity.Identity.Dtos;
@@ -14,11 +15,13 @@ using CleanArc.Infrastructure.Identity.Identity.Store;
 using CleanArc.Infrastructure.Identity.Identity.validator;
 using CleanArc.Infrastructure.Identity.Jwt;
 using CleanArc.Infrastructure.Identity.UserManager;
+using CleanArc.Infrastructure.Persistence;
 using CleanArc.SharedKernel.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
@@ -212,4 +215,117 @@ public static class ServiceCollectionExtension
 
         return services;
     }
+    
+   /* public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddIdentity<TS_USER, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 6;
+                // Autres configurations selon vos besoins
+            })
+            .AddEntityFrameworkStores<ApplicationDbContext>() // Assurez-vous d'avoir un DbContext configuré
+            .AddDefaultTokenProviders();
+
+        // Configuration JWT
+        var jwtSettings = configuration.GetSection("JwtSettings");
+        services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = false;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = jwtSettings["validAudience"],
+                    ValidIssuer = jwtSettings["validIssuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["securityKey"]))
+                };
+            });
+        
+        
+
+        return services;
+    }*/
+   
+   /*public static IServiceCollection RegisterIdentityServices(this IServiceCollection services, IdentitySettings identitySettings)
+{
+    // Enregistrement des services nécessaires
+    services.AddScoped<IJwtService, JwtService>();
+    services.AddScoped<IAppUserManager, AppUserManagerImplementation>();
+    services.AddScoped<ISeedDataBase, SeedDataBase>();
+
+    // Configuration spécifique pour utiliser vos types d'entités TS_USER et Role
+    services.AddIdentity<User, Role>(options =>
+    {
+        // Configuration des options d'identité selon vos besoins
+        options.Password.RequireDigit = false;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequiredUniqueChars = 0;
+        options.Password.RequireUppercase = false;
+
+
+        options.Lockout.MaxFailedAccessAttempts = 5;
+        options.Lockout.AllowedForNewUsers = false;
+        options.User.RequireUniqueEmail = false;
+    })
+    .AddEntityFrameworkStores<ApplicationDbContext>() 
+    .AddDefaultTokenProviders();
+
+    // Configuration de l'autorisation dynamique
+    services.AddScoped<IAuthorizationHandler, DynamicPermissionHandler>();
+    services.AddScoped<IDynamicPermissionService, DynamicPermissionService>();
+
+    // Configuration de l'authentification JWT
+    services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        var secretKey = Encoding.UTF8.GetBytes(identitySettings.SecretKey);
+        var encryptionKey = Encoding.UTF8.GetBytes(identitySettings.Encryptkey);
+
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ClockSkew = TimeSpan.Zero,
+            RequireSignedTokens = true,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(secretKey),
+            RequireExpirationTime = true,
+            ValidateLifetime = true,
+            ValidateAudience = true,
+            ValidAudience = identitySettings.Audience,
+            ValidateIssuer = true,
+            ValidIssuer = identitySettings.Issuer,
+            TokenDecryptionKey = new SymmetricSecurityKey(encryptionKey),
+        };
+
+        // Configurez ici les événements JWTBearer si nécessaire
+    });
+
+    // Configuration des politiques d'autorisation
+    services.AddAuthorization(options =>
+    {
+        options.AddPolicy(ConstantPolicies.DynamicPermission, policy =>
+        {
+            policy.RequireAuthenticatedUser();
+            policy.Requirements.Add(new DynamicPermissionRequirement());
+        });
+    });
+
+    return services;
+}*/
 }

@@ -15,5 +15,4 @@ public class Role:IdentityRole<int>,IEntity
     public ICollection<RoleClaim> Claims { get; set; }
     public ICollection<UserRole> Users { get; set; }
 
-
 }

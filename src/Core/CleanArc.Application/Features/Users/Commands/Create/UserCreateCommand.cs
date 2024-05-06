@@ -9,35 +9,48 @@ using Microsoft.Extensions.DependencyInjection;
 namespace CleanArc.Application.Features.Users.Commands.Create;
 
 public record UserCreateCommand
-    (string UserName, string FirstName, string LastName, string PhoneNumber) : IRequest<OperationResult<UserCreateCommandResult>>,IValidatableModel<UserCreateCommand>
+    (string NOM_USER, string PRE_USER, string LOGIN_USER, string MDP_USER, bool ACTIF_USER, string FONCTION_USER, string SERVICE_USER, string DIRECTION_USER, string AGENCE_USER, string MAIL_USER, string TEL_FIXE_USER, string MOBILE_USER, string PHOTO_USER, string ONE_SIGNAL_PLAYER_ID) : IRequest<OperationResult<UserCreateCommandResult>>, IValidatableModel<UserCreateCommand>
 {
 
     public IValidator<UserCreateCommand> ValidateApplicationModel(ApplicationBaseValidationModelProvider<UserCreateCommand> validator)
     {
 
         validator
-            .RuleFor(c => c.FirstName)
+            .RuleFor(c => c.NOM_USER)
             .NotEmpty()
             .NotNull()
-            .WithMessage("User must have first name");
-
-        validator.RuleFor(c => c.UserName)
-            .NotEmpty()
-            .NotNull()
-            .WithMessage("Please enter your username");
+            .WithMessage("User must have a last name");
 
         validator
-            .RuleFor(c => c.LastName)
+            .RuleFor(c => c.PRE_USER)
             .NotEmpty()
             .NotNull()
-            .WithMessage("User must have last name");
+            .WithMessage("User must have a first name");
 
+        validator
+            .RuleFor(c => c.LOGIN_USER)
+            .NotEmpty()
+            .NotNull()
+            .WithMessage("Please enter a username");
 
-        validator.RuleFor(c => c.PhoneNumber).NotEmpty()
-            .NotNull().WithMessage("Phone Number is required.")
-            .MinimumLength(10).WithMessage("PhoneNumber must not be less than 10 characters.")
-            .MaximumLength(20).WithMessage("PhoneNumber must not exceed 50 characters.")
-            .Matches(new Regex(@"^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$")).WithMessage("Phone number is not valid");
+        validator
+            .RuleFor(c => c.MDP_USER)
+            .NotEmpty()
+            .NotNull()
+            .WithMessage("Please enter a password");
+
+        validator
+            .RuleFor(c => c.ACTIF_USER)
+            .NotNull()
+            .WithMessage("Please specify whether the user is active");
+
+        validator
+            .RuleFor(c => c.FONCTION_USER)
+            .NotEmpty()
+            .NotNull()
+            .WithMessage("Please specify the user's function");
+
+        // Ajoutez des règles de validation pour les autres attributs ici selon vos besoins
 
         return validator;
     }

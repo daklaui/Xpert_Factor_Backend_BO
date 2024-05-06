@@ -48,7 +48,7 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
 
     public virtual DbSet<TR_TVA> TR_TVAs { get; set; }
 
-    public virtual DbSet<TS_GRP_USER> TS_GRP_USERs { get; set; }
+   // public virtual DbSet<TS_GRP_USER> TS_GRP_USERs { get; set; }
 
     public virtual DbSet<TS_USER> TS_USERs { get; set; }
 
@@ -597,7 +597,7 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
             entity.Property(e => e.VAL_TVA).HasColumnType("decimal(4, 2)");
         });
 
-        modelBuilder.Entity<TS_GRP_USER>(entity =>
+       /* modelBuilder.Entity<TS_GRP_USER>(entity =>
         {
             entity.HasKey(e => e.ID_GRP_USER).HasName("PK__TS_GRP_U__D6346B9A4DDCEA49");
 
@@ -607,7 +607,7 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
             entity.Property(e => e.LIB_GRP_USER)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-        });
+        });*/
 
         modelBuilder.Entity<TS_USER>(entity =>
         {
@@ -642,12 +642,12 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
             entity.Property(e => e.NOM_USER)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.ONE_SIGNAL_PLAYER_ID)
+            /*entity.Property(e => e.ONE_SIGNAL_PLAYER_ID)
                 .HasMaxLength(100)
-                .IsUnicode(false);
-            entity.Property(e => e.PHOTO_USER)
+                .IsUnicode(false);*/
+           /* entity.Property(e => e.PHOTO_USER)
                 .HasMaxLength(200)
-                .IsUnicode(false);
+                .IsUnicode(false);*/
             entity.Property(e => e.PRE_USER)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -658,10 +658,10 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
                 .HasMaxLength(50)
                 .IsUnicode(false);
 
-            entity.HasOne(d => d.ID_GRP_USERNavigation).WithMany(p => p.TS_USERs)
+            /*entity.HasOne(d => d.ID_GRP_USERNavigation).WithMany(p => p.TS_USERs)
                 .HasForeignKey(d => d.ID_GRP_USER)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__TS_USER__ID_GRP___5C6CB6D7");
+                .HasConstraintName("FK__TS_USER__ID_GRP___5C6CB6D7");*/
         });
 
         modelBuilder.Entity<TS_USERS_WEB>(entity =>

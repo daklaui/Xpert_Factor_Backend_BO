@@ -26,13 +26,13 @@ public class UserController : BaseController
         _mediator = mediator;
     }
 
-    [HttpPost("Register")]
+    /*[HttpPost("Register")]
     public async Task<IActionResult> CreateUser(UserCreateCommand model)
     {
         var command = await _mediator.Send(model);
 
         return base.OperationResult(command);
-    }
+    }*/
 
     //[HttpPost("ConfirmPhoneNumber")]
     //public async Task<IActionResult> ConfirmPhoneNumber(ConfirmUserPhoneNumberViewModel model)

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CleanArc.Domain.Entities;
+/*namespace CleanArc.Domain.Entities;
 
 public partial class TS_GRP_USER
 {
@@ -12,4 +12,4 @@ public partial class TS_GRP_USER
     public bool? ACTIF_GRP_USER { get; set; }
 
     public virtual ICollection<TS_USER> TS_USERs { get; } = new List<TS_USER>();
-}
+}*/

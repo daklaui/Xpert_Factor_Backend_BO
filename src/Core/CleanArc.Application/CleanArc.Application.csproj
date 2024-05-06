@@ -19,5 +19,8 @@
     <PackageReference Include="Mediator.Abstractions" Version="2.1.1" />
     <PackageReference Include="System.Linq.Async" Version="6.0.1" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\TsUserAuth\Queries\" />
+  </ItemGroup>
 
 </Project>

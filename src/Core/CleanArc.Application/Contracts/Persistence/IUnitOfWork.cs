@@ -1,13 +1,22 @@
-﻿namespace CleanArc.Application.Contracts.Persistence;
+﻿using CleanArc.Application.Contracts.Identity;
+using CleanArc.Application.Contracts.Persistence;
+
+namespace CleanArc.Application.Contracts.Persistence;
 
 public interface IUnitOfWork
 {
-    public IUserRefreshTokenRepository UserRefreshTokenRepository { get; }
-    public IOrderRepository OrderRepository { get; }
-    public IIndividualRepository IndividualRepository { get; }
-    public IContactRepository contactRepository { get; }
-    public IRibRepository ribRepository { get; }
-    public IAdhAuthRepository adhAuthRepository { get; }
+    IUserRefreshTokenRepository UserRefreshTokenRepository { get; }
+    IOrderRepository OrderRepository { get; }
+    IIndividualRepository IndividualRepository { get; }
+    IContactRepository ContactRepository { get; } 
+    IRoleRepository RoleRepository { get; }
+    IRolesRepository RolesRepository { get; }
+    IRibRepository RibRepository { get; }  
+    IUserRoleRepository UserRoleRepository { get; } 
+    IPermissionRepository PermissionRepository { get; } 
+    IAdhAuthRepository AdhAuthRepository { get; } 
+    IUserRepository UserRepository { get; } 
+
     Task CommitAsync();
     ValueTask RollBackAsync();
 }

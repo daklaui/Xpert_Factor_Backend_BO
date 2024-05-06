@@ -27,4 +27,9 @@ internal class RibRepository : BaseAsyncRepository<TR_RIB>, IRibRepository
     {
         throw new NotImplementedException();
     }
+
+    public Task<List<T_INDIVIDU>> GetAllOrdersWithRelatedUserAsync()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace CleanArc.Domain.Entities;
 
 public partial class T_ADRESSE
