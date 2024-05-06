@@ -1,10 +1,11 @@
 using CleanArc.Application.Contracts.Persistence;
+using CleanArc.Application.Models.Common;
 using CleanArc.Domain.Entities;
 using Mediator;
 
 namespace CleanArc.Application.Features.Bordereaux.Commands.ValidateBordereauCommand;
 
-public class ValidateBordereauCommandHandler : IRequestHandler<ValidateBordereauCommand, bool>
+public class ValidateBordereauCommandHandler : IRequestHandler<ValidateBordereauCommand, OperationResult<bool>>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -12,29 +13,38 @@ public class ValidateBordereauCommandHandler : IRequestHandler<ValidateBordereau
     {
         _unitOfWork = unitOfWork;
     }
-    public async ValueTask<bool> Handle(ValidateBordereauCommand request, CancellationToken cancellationToken)
+    public async ValueTask<OperationResult<bool>> Handle(ValidateBordereauCommand request, CancellationToken cancellationToken)
     {
-        var pksDto = request.PksBordereauxDto;
-        
-        var existingBordereau = await _unitOfWork.BordereauxRepository.GetBordereauxByPK(pksDto.NUM_BORD, pksDto.REF_CTR_BORD, pksDto.ANNEE_BORD);
-        
-        if (existingBordereau == null)
+        try
         {
-            return false;
-        }
+            var pksDto = request.PksBordereauxDto;
         
-        var detBordList = await _unitOfWork.TDetBordRepository.GetDetBordByPK(pksDto.NUM_BORD, pksDto.REF_CTR_BORD, pksDto.ANNEE_BORD);
+            var existingBordereau = await _unitOfWork.BordereauxRepository.GetBordereauxByPK(pksDto.NUM_BORD, pksDto.REF_CTR_BORD, pksDto.ANNEE_BORD);
         
-        if (detBordList == null || !detBordList.Any())
-        {
-            return false;
-        }
-        List<T_DET_BORD> detBordListAsList = detBordList.ToList();
-        await _unitOfWork.BordereauxRepository.ValidateBordereauAsync(existingBordereau, detBordListAsList);
+            if (existingBordereau == null)
+            {
+                return OperationResult<bool>.FailureResult("existingBordereau is empty" ,(false));
+            }
         
-        await _unitOfWork.CommitAsync();
+            var detBordList = await _unitOfWork.TDetBordRepository.GetDetBordByPK(pksDto.NUM_BORD, pksDto.REF_CTR_BORD, pksDto.ANNEE_BORD);
+        
+            if (detBordList == null || !detBordList.Any())
+            {
+                return OperationResult<bool>.FailureResult("detbordlist is empty" ,(false));
+            }
+            List<T_DET_BORD> detBordListAsList = detBordList.ToList();
+            await _unitOfWork.BordereauxRepository.ValidateBordereauAsync(existingBordereau, detBordListAsList);
+        
+            await _unitOfWork.CommitAsync();
 
-        return true;
+            return OperationResult<bool>.SuccessResult(true);
+        }
+        catch (Exception ex)
+        {
+            return OperationResult<bool>.NotFoundResult("error");
+
+        }
+     
     }
 
 }

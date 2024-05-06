@@ -76,18 +76,16 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
         }
         public async Task ValidateBordereauAsync(T_BORDEREAU existingBordereau, List<T_DET_BORD> detBordList)
         {
-            // Update the Bordereau entity
+            
             existingBordereau.VALIDE_BORD = true;
             _dbContext.Entry(existingBordereau).State = EntityState.Modified;
-
-            // Update each T_DET_BORD entity
+            
             foreach (var detBord in detBordList)
             {
                 detBord.VALIDE_DET_BORD = true;
                 _dbContext.Entry(detBord).State = EntityState.Modified;
             }
-
-            // Save the changes to the database
+            
             await _dbContext.SaveChangesAsync();
         }
         

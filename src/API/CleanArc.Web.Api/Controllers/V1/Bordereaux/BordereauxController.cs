@@ -91,22 +91,19 @@ public class BordereauxController : BaseController
         return base.OperationResult(command);
     }
     
- /*   [HttpPut("ValidateBordereau")]
+    [HttpPut("ValidateBordereau")]
     public async Task<IActionResult> ValidateBordereau([FromBody] PksBordereauxDto pksBordereauxDto)
     {
-        // Create the command
         var command = new ValidateBordereauCommand(pksBordereauxDto);
-
-        // Send the command using _sender
+     
         var result = await _sender.Send(command);
-
-        // Return the result using base.OperationResult<bool>
+    
         return base.OperationResult<bool>(result);
-    }*/
+        
+        
+    }
 
-
-
-
+    
     private (string NumBord, int RefCtrBord, string AnneeBord) ParseDeletionCriteria(PksDetBordDto id)
     {
         
