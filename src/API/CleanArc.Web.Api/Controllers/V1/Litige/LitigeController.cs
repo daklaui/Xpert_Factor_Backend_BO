@@ -14,7 +14,7 @@ public class LitigeController : BaseController
 {
     private readonly ISender _sender;
 
-    public LitigesController(ISender sender)
+    public LitigeController(ISender sender)
     {
         _sender = sender;
     }
