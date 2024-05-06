@@ -10,7 +10,7 @@ namespace CleanArc.Web.Api.Controllers.V1.Litige;
 [ApiVersion("1")]
 [ApiController]
 [Route("api/v{version:apiVersion}/Litige")]
-public class LitigesController : BaseController
+public class LitigeController : BaseController
 {
     private readonly ISender _sender;
 
