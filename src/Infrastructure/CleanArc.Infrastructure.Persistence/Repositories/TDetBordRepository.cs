@@ -109,21 +109,21 @@ internal class TDetBordRepository :BaseAsyncRepository<T_DET_BORD> ,IT_DET_BORD_
    {
        string sqlQuery = $@"
                 SELECT 
-                    ID_DET_BORD,
-                    NUM_BORD,
-                    (SELECT REF_DOCUMENT_DET_BORD FROM TJ_DOCUMENT_DET_BORD WHERE ID_DET_BORD = T_DET_BORD.ID_DET_BORD) AS REF_DET_BORD,
-                    TYP_DET_BORD,
-                    DAT_DET_BORD,
-                    MONT_TTC_DET_BORD,
-                    ANNEE_BORD,
-                    REF_CTR_DET_BORD,
-                    ECH_DET_BORD,
-                    MODE_REG_DET_BORD,
-                    (SELECT NOM_IND FROM T_INDIVIDU WHERE REF_IND = REF_IND_DET_BORD) AS nomind,
-                    REF_CTR_PAPIER_CTR
-                FROM
-                    T_DET_BORD
-                    JOIN T_CONTRAT ON T_CONTRAT.REF_CTR = T_DET_BORD.REF_CTR_DET_BORD
+    ID_DET_BORD,
+    NUM_BORD,
+    (SELECT REF_DOCUMENT_DET_BORD FROM TJ_DOCUMENT_DET_BORD WHERE ID_DET_BORD = T_DET_BORD.ID_DET_BORD) AS REF_DOCUMENT_DET_BORD,
+    TYP_DET_BORD,
+    DAT_DET_BORD,
+    MONT_TTC_DET_BORD,
+    ANNEE_BORD,
+    REF_CTR_DET_BORD,
+    ECH_DET_BORD,
+    MODE_REG_DET_BORD,
+    (SELECT NOM_IND FROM T_INDIVIDU WHERE REF_IND = REF_IND_DET_BORD) AS NOM_IND,
+    REF_CTR_PAPIER_CTR
+FROM
+    T_DET_BORD
+    JOIN T_CONTRAT ON T_CONTRAT.REF_CTR = T_DET_BORD.REF_CTR_DET_BORD
                 WHERE
                     NUM_BORD = '{pksDto.NUM_BORD}' AND
                     REF_CTR_DET_BORD = {pksDto.REF_CTR_DET_BORD} AND

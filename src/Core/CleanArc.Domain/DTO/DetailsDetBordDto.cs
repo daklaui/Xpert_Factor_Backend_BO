@@ -15,10 +15,7 @@ public class DetailsDetBordDto
     public short? ECH_DET_BORD { get; set; }
     public string MODE_REG_DET_BORD { get; set; }
     public string NOM_IND { get; set; }
-    public int REF_IND { get; set; }
-    public int? REF_IND_DET_BORD { get; set; }
     public string REF_CTR_PAPIER_CTR { get; set; }
-    public int REF_CTR { get; set; }
-    public bool? VALIDE_DET_BORD { get; set; }
+    
      
 }
