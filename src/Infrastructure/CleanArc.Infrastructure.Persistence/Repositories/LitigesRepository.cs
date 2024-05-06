@@ -1,6 +1,8 @@
 ﻿using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Domain.Entities;
+using CleanArc.Domain.Entities.DTO;
 using CleanArc.Infrastructure.Persistence.Repositories.Common;
+using Microsoft.EntityFrameworkCore;
 
 namespace CleanArc.Infrastructure.Persistence.Repositories;
 
@@ -46,6 +48,13 @@ public class LitigesRepository:BaseAsyncRepository<T_LITIGE>,ILitigesRepository
         {
             throw new InvalidOperationException("Une erreur s'est produite lors de l'ajout du litige.", ex);
         }
+    }
+    public  List<T_LITIGE_DTO> GetAllRapportFacturesEnLitige()
+    {
+        return  _dbContext
+            .usp_Rapport_Factures_En_Litige_VersionII
+            .FromSql($"exec usp_Rapport_Factures_En_Litige_VersionII").ToList();
+        
     }
 
 

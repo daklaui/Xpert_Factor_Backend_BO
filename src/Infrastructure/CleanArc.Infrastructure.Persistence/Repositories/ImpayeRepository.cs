@@ -25,7 +25,9 @@ internal class ImpayeRepository :BaseAsyncRepository<T_IMPAYE>,IimpayeRepository
  
     public  List<T_IMPAYE_DTO> GetListeResolutionDesImpayes()
     {
-        return _dbContext.ListeDesImpayes.FromSql($"exec ListeDesImpayes").ToList();
+        return _dbContext.ListeDesImpayes
+            .FromSql($"exec ListeDesImpayes")
+            .ToList();
        
       
     }
@@ -42,7 +44,10 @@ internal class ImpayeRepository :BaseAsyncRepository<T_IMPAYE>,IimpayeRepository
     
    public List<T_IMPAYE_DTO> Listedesimpaye()
    {
-    var ListImpaye = _dbContext.ListeDesImpayes.FromSql($"exec ListeDesImpayes").AsEnumerable().Where(imp => imp.IS_RESOLU == null).ToList();
+    var ListImpaye = _dbContext.ListeDesImpayes
+        .FromSql($"exec ListeDesImpayes")
+        .AsEnumerable()
+        .Where(imp => imp.IS_RESOLU == null).ToList();
     return ListImpaye;
    }
 

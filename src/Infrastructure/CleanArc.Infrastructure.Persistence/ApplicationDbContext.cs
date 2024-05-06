@@ -182,7 +182,9 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
     
     public DbSet<T_RECOUVREMENT_DTO>FacturesNonEchu { get; set; }
     
-
+    public DbSet<T_LITIGE_DTO>usp_Rapport_Factures_En_Litige_VersionII { get; set; }
+    
+    
 
     public ApplicationDbContext(DbContextOptions options)
         : base(options)
