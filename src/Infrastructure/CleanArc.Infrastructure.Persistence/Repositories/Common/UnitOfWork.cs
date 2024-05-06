@@ -10,6 +10,8 @@ public class UnitOfWork : IUnitOfWork
 
     public IUserRefreshTokenRepository UserRefreshTokenRepository { get; }
     public IOrderRepository OrderRepository { get; }
+    public IGEDRepository GEDRepository { get; }
+
     public IIndividualRepository IndividualRepository { get; }
     public ITMMRepository TmmRepository { get; }
     public IFundingRepository FundingRepository { get; }
@@ -60,6 +62,7 @@ public class UnitOfWork : IUnitOfWork
         ListValRepository = new ListValRepository(_db);
         ProrogationsRepository = new ProrogationsRepository(_db);
         LitigesRepository = new LitigesRepository(_db);
+        GEDRepository = new GEDRepository(_db);
     }
 
     public Task CommitAsync()

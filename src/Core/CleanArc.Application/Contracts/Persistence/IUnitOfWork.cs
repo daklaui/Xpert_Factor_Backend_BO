@@ -5,6 +5,7 @@ public interface IUnitOfWork
     public IUserRefreshTokenRepository UserRefreshTokenRepository { get; }
     public IOrderRepository OrderRepository { get; }
     public IIndividualRepository IndividualRepository { get; }
+    public IGEDRepository GEDRepository { get; }
     public ITMMRepository TmmRepository { get; }
     public IFundingRepository FundingRepository { get; }
     public IContactRepository contactRepository { get; }
