@@ -1,7 +1,6 @@
 ﻿using CleanArc.Application.Profiles;
-using CleanArc.Domain.Entities;
 
-namespace CleanArc.Application.Features.TListVal.Queries.GetByIdQuery
+namespace CleanArc.Application.Features.ListVal.Queries.GetTListValById
 {
     public record GetByIdQueryResult : ICreateMapper<Domain.Entities.TR_LIST_VAL>
     {

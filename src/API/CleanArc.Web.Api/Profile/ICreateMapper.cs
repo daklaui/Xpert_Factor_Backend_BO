@@ -17,7 +17,6 @@ public interface ICreateMapper<TSource>
     {
         profile.CreateMap(typeof(TSource), GetType()).ReverseMap();
         
-        profile.CreateMap<UpdateTPostalCodesCommand, TR_CP>();
     }
     
     

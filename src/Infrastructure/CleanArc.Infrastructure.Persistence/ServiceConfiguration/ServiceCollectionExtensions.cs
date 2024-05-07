@@ -21,11 +21,6 @@ public static class ServiceCollectionExtensions
                 .UseSqlServer(configuration.GetConnectionString("SqlServer"));
         });
         
-        services.AddScoped<ITPostalCodesRepository, TPostalCodesRepository>(); 
-        services.AddScoped<AddTPostalCodesCommandHandler>();
-        services.AddScoped<UpdateTPostalCodesCommandHandler>();
-        services.AddScoped<ITJobsRepository, TJobsRepository>();
-        services.AddScoped<ITListValRepository, TListValRepository>();
 
 
         return services;

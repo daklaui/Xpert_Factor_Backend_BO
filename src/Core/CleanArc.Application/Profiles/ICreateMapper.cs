@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using CleanArc.Application.Features.ListVals.Commands.UpdateTListValCommand;
-using CleanArc.Application.Features.TListVal.Queries.GetAllTListVals;
 using CleanArc.Domain.Entities;
 using CleanArc.Domain.Entities;
 
@@ -12,7 +10,7 @@ public interface ICreateMapper<TSource>
     {
         public MappingProfile()
         {
-            CreateMap<TR_LIST_VAL, GetAllTListValsQueryResult>();
+            
         }
     }
     void Map(Profile profile)
@@ -23,8 +21,5 @@ public interface ICreateMapper<TSource>
 
 public class UpdateTListValProfile : Profile
 {
-    public UpdateTListValProfile()
-    {
-        CreateMap<UpdateTListValCommand, TR_LIST_VAL>();
-    }
+    
 }

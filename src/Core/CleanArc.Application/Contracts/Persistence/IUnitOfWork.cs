@@ -12,6 +12,7 @@ public interface IUnitOfWork
     public IRibRepository ribRepository { get; }
     public IAdhAuthRepository adhAuthRepository { get; }
     public ITjcirRepository tjcirRepository { get; }
+   // public ITPostalCodesRepository PostalCodesRepository { get; }
     
  
     public  IimpayeRepository ImpayeRepository { get; }
@@ -19,18 +20,13 @@ public interface IUnitOfWork
     public IDebitRepository DebitRepository { get; }
     public IExtraitRepository ExtraitRepository { get; }
     public IAgencyBankRepository AgencyBankRepository { get; }
-   
-
-    
-    public ITListValRepository TListValRepository { get; }
-    
-    
     public  IEncaissement EncaissementRepository { get; }
     public ILimiteRepository LimiteRepository { get; }
     public  IListValRepository ListValRepository { get; }
     public  IProrogationsRepository ProrogationsRepository { get; }
     public ILitigesRepository LitigesRepository { get; }
     public IRecouvrementRepository RecouvrementRepository { get; }
+    public ITJobsRepository TJobsRepository { get; }
     Task CommitAsync();
     ValueTask RollBackAsync();
 }

@@ -1,8 +1,9 @@
 ﻿using CleanArc.Application.Common;
-using CleanArc.Application.Features.ListVals.Commands.UpdateTListValCommand;
-using CleanArc.Application.Features.TListVal.Commands;
-using CleanArc.Application.Features.TListVal.Queries.GetAllTListVals;
-using CleanArc.Application.Features.TListVal.Queries.GetByIdQuery;
+using CleanArc.Application.Features.ListVal.Commands.AddValsCommand;
+using CleanArc.Application.Features.ListVal.Commands.UpdateTListValCommand;
+using CleanArc.Application.Features.ListVal.Queries.GetAllTListVals;
+using CleanArc.Application.Features.ListVal.Queries.GetTListValById;
+using CleanArc.Application.Features.Recouvrement.Queries.GetAllRecouvrements;
 using CleanArc.WebFramework.BaseController;
 using Mediator;
 using Microsoft.AspNetCore.Mvc;
@@ -75,19 +76,18 @@ namespace CleanArc.Web.Api.Controllers.V1.TListVal
                 return BadRequest("Invalid model");
             }
 
-            model.Id = id; 
+            var command = await _sender.Send(model);
 
-            var commandResult = await _sender.Send(model);
-
-            if (commandResult == null || !commandResult.IsSuccess)
-            {
-                return BadRequest("Failed to update TListVal");
-            }
-
-            return Ok("TListVal updated successfully");
+            return base.OperationResult(command);
         }
+        
+        [HttpGet("GetAllRecouvrement")]
+        public async Task<IActionResult> GetListOfRecouvrement([FromQuery] PaginationParams paginationParams)
+        {
+            var query = await _sender.Send(new GetAllRecouvrementQuery(paginationParams));
 
-
+            return base.OperationResult(query);
+        }
 
         
     }

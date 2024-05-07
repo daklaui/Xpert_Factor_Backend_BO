@@ -5,8 +5,7 @@ using CleanArc.Application.Models.Common;
 using CleanArc.Domain.Entities;
 using Mediator;
 
-
-namespace CleanArc.Application.Features.TListVal.Queries.GetAllTListVals
+namespace CleanArc.Application.Features.ListVal.Queries.GetAllTListVals
 {
     internal class GetAllTListValsQueryHandler : IRequestHandler<GetAllTListValsQuery, OperationResult<PageInfo<GetAllTListValsQueryResult>>>
     {
@@ -31,7 +30,7 @@ namespace CleanArc.Application.Features.TListVal.Queries.GetAllTListVals
                 throw new ArgumentNullException(nameof(_mapper), "Mapper is null");
             }
 
-            var listVal = await _unitOfWork.TListValRepository.GetAllTListValsAsync(request.PaginationParams);
+            var listVal = await _unitOfWork.ListValRepository.GetAllTListValsAsync(request.PaginationParams);
 
             if (listVal == null)
             {

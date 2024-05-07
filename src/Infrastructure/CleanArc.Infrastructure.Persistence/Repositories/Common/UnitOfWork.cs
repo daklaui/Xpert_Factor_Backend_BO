@@ -20,13 +20,15 @@ public class UnitOfWork : IUnitOfWork
     public IRibRepository ribRepository { get; }
     public IAdhAuthRepository adhAuthRepository { get; }
     public ITjcirRepository tjcirRepository { get; }
+
+    //public ITPostalCodesRepository PostalCodesRepository { get; }
+
+    //public ITPostalCodesRepository PostalCodesRepository { get; }
     public IimpayeRepository ImpayeRepository { get; }
     public ICreditRepository CreditRepository { get; }
     public IDebitRepository DebitRepository { get; }
     public IExtraitRepository ExtraitRepository { get; }
     public IAgencyBankRepository AgencyBankRepository { get; }
-    //public ITPostalCodesRepository TPostalCodesRepository { get; }
-    //public ITJobsRepository TJobsRepository { get; } // Nouvelle propriété
     public IEncaissement EncaissementRepository { get; }
     
     public TJcirRepository  JcirRepository{ get; set; }
@@ -36,8 +38,7 @@ public class UnitOfWork : IUnitOfWork
     public ILitigesRepository LitigesRepository { get; }
     
     public IRecouvrementRepository RecouvrementRepository { get; }
-
-    public ITListValRepository TListValRepository { get; }
+    public ITJobsRepository TJobsRepository { get; }
 
     public UnitOfWork(ApplicationDbContext db)
     {
@@ -52,14 +53,12 @@ public class UnitOfWork : IUnitOfWork
         ribRepository = new RibRepository(_db);
         adhAuthRepository = new AdhAuthRepository(_db);
         ImpayeRepository =new ImpayeRepository(_db);
-        CreditRepository = new CreditRepository(_db);
+        //CreditRepository = new CreditRepository(_db);
         DebitRepository =new DebitRepository(_db);
         ExtraitRepository = new ExtraitRepository(_db);
         AgencyBankRepository = new AgencyBankRepositoryRepository(_db);
         OrderRepository = new OrderRepository(_db);
         IndividualRepository = new IndividuRepository(_db);
-        //TPostalCodesRepository = new TPostalCodesRepository(_db);
-        //TJobsRepository = new TJobsRepository(_db); // Initialisation de TJobsRepository
         EncaissementRepository = new EncaissementReposiotry(_db);
         OrderRepository= new OrderRepository(_db);
         IndividualRepository= new IndividuRepository(_db);
@@ -69,11 +68,10 @@ public class UnitOfWork : IUnitOfWork
         LitigesRepository = new LitigesRepository(_db);
         GEDRepository = new GEDRepository(_db);
         RecouvrementRepository = new RecouvrementRepository(_db);
-        TPostalCodesRepository = new TPostalCodesRepository(_db);
-        TJobsRepository = new TJobsRepository(_db); // Initialisation de TJobsRepository
+        //PostalCodesRepository = new TPostalCodesRepository(_db);
+        //TJobsRepository = new TJobsRepository(_db); 
         OrderRepository= new OrderRepository(_db);
         IndividualRepository= new IndividuRepository(_db);
-        TListValRepository = new TListValRepository(_db);
     }
 
     public Task CommitAsync()
