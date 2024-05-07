@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using CleanArc.Domain.Common;
+namespace CleanArc.Domain.DTO;
 
-namespace CleanArc.Domain.Entities;
-
-public partial class T_DET_BORD : IEntity
+public class T_det_bord_DTO
 {
+    
     public string ID_DET_BORD { get; set; }
 
+    public string  REF_DOC { get; set; }
     public int REF_CTR_DET_BORD { get; set; }
 
     public string ANNEE_BORD { get; set; }
@@ -67,6 +65,4 @@ public partial class T_DET_BORD : IEntity
     public string COMM_DET_BORD { get; set; }
 
     public decimal? RETENU_DET_BORD { get; set; }
-
-    public virtual T_CONTRAT REF_CTR_DET_BORDNavigation { get; set; }
 }

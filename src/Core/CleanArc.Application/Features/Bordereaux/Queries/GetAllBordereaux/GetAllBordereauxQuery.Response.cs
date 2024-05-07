@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using CleanArc.Domain.Common;
+using CleanArc.Application.Profiles;
+using CleanArc.Domain.DTO;
+using CleanArc.Domain.Entities;
 
-namespace CleanArc.Domain.Entities;
+namespace CleanArc.Application.Features.Bordereaux.Queries.GetAllBordereaux;
 
-public partial class T_BORDEREAU : IEntity
+public record GetAllBordereauxQueryResult : ICreateMapper<T_BORDEREAU>
 {
     public string NUM_BORD { get; set; }
 

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using CleanArc.Domain.Common;
+using CleanArc.Application.Profiles;
+using CleanArc.Domain.Entities;
 
-namespace CleanArc.Domain.Entities;
+namespace CleanArc.Application.Features.TDetBord.Queries.GetAllTDetBord;
 
-public partial class T_DET_BORD : IEntity
+public record GetAllTDetBordQueryResult : ICreateMapper<T_DET_BORD>
 {
     public string ID_DET_BORD { get; set; }
 

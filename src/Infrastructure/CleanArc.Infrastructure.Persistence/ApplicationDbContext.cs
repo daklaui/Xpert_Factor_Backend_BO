@@ -4,6 +4,7 @@ using CleanArc.Domain.Common;
 using CleanArc.Domain.DTO;
 using CleanArc.Domain.Entities;
 using CleanArc.Domain.Entities.DTO;
+using CleanArc.Domain.DTO;
 using CleanArc.Domain.Entities;
 using CleanArc.Domain.Entities.User;
 using CleanArc.Domain.StoredProcuderModel;
@@ -175,6 +176,7 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
     public DbSet<usp_FRAIS_PAIEMENT_V> usp_FRAIS_PAIEMENT_V { get; set; }
     public DbSet<usp_FRAIS_PAIEMENT_T> usp_FRAIS_PAIEMENT_T { get; set; }
     public DbSet<usp_FRAIS_PAIEMENT_C> usp_FRAIS_PAIEMENT_C { get; set; }
+    public virtual DbSet<DetailsDetBordDto> DetailsDetBordDto { get; set; }
 
     public  DbSet<All_Ecran_Financements> All_Ecran_Financements { get; set; }
     

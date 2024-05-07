@@ -27,6 +27,9 @@ public interface IUnitOfWork
     public ILitigesRepository LitigesRepository { get; }
     public IRecouvrementRepository RecouvrementRepository { get; }
     public ITJobsRepository TJobsRepository { get; }
+    public IT_DET_BORD_Repository TDetBordRepository { get; }
+    ITJ_DOCUMENT_DET_BORD_Repository TjDocumentDetBordRepository { get; }
+    public IBordereauxRepository BordereauxRepository { get; }
     Task CommitAsync();
     ValueTask RollBackAsync();
 }

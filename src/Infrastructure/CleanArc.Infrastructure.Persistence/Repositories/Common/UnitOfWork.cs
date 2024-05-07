@@ -41,6 +41,11 @@ public class UnitOfWork : IUnitOfWork
     public ITJobsRepository TJobsRepository { get; }
 
     public UnitOfWork(ApplicationDbContext db)
+    
+    public IT_DET_BORD_Repository TDetBordRepository { get; }
+    public ITJ_DOCUMENT_DET_BORD_Repository TjDocumentDetBordRepository { get; }
+    public IBordereauxRepository BordereauxRepository { get; }
+    public UnitOfWork(ApplicationDbContext db )
     {
         _db = db;
         JcirRepository = new TJcirRepository(_db);
@@ -72,6 +77,9 @@ public class UnitOfWork : IUnitOfWork
         //TJobsRepository = new TJobsRepository(_db); 
         OrderRepository= new OrderRepository(_db);
         IndividualRepository= new IndividuRepository(_db);
+        BordereauxRepository = new BordereauxRepository(_db);
+        TjDocumentDetBordRepository = new TJ_DOCUMENT_DET_BORD_Repository(_db);
+        TDetBordRepository = new TDetBordRepository(_db);
     }
 
     public Task CommitAsync()

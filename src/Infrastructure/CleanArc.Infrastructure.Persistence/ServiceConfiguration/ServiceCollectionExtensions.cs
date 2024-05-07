@@ -2,6 +2,7 @@
 using CleanArc.Application.Features.Financement.Commands.RejectFinancementCommand;
 using CleanArc.Application.Features.Financement.Commands.UpdateFinancementCommand;
 using CleanArc.Infrastructure.Persistence.Repositories;
+using CleanArc.Infrastructure.Persistence.Repositories;
 using CleanArc.Infrastructure.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -20,6 +21,7 @@ public static class ServiceCollectionExtensions
             options
                 .UseSqlServer(configuration.GetConnectionString("SqlServer"));
         });
+        
         
 
 
