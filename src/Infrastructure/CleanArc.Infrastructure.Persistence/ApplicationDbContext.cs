@@ -4,6 +4,7 @@ using CleanArc.Domain.Common;
 using CleanArc.Domain.DTO;
 using CleanArc.Domain.Entities;
 using CleanArc.Domain.Entities.DTO;
+using CleanArc.Domain.Entities;
 using CleanArc.Domain.Entities.User;
 using CleanArc.Domain.StoredProcuderModel;
 using CleanArc.SharedKernel.Extensions;
@@ -188,6 +189,7 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
     
     
 
+    public DbSet<TR_LIST_VAL> TRListVals { get; set; }
     public ApplicationDbContext(DbContextOptions options)
         : base(options)
     {

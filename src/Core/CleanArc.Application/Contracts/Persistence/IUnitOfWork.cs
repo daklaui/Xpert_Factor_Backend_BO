@@ -22,6 +22,9 @@ public interface IUnitOfWork
    
 
     
+    public ITListValRepository TListValRepository { get; }
+    
+    
     public  IEncaissement EncaissementRepository { get; }
     public ILimiteRepository LimiteRepository { get; }
     public  IListValRepository ListValRepository { get; }

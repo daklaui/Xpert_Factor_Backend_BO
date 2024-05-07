@@ -8,6 +8,7 @@ public class UnitOfWork : IUnitOfWork
     private IUnitOfWork _unitOfWorkImplementation;
 
 
+       
     public IUserRefreshTokenRepository UserRefreshTokenRepository { get; }
     public IOrderRepository OrderRepository { get; }
     public IGEDRepository GEDRepository { get; }
@@ -35,6 +36,8 @@ public class UnitOfWork : IUnitOfWork
     public ILitigesRepository LitigesRepository { get; }
     
     public IRecouvrementRepository RecouvrementRepository { get; }
+
+    public ITListValRepository TListValRepository { get; }
 
     public UnitOfWork(ApplicationDbContext db)
     {
@@ -66,6 +69,11 @@ public class UnitOfWork : IUnitOfWork
         LitigesRepository = new LitigesRepository(_db);
         GEDRepository = new GEDRepository(_db);
         RecouvrementRepository = new RecouvrementRepository(_db);
+        TPostalCodesRepository = new TPostalCodesRepository(_db);
+        TJobsRepository = new TJobsRepository(_db); // Initialisation de TJobsRepository
+        OrderRepository= new OrderRepository(_db);
+        IndividualRepository= new IndividuRepository(_db);
+        TListValRepository = new TListValRepository(_db);
     }
 
     public Task CommitAsync()

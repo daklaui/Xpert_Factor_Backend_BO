@@ -12,8 +12,8 @@ public static class ServiceCollectionExtension
     {
         services.AddMediator(options =>
         {
-            options.ServiceLifetime = ServiceLifetime.Scoped;
-            options.Namespace = "CleanArc.Application.Mediator";
+            //options.ServiceLifetime = ServiceLifetime.Scoped;
+            //options.Namespace = "CleanArc.Application.Mediator";
         });
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidateCommandBehavior<,>));
         //services.AddMediator(Assembly.GetExecutingAssembly());
