@@ -29,7 +29,7 @@ public class LimiteRepository : BaseAsyncRepository<T_DEM_LIMITE> ,ILimiteReposi
 
     public async Task<T_DEM_LIMITE_DTO> checkExistingLimiteNoActif(int refCtr, int refInd)
     {
-        var tab = from dem in _dbContext.T_DEM_LIMITEs
+        var tab = from dem in base.Table
             join iach in _dbContext.T_INDIVIDUs on dem.REF_ACH_LIM equals iach.REF_IND
             join cach in _dbContext.TJ_CIRs on dem.REF_CTR_DEM_LIM equals cach.REF_CTR_CIR
             where (cach.ID_ROLE_CIR == "ACH" && cach.REF_IND_CIR == refCtr && cach.REF_IND_CIR == dem.REF_ACH_LIM
@@ -61,7 +61,7 @@ public class LimiteRepository : BaseAsyncRepository<T_DEM_LIMITE> ,ILimiteReposi
     
     public async Task<PagedList<T_DEM_LIMITE_DTO>> getListOfDemLimitNoActif(PaginationParams paginationParam)
                     { 
-                        var demLim = (from dem in _dbContext.T_DEM_LIMITEs
+                        var demLim = (from dem in base.Table
                             join iach in _dbContext.T_INDIVIDUs on dem.REF_ACH_LIM equals iach.REF_IND
                             join cach in _dbContext.TJ_CIRs on dem.REF_CTR_DEM_LIM equals cach.REF_CTR_CIR
                            join ctr in _dbContext.T_CONTRATs on dem.REF_CTR_DEM_LIM equals ctr.REF_CTR

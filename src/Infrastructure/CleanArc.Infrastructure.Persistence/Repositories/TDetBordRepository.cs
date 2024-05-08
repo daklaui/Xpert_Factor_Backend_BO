@@ -11,7 +11,7 @@ namespace CleanArc.Infrastructure.Persistence.Repositories;
 internal class TDetBordRepository :BaseAsyncRepository<T_DET_BORD> ,IT_DET_BORD_Repository
 {
     private readonly ApplicationDbContext _dbContext;
-   
+
     public TDetBordRepository(ApplicationDbContext dbContext) : base(dbContext)
     {
         _dbContext = dbContext;
@@ -22,7 +22,7 @@ internal class TDetBordRepository :BaseAsyncRepository<T_DET_BORD> ,IT_DET_BORD_
     {
         await base.AddAsync(detBord);
     }
-    
+
     public async Task<PagedList<T_DET_BORD>> GetAllT_DET_BORD_Async(PaginationParams paginationParams)
     {
         var query = base.TableNoTracking.AsQueryable();
@@ -32,10 +32,11 @@ internal class TDetBordRepository :BaseAsyncRepository<T_DET_BORD> ,IT_DET_BORD_
         return result;
     }
 
-   public async Task<T_DET_BORD> GetT_DET_BORD_Byid(string id)
+    public async Task<T_DET_BORD> GetT_DET_BORD_Byid(string id)
     {
         return await base.TableNoTracking.FirstOrDefaultAsync(p => p.ID_DET_BORD == id);
     }
+
     public async Task<IEnumerable<T_DET_BORD>> GetDetBordByPK(string numBord, int refCtr , string yearBord)
     {
         var query =base.TableNoTracking.Where(x => 
@@ -45,10 +46,12 @@ internal class TDetBordRepository :BaseAsyncRepository<T_DET_BORD> ,IT_DET_BORD_
 
         return await query.ToListAsync();
     }
+
     public async Task<int> getMaxDocs()
     {
         return base.TableNoTracking.Select(p => Convert.ToInt32(p.ID_DET_BORD)).DefaultIfEmpty().Max();
     }
+
     public async Task<bool> UpdateDetBordAsync(PksDetBordDto pksDto, T_DET_BORD updatedDetBord)
     {
     
@@ -100,16 +103,16 @@ internal class TDetBordRepository :BaseAsyncRepository<T_DET_BORD> ,IT_DET_BORD_
 }
 
 
-   public async  Task DeleteT_DET_BORD(T_DET_BORD detBord)
+    public async  Task DeleteT_DET_BORD(T_DET_BORD detBord)
    {
        _dbContext.Set<T_DET_BORD>().Remove(detBord);
    }
-   
-   public async Task<IEnumerable<DetailsDetBordDto>> getDetailsDetBord(PksDetBordDto pksDto)
+
+    public async Task<IEnumerable<DetailsDetBordDto>> getDetailsDetBord(PksDetBordDto pksDto)
    {
        string sqlQuery = $@"
                 SELECT 
-    ID_DET_BORD,
+         ID_DET_BORD,
     NUM_BORD,
     (SELECT REF_DOCUMENT_DET_BORD FROM TJ_DOCUMENT_DET_BORD WHERE ID_DET_BORD = T_DET_BORD.ID_DET_BORD) AS REF_DOCUMENT_DET_BORD,
     TYP_DET_BORD,
@@ -135,6 +138,4 @@ FROM
  
        return result;
    }
-   
-  
 }

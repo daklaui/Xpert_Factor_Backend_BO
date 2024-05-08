@@ -38,8 +38,21 @@ public class TmmRepository :BaseAsyncRepository<TR_TMM>, ITMMRepository
 
     }
 
-    public  async Task UpdateTrTmmAsync(TR_TMM trTmm)
+    public  async Task<bool> UpdateTrTmmAsync(int id,TR_TMM trTmmUpdate )
     {
-       //await base.UpdateAsync1(trTmm);
+        var existingTrmm = await base.Table.FirstOrDefaultAsync(p => p.ID_TMM == id);
+
+        if (existingTrmm == null)
+        {
+            throw new InvalidOperationException($"TMM with id {id} not found");
+        }
+
+        existingTrmm.ID_TMM = trTmmUpdate.ID_TMM;
+        existingTrmm.DATE_DEBUT_TMM = trTmmUpdate.DATE_DEBUT_TMM;
+        existingTrmm.DATE_DEBUT_TMM = trTmmUpdate.DATE_DEBUT_TMM;
+        existingTrmm.DATE_FIN_TMM = trTmmUpdate.DATE_FIN_TMM;
+        existingTrmm.TAUX_TMM = trTmmUpdate.TAUX_TMM;
+        await base.UpdateAsync(existingTrmm);
+        return true;  
     }
 }

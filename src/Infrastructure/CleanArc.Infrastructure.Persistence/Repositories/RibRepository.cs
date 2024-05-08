@@ -58,7 +58,7 @@ internal class RibRepository : BaseAsyncRepository<TR_RIB>, IRibRepository
 
     private Task<bool> verifExistingRib(string rib)
     {
-        return Task.FromResult(_dbContext.TR_RIBs.Any(p => p.RIB_RIB == rib));
+        return Task.FromResult(base.Table.Any(p => p.RIB_RIB == rib));
     }
 
     public async Task<TR_RIB_DTO> EditRibIndividu(TR_RIB_DTO rib)

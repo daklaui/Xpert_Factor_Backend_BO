@@ -21,7 +21,7 @@ internal class TJ_DOCUMENT_DET_BORD_Repository : BaseAsyncRepository<TJ_DOCUMENT
     }
     public async Task<IEnumerable<TJ_DOCUMENT_DET_BORD>> GetDocumentDetBordByPK(string numBord, int refCtr)
     {
-        var query = _dbContext.TJ_DOCUMENT_DET_BORDs.Where(x => 
+        var query = base.Table.Where(x => 
             x.NUM_BORD == numBord && 
             x.REF_CTR_DET_BORD == refCtr);
 

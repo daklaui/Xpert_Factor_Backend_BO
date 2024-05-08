@@ -6,10 +6,15 @@ using Microsoft.EntityFrameworkCore;
 namespace CleanArc.Infrastructure.Persistence.Repositories;
 
 internal class OrderRepository:BaseAsyncRepository<Order>,IOrderRepository
-{
+{    private ApplicationDbContext _dbContext;
     public OrderRepository(ApplicationDbContext dbContext) : base(dbContext)
     {
+        _dbContext = dbContext;
     }
+
+
+
+  
 
     public async Task AddOrderAsync(Order order)
     {

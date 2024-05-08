@@ -27,7 +27,7 @@ public class EncaissementReposiotry:BaseAsyncRepository<T_ENCAISSEMENT>, IEncais
             List<T_ENCAISSEMENT> enclist = new List<T_ENCAISSEMENT>();
             try
             {
-                enclist = _dbContext.T_ENCAISSEMENTs
+                enclist = base.Table
                     .Where(p => p.REF_ACH_ENC == encaissement.REF_ACH_ENC && p.REF_ENC == encaissement.REF_ENC &&
                                 p.VALIDE_ENC == true)
                     .ToList();
@@ -45,15 +45,17 @@ public class EncaissementReposiotry:BaseAsyncRepository<T_ENCAISSEMENT>, IEncais
                     {
                         encaissement.TYP_ENC = "A";
                         encaissement.REF_ENC = "Ret" + encaissement.REF_ENC;
-                    }
-
+                    } 
                     encaissement.MONT_ENC =
                         decimal.Parse(encaissement.MONT_ENC.ToString().Replace(" ", "").Replace(",", "."));
                     encaissement.VALIDE_ENC = true;
                     encaissement.REF_CTR_ENC = _dbContext.T_CONTRATs
                         .Where(p => p.REF_CTR_PAPIER_CTR == encaissement.REF_CTR_ENC.ToString()).FirstOrDefault()
                         .REF_CTR;
-                    _dbContext.T_ENCAISSEMENTs.Add(encaissement);
+                    await base.AddAsync(encaissement);
+                    await _dbContext.SaveChangesAsync();
+                   // _dbContext.T_ENCAISSEMENTs.Add(encaissement);
+                   
                     return true;
                 }
                 catch (Exception e)
@@ -62,8 +64,7 @@ public class EncaissementReposiotry:BaseAsyncRepository<T_ENCAISSEMENT>, IEncais
                 }
             }
         }
-
-        await base.AddAsync(encaissement);
+       // await base.AddAsync(encaissement);
 
         return false;
     }

@@ -9,7 +9,7 @@ public interface IAgencyBankRepository
     Task<TR_Ag_Bq> GetTrAgencyBankById(string code);
     Task<string> RechercheBanque(string id);
     Task<string> RechercheAgence(string id);
-    Task UpdateTrAgencyBankAsync(TR_Ag_Bq bankAgency);    
+    Task<bool> UpdateTrAgencyBankAsync(String code, TR_Ag_Bq updateAgBq);
 
-    
+
 }

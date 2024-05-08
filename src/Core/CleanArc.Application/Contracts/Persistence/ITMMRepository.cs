@@ -8,5 +8,5 @@ public interface ITMMRepository
     Task <TR_TMM> AddTrTmmAsync(TR_TMM trTmm);
     Task<PagedList<TR_TMM>> GetAllTrTmmAsync(PaginationParams paginationParams);
     Task<TR_TMM> GetTrTmmById(int id);
-    Task UpdateTrTmmAsync(TR_TMM trTmm);    
+    Task<bool> UpdateTrTmmAsync(int id, TR_TMM trTmmUpdate);
 }

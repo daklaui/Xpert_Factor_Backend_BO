@@ -78,9 +78,23 @@ internal class AgencyBankRepositoryRepository : BaseAsyncRepository<TR_Ag_Bq>, I
 
     }
 
-    public async Task UpdateTrAgencyBankAsync(TR_Ag_Bq updateTrAgBq)
+    public async Task<bool>  UpdateTrAgencyBankAsync(String code,TR_Ag_Bq updateAgBq)
     {
-        await base.UpdateAsync(updateTrAgBq);
+        var existingAgBq = await base.Table.FirstOrDefaultAsync(p => p.Code_Bq_Ag ==code);
+
+        if (existingAgBq == null)
+        {
+            throw new InvalidOperationException($" AgBq with id {code} not found");
+        }
+
+        existingAgBq.Code_Bq_Ag = updateAgBq.Code_Bq_Ag; 
+        existingAgBq.Code_Bq = updateAgBq.Code_Bq;
+        existingAgBq.Code_Ag = updateAgBq.Code_Ag;
+        existingAgBq.Agence = updateAgBq.Agence;
+        existingAgBq.Banque = updateAgBq.Banque;
+        
+        await base.UpdateAsync(existingAgBq);
+        return true;
 
     }
 

@@ -49,10 +49,7 @@ internal class TJcirRepository: BaseAsyncRepository<TJ_CIR> , ITjcirRepository
         return await query.FirstOrDefaultAsync() ;
     }
 
-    public Task AddICIRlAsync(TJ_CIR buyer)
-    {
-        throw new NotImplementedException();
-    }
+
 
     public Task<PagedList<TJ_CIR>> GetAllCIRAsync(PaginationParams paginationParams)
     {

@@ -7,8 +7,11 @@ namespace CleanArc.Infrastructure.Persistence.Repositories;
 
 internal class UserRefreshTokenRepository : BaseAsyncRepository<UserRefreshToken>, IUserRefreshTokenRepository
 {
+    private readonly ApplicationDbContext _dbContext;
+
     public UserRefreshTokenRepository(ApplicationDbContext dbContext) : base(dbContext)
     {
+        _dbContext = dbContext;
     }
 
     public async Task<Guid> CreateToken(int userId)
