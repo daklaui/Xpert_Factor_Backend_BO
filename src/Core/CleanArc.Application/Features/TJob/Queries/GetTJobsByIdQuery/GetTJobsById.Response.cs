@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using CleanArc.Domain.Common;
+﻿using CleanArc.Application.Profiles;
+using CleanArc.Domain.Entities;
 
-namespace CleanArc.Domain.Entities;
+namespace CleanArc.Application.Features.TJob.Queries.GetTJobsByIdQuery;
 
-public partial class TR_ACTPROF_BCT : IEntity
+public record GetTJobsById_Response:ICreateMapper<TR_ACTPROF_BCT>
 {
     public string Code_Section { get; set; }
     public string Section { get; set; }

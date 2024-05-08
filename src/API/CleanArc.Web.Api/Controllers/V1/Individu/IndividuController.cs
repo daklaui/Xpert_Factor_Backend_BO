@@ -1,5 +1,6 @@
 ﻿using CleanArc.Application.Common;
 using CleanArc.Application.Features.Individu.Commands.AddIndividuCommand;
+using CleanArc.Application.Features.Individu.Commands.UpdateIndividuCommand;
 using CleanArc.Application.Features.Individu.Queries.GetAllIndividus;
 using CleanArc.Application.Features.Individu.Queries.GetByIdQuery;
 using CleanArc.WebFramework.BaseController;
@@ -44,6 +45,19 @@ public class IndividuController : BaseController
 
         return base.OperationResult(query);
     }
+    
+    [HttpPut("UpdateIndividu/{id}")]
+    public async Task<IActionResult> UpdateJob(int id, UpdateIndividuCommand model)
+    {
+        if (model == null)
+        {
+            return BadRequest("Invalid model");
+        }
+        var command = await _sender.Send(model);
+
+        return base.OperationResult(command);
+    }
+        
     
     
 

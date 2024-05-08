@@ -5,10 +5,8 @@ namespace CleanArc.Infrastructure.Persistence.Repositories.Common;
 public class UnitOfWork : IUnitOfWork
 {
     private readonly ApplicationDbContext _db;
-    private IUnitOfWork _unitOfWorkImplementation;
-
-
-    public ITPostalCodesRepository TPostalCodesRepository { get; } 
+    
+    public IPostalCodesRepository PostalCodesRepository { get; } 
     
     public ITR_CPRepository TR_CPRepository { get; }
     public IContratRepository ContratRepository { get; }
@@ -86,6 +84,10 @@ public class UnitOfWork : IUnitOfWork
         TjDocumentDetBordRepository = new TJ_DOCUMENT_DET_BORD_Repository(_db);
         TDetBordRepository = new TDetBordRepository(_db);
         tjcirRepository = new TJcirRepository(_db);
+        TJobsRepository = new TJobsRepository(_db);
+        PostalCodesRepository = new PostalCodesRepository(_db);
+
+
     }
 
     public Task CommitAsync()
