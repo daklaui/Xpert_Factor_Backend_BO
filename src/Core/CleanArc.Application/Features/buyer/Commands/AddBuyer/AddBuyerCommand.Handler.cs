@@ -7,7 +7,7 @@ using Mediator;
 
 namespace CleanArc.Application.Features.Buyer.Commands.AddBuyer
 {
-    public class AddBuyerCommandHandler : IRequestHandler<AddBuyerCommand, OperationResult<bool>>
+    internal class AddBuyerCommandHandler : IRequestHandler<AddBuyerCommand, OperationResult<bool>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -18,7 +18,7 @@ namespace CleanArc.Application.Features.Buyer.Commands.AddBuyer
 
         public async ValueTask<OperationResult<bool>> Handle(AddBuyerCommand request, CancellationToken cancellationToken)
         {
-            await _unitOfWork.tjcirRepository.AddTJCIRsync(request.Buyer);
+            await _unitOfWork.tjcirRepository.AddBuyer(request.Buyer);
             await _unitOfWork.CommitAsync();
 
             return OperationResult<bool>.SuccessResult(true);

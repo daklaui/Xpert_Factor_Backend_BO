@@ -8,7 +8,20 @@ public class UnitOfWork : IUnitOfWork
     private IUnitOfWork _unitOfWorkImplementation;
 
 
-       
+    public ITPostalCodesRepository TPostalCodesRepository { get; } 
+    
+    public ITR_CPRepository TR_CPRepository { get; }
+    public IContratRepository ContratRepository { get; }
+    public IFraisDiversRepository FraisDiversRepository { get; }
+    public IFactoringCommissionRepository FactoringCommissionRepository { get; }
+    public IFraisPaiementRepository FraisPaiementRepository { get; }
+
+    public IListValRepository ListValueRepository { get; }
+    
+    public IFactoringCommissionRepository FactoringCommis { get; }
+    public IIntFinanceRepository IntFinanceRepository { get; }
+    public IDetAssRepository DetAssRepository { get; }
+    public IFondGarantieRepository FondGarantieRepository { get; } 
     public IUserRefreshTokenRepository UserRefreshTokenRepository { get; }
     public IOrderRepository OrderRepository { get; }
     public IGEDRepository GEDRepository { get; }
@@ -20,10 +33,6 @@ public class UnitOfWork : IUnitOfWork
     public IRibRepository ribRepository { get; }
     public IAdhAuthRepository adhAuthRepository { get; }
     public ITjcirRepository tjcirRepository { get; }
-
-    //public ITPostalCodesRepository PostalCodesRepository { get; }
-
-    //public ITPostalCodesRepository PostalCodesRepository { get; }
     public IimpayeRepository ImpayeRepository { get; }
     public ICreditRepository CreditRepository { get; }
     public IDebitRepository DebitRepository { get; }
@@ -31,7 +40,7 @@ public class UnitOfWork : IUnitOfWork
     public IAgencyBankRepository AgencyBankRepository { get; }
     public IEncaissement EncaissementRepository { get; }
     
-    public TJcirRepository  JcirRepository{ get; set; }
+    public ITjcirRepository  JcirRepository{ get; set; }
     public ILimiteRepository LimiteRepository { get; }
     public IListValRepository ListValRepository { get; }
     public IProrogationsRepository ProrogationsRepository { get; }
@@ -40,7 +49,6 @@ public class UnitOfWork : IUnitOfWork
     public IRecouvrementRepository RecouvrementRepository { get; }
     public ITJobsRepository TJobsRepository { get; }
 
-    public UnitOfWork(ApplicationDbContext db)
     
     public IT_DET_BORD_Repository TDetBordRepository { get; }
     public ITJ_DOCUMENT_DET_BORD_Repository TjDocumentDetBordRepository { get; }
@@ -56,9 +64,8 @@ public class UnitOfWork : IUnitOfWork
         FundingRepository = new FundingRepository(_db);
         contactRepository = new ContactRepository(_db);
         ribRepository = new RibRepository(_db);
-        adhAuthRepository = new AdhAuthRepository(_db);
+        ContratRepository = new ContratRepository(_db);
         ImpayeRepository =new ImpayeRepository(_db);
-        //CreditRepository = new CreditRepository(_db);
         DebitRepository =new DebitRepository(_db);
         ExtraitRepository = new ExtraitRepository(_db);
         AgencyBankRepository = new AgencyBankRepositoryRepository(_db);
@@ -73,13 +80,12 @@ public class UnitOfWork : IUnitOfWork
         LitigesRepository = new LitigesRepository(_db);
         GEDRepository = new GEDRepository(_db);
         RecouvrementRepository = new RecouvrementRepository(_db);
-        //PostalCodesRepository = new TPostalCodesRepository(_db);
-        //TJobsRepository = new TJobsRepository(_db); 
         OrderRepository= new OrderRepository(_db);
         IndividualRepository= new IndividuRepository(_db);
         BordereauxRepository = new BordereauxRepository(_db);
         TjDocumentDetBordRepository = new TJ_DOCUMENT_DET_BORD_Repository(_db);
         TDetBordRepository = new TDetBordRepository(_db);
+        tjcirRepository = new TJcirRepository(_db);
     }
 
     public Task CommitAsync()

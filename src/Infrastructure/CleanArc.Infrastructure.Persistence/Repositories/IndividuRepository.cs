@@ -8,11 +8,11 @@ namespace CleanArc.Infrastructure.Persistence.Repositories;
 
 internal class IndividuRepository : BaseAsyncRepository<T_INDIVIDU>, IIndividualRepository
 {
-    private IIndividualRepository _individualRepositoryImplementation;
-    private IIndividualRepository _individualRepositoryImplementation1;
+    private ApplicationDbContext _dbContext;
 
     public IndividuRepository(ApplicationDbContext dbContext) : base(dbContext)
     {
+        _dbContext = dbContext;
     }
 
     public async Task AddIIndividualAsync(T_INDIVIDU individu)

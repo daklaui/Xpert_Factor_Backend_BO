@@ -1,14 +1,11 @@
 ﻿using AutoMapper;
 using CleanArc.Application.Contracts.Persistence;
-using CleanArc.Application.Features.Users.Queries.GetUsers;
 using CleanArc.Application.Models.Common;
 using CleanArc.Domain.Entities;
-using CleanArc.Domain.Entities.User;
 using Mediator;
 
 namespace CleanArc.Application.Features.Individu.Queries.GetByIdQuery
-{
-    internal class GetByIdQueryHandler : IRequestHandler<GetByIdQuery, OperationResult<GetByIdQueryResult>>
+{ internal class GetByIdQueryHandler : IRequestHandler<GetByIdQuery, OperationResult<GetByIdQueryResult>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;

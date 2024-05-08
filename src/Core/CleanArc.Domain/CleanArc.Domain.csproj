@@ -8,4 +8,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\CleanArc.SharedKernel\CleanArc.SharedKernel.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Entities\DTO\T_DEM_LIMITE_DTO.cs" />
+  </ItemGroup>
 </Project>

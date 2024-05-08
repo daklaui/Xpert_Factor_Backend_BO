@@ -1,5 +1,6 @@
 using CleanArc.Application.Common;
 using CleanArc.Application.Contracts.Persistence;
+using CleanArc.Domain.DTO;
 using CleanArc.Domain.Entities;
 using CleanArc.Infrastructure.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
@@ -52,7 +53,6 @@ public class LimiteRepository : BaseAsyncRepository<T_DEM_LIMITE> ,ILimiteReposi
                 DELAIS_ACC = dem.DELAIS_ACC,
                // MONT_ACC = dem.MONT_ACC,
                 MODE_PAY_ACC = dem.MODE_PAY_ACC,
-                NOM_IND = iach.NOM_IND
             };
 
         var result = await tab.FirstOrDefaultAsync();
@@ -72,7 +72,6 @@ public class LimiteRepository : BaseAsyncRepository<T_DEM_LIMITE> ,ILimiteReposi
                                                            //  && (dem.COMMENT != null && dem.COMMENT != ""))
                             select new T_DEM_LIMITE_DTO
                             {
-                                REF_CTR_PAPIER_CTR = ctr.REF_CTR_PAPIER_CTR,
                                 REF_CTR_DEM_LIM = dem.REF_CTR_DEM_LIM,
                                 REF_ACH_LIM = dem.REF_ACH_LIM,
                                 ACTIF_DEM_LIMI = dem.ACTIF_DEM_LIMI,
@@ -90,7 +89,6 @@ public class LimiteRepository : BaseAsyncRepository<T_DEM_LIMITE> ,ILimiteReposi
                                 DELAIS_ACC = dem.DELAIS_ACC,
                                 MONT_ACC = (decimal)dem.MONT_ACC,
                                 MODE_PAY_ACC = dem.MODE_PAY_ACC,
-                              NOM_IND = iach.NOM_IND
                             }).AsQueryable();
 
                         var result = await PagedList<T_DEM_LIMITE_DTO>.CreateAsync(demLim, paginationParam.PageNumber, paginationParam.PageSize);
@@ -120,9 +118,30 @@ public class LimiteRepository : BaseAsyncRepository<T_DEM_LIMITE> ,ILimiteReposi
         return limite;
         
     }
+
+    public  async Task<bool> UpdateDemandeLimiteAsync(int demandeLimiteId, T_DEM_LIMITE updatedDemandeLimite)
+    {
+        var existingDemandeLimite = await base.Table.FirstOrDefaultAsync(p => p.REF_DEM_LIM == updatedDemandeLimite.REF_DEM_LIM);
+
+        if (existingDemandeLimite == null)
+        {
+            throw new InvalidOperationException($"Demande limite with REF_DEM_LIM {updatedDemandeLimite.REF_DEM_LIM} not found");
+        }
+
+        await base.UpdateAsync(existingDemandeLimite);
+
+        return true;    
+    }
+
+    public Task<T_DEM_LIMITE> GetDemandeLimiteByRefCtrAndType(int id, string type)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<T_DEM_LIMITE> GetDemLimiteById(int id)
     {
         return await base.TableNoTracking.FirstOrDefaultAsync(p => p.REF_DEM_LIM == id);
 
     }
+    
 }

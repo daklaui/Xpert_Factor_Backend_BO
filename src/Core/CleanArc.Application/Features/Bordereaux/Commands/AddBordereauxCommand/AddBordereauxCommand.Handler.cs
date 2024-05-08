@@ -9,12 +9,11 @@ namespace CleanArc.Application.Features.Bordereaux.Commands.AddBordereauxCommand
 public class AddBordereauxCommandHandler : IRequestHandler<AddBordereauxCommand, OperationResult<bool>>
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IAppUserManager _userManager;
 
-    public AddBordereauxCommandHandler(IUnitOfWork unitOfWork, IAppUserManager userManager)
+    public AddBordereauxCommandHandler(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
-        _userManager = userManager;
+        
     }
 
     public async ValueTask<OperationResult<bool>> Handle(AddBordereauxCommand request, CancellationToken cancellationToken)

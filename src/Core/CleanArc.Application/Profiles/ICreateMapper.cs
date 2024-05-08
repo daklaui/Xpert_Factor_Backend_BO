@@ -8,10 +8,7 @@ public interface ICreateMapper<TSource>
 {
     public class MappingProfile : Profile
     {
-        public MappingProfile()
-        {
-            
-        }
+      
     }
     void Map(Profile profile)
     {
@@ -19,7 +16,3 @@ public interface ICreateMapper<TSource>
     }
 }
 
-public class UpdateTListValProfile : Profile
-{
-    
-}

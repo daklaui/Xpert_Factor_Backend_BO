@@ -1,10 +1,8 @@
-﻿using System.Text.Json;
-using CleanArc.Application.Common;
+﻿using CleanArc.Application.Common;
 using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Domain.Entities;
 using CleanArc.Infrastructure.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace CleanArc.Infrastructure.Persistence.Repositories;
 
@@ -45,10 +43,13 @@ internal class AgencyBankRepositoryRepository : BaseAsyncRepository<TR_Ag_Bq>, I
         string nomBanque = "";
         try
         {
-            nomBanque = await _dbContext.TR_Ag_Bqs
+            nomBanque = base.Table.Where(p => p.Code_Bq == id).Select(p => p.Banque).FirstOrDefault();
+                
+            
+           /* nomBanque = await _dbContext.TR_Ag_Bqs
                 .Where(p => p.Code_Bq == id)
                 .Select(p => p.Banque)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync();*/
         }
         catch (Exception e)
         {
@@ -62,10 +63,11 @@ internal class AgencyBankRepositoryRepository : BaseAsyncRepository<TR_Ag_Bq>, I
        
         try
         {
-            nom_Agence =  _dbContext.TR_Ag_Bqs
+            nom_Agence = base.Table.Where(p => p.Code_Bq_Ag == id).Select(p => p.Agence).FirstOrDefault();
+           /* nom_Agence =  _dbContext.TR_Ag_Bqs
                 .Where(p => p.Code_Bq_Ag == id)
                 .Select(p => p.Agence)
-                .FirstOrDefault();
+                .FirstOrDefault();*/
         }
         catch (Exception e)
         {
@@ -78,7 +80,7 @@ internal class AgencyBankRepositoryRepository : BaseAsyncRepository<TR_Ag_Bq>, I
 
     public async Task UpdateTrAgencyBankAsync(TR_Ag_Bq updateTrAgBq)
     {
-        await base.UpdateAsync1(updateTrAgBq);
+        await base.UpdateAsync(updateTrAgBq);
 
     }
 

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class T_FOND_GARANTIE
+public partial class T_FOND_GARANTIE : IEntity
+
 {
     public string TYP_FDG { get; set; }
 

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class T_CONTRAT
+public partial class T_CONTRAT : IEntity
 {
     public int REF_CTR { get; set; }
 

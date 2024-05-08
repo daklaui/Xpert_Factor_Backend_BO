@@ -12,5 +12,4 @@ public interface IIndividualRepository
     Task<T_INDIVIDU> GetIndividuById(int id);
     Task<bool> UpdateIndividuAsync(int id, T_INDIVIDU updatedIndividu);
 
-    //Task<List<Individu>> GetAllOrdersWithRelatedUserAsync();
 }

@@ -2,6 +2,7 @@
 using CleanArc.Application.Common;
 using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Application.Models.Common;
+using CleanArc.Domain.DTO;
 using CleanArc.Domain.Entities;
 using Mediator;
 

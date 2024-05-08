@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using CleanArc.Domain.Common;
+using CleanArc.Domain.DTO;
 using CleanArc.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
@@ -29,7 +30,7 @@ public abstract class BaseAsyncRepository<TEntity> where TEntity:class,IEntity
         await Entities.AddAsync(entity);
            
     }
-    
+   
 
     protected virtual async Task UpdateAsync(TEntity entity)
     {
@@ -37,16 +38,15 @@ public abstract class BaseAsyncRepository<TEntity> where TEntity:class,IEntity
         await DbContext.SaveChangesAsync();
     }
 
+  /* protected virtual async Task RemoveAsync(TEntity entity)
+    {
+        DbContext.Entry(entity).State = EntityState.Deleted;
+        await DbContext.SaveChangesAsync();
+    }*/
+
     protected virtual async Task DeleteAsync(Expression<Func<TEntity,bool>> deleteExpression)
     {
         await Entities.Where(deleteExpression).ExecuteDeleteAsync();
-    }
-   
-    
-    protected virtual async Task UpdateAsync1(TEntity entity)
-    {
-        DbContext.Entry(entity).State = EntityState.Modified;
-        await DbContext.SaveChangesAsync();
     }
     
 }

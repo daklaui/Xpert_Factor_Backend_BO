@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class T_FRAIS_DIVER
+public partial class T_FRAIS_DIVER : IEntity
 {
     public string TYP_FRAIS_DIVERS { get; set; }
 

@@ -35,8 +35,5 @@
   <ItemGroup>
     <Folder Include="Features\Encaissement\Queries" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Features\buyer\Queries\" />
-  </ItemGroup>
 
 </Project>

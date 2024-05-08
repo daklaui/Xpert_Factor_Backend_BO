@@ -15,6 +15,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddPersistenceServices(this IServiceCollection services,IConfiguration configuration)
     {
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddTransient<IContratRepository, ContratRepository>();
         
         services.AddDbContext<ApplicationDbContext>(options =>
         {

@@ -10,12 +10,10 @@ namespace CleanArc.Application.Features.Bordereaux.Commands.UpdateBordereauxComm
 public class UpdateBordereauxCommandHandler: IRequestHandler<UpdateBordereauxCommand, OperationResult<bool>>
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IMapper _mapper;
 
-    public UpdateBordereauxCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public UpdateBordereauxCommandHandler(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
-        _mapper = mapper;
     }
 
 
@@ -65,7 +63,7 @@ public class UpdateBordereauxCommandHandler: IRequestHandler<UpdateBordereauxCom
                
                 foreach (var existingDetBord in existingDetBordList)
                 {
-                    _mapper.Map(updatedDetBordDto, existingDetBord);
+                   // _mapper.Map(updatedDetBordDto, existingDetBord);
                     
                   
                     PksDetBordDto pksDetBordDto = new PksDetBordDto

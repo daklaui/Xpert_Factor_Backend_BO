@@ -1,7 +1,5 @@
 ﻿using CleanArc.Application.Common;
-using CleanArc.Application.Features.AgencyBank.Queries.GetAgnecyBankByIdQuerie;
 using CleanArc.Application.Features.Individu.Commands.AddIndividuCommand;
-using CleanArc.Application.Features.Individu.Commands.UpdateIndividuCommand;
 using CleanArc.Application.Features.Individu.Queries.GetAllIndividus;
 using CleanArc.Application.Features.Individu.Queries.GetByIdQuery;
 using CleanArc.WebFramework.BaseController;
@@ -9,7 +7,6 @@ using Mediator;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArc.Web.Api.Controllers.V1.Individu;
-
 [ApiVersion("1")]
 [ApiController]
 [Route("api/v{version:apiVersion}/Individu")]
@@ -41,9 +38,9 @@ public class IndividuController : BaseController
     }
 
     [HttpGet("GetIndividuById/{id}")]
-    public async Task<IActionResult> GetIndividuById(string id)
+    public async Task<IActionResult> GetIndividuById(int id)
     {
-        var query = await _sender.Send(new GetAgencyBankByIdQuery(id));
+        var query = await _sender.Send(new GetByIdQuery(id));
 
         return base.OperationResult(query);
     }

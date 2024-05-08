@@ -9,12 +9,10 @@ namespace CleanArc.Application.Features.Individu.Commands.AddIndividuCommand
     internal class AddIndividuCommandHandler : IRequestHandler<AddIndividuCommand,OperationResult<bool>>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IAppUserManager _userManager;
 
-        public AddIndividuCommandHandler(IUnitOfWork unitOfWork, IAppUserManager userManager)
+        public AddIndividuCommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _userManager = userManager;
         }
 
         public async ValueTask<OperationResult<bool>> Handle(AddIndividuCommand request, CancellationToken cancellationToken)

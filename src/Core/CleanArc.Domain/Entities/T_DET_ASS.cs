@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class T_DET_ASS
+public partial class T_DET_ASS : IEntity
 {
     public int REF_ASS { get; set; }
 

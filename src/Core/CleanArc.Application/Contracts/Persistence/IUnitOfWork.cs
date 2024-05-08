@@ -12,9 +12,6 @@ public interface IUnitOfWork
     public IRibRepository ribRepository { get; }
     public IAdhAuthRepository adhAuthRepository { get; }
     public ITjcirRepository tjcirRepository { get; }
-   // public ITPostalCodesRepository PostalCodesRepository { get; }
-    
- 
     public  IimpayeRepository ImpayeRepository { get; }
     public ICreditRepository CreditRepository { get; }
     public IDebitRepository DebitRepository { get; }
@@ -27,6 +24,13 @@ public interface IUnitOfWork
     public ILitigesRepository LitigesRepository { get; }
     public IRecouvrementRepository RecouvrementRepository { get; }
     public ITJobsRepository TJobsRepository { get; }
+    public IContratRepository ContratRepository { get; }
+    public IFraisDiversRepository FraisDiversRepository { get; }
+    public IFactoringCommissionRepository FactoringCommissionRepository { get; }
+    public IFraisPaiementRepository FraisPaiementRepository { get; }
+    public IIntFinanceRepository IntFinanceRepository { get; }
+    public IDetAssRepository DetAssRepository { get; }
+    public IFondGarantieRepository FondGarantieRepository { get; }
     public IT_DET_BORD_Repository TDetBordRepository { get; }
     ITJ_DOCUMENT_DET_BORD_Repository TjDocumentDetBordRepository { get; }
     public IBordereauxRepository BordereauxRepository { get; }
