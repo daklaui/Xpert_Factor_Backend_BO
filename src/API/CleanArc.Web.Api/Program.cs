@@ -57,7 +57,19 @@ builder.Services.RegisterValidatorsAsServices();
 
 builder.Services.AddAutoMapper(typeof(User), typeof(JwtService), typeof(UserController));
 
+// The CORS part 
+builder.Services.AddCors(options => 
+{
+    options.AddPolicy("AllowSpecificOrigin", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000", "http://173.249.2.77:8085")
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
+app.UseCors("AllowSpecificOrigin");
 
 
 #region Seeding and creating database
