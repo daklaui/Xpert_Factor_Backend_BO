@@ -4,7 +4,7 @@ using Mediator;
 
 namespace CleanArc.Application.Features.Prorogation.Commands.AddProrogation;
 
-public class AddProrogationCommand_Handler:IRequestHandler<AddProrogationCommand, OperationResult<bool>>
+internal class AddProrogationCommand_Handler:IRequestHandler<AddProrogationCommand, OperationResult<bool>>
 {
     private readonly IUnitOfWork _unitOfWork;
 

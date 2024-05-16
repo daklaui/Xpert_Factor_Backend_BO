@@ -4,7 +4,7 @@ using Mediator;
 
 namespace CleanArc.Application.Features.Litige.Commands.AddLitige;
 
-public class AddLitigeCommand_Handler : IRequestHandler<AddLitigesCommand, OperationResult<bool>>
+internal class AddLitigeCommand_Handler : IRequestHandler<AddLitigesCommand, OperationResult<bool>>
 {
     private readonly IUnitOfWork _unitOfWork;
 

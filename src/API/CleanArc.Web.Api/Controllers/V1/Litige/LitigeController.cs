@@ -1,4 +1,5 @@
 ﻿using CleanArc.Application.Common;
+using CleanArc.Application.Features.Litige.Commands.Add;
 using CleanArc.Application.Features.Litige.Commands.AddLitige;
 using CleanArc.Application.Features.Litige.Queries.GetAllRapportFacturesEnLitige;
 using CleanArc.WebFramework.BaseController;
@@ -21,6 +22,14 @@ public class LitigeController : BaseController
 
     [HttpPost("CreateNewLitige")]
     public async Task<IActionResult> CreateNewLitige(AddLitigesCommand model)
+    {
+
+        var command = await _sender.Send(model);
+
+        return base.OperationResult(command);
+    }
+    [HttpPost("CreateLitige")]
+    public async Task<IActionResult> CreateLitige(AddCommand model)
     {
 
         var command = await _sender.Send(model);
