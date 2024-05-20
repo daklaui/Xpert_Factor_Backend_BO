@@ -67,10 +67,10 @@ public class IndividuController : BaseController
         return base.OperationResult(result);
     }
         
-    [HttpGet("GetRefCtrCirByAdherentName/{refInd}")]
-    public async Task<IActionResult> GetRefCtrCirByAdherentName(int refInd)
+    [HttpGet("GetRefCtrCirByRefInd/{refInd}")]
+    public async Task<IActionResult> GetRefCtrCirByRefInd(int refInd)
     {
-        var query = new GetRefCtrCirByAdherentNameQuery(refInd);
+        var query = new GetRefCtrCirByRefIndQuery(refInd);
         var result = await _sender.Send(query);
         return base.OperationResult(result);
     }

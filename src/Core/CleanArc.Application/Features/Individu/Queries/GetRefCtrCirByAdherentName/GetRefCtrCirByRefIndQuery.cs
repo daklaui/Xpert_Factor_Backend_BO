@@ -3,4 +3,4 @@ using Mediator;
 
 namespace CleanArc.Application.Features.Individu.Queries.GetRefCtrCirByAdherentName;
 
-public record GetRefCtrCirByAdherentNameQuery(int  refInd) : IRequest<OperationResult<List<int>>>;
+public record GetRefCtrCirByRefIndQuery(int refInd) : IRequest<OperationResult<List<int>>>;

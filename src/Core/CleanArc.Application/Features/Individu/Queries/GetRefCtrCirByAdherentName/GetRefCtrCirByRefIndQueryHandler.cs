@@ -4,16 +4,16 @@ using Mediator;
 
 namespace CleanArc.Application.Features.Individu.Queries.GetRefCtrCirByAdherentName;
 
-internal class GetRefCtrCirByAdherentNameQueryHandler : IRequestHandler<GetRefCtrCirByAdherentNameQuery, OperationResult<List<int>>>
+internal class GetRefCtrCirByRefIndQueryHandler : IRequestHandler<GetRefCtrCirByRefIndQuery, OperationResult<List<int>>>
 {
     private readonly IUnitOfWork _unitOfWork;
 
-    public GetRefCtrCirByAdherentNameQueryHandler(IUnitOfWork unitOfWork)
+    public GetRefCtrCirByRefIndQueryHandler(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
     }
   
-    public async ValueTask<OperationResult<List<int>>> Handle(GetRefCtrCirByAdherentNameQuery request, CancellationToken cancellationToken)
+    public async ValueTask<OperationResult<List<int>>> Handle(GetRefCtrCirByRefIndQuery request, CancellationToken cancellationToken)
     {
         var refCtrCirList = await _unitOfWork.IndividualRepository.GetRefCtrCirByRefIndAsync(request.refInd);
 
