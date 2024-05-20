@@ -7,4 +7,6 @@ public interface ILitigesRepository
 {
     Task AddLitigeAsync(T_LITIGE litige, decimal? montantLt);
       List<T_LITIGE_DTO> GetAllRapportFacturesEnLitige();
+      Task AddLitige(T_LITIGE litige);
+
 }

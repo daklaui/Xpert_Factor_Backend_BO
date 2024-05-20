@@ -2,7 +2,7 @@
 using CleanArc.Domain.Common;
 using CleanArc.Domain.Entities;
 
-public class TIndividu : BaseEntity, IEntity
+public class TIndividu 
 {
     
         public string GenreInd { get; set; }
@@ -38,7 +38,7 @@ public class TIndividu : BaseEntity, IEntity
         public string CpInd { get; set; }
         public string RefAchInd { get; set; }
         public virtual ICollection<TR_RIB> Ribs { get; set; }
-        public virtual ICollection<TContact> Contacts { get; set; }
+        //public virtual ICollection<TContact> Contacts { get; set; }
 
 }
  

@@ -2,7 +2,8 @@
 
     namespace CleanArc.Domain.DTO;
 
-    public class ContractDTO
+    public class 
+        ContractDTO
     {
         public T_CONTRAT  Contrat { get; set; }
         public int refAdh { get; set; }

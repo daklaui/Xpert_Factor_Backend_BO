@@ -74,7 +74,7 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
 
     public virtual DbSet<T_BORD_MFG> T_BORD_MFGs { get; set; }
 
-    public virtual DbSet<T_Bordereau_MFG> T_Bordereau_MFGs { get; set; }
+   // public virtual DbSet<T_Bordereau_MFG> T_Bordereau_MFGs { get; set; }
 
     public virtual DbSet<T_CALC_DISPO> T_CALC_DISPOs { get; set; }
 
@@ -138,7 +138,7 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
 
     public virtual DbSet<T_FRAIS_RELEVE> T_FRAIS_RELEVEs { get; set; }
 
-    public virtual DbSet<T_Fichiers_Scan> T_Fichiers_Scans { get; set; }
+   // public virtual DbSet<T_Fichiers_Scan> T_Fichiers_Scans { get; set; }
 
     public virtual DbSet<T_GROUPE> T_GROUPEs { get; set; }
 
@@ -835,7 +835,7 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<T_Bordereau_MFG>(entity =>
+        /*modelBuilder.Entity<T_Bordereau_MFG>(entity =>
         {
             entity
                 .HasNoKey()
@@ -861,7 +861,7 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.acc_fourn_adh_MFG).HasColumnType("numeric(18, 3)");
-        });
+        });*/
 
         modelBuilder.Entity<T_CALC_DISPO>(entity =>
         {
@@ -1897,8 +1897,8 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
 
             entity.ToTable("T_LITIGE");
 
-            entity.Property(e => e.DAT_LIT).HasColumnType("date");
-            entity.Property(e => e.ECH_LIT).HasColumnType("date");
+           entity.Property(e => e.DAT_LIT).HasColumnType("date");
+           entity.Property(e => e.ECH_LIT).HasColumnType("date");
             entity.Property(e => e.MONT_LT).HasColumnType("decimal(15, 3)");
             entity.Property(e => e.TYP_LIT)
                 .IsRequired()

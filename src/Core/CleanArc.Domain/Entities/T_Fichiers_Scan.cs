@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanArc.Domain.Common;
 
 namespace CleanArc.Domain.Entities;
 
-public partial class T_Fichiers_Scan
+public partial class T_Fichiers_Scan:IEntity
 {
     public int Id_Scan { get; set; }
 

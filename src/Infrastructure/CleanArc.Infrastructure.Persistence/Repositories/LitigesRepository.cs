@@ -27,17 +27,14 @@ public class LitigesRepository:BaseAsyncRepository<T_LITIGE>,ILitigesRepository
             {
                 tva = null;
             }
-
-            T_LITIGE existingLitige = _dbContext.T_LITIGEs
+            T_LITIGE existingLitige = base.Table
                 .Where(p => p.ID_DET_BORD_LIT == litige.ID_DET_BORD_LIT && p.ETAT_LIT == true)
                 .FirstOrDefault();
-
             if (existingLitige == null)
             {
                 litige.ETAT_LIT = true;
-                litige.MONT_LT = montantLt ?? 0; 
-                _dbContext.T_LITIGEs.Add(litige);
-                await _dbContext.SaveChangesAsync();
+                litige.MONT_LT = montantLt ?? 0;
+                await base.AddAsync(litige);
             }
             else
             {
@@ -57,7 +54,8 @@ public class LitigesRepository:BaseAsyncRepository<T_LITIGE>,ILitigesRepository
         
     }
 
-
-    
-    
+    public async Task AddLitige(T_LITIGE litige)
+    {
+       await  base.AddAsync(litige);
+    }
 }
