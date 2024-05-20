@@ -1,8 +1,10 @@
 ﻿using CleanArc.Application.Common;
 using CleanArc.Application.Features.Individu.Commands.AddIndividuCommand;
 using CleanArc.Application.Features.Individu.Commands.UpdateIndividuCommand;
+using CleanArc.Application.Features.Individu.Queries.GetAllAdherents;
 using CleanArc.Application.Features.Individu.Queries.GetAllIndividus;
 using CleanArc.Application.Features.Individu.Queries.GetByIdQuery;
+using CleanArc.Application.Features.Individu.Queries.GetRefCtrCirByAdherentName;
 using CleanArc.WebFramework.BaseController;
 using Mediator;
 using Microsoft.AspNetCore.Mvc;
@@ -57,8 +59,21 @@ public class IndividuController : BaseController
 
         return base.OperationResult(command);
     }
+    [HttpGet("GetAllAdherents")]
+    public async Task<IActionResult> GetAllAdherents()
+    {
+        var query = new GetAllAdherentsQuery();
+        var result = await _sender.Send(query);
+        return base.OperationResult(result);
+    }
         
-    
+    [HttpGet("GetRefCtrCirByAdherentName/{refInd}")]
+    public async Task<IActionResult> GetRefCtrCirByAdherentName(int refInd)
+    {
+        var query = new GetRefCtrCirByAdherentNameQuery(refInd);
+        var result = await _sender.Send(query);
+        return base.OperationResult(result);
+    }
     
 
 }

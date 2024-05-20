@@ -11,5 +11,7 @@ public interface IIndividualRepository
     Task<PagedList<T_INDIVIDU>> GetAllIndividusAsync(PaginationParams paginationParams);
     Task<T_INDIVIDU> GetIndividuById(int id);
     Task<bool> UpdateIndividuAsync(int id, T_INDIVIDU updatedIndividu);
+    Task<List<string>> GetAllAdherentsAsync();
+    Task<List<int>> GetRefCtrCirByRefIndAsync(int refInd);
 
 }

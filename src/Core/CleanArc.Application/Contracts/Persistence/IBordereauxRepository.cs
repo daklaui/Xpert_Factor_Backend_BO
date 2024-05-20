@@ -14,6 +14,7 @@ public interface IBordereauxRepository
     Task<T_BORDEREAU> GetBordereauxByPK(string numBord, int refCtr , string yearBord);
     Task ValidateBordereauAsync(T_BORDEREAU existingBordereau, List<T_DET_BORD> detBordList);
     Task DeleteBordereaux(T_BORDEREAU bordereau);
-   
+    Task<List<PksBordereauxDto>> GetDetailsBordByRefCtrAsync(int refCtr);
+
 
 }

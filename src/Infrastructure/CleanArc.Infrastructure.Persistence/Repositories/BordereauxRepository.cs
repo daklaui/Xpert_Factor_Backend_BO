@@ -89,6 +89,25 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
             await _dbContext.SaveChangesAsync();
         }
         
+        public async Task<List<PksBordereauxDto>> GetDetailsBordByRefCtrAsync(int refCtr)
+        {
+            var result = await _dbContext.T_BORDEREAUs
+                .Join(_dbContext.T_CONTRATs,
+                    bord => bord.REF_CTR_BORD,
+                    ctr => ctr.REF_CTR,
+                    (bord, ctr) => new { bord, ctr })
+                .Where(joined => joined.bord.REF_CTR_BORD == refCtr)
+                .Select(joined => new PksBordereauxDto
+                {
+                    REF_CTR_BORD = joined.bord.REF_CTR_BORD,
+                    NUM_BORD = joined.bord.NUM_BORD,
+                    ANNEE_BORD = joined.bord.ANNEE_BORD
+                })
+                .ToListAsync();
+
+            return result;
+        }
+        
 
 
     }

@@ -5,6 +5,7 @@ using CleanArc.Application.Features.Bordereaux.Commands.UpdateBordereauxCommand;
 using CleanArc.Application.Features.Bordereaux.Commands.ValidateBordereauCommand;
 using CleanArc.Application.Features.Bordereaux.Queries.GetAllBordereaux;
 using CleanArc.Application.Features.Bordereaux.Queries.GetById;
+using CleanArc.Application.Features.Bordereaux.Queries.GetDetailsBordByRefCtr;
 using CleanArc.Application.Models.Common;
 using CleanArc.Domain.DTO;
 using CleanArc.WebFramework.BaseController;
@@ -100,9 +101,15 @@ public class BordereauxController : BaseController
     
         return base.OperationResult<bool>(result);
         
-        
     }
-
+  
+    [HttpGet("GetDetailsBordByRefCtr/{refCtr}")]
+    public async Task<IActionResult> GetDetailsBordByRefCtr(int refCtr)
+    {
+        var query = new GetDetailsBordByRefCtrQuery(refCtr);
+        var result = await _sender.Send(query);
+        return base.OperationResult(result);
+    }
     
     private (string NumBord, int RefCtrBord, string AnneeBord) ParseDeletionCriteria(PksDetBordDto id)
     {
