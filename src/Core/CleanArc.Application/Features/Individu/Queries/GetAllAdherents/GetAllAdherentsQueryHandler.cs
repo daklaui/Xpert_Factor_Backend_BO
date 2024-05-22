@@ -1,10 +1,15 @@
+using CleanArc.Application.Common;
 using CleanArc.Application.Contracts.Persistence;
-using CleanArc.Application.Models.Common;
 using Mediator;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using CleanArc.Application.Features.Individu.Queries.GetAllAdherents;
+using CleanArc.Application.Models.Common;
+using CleanArc.Domain.DTO;
 
 namespace CleanArc.Application.Features.Individu.Queries.GetAllAdherents;
-
-internal class GetAllAdherentsQueryHandler : IRequestHandler<GetAllAdherentsQuery, OperationResult<List<string>>>
+internal class GetAllAdherentsQueryHandler : IRequestHandler<GetAllAdherentsQuery, OperationResult<List<AdherentDto>>>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -12,10 +17,11 @@ internal class GetAllAdherentsQueryHandler : IRequestHandler<GetAllAdherentsQuer
     {
         _unitOfWork = unitOfWork;
     }
-    public async ValueTask<OperationResult<List<string>>> Handle(GetAllAdherentsQuery request, CancellationToken cancellationToken)
+
+    public async ValueTask<OperationResult<List<AdherentDto>>> Handle(GetAllAdherentsQuery request, CancellationToken cancellationToken)
     {
         var adherents = await _unitOfWork.IndividualRepository.GetAllAdherentsAsync();
-
-        return OperationResult<List<string>>.SuccessResult(adherents);
+        Console.WriteLine($"Adherents count: {adherents.Count}");
+        return OperationResult<List<AdherentDto>>.SuccessResult(adherents);
     }
 }

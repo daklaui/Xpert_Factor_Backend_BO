@@ -64,6 +64,7 @@ public class IndividuController : BaseController
     {
         var query = new GetAllAdherentsQuery();
         var result = await _sender.Send(query);
+        Console.WriteLine($"OperationResult Success: {result.IsSuccess}");
         return base.OperationResult(result);
     }
         

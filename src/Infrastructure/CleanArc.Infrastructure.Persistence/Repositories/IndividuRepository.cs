@@ -1,5 +1,6 @@
 ﻿using CleanArc.Application.Common;
 using CleanArc.Application.Contracts.Persistence;
+using CleanArc.Domain.DTO;
 using CleanArc.Domain.Entities;
 using CleanArc.Infrastructure.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
@@ -84,15 +85,15 @@ internal class IndividuRepository : BaseAsyncRepository<T_INDIVIDU>, IIndividual
 
     return true;
 }
-    public async Task<List<string>> GetAllAdherentsAsync()
+    public async Task<List<AdherentDto>> GetAllAdherentsAsync()
     {
         var adherents = await _dbContext.T_INDIVIDUs
             .Join(_dbContext.TJ_CIRs,
                 individu => individu.REF_IND,
                 cir => cir.REF_IND_CIR,
-                (individu, cir) => new { individu, cir })
-            .Where(joined => joined.cir.ID_ROLE_CIR == "ADH")
-            .Select(joined => joined.individu.NOM_IND)
+                (individu, cir) => new { individu.REF_IND, individu.NOM_IND, cir.ID_ROLE_CIR })
+            .Where(joined => joined.ID_ROLE_CIR == "ADH")
+            .Select(joined => new AdherentDto { RefInd = joined.REF_IND, NomInd = joined.NOM_IND })
             .ToListAsync();
 
         return adherents;
