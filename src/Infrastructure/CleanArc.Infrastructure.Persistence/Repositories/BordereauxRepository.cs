@@ -89,20 +89,30 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
             await _dbContext.SaveChangesAsync();
         }
         
-        public async Task<List<PksBordereauxDto>> GetDetailsBordByRefCtrAsync(int refCtr)
+        public async Task<List<BordereauxWithIndividuDto>> GetDetailsBordByRefCtrAsync(int refCtr)
         {
             var result = await _dbContext.T_BORDEREAUs
                 .Join(_dbContext.T_CONTRATs,
                     bord => bord.REF_CTR_BORD,
                     ctr => ctr.REF_CTR,
                     (bord, ctr) => new { bord, ctr })
-                .Where(joined => joined.bord.REF_CTR_BORD == refCtr)
-                .Select(joined => new PksBordereauxDto
+                .Join(_dbContext.TJ_CIRs,
+                    joined => joined.bord.REF_CTR_BORD,
+                    cir => cir.REF_CTR_CIR,
+                    (joined, cir) => new { joined.bord, joined.ctr, cir })
+                .Join(_dbContext.T_INDIVIDUs,
+                    joined => joined.cir.REF_IND_CIR,
+                    ind => ind.REF_IND,
+                    (joined, ind) => new { joined.bord, joined.ctr, joined.cir, ind })
+                .Where(joined => joined.bord.REF_CTR_BORD == refCtr && joined.cir.ID_ROLE_CIR == "ACH")
+                .Select(joined => new BordereauxWithIndividuDto
                 {
                     REF_CTR_BORD = joined.bord.REF_CTR_BORD,
                     NUM_BORD = joined.bord.NUM_BORD,
-                    ANNEE_BORD = joined.bord.ANNEE_BORD
+                    ANNEE_BORD = joined.bord.ANNEE_BORD,
+                    NOM_IND = joined.ind.NOM_IND
                 })
+                .Distinct()
                 .ToListAsync();
 
             return result;

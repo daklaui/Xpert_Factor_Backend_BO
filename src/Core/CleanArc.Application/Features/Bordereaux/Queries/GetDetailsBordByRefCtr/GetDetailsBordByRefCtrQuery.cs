@@ -4,4 +4,4 @@ using Mediator;
 
 namespace CleanArc.Application.Features.Bordereaux.Queries.GetDetailsBordByRefCtr;
 
-public record GetDetailsBordByRefCtrQuery(int RefCtr) : IRequest<OperationResult<List<PksBordereauxDto>>>;
+public record GetDetailsBordByRefCtrQuery(int RefCtr) : IRequest<OperationResult<List<BordereauxWithIndividuDto>>>;

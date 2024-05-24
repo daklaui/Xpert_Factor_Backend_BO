@@ -5,7 +5,7 @@ using Mediator;
 
 namespace CleanArc.Application.Features.Bordereaux.Queries.GetDetailsBordByRefCtr;
 
-internal class GetDetailsBordByRefCtrQueryHandler : IRequestHandler<GetDetailsBordByRefCtrQuery, OperationResult<List<PksBordereauxDto>>>
+internal class GetDetailsBordByRefCtrQueryHandler : IRequestHandler<GetDetailsBordByRefCtrQuery, OperationResult<List<BordereauxWithIndividuDto>>>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -13,15 +13,15 @@ internal class GetDetailsBordByRefCtrQueryHandler : IRequestHandler<GetDetailsBo
     {
         _unitOfWork = unitOfWork;
     }
-    public async ValueTask<OperationResult<List<PksBordereauxDto>>> Handle(GetDetailsBordByRefCtrQuery request, CancellationToken cancellationToken)
+    public async ValueTask<OperationResult<List<BordereauxWithIndividuDto>>> Handle(GetDetailsBordByRefCtrQuery request, CancellationToken cancellationToken)
     {
         var bordereauDetails = await _unitOfWork.BordereauxRepository.GetDetailsBordByRefCtrAsync(request.RefCtr);
 
         if (bordereauDetails == null || !bordereauDetails.Any())
         {
-            return OperationResult<List<PksBordereauxDto>>.FailureResult("No bordereau details found for the given reference.");
+            return OperationResult<List<BordereauxWithIndividuDto>>.FailureResult("No bordereau details found for the given reference.");
         }
 
-        return OperationResult<List<PksBordereauxDto>>.SuccessResult(bordereauDetails);
+        return OperationResult<List<BordereauxWithIndividuDto>>.SuccessResult(bordereauDetails);
     }
 }
