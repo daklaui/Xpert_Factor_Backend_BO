@@ -1,80 +1,102 @@
 ﻿using CleanArc.Application.Common;
 using CleanArc.Application.Features.Individu.Commands.AddIndividuCommand;
 using CleanArc.Application.Features.Individu.Commands.UpdateIndividuCommand;
-using CleanArc.Application.Features.Individu.Queries.GetAllAdherents;
 using CleanArc.Application.Features.Individu.Queries.GetAllIndividus;
 using CleanArc.Application.Features.Individu.Queries.GetByIdQuery;
-using CleanArc.Application.Features.Individu.Queries.GetRefCtrCirByAdherentName;
+using CleanArc.Domain.DTO;
 using CleanArc.WebFramework.BaseController;
 using Mediator;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
-namespace CleanArc.Web.Api.Controllers.V1.Individu;
-[ApiVersion("1")]
-[ApiController]
-[Route("api/v{version:apiVersion}/Individu")]
-//[Authorize]
-public class IndividuController : BaseController
+namespace CleanArc.Web.Api.Controllers.V1.Individu
 {
-    private readonly ISender _sender;
-
-    public IndividuController(ISender sender)
+    [ApiVersion("1")]
+    [ApiController]
+    [Route("api/v{version:apiVersion}/Individu")]
+    //[Authorize]
+    public class IndividuController : BaseController
     {
-        _sender = sender;
-    }
+        private readonly ISender _sender;
+        private readonly ILogger<IndividuController> _logger;
 
-    [HttpPost("CreateNewIndividu")]
-    public async Task<IActionResult> CreateNewIndividu(AddIndividuCommand model)
-    {
-    
-        var command = await _sender.Send(model);
-
-        return base.OperationResult(command);
-    }
-
-   [HttpGet("GetAllIndividus")]
-    public async Task<IActionResult> GetAllIndividus([FromQuery] PaginationParams paginationParams)
-    {
-        var query = await _sender.Send(new GetAllIndividusQuery(paginationParams));
-
-        return base.OperationResult(query);
-    }
-
-    [HttpGet("GetIndividuById/{id}")]
-    public async Task<IActionResult> GetIndividuById(int id)
-    {
-        var query = await _sender.Send(new GetByIdQuery(id));
-
-        return base.OperationResult(query);
-    }
-    
-    [HttpPut("UpdateIndividu/{id}")]
-    public async Task<IActionResult> UpdateJob(int id, UpdateIndividuCommand model)
-    {
-        if (model == null)
+        public IndividuController(ISender sender, ILogger<IndividuController> logger)
         {
-            return BadRequest("Invalid model");
+            _sender = sender;
+            _logger = logger;
         }
-        var command = await _sender.Send(model);
 
-        return base.OperationResult(command);
-    }
-    [HttpGet("GetAllAdherents")]
-    public async Task<IActionResult> GetAllAdherents()
-    {
-        var query = new GetAllAdherentsQuery();
-        var result = await _sender.Send(query);
-        Console.WriteLine($"OperationResult Success: {result.IsSuccess}");
-        return base.OperationResult(result);
-    }
+        [HttpPost("CreateNewIndividu")]
+        public async Task<IActionResult> CreateNewIndividu([FromBody] IndividualDTO model)
+        {
+            if (model == null)
+            {
+                return BadRequest("Invalid model");
+            }
+
+            try
+            {
+                var command = new AddIndividuCommand(model);
+                var result = await _sender.Send(command);
+                return base.OperationResult(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error during Individual registration.");
+                return BadRequest("An error occurred while processing your request.");
+            }
+        }
+
+        [HttpGet("GetIndividuById/{id}")]
+        public async Task<IActionResult> GetIndividuById(int id)
+        {
+            try
+            {
+                var query = new GetByIdQuery(id);
+                var result = await _sender.Send(query);
+                return base.OperationResult(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error fetching individual with ID: {id}");
+                return BadRequest("An error occurred while processing your request.");
+            }
+        }
         
-    [HttpGet("GetRefCtrCirByRefInd/{refInd}")]
-    public async Task<IActionResult> GetRefCtrCirByRefInd(int refInd)
-    {
-        var query = new GetRefCtrCirByRefIndQuery(refInd);
-        var result = await _sender.Send(query);
-        return base.OperationResult(result);
-    }
-    
+        [HttpPut("UpdateIndividu/{id}")]
+        public async Task<IActionResult> UpdateIndividu(int id, [FromBody] UpdateIndividuCommand model)
+        {
+            if (model == null)
+            {
+                return BadRequest("Invalid model");
+            }
 
+            try
+            {
+                var command = await _sender.Send(model);
+                return base.OperationResult(command);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error updating individual.");
+                return BadRequest("An error occurred while processing your request.");
+            }
+        }
+
+        [HttpGet("GetAllIndividus")]
+        public async Task<IActionResult> GetAllIndividus([FromQuery] PaginationParams paginationParams)
+        {
+            try
+            {
+                var query = new GetAllIndividusQuery(paginationParams);
+                var result = await _sender.Send(query);
+                return base.OperationResult(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error fetching all individuals.");
+                return BadRequest("An error occurred while processing your request.");
+            }
+        }
+    }
 }

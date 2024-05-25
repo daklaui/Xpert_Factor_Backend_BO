@@ -1,7 +1,8 @@
 ﻿using CleanArc.Application.Models.Common;
-using CleanArc.Domain.Entities;
+using CleanArc.Domain.DTO;
 using Mediator;
 
-namespace CleanArc.Application.Features.Individu.Commands.AddIndividuCommand;
-
-public record AddIndividuCommand(T_INDIVIDU Individu) : IRequest<OperationResult<bool>>;
+namespace CleanArc.Application.Features.Individu.Commands.AddIndividuCommand
+{
+    public record AddIndividuCommand(IndividualDTO IndividualDTO) : IRequest<OperationResult<bool>>;
+}

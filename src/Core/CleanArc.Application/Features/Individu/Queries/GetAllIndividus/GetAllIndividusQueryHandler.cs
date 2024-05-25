@@ -1,15 +1,13 @@
 ﻿using AutoMapper;
 using CleanArc.Application.Common;
 using CleanArc.Application.Contracts.Persistence;
-using CleanArc.Application.Features.Users.Queries.GetUsers;
 using CleanArc.Application.Models.Common;
-using CleanArc.Domain.Entities;
-using CleanArc.Domain.Entities.User;
+using CleanArc.Domain.DTO;
 using Mediator;
 
 namespace CleanArc.Application.Features.Individu.Queries.GetAllIndividus
 {
-    internal class GetAllIndividusQueryHandler : IRequestHandler<GetAllIndividusQuery,OperationResult<PageInfo<GetAllIndividusQueryResult>>>
+    internal class GetAllIndividusQueryHandler : IRequestHandler<GetAllIndividusQuery, OperationResult<PageInfo<GetAllIndividusQueryResult>>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -22,17 +20,17 @@ namespace CleanArc.Application.Features.Individu.Queries.GetAllIndividus
 
         public async ValueTask<OperationResult<PageInfo<GetAllIndividusQueryResult>>> Handle(GetAllIndividusQuery request, CancellationToken cancellationToken)
         {
-            var individus = await _unitOfWork.IndividualRepository.GetAllIndividusAsync(request.paginationParams);
- 
+            var individus = await _unitOfWork.IndividualRepository.GetAllIndividualDTOsAsync(request.paginationParams);
+            
             var result = new PageInfo<GetAllIndividusQueryResult>
             {
                 PageSize = individus.PageSize,
                 CurrentPage = individus.CurrentPage,
                 TotalPages = individus.TotalPages,
                 TotalCount = individus.TotalCount,
-                Result = individus.Select(_mapper.Map<T_INDIVIDU, GetAllIndividusQueryResult>).ToList()
-
+                Result = individus.Result.Select(_mapper.Map<IndividualDTO, GetAllIndividusQueryResult>).ToList()
             };
+            
             return OperationResult<PageInfo<GetAllIndividusQueryResult>>.SuccessResult(result);
         }
     }

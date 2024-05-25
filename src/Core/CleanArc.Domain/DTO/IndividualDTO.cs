@@ -1,11 +1,9 @@
-﻿using CleanArc.Application.Profiles;
-using CleanArc.Domain.DTO;
 using CleanArc.Domain.Entities;
+using System.Collections.Generic;
 
-
-namespace CleanArc.Application.Features.Individu.Queries.GetAllIndividus
+namespace CleanArc.Domain.DTO
 {
-    public record GetAllIndividusQueryResult : ICreateMapper<IndividualDTO>
+    public class IndividualDTO
     {
         public T_INDIVIDU Individu { get; set; }
         public List<TR_RIB> TrRibs { get; set; }
