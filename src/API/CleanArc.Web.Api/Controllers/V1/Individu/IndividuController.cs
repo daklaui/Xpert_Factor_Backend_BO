@@ -1,8 +1,10 @@
 ﻿using CleanArc.Application.Common;
 using CleanArc.Application.Features.Individu.Commands.AddIndividuCommand;
 using CleanArc.Application.Features.Individu.Commands.UpdateIndividuCommand;
+using CleanArc.Application.Features.Individu.Queries.GetAllAdherents;
 using CleanArc.Application.Features.Individu.Queries.GetAllIndividus;
 using CleanArc.Application.Features.Individu.Queries.GetByIdQuery;
+using CleanArc.Application.Features.Individu.Queries.GetRefCtrCirByAdherentName;
 using CleanArc.Domain.DTO;
 using CleanArc.WebFramework.BaseController;
 using Mediator;
@@ -98,5 +100,23 @@ namespace CleanArc.Web.Api.Controllers.V1.Individu
                 return BadRequest("An error occurred while processing your request.");
             }
         }
+        [HttpGet("GetAllAdherents")]
+        public async Task<IActionResult> GetAllAdherents()
+        {
+            var query = new GetAllAdherentsQuery();
+            var result = await _sender.Send(query);
+            Console.WriteLine($"OperationResult Success: {result.IsSuccess}");
+            return base.OperationResult(result);
+        }
+        
+        [HttpGet("GetRefCtrCirByRefInd/{refInd}")]
+        public async Task<IActionResult> GetRefCtrCirByRefInd(int refInd)
+        {
+            var query = new GetRefCtrCirByRefIndQuery(refInd);
+            var result = await _sender.Send(query);
+            return base.OperationResult(result);
+        }
     }
-}
+
+    }
+    
