@@ -19,16 +19,17 @@ internal class GetDetailsDetBordQueryHandler: IRequestHandler<GetDetailsDetBordQ
     }
     public async ValueTask<OperationResult<GetDetailsDetBordQueryResult>> Handle(GetDetailsDetBordQuery request, CancellationToken cancellationToken)
     {
-
         var tDetBordList = await _unitOfWork.TDetBordRepository.getDetailsDetBord(request.PksDto);
         if (tDetBordList == null || !tDetBordList.Any())
         {
             return OperationResult<GetDetailsDetBordQueryResult>.FailureResult("No records found for the given primary keys.");
         }
-        
-       
-        var firstTDetBord = tDetBordList.First();
-        var result = _mapper.Map<DetailsDetBordDto, GetDetailsDetBordQueryResult>(firstTDetBord);
+
+        var result = new GetDetailsDetBordQueryResult
+        {
+            DetailsDetBordList = _mapper.Map<List<DetailsDetBordDto>>(tDetBordList)
+        };
+
         return OperationResult<GetDetailsDetBordQueryResult>.SuccessResult(result);
     }
 }
