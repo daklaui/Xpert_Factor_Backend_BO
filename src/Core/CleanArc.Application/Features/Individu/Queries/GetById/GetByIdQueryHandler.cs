@@ -18,11 +18,15 @@ namespace CleanArc.Application.Features.Individu.Queries.GetByIdQuery
 
         public async ValueTask<OperationResult<GetByIdQueryResult>> Handle(GetByIdQuery request, CancellationToken cancellationToken)
         {
-            var individu = await _unitOfWork.IndividualRepository.GetIndividuById(request.individuId);
+            var individu = await _unitOfWork.IndividualRepository.GetIndividuByIdAsync(request.IndividuId);
+            if (individu == null)
+            {
+                return OperationResult<GetByIdQueryResult>.FailureResult($"Individu with ID {request.IndividuId} not found");
+            }
 
-            var result =   _mapper.Map<T_INDIVIDU, GetByIdQueryResult>(individu);
-
+            var result = _mapper.Map<GetByIdQueryResult>(individu);
             return OperationResult<GetByIdQueryResult>.SuccessResult(result);
         }
     }
+    
 }

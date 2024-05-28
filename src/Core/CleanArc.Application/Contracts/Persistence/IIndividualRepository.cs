@@ -8,9 +8,9 @@ namespace CleanArc.Application.Contracts.Persistence;
 
 public interface IIndividualRepository
 {
-    Task AddIIndividualAsync(T_INDIVIDU individu);
-    Task<PagedList<T_INDIVIDU>> GetAllIndividusAsync(PaginationParams paginationParams);
-    Task<T_INDIVIDU> GetIndividuById(int id);
+    Task AddIndividualDTOAsync(IndividualDTO individualDTO);
+    Task<PageInfo<IndividualDTO>> GetAllIndividualDTOsAsync(PaginationParams paginationParams);
+    Task<IndividualDTO> GetIndividuByIdAsync(int id);
     Task<bool> UpdateIndividuAsync(int id, T_INDIVIDU updatedIndividu);
     Task<List<AdherentDto>> GetAllAdherentsAsync();
     Task<List<int>> GetRefCtrCirByRefIndAsync(int refInd);
