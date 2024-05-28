@@ -91,6 +91,18 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
         
         public async Task<List<BordereauxWithIndividuDto>> GetDetailsBordByRefCtrAsync(int refCtr)
         {
+            // Get the current year
+            var currentYear = DateTime.Now.Year.ToString();
+
+            // Retrieve the maximum NUM_BORD for the specified REF_CTR_BORD
+            var maxNumBord = await _dbContext.T_BORDEREAUs
+                .Where(bord => bord.REF_CTR_BORD == refCtr)
+                .MaxAsync(bord => bord.NUM_BORD);
+
+            // Increment the maximum NUM_BORD by 1
+            var newNumBord = (int.Parse(maxNumBord) + 1).ToString();
+
+            // Retrieve the required details
             var result = await _dbContext.T_BORDEREAUs
                 .Join(_dbContext.T_CONTRATs,
                     bord => bord.REF_CTR_BORD,
@@ -108,9 +120,10 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
                 .Select(joined => new BordereauxWithIndividuDto
                 {
                     REF_CTR_BORD = joined.bord.REF_CTR_BORD,
-                    NUM_BORD = joined.bord.NUM_BORD,
-                    ANNEE_BORD = joined.bord.ANNEE_BORD,
-                    NOM_IND = joined.ind.NOM_IND
+                    NUM_BORD = newNumBord, // Use the new incremented NUM_BORD
+                    ANNEE_BORD = currentYear, // Use the current year
+                    NOM_IND = joined.ind.NOM_IND,
+                    REF_IND_CIR = joined.cir.REF_IND_CIR // Include REF_IND_CIR
                 })
                 .Distinct()
                 .ToListAsync();
