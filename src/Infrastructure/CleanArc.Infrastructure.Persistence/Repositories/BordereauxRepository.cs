@@ -25,12 +25,25 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
             await base.AddAsync(bordereau);
         }
 
-        public async Task<PagedList<T_BORDEREAU>> GetAllBordereauxAsync(PaginationParams paginationParams)
+        public async Task<PagedList<GetAllBordDTO>> GetAllBordereauxAsync(PaginationParams paginationParams)
         {
-           
-            var query = base.TableNoTracking.AsQueryable();
+            var query = from bord in _dbContext.T_BORDEREAUs.AsQueryable()
+                join ctr in _dbContext.T_CONTRATs.AsQueryable() on bord.REF_CTR_BORD equals ctr.REF_CTR
+               
+                select new GetAllBordDTO
+                {
+                    NUM_BORD = bord.NUM_BORD,
+                    REF_CTR_BORD = bord.REF_CTR_BORD,
+                    NB_DOC_BORD = bord.NB_DOC_BORD,
+                    ANNEE_BORD = bord.ANNEE_BORD,
+                    DAT_SAISIE_BORD = bord.DAT_SAISIE_BORD,
+                    Nbre_Det = _dbContext.T_DET_BORDs.Count(det => det.NUM_BORD == bord.NUM_BORD && det.ANNEE_BORD == bord.ANNEE_BORD && det.REF_CTR_DET_BORD == bord.REF_CTR_BORD),
+                    Nom_ADH = _dbContext.T_INDIVIDUs.Where(ind => ind.REF_IND == bord.REF_ADH_BORD).Select(ind => ind.NOM_IND).FirstOrDefault(),
+                    MontantTotale = _dbContext.T_DET_BORDs.Where(det => det.NUM_BORD == bord.NUM_BORD && det.ANNEE_BORD == bord.ANNEE_BORD && det.REF_CTR_DET_BORD == bord.REF_CTR_BORD).Sum(det => det.MONT_TTC_DET_BORD) ?? 0,
+                    REF_CTR_PAPIER_CTR = bord.REF_CTR_BORD
+                };
 
-            var result = await PagedList<T_BORDEREAU>.CreateAsync(query, paginationParams.PageNumber, paginationParams.PageSize);
+            var result = await PagedList<GetAllBordDTO>.CreateAsync(query, paginationParams.PageNumber, paginationParams.PageSize);
 
             return result;
         }

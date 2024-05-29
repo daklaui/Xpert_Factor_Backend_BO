@@ -22,15 +22,14 @@ internal class GetAllBordereauxQueryHandler : IRequestHandler<GetAllBordereauxQu
 
     public async ValueTask<OperationResult<PageInfo<GetAllBordereauxQueryResult>>> Handle(GetAllBordereauxQuery request, CancellationToken cancellationToken)
     {
-        var TBordereau = await _unitOfWork.BordereauxRepository.GetAllBordereauxAsync(request.paginationParams);
+        var bordereaux = await _unitOfWork.BordereauxRepository.GetAllBordereauxAsync(request.paginationParams);
         var result = new PageInfo<GetAllBordereauxQueryResult>
         {
-            PageSize = TBordereau.PageSize,
-            CurrentPage = TBordereau.CurrentPage,
-            TotalPages = TBordereau.TotalPages,
-            TotalCount = TBordereau.TotalCount,
-            Result = TBordereau.Select(_mapper.Map<T_BORDEREAU, GetAllBordereauxQueryResult>).ToList()
-
+            PageSize = bordereaux.PageSize,
+            CurrentPage = bordereaux.CurrentPage,
+            TotalPages = bordereaux.TotalPages,
+            TotalCount = bordereaux.TotalCount,
+            Result = bordereaux.Select(_mapper.Map<GetAllBordDTO, GetAllBordereauxQueryResult>).ToList()
         };
         return OperationResult<PageInfo<GetAllBordereauxQueryResult>>.SuccessResult(result);
     }
