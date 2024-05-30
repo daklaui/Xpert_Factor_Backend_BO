@@ -2,6 +2,7 @@
 using CleanArc.Application.Features.ListVal.Commands.AddValsCommand;
 using CleanArc.Application.Features.ListVal.Commands.UpdateTListValCommand;
 using CleanArc.Application.Features.ListVal.Queries.GetAllTListVals;
+using CleanArc.Application.Features.ListVal.Queries.GetFormJuridique;
 using CleanArc.Application.Features.ListVal.Queries.GetTListValById;
 using CleanArc.Application.Features.Recouvrement.Queries.GetAllRecouvrements;
 using CleanArc.WebFramework.BaseController;
@@ -85,6 +86,15 @@ namespace CleanArc.Web.Api.Controllers.V1.TListVal
         public async Task<IActionResult> GetListOfRecouvrement([FromQuery] PaginationParams paginationParams)
         {
             var query = await _sender.Send(new GetAllRecouvrementQuery(paginationParams));
+
+            return base.OperationResult(query);
+        }      
+        
+        
+        [HttpGet("GetFormJuridique")]
+        public async Task<IActionResult> GetFormJuridique()
+        {
+            var query = await _sender.Send(new GetFormJuridiqueQuery());
 
             return base.OperationResult(query);
         }
