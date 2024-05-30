@@ -143,5 +143,16 @@ public class LimiteRepository : BaseAsyncRepository<T_DEM_LIMITE> ,ILimiteReposi
         return await base.TableNoTracking.FirstOrDefaultAsync(p => p.REF_DEM_LIM == id);
 
     }
+    public async Task AddBuyerLimit(BuyerDTO buyerDto)
+    {
+        var buyerEntity = new T_DEM_LIMITE
+        {
+       DAT_DEM_LIM = buyerDto.DAT_DEM_LIM_FIN,
+       MONT_DEM_LIM = buyerDto.MONT_LIM_FIN,
+       
+        };
+        await base.AddAsync(buyerEntity);
+    }
+
     
 }

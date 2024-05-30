@@ -4,9 +4,7 @@ using CleanArc.Domain.DTO;
 using CleanArc.Domain.Entities;
 using CleanArc.Infrastructure.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace CleanArc.Infrastructure.Persistence.Repositories
 {
@@ -82,7 +80,7 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
 
         public async Task<IndividualDTO> GetIndividuByIdAsync(int id)
         {
-            // Fetch the T_INDIVIDU entity
+      
             var individu = await _dbContext.T_INDIVIDUs.FirstOrDefaultAsync(i => i.REF_IND == id);
     
             if (individu == null)
@@ -90,7 +88,7 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
                 return null;
             }
 
-            // Fetch related entities
+           
             var trRibs = await _dbContext.TR_RIBs.Where(r => r.REF_IND_RIB == id).ToListAsync();
             var contacts = await _dbContext.T_CONTACTs.Where(c => c.REF_IND_CONTACT == id).ToListAsync();
             var tsUsers = await _dbContext.TS_USERS_WEBs.FirstOrDefaultAsync(u => u.REF_IND_WEB == id);
@@ -155,7 +153,6 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
 
             return true;
         }
-        
         public async Task<List<AdherentDto>> GetAllAdherentsAsync()
         {
             var adherents = await _dbContext.T_INDIVIDUs
@@ -182,5 +179,59 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
 
             return result;
         }
+        public async Task<PagedList<NomIndividuDto>> GetAllNomIndivAsync(PaginationParams paginationParams)
+        {
+            var query = base.TableNoTracking.AsQueryable()
+                .Select(ind => new NomIndividuDto { RefInd = ind.REF_IND, NomInd = ind.NOM_IND });
+
+            var result =
+                await PagedList<NomIndividuDto>.CreateAsync(query, paginationParams.PageNumber, paginationParams.PageSize);
+
+            return result;
+        }
+         public async Task<List<AdherentDetailDto>> GetAdherentDetailsByAdherentAsync(int refIndiv)
+         {
+             var adherentDetails = await _dbContext.TJ_CIRs
+                 .Where(cir => cir.ID_ROLE_CIR == "ach" && cir.REF_IND_CIR==refIndiv)  
+                 .Join(_dbContext.T_INDIVIDUs,
+                     cir => cir.REF_IND_CIR,
+                     individu => individu.REF_IND,
+                     (cir, individu) => new AdherentDetailDto
+                     {
+                         RefInd = individu.REF_IND,
+                         NomInd = individu.NOM_IND,
+                         TypDocIdInd = individu.TYP_DOC_ID_IND,
+                         NumDocIdInd = individu.NUM_DOC_ID_IND
+                     })
+                 .ToListAsync();
+
+             return adherentDetails;
+         }
+       
+         public async Task<List<NomIndividuDto>> GetIndividusSansContrat(int refctr)
+         {
+             var individusSansContrat = await base.Table
+                 .Where(individu =>
+                     !_dbContext.TJ_CIRs.Any(cir =>
+                         cir.REF_IND_CIR == individu.REF_IND && cir.REF_CTR_CIR == refctr && cir.ID_ROLE_CIR=="ACH"))
+                 .Select(individu => new NomIndividuDto
+                 {
+                     RefInd = individu.REF_IND,
+                     NomInd = individu.NOM_IND
+                 })
+                 .ToListAsync();
+
+             return individusSansContrat;
+         }
+
+         
+         
+         
+         
+         
+         
+
+         
+
     }
 }
