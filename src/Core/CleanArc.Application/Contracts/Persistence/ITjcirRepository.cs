@@ -8,8 +8,9 @@ public interface ITjcirRepository
 {
     
     Task AddTJCIRsync( TJ_CIR Buyer);
-     Task AddBuyer(TJ_CIR_DTO buyer);
+    Task AddBuyer(BuyerDTO buyerDto);
     Task<TJ_CIR> GetExistingActorsByRefCtr(string role, int refCtr);
     Task<bool> UpdateCirAsync(TJ_CIR updatedCir);
+    Task<List<AcheteurDto>> GetAcheteursByContratAsync(int refCtrCir);
     void SaveChanges();
 }

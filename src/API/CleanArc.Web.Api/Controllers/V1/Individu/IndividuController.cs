@@ -2,8 +2,11 @@
 using CleanArc.Application.Features.Individu.Commands.AddIndividuCommand;
 using CleanArc.Application.Features.Individu.Commands.UpdateIndividuCommand;
 using CleanArc.Application.Features.Individu.Queries.GetAllAdherents;
+using CleanArc.Application.Features.Individu.Queries.GetAllDetailsAdherents;
 using CleanArc.Application.Features.Individu.Queries.GetAllIndividus;
+using CleanArc.Application.Features.Individu.Queries.GetAllNomIndiv;
 using CleanArc.Application.Features.Individu.Queries.GetByIdQuery;
+using CleanArc.Application.Features.Individu.Queries.GetIndividusSansContrat;
 using CleanArc.Application.Features.Individu.Queries.GetRefCtrCirByAdherentName;
 using CleanArc.Domain.DTO;
 using CleanArc.WebFramework.BaseController;
@@ -116,7 +119,41 @@ namespace CleanArc.Web.Api.Controllers.V1.Individu
             var result = await _sender.Send(query);
             return base.OperationResult(result);
         }
+        
+        
+        [HttpGet("GetAllNomIndividus")]
+        public async Task<IActionResult> GetAllNomIndividus([FromQuery] PaginationParams paginationParams)
+        {
+            try
+            {
+                var query = new GetAllNomIndivQuery(paginationParams);
+                var result = await _sender.Send(query);
+                return base.OperationResult(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error fetching all name individuals.");
+                return BadRequest("An error occurred while processing your request.");
+            }
+        }
+        
+        [HttpGet("GetAllDetailsAdherents")]
+        public async Task<IActionResult> GetAllDetailsAdherents(int refIndiv)
+        {
+            var query = new GetAllDetailsAdherentsQuery(refIndiv);
+            var result = await _sender.Send(query);
+            Console.WriteLine($"OperationResult Success: {result.IsSuccess}");
+            return base.OperationResult(result);
+        }
+        
+        [HttpGet("GetIndividusSansContrat")]
+        public async Task<IActionResult> GetIndividusSansContrat(int refctr)
+        {
+            var query = new GetIndividusSansContratQuery(refctr);
+            var result = await _sender.Send(query);
+            Console.WriteLine($"OperationResult Success: {result.IsSuccess}");
+            return base.OperationResult(result);
+        }
     }
-
     }
     

@@ -1,4 +1,6 @@
 using CleanArc.Application.Features.buyer.Commands.AddBuyer;
+using CleanArc.Application.Features.buyer.Commands.AddBuyerLimit;
+using CleanArc.Application.Features.buyer.Commands.Queries;
 
 namespace CleanArc.Web.Api.Controllers.V1.Buyer;
 
@@ -28,4 +30,20 @@ public class BuyerController:BaseController
 
         return base.OperationResult(command);
     }
-}
+    [HttpGet("GetAllAcheteursByContrat")]
+    public async Task<IActionResult> GetAllAcheteursByContrat(int id)
+    {
+        var query = new GetAcheteursByContratQuery(id);
+        var result = await _sender.Send(query);
+        return base.OperationResult(result);
+    }
+    
+    [HttpPost("AddBuyerLimit")]
+    public async Task<IActionResult> AddBuyerLimit( AddBuyerLimitCommmand model)
+    {
+    
+        var command = await _sender.Send(model);
+
+        return base.OperationResult(command);
+    }
+} 
