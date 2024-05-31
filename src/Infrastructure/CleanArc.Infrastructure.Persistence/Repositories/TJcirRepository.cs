@@ -21,16 +21,13 @@ internal class TJcirRepository: BaseAsyncRepository<TJ_CIR> , ITjcirRepository
         await base.AddAsync(buyer);
     }
 
-    public async Task AddBuyer(TJ_CIR_DTO buyerDto)
+    public async Task AddBuyer(BuyerDTO buyerDto)
     {
         var buyerEntity = new TJ_CIR
         {
-            ID_CIR = buyerDto.ID_CIR,
             REF_CTR_CIR = buyerDto.REF_CTR_CIR,
             REF_IND_CIR = buyerDto.REF_IND_CIR,
-            ID_ROLE_CIR = buyerDto.ID_ROLE_CIR,
         };
-
         await base.AddAsync(buyerEntity);
     }
 
@@ -73,6 +70,24 @@ internal class TJcirRepository: BaseAsyncRepository<TJ_CIR> , ITjcirRepository
 
         return true;
     }
+    
+    
+    public async Task<List<AcheteurDto>> GetAcheteursByContratAsync(int refCtrCir)
+    {
+        Console.WriteLine($"Fetching acheteurs for REF_CTR_CIR = {refCtrCir}");
+        var acheteurs = await base.Table
+            .Where(cir => cir.REF_CTR_CIR == refCtrCir && cir.ID_ROLE_CIR == "ach")
+            .Select(cir => new AcheteurDto
+            {
+                IdCir = cir.ID_CIR,
+                RefIndCir = cir.REF_IND_CIR
+            })
+            .ToListAsync();
+        Console.WriteLine($"Acheteurs count for REF_CTR_CIR = {refCtrCir}: {acheteurs.Count}");
+
+        return acheteurs;
+    }
+
 
     public void SaveChanges()
     {

@@ -89,6 +89,15 @@ public class UnitOfWork : IUnitOfWork
         tjcirRepository = new TJcirRepository(_db);
         TJobsRepository = new TJobsRepository(_db);
         PostalCodesRepository = new PostalCodesRepository(_db);
+        FraisDiversRepository = new FraisDiversRepository(_db);
+        FondGarantieRepository = new FondGarantieRepository(_db);
+        FraisDiversRepository = new FraisDiversRepository(_db);
+        FactoringCommissionRepository = new FactoringCommissionRepository(_db);
+        FraisPaiementRepository = new FraisPaiementRepository(_db);
+        FactoringCommis = new FactoringCommissionRepository(_db);
+        IntFinanceRepository = new IntFinanceRepository(_db);
+        DetAssRepository = new DetAssRepository(_db);
+
 
 
     }
