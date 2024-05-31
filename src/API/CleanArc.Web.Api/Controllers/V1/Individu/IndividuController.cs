@@ -8,6 +8,7 @@ using CleanArc.Application.Features.Individu.Queries.GetAllNomIndiv;
 using CleanArc.Application.Features.Individu.Queries.GetByIdQuery;
 using CleanArc.Application.Features.Individu.Queries.GetIndividusSansContrat;
 using CleanArc.Application.Features.Individu.Queries.GetRefCtrCirByAdherentName;
+using CleanArc.Application.Models.Common;
 using CleanArc.Domain.DTO;
 using CleanArc.WebFramework.BaseController;
 using Mediator;
@@ -32,24 +33,10 @@ namespace CleanArc.Web.Api.Controllers.V1.Individu
         }
 
         [HttpPost("CreateNewIndividu")]
-        public async Task<IActionResult> CreateNewIndividu([FromBody] IndividualDTO model)
+        public async Task<IActionResult> CreateNewIndividu(AddIndividuCommand model)
         {
-            if (model == null)
-            {
-                return BadRequest("Invalid model");
-            }
-
-            try
-            {
-                var command = new AddIndividuCommand(model);
-                var result = await _sender.Send(command);
-                return base.OperationResult(result);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error during Individual registration.");
-                return BadRequest("An error occurred while processing your request.");
-            }
+            var result = await _sender.Send(model);
+            return OperationResult(result);
         }
 
         [HttpGet("GetIndividuById/{id}")]
@@ -59,7 +46,7 @@ namespace CleanArc.Web.Api.Controllers.V1.Individu
             {
                 var query = new GetByIdQuery(id);
                 var result = await _sender.Send(query);
-                return base.OperationResult(result);
+                return OperationResult(result);
             }
             catch (Exception ex)
             {

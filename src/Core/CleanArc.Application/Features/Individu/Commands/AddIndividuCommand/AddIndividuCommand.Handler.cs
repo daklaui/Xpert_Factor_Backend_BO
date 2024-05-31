@@ -24,7 +24,7 @@ namespace CleanArc.Application.Features.Individu.Commands.AddIndividuCommand
             try
             {
                 // Adding the main individual entity
-                await _unitOfWork.IndividualRepository.AddIndividualDTOAsync(request.IndividualDTO);
+                await _unitOfWork.IndividualRepository.AddIndividualDTOAsync(request.individual);
                 await _unitOfWork.CommitAsync();
 
                 return OperationResult<bool>.SuccessResult(true);
