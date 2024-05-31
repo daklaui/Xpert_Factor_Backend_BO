@@ -2,6 +2,7 @@ using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Application.Models.Common;
 using CleanArc.Domain.Entities;
 using Mediator;
+using Microsoft.EntityFrameworkCore;
 
 namespace CleanArc.Application.Features.Bordereaux.Commands.ValidateBordereauCommand;
 
@@ -39,10 +40,17 @@ public class ValidateBordereauCommandHandler : IRequestHandler<ValidateBordereau
 
             return OperationResult<bool>.SuccessResult(true);
         }
+        catch (InvalidOperationException ex)
+        {
+            return OperationResult<bool>.FailureResult($"Invalid operation: {ex.Message}", false);
+        }
+        catch (DbUpdateException ex)
+        {
+            return OperationResult<bool>.FailureResult($"Database update error: {ex.Message}", false);
+        }
         catch (Exception ex)
         {
-            return OperationResult<bool>.NotFoundResult("error");
-
+            return OperationResult<bool>.FailureResult($"An unexpected error occurred: {ex.Message}", false);
         }
      
     }
