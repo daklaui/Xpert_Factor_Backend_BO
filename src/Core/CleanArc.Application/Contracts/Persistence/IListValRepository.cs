@@ -9,6 +9,7 @@ public interface IListValRepository
     Task<List<TR_LIST_VAL>> GetFormJuridique();
     Task<TR_LIST_VAL> AddTListValAsync(TR_LIST_VAL listVal);
     Task<PagedList<TR_LIST_VAL>> GetAllTListValsAsync(PaginationParams paginationParams);
+    Task<List<TR_LIST_VAL>> GetAllTListValsByTypeAsync(string type);
     Task<TR_LIST_VAL> GetTListValById(int id);
     Task<TR_LIST_VAL> UpdateTListValAsync(int id, TR_LIST_VAL updatedTListVal);
 }

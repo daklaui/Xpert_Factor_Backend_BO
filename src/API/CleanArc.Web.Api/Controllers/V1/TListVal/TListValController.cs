@@ -3,6 +3,7 @@ using CleanArc.Application.Features.ListVal.Commands.AddValsCommand;
 using CleanArc.Application.Features.ListVal.Commands.UpdateTListValCommand;
 using CleanArc.Application.Features.ListVal.Queries.GetAllTListVals;
 using CleanArc.Application.Features.ListVal.Queries.GetFormJuridique;
+using CleanArc.Application.Features.ListVal.Queries.GetListValByType;
 using CleanArc.Application.Features.ListVal.Queries.GetTListValById;
 using CleanArc.Application.Features.Recouvrement.Queries.GetAllRecouvrements;
 using CleanArc.WebFramework.BaseController;
@@ -60,7 +61,23 @@ namespace CleanArc.Web.Api.Controllers.V1.TListVal
             return base.OperationResult(query);
         }
 
-        
+
+        [HttpGet("GetAllTListValsByType")]
+        public async Task<IActionResult> GetAllTListValsByType([FromQuery] string type)
+        {
+           
+
+            var query = await _sender.Send(new GetListValByTypeQuery(type));
+
+            if (query == null)
+            {
+                return NotFound();
+            }
+
+            return base.OperationResult(query);
+        }
+
+
         [HttpGet("GetTListValById/{id}")]
         public async Task<IActionResult> GetTListValById(int id)
         {
