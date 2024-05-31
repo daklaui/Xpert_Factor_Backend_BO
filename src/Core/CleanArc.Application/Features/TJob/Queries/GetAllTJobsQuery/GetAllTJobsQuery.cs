@@ -4,5 +4,4 @@ using Mediator;
 
 namespace CleanArc.Application.Features.TJob.Queries.GetAllTJobs;
 
-public record GetAllTJobsQuery
-    (PaginationParams PaginationParams) :IRequest<OperationResult<PageInfo<GetAllTJobsQuery_Response>>>;
+public record GetAllTJobsQuery : IRequest<OperationResult<List<GetAllTJobsQuery_Response>>>;
