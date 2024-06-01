@@ -15,16 +15,17 @@ namespace CleanArc.Application.Features.Individu.Commands.UpdateIndividuCommand
 
         public async ValueTask<OperationResult<bool>> Handle(UpdateIndividuCommand request, CancellationToken cancellationToken)
         {
-            var existingIndividu = await _unitOfWork.IndividualRepository.GetIndividuByIdAsync(request.Individu.REF_IND);
+            var existingIndividu = await _unitOfWork.IndividualRepository.GetIndividuByIdAsync(request.IndividualDTO.Individu.REF_IND);
 
             if (existingIndividu == null)
             {
-                return OperationResult<bool>.FailureResult($"Individu with id {request.Individu.REF_IND} not found.");
+                return OperationResult<bool>.FailureResult($"Individu with id {request.IndividualDTO.Individu.REF_IND} not found.");
             }
-            await _unitOfWork.IndividualRepository.UpdateIndividuAsync(existingIndividu.Individu.REF_IND, request.Individu);
+
+            await _unitOfWork.IndividualRepository.UpdateIndividuAsync(existingIndividu.Individu.REF_IND, request.IndividualDTO);
             await _unitOfWork.CommitAsync();
             return OperationResult<bool>.SuccessResult(true);
         }
 
-        }
+    }
 }
