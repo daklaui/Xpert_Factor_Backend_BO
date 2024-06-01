@@ -31,7 +31,7 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
                 await _dbContext.T_CONTACTs.AddRangeAsync(individualDTO.Contacts);
             }
 
-            if (individualDTO.TsUsers != null)
+            if (individualDTO.TsUsers != null && individualDTO.TsUsers.LOGIN_WEB != null)
             {
                 await _dbContext.TS_USERS_WEBs.AddAsync(individualDTO.TsUsers);
             }

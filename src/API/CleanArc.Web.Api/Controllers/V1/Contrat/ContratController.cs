@@ -19,12 +19,12 @@ namespace CleanArc.Web.Api.Controllers.V1.Contrat
     public class ContratController : BaseController
     {
         private readonly ISender _sender;
-        private readonly IContratRepository _contratRepository; // Injection de dépendance pour IContratRepository
 
-        public ContratController(ISender sender, IContratRepository contratRepository) // Ajout de IContratRepository dans le constructeur
+
+        public ContratController(ISender sender) // Ajout de IContratRepository dans le constructeur
         {
             _sender = sender;
-            _contratRepository = contratRepository; // Assignation de contratRepository
+          
         }
 
         [HttpPost("CreateNewContrat")]
@@ -58,11 +58,6 @@ namespace CleanArc.Web.Api.Controllers.V1.Contrat
             return Ok(queryResult);
         }
         
-        [HttpGet("GetAllContrats")]
-        public async Task<IActionResult> GetAllContratcs([FromQuery] PaginationParams paginationParams)
-        {
-            var queryResult = await _contratRepository.GetAllContratAsync(paginationParams); 
-            return Ok(queryResult);
-        }
+       
     }
 }
