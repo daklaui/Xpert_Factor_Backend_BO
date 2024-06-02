@@ -17,7 +17,7 @@ internal class GetIndividusSansContratHandler :IRequestHandler<GetIndividusSansC
 
     public async ValueTask<OperationResult<List<NomIndividuDto>>> Handle(GetIndividusSansContratQuery request, CancellationToken cancellationToken)
     {
-        var individus = await _unitOfWork.IndividualRepository.GetIndividusSansContrat(request.refctr);
+        var individus = await _unitOfWork.IndividualRepository.GetAcheteurSansContrat(request.refctr);
         Console.WriteLine($"Adherents count: {individus.Count}");
         return OperationResult<List<NomIndividuDto>>.SuccessResult(individus);
     }

@@ -1,6 +1,7 @@
 ﻿using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Domain.Entities;
 using CleanArc.Domain.Entities.DTO;
+using CleanArc.Domain.StoredProcuderModel;
 using CleanArc.Infrastructure.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
 
@@ -54,7 +55,7 @@ public class EncaissementReposiotry:BaseAsyncRepository<T_ENCAISSEMENT>, IEncais
                         .REF_CTR;
                     await base.AddAsync(encaissement);
                     await _dbContext.SaveChangesAsync();
-                   // _dbContext.T_ENCAISSEMENTs.Add(encaissement);
+                
                    
                     return true;
                 }
@@ -64,7 +65,7 @@ public class EncaissementReposiotry:BaseAsyncRepository<T_ENCAISSEMENT>, IEncais
                 }
             }
         }
-       // await base.AddAsync(encaissement);
+      
 
         return false;
     }
@@ -84,6 +85,30 @@ public class EncaissementReposiotry:BaseAsyncRepository<T_ENCAISSEMENT>, IEncais
 
         return listefactureNonEchu;
     }
+    
+    public async Task<List<SelectRefEncaissementParCtrETAch_Result>> RecherchEncAchRefCtr(int ref_ctr, int ref_ach)
+    {
+        var listeDesEncaissement = 
+             _dbContext.SelectRefEncaissementParCtrETAch
+            .FromSqlRaw("exec SelectRefEncaissementParCtrETAch @ref_ctr = {0}, @refach = {1}", ref_ctr, ref_ach)
+            .AsEnumerable()
+            .Where(p => p.TYP_ENC != "V" && p.TYP_ENC != "E" && p.TYP_ENC != "A")
+            .ToList();
+
+        return listeDesEncaissement;
+    }
+    
+    public async Task<List<SelectRefEncaissementParCtr>> RecherchEncCtr(int ref_ctr)
+    {
+        var listeDesEncaissement =  _dbContext.SelectRefEncaissementParCtr
+            .FromSqlRaw($"exec SelectRefEncaissementParCtr @ref_ctr = {ref_ctr}")
+            .AsEnumerable()
+            .Where(p => p.TYP_ENC != "V" && p.TYP_ENC != "E" && p.TYP_ENC != "A")
+            .ToList();
+    
+        return listeDesEncaissement;
+    }
+
     
     
 

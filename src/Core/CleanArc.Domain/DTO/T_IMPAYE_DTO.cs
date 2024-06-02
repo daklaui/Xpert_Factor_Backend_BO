@@ -18,4 +18,8 @@ public class T_IMPAYE_DTO
     public DateTime DATE_IMP { get; set; }
     public DateTime DATE_SAISI_IMP { get; set; }
     public decimal MONT_IMP { get; set; }
+    
+    
+    
+    
 }

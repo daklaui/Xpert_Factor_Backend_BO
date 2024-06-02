@@ -10,4 +10,5 @@ public interface IimpayeRepository
      List<T_IMPAYE_DTO> Listedesimpaye();
     List<T_IMPAYE_DTO> GetListehistorical();
    List<T_IMPAYE_DTO> GetListeResolutionDesImpayes();
+   
 }

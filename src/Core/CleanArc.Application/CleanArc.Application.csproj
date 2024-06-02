@@ -32,8 +32,5 @@
     <Folder Include="Features\Prorogation\Queries" />
     <Folder Include="Features\RecouvrementList\Commands" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Features\Encaissement\Queries" />
-  </ItemGroup>
 
 </Project>

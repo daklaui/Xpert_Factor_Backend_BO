@@ -15,5 +15,6 @@ public interface ILimiteRepository
     Task<bool> UpdateDemandeLimiteAsync(int demandeLimiteId, T_DEM_LIMITE updatedDemandeLimite);
     Task<T_DEM_LIMITE> GetDemandeLimiteByRefCtrAndType(int id, string type);
     Task AddBuyerLimit(BuyerDTO buyerDto);
+    Task<PagedList<T_DEM_LIMITE>> GetAllListOfDemLimitNoActif(PaginationParams paginationParam);
 
 }

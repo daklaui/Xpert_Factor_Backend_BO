@@ -13,7 +13,6 @@ internal class AddBuyerLimitCommmandHandler  : IRequestHandler<AddBuyerLimitComm
         await _unitOfWork.tjcirRepository.AddBuyer(request.Buyer);
         await _unitOfWork.LimiteRepository.AddBuyerLimit(request.Buyer);
         await _unitOfWork.CommitAsync();
-
         return OperationResult<bool>.SuccessResult(true);
     }
 }

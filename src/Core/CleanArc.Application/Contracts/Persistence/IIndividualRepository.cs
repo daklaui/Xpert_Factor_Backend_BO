@@ -14,8 +14,10 @@ public interface IIndividualRepository
     Task<bool> UpdateIndividuAsync(int id, T_INDIVIDU updatedIndividu);
     Task<List<AdherentDto>> GetAllAdherentsAsync();
     Task<List<int>> GetRefCtrCirByRefIndAsync(int refInd);
-    Task<PagedList<NomIndividuDto>> GetAllNomIndivAsync(PaginationParams paginationParams);
+    Task<List<NomIndividuDto>> GetAllNomIndivAsync();
 
     Task<List<AdherentDetailDto>> GetAdherentDetailsByAdherentAsync(int refIndiv);
-    Task<List<NomIndividuDto>> GetIndividusSansContrat(int refctr);
+    Task<List<NomIndividuDto>> GetAcheteurSansContrat(int refctr);
+    Task<List<NomIndividuDto>> GetAcheteurPourContrat(int refctr);
+
 }

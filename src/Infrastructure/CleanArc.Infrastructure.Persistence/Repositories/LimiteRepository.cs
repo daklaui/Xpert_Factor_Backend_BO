@@ -69,7 +69,7 @@ public class LimiteRepository : BaseAsyncRepository<T_DEM_LIMITE> ,ILimiteReposi
                                                              && dem.ACTIF_DEM_LIMI == false
                                                              && dem.DECISION_LIM != "RF"
                                                              && dem.MONT_ACC != null)
-                                                           //  && (dem.COMMENT != null && dem.COMMENT != ""))
+                                                          
                             select new T_DEM_LIMITE_DTO
                             {
                                 REF_CTR_DEM_LIM = dem.REF_CTR_DEM_LIM,
@@ -103,20 +103,30 @@ public class LimiteRepository : BaseAsyncRepository<T_DEM_LIMITE> ,ILimiteReposi
         
         return result;
     }
+    public async Task<PagedList<T_DEM_LIMITE>> GetAllListOfDemLimitNoActif(PaginationParams paginationParam)
+    {
+        var demLim = base.Table
+            .Where(dem => dem.ACTIF_DEM_LIMI == false)
+            .AsQueryable();
+
+        var result = await PagedList<T_DEM_LIMITE>.CreateAsync(demLim, paginationParam.PageNumber, paginationParam.PageSize);
+
+        return result;
+    }
+
+
 
     public async Task<T_DEM_LIMITE> validateLimite(int id)
     {
         var limite = await  base.Table.FirstOrDefaultAsync(p => p.REF_DEM_LIM == id);
-       if (limite == null)
+        if (limite == null)
         {
             throw new InvalidOperationException($"Limite with id {id} not found");
 
         }
-        limite.DECISION_LIM = "V";
         limite.ACTIF_DEM_LIMI = true;
        await base.UpdateAsync(limite);
         return limite;
-        
     }
 
     public  async Task<bool> UpdateDemandeLimiteAsync(int demandeLimiteId, T_DEM_LIMITE updatedDemandeLimite)
