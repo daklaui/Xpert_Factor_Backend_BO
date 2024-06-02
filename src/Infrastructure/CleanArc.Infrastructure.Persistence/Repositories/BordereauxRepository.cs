@@ -87,35 +87,102 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
             await _dbContext.SaveChangesAsync();
             return true;
         }
+
         public async Task ValidateBordereauAsync(T_BORDEREAU existingBordereau, List<T_DET_BORD> detBordList)
         {
-            
             existingBordereau.VALIDE_BORD = true;
             _dbContext.Entry(existingBordereau).State = EntityState.Modified;
-            
+
+            string x = "F";
+            var f = await _dbContext.T_FOND_GARANTIEs
+                .Where(p => p.REF_CTR_FDG == existingBordereau.REF_CTR_BORD && p.TYP_FDG == x)
+                .FirstOrDefaultAsync();
+
+            var cf = await _dbContext.T_COMM_FACTORINGs
+                .Where(p => p.REF_CTR_COMM_FACTORING == existingBordereau.REF_CTR_BORD && p.TYP_COMM_FACTORING == x)
+                .FirstOrDefaultAsync();
+
+            if (cf.TX_COMM_FACTORING.ToString() == "")
+            {
+                cf.TX_COMM_FACTORING = 0;
+            }
+
+            if (f.TX_FDG.ToString() == "")
+            {
+                f.TX_FDG = 0;
+            }
+
+            decimal TX_COMM_FACTORING =
+                ParseDecimalOrDefault(cf.TX_COMM_FACTORING.ToString().Replace(" ", "").Replace(",", "."));
+            TX_COMM_FACTORING = TX_COMM_FACTORING / 100;
+            decimal TX_FDG = ParseDecimalOrDefault(f.TX_FDG.ToString().Replace(" ", "").Replace(",", "."));
+            TX_FDG = TX_FDG / 100;
+            decimal ITauxFDGF = ParseDecimalOrDefault(f.TX_FDG.ToString().Replace(" ", "").Replace(",", "."));
+
+            decimal mONT_MIN_DOC_COMM_FACTORING;
+            try
+            {
+                mONT_MIN_DOC_COMM_FACTORING =
+                    ParseDecimalOrDefault(cf.MONT_MIN_DOC_COMM_FACTORING.ToString().Replace(" ", "").Replace(",", "."));
+            }
+            catch (Exception e)
+            {
+                mONT_MIN_DOC_COMM_FACTORING = 0;
+            }
+
+            decimal TauxTVA = 0.19M;
+
             foreach (var detBord in detBordList)
             {
                 detBord.VALIDE_DET_BORD = true;
                 _dbContext.Entry(detBord).State = EntityState.Modified;
+
+                decimal V_IMTCOMFAC = TX_COMM_FACTORING * (decimal)detBord.MONT_TTC_DET_BORD;
+                decimal IMTCOMFAC = mONT_MIN_DOC_COMM_FACTORING > V_IMTCOMFAC
+                    ? mONT_MIN_DOC_COMM_FACTORING
+                    : V_IMTCOMFAC;
+                decimal IMtTVACOM = TauxTVA * IMTCOMFAC;
+                decimal IMTCOMTTC = IMTCOMFAC + IMtTVACOM;
+
+                detBord.TX_FDG_DET_BORD = ParseDecimalOrDefault(f.TX_FDG.ToString().Replace(" ", "").Replace(",", "."));
+                detBord.TX_COMM_FACT_DET_BORD =
+                    ParseDecimalOrDefault(cf.TX_COMM_FACTORING.ToString().Replace(" ", "").Replace(",", "."));
+                decimal MONT_FDG_DET_BORD = TX_FDG * (decimal)detBord.MONT_TTC_DET_BORD;
+                detBord.MONT_FDG_LIBERE_DET_BORD = 0;
+                detBord.MONT_FDG_DET_BORD = Math.Round(MONT_FDG_DET_BORD, 3);
+                detBord.MONT_COMM_FACT_DET_BORD = IMTCOMFAC;
+                detBord.TX_TVA_COMM_FACT_DET_BORD = TauxTVA;
+                detBord.MONT_TVA_COMM_FACT_DET_BORD = IMtTVACOM;
+                detBord.MONT_TTC_COMM_FACT_DET_BORD = IMTCOMTTC;
             }
-            
+
             await _dbContext.SaveChangesAsync();
+        }
+
+        private decimal ParseDecimalOrDefault(string value)
+        {
+            if (decimal.TryParse(value, out var result))
+            {
+                return result;
+            }
+
+            return 0;
         }
         
         public async Task<List<BordereauxWithIndividuDto>> GetDetailsBordByRefCtrAsync(int refCtr)
         {
-            // Get the current year
             var currentYear = DateTime.Now.Year.ToString();
-
-            // Retrieve the maximum NUM_BORD for the specified REF_CTR_BORD
-            var maxNumBord = await _dbContext.T_BORDEREAUs
+            var numBordList = await _dbContext.T_BORDEREAUs
                 .Where(bord => bord.REF_CTR_BORD == refCtr)
-                .MaxAsync(bord => bord.NUM_BORD);
+                .Select(bord => bord.NUM_BORD)
+                .ToListAsync();
+            
+            var maxNumBord = numBordList
+                .Select(numBord => int.TryParse(numBord, out var num) ? num : 0)
+                .Max();
 
-            // Increment the maximum NUM_BORD by 1
-            var newNumBord = (int.Parse(maxNumBord) + 1).ToString();
+            var newNumBord = (maxNumBord + 1).ToString();
 
-            // Retrieve the required details
             var result = await _dbContext.T_BORDEREAUs
                 .Join(_dbContext.T_CONTRATs,
                     bord => bord.REF_CTR_BORD,
@@ -133,10 +200,10 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
                 .Select(joined => new BordereauxWithIndividuDto
                 {
                     REF_CTR_BORD = joined.bord.REF_CTR_BORD,
-                    NUM_BORD = newNumBord, // Use the new incremented NUM_BORD
-                    ANNEE_BORD = currentYear, // Use the current year
+                    NUM_BORD = newNumBord,
+                    ANNEE_BORD = currentYear,
                     NOM_IND = joined.ind.NOM_IND,
-                    REF_IND_CIR = joined.cir.REF_IND_CIR // Include REF_IND_CIR
+                    REF_IND_CIR = joined.cir.REF_IND_CIR
                 })
                 .Distinct()
                 .ToListAsync();

@@ -31,7 +31,7 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
                 await _dbContext.T_CONTACTs.AddRangeAsync(individualDTO.Contacts);
             }
 
-            if (individualDTO.TsUsers != null)
+            if (individualDTO.TsUsers != null && individualDTO.TsUsers.LOGIN_WEB != null)
             {
                 await _dbContext.TS_USERS_WEBs.AddAsync(individualDTO.TsUsers);
             }
@@ -105,54 +105,81 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
             return individualDTO;
         }
 
-        public async Task<bool> UpdateIndividuAsync(int id, T_INDIVIDU updatedIndividu)
+       public async Task<bool> UpdateIndividuAsync(int id, IndividualDTO updatedIndividualDTO)
+{
+    var existingIndividu = await base.Table.FirstOrDefaultAsync(e => e.REF_IND == id);
+
+    if (existingIndividu == null)
+    {
+        throw new InvalidOperationException($"Individu with id {id} not found");
+    }
+
+    // Update the T_INDIVIDU entity
+    var updatedIndividu = updatedIndividualDTO.Individu;
+    existingIndividu.GENRE_IND = updatedIndividu.GENRE_IND;
+    existingIndividu.TYP_DOC_ID_IND = updatedIndividu.TYP_DOC_ID_IND;
+    existingIndividu.NUM_DOC_ID_IND = updatedIndividu.NUM_DOC_ID_IND;
+    existingIndividu.LIEU_DOC_ID_IND = updatedIndividu.LIEU_DOC_ID_IND;
+    existingIndividu.DATE_DOC_ID_IND = updatedIndividu.DATE_DOC_ID_IND;
+    existingIndividu.COD_TVA_IND = updatedIndividu.COD_TVA_IND;
+    existingIndividu.NOM_IND = updatedIndividu.NOM_IND;
+    existingIndividu.PRE_IND = updatedIndividu.PRE_IND;
+    existingIndividu.DAT_NAISS_CREAT = updatedIndividu.DAT_NAISS_CREAT;
+    existingIndividu.GRP_IND = updatedIndividu.GRP_IND;
+    existingIndividu.LIM_CRED_GLO_IND = updatedIndividu.LIM_CRED_GLO_IND;
+    existingIndividu.LIM_FIN_GLO_IND = updatedIndividu.LIM_FIN_GLO_IND;
+    existingIndividu.INFO_IND = updatedIndividu.INFO_IND;
+    existingIndividu.DAT_INFO_IND = updatedIndividu.DAT_INFO_IND;
+    existingIndividu.ID_NLDP = updatedIndividu.ID_NLDP;
+    existingIndividu.COD_SCLAS = updatedIndividu.COD_SCLAS;
+    existingIndividu.ABRV_IND = updatedIndividu.ABRV_IND;
+    existingIndividu.MF_IND = updatedIndividu.MF_IND;
+    existingIndividu.RC_IND = updatedIndividu.RC_IND;
+    existingIndividu.EXO_TVA = updatedIndividu.EXO_TVA;
+    existingIndividu.DAT_DEB_EXO = updatedIndividu.DAT_DEB_EXO;
+    existingIndividu.DAT_FIN_EXO = updatedIndividu.DAT_FIN_EXO;
+    existingIndividu.TEL_IND = updatedIndividu.TEL_IND;
+    existingIndividu.FAX_IND = updatedIndividu.FAX_IND;
+    existingIndividu.EMAIL_IND = updatedIndividu.EMAIL_IND;
+    existingIndividu.REF_ADH_IND = updatedIndividu.REF_ADH_IND;
+    existingIndividu.FROM_JUR_IND = updatedIndividu.FROM_JUR_IND;
+    existingIndividu.EXO_IND = updatedIndividu.EXO_IND;
+    existingIndividu.ADR_IND = updatedIndividu.ADR_IND;
+    existingIndividu.CP_IND = updatedIndividu.CP_IND;
+    existingIndividu.REF_ACH_IND = updatedIndividu.REF_ACH_IND;
+    existingIndividu.ID_GROUPE = updatedIndividu.ID_GROUPE;
+
+    await base.UpdateAsync(existingIndividu);
+
+    
+    if (updatedIndividualDTO.TrRibs != null)
+    {
+        var existingTrRibs = await _dbContext.TR_RIBs.Where(r => r.REF_IND_RIB == id).ToListAsync();
+        _dbContext.TR_RIBs.RemoveRange(existingTrRibs);
+        await _dbContext.TR_RIBs.AddRangeAsync(updatedIndividualDTO.TrRibs);
+    }
+
+    if (updatedIndividualDTO.Contacts != null)
+    {
+        var existingContacts = await _dbContext.T_CONTACTs.Where(c => c.REF_IND_CONTACT == id).ToListAsync();
+        _dbContext.T_CONTACTs.RemoveRange(existingContacts);
+        await _dbContext.T_CONTACTs.AddRangeAsync(updatedIndividualDTO.Contacts);
+    }
+
+    if (updatedIndividualDTO.TsUsers != null)
+    {
+        var existingTsUsers = await _dbContext.TS_USERS_WEBs.FirstOrDefaultAsync(u => u.REF_IND_WEB == id);
+        if (existingTsUsers != null)
         {
-            var existingIndividu = await base.Table.FirstOrDefaultAsync(e => e.REF_IND == id);
-
-            if (existingIndividu == null)
-            {
-                throw new InvalidOperationException($"Individu with id {id} not found");
-            }
-
-            existingIndividu.GENRE_IND = updatedIndividu.GENRE_IND;
-            existingIndividu.TYP_DOC_ID_IND = updatedIndividu.TYP_DOC_ID_IND;
-            existingIndividu.NUM_DOC_ID_IND = updatedIndividu.NUM_DOC_ID_IND;
-            existingIndividu.LIEU_DOC_ID_IND = updatedIndividu.LIEU_DOC_ID_IND;
-            existingIndividu.DATE_DOC_ID_IND = updatedIndividu.DATE_DOC_ID_IND;
-            existingIndividu.COD_TVA_IND = updatedIndividu.COD_TVA_IND;
-            existingIndividu.NOM_IND = updatedIndividu.NOM_IND;
-            existingIndividu.PRE_IND = updatedIndividu.PRE_IND;
-            existingIndividu.DAT_NAISS_CREAT = updatedIndividu.DAT_NAISS_CREAT;
-            existingIndividu.GRP_IND = updatedIndividu.GRP_IND;
-            existingIndividu.LIM_CRED_GLO_IND = updatedIndividu.LIM_CRED_GLO_IND;
-            existingIndividu.LIM_FIN_GLO_IND = updatedIndividu.LIM_FIN_GLO_IND;
-            existingIndividu.INFO_IND = updatedIndividu.INFO_IND;
-            existingIndividu.DAT_INFO_IND = updatedIndividu.DAT_INFO_IND;
-            existingIndividu.ID_NLDP = updatedIndividu.ID_NLDP;
-            existingIndividu.COD_SCLAS = updatedIndividu.COD_SCLAS;
-            existingIndividu.ABRV_IND = updatedIndividu.ABRV_IND;
-            existingIndividu.LOGO_IND = updatedIndividu.LOGO_IND;
-            existingIndividu.PHOTO_IND = updatedIndividu.PHOTO_IND;
-            existingIndividu.MF_IND = updatedIndividu.MF_IND;
-            existingIndividu.RC_IND = updatedIndividu.RC_IND;
-            existingIndividu.EXO_TVA = updatedIndividu.EXO_TVA;
-            existingIndividu.DAT_DEB_EXO = updatedIndividu.DAT_DEB_EXO;
-            existingIndividu.DAT_FIN_EXO = updatedIndividu.DAT_FIN_EXO;
-            existingIndividu.TEL_IND = updatedIndividu.TEL_IND;
-            existingIndividu.FAX_IND = updatedIndividu.FAX_IND;
-            existingIndividu.EMAIL_IND = updatedIndividu.EMAIL_IND;
-            existingIndividu.REF_ADH_IND = updatedIndividu.REF_ADH_IND;
-            existingIndividu.FROM_JUR_IND = updatedIndividu.FROM_JUR_IND;
-            existingIndividu.EXO_IND = updatedIndividu.EXO_IND;
-            existingIndividu.ADR_IND = updatedIndividu.ADR_IND;
-            existingIndividu.CP_IND = updatedIndividu.CP_IND;
-            existingIndividu.REF_ACH_IND = updatedIndividu.REF_ACH_IND;
-            existingIndividu.ID_GROUPE = updatedIndividu.ID_GROUPE;
-
-            await base.UpdateAsync(existingIndividu);
-
-            return true;
+            _dbContext.TS_USERS_WEBs.Remove(existingTsUsers);
         }
+        await _dbContext.TS_USERS_WEBs.AddAsync(updatedIndividualDTO.TsUsers);
+    }
+
+    await _dbContext.SaveChangesAsync();
+
+    return true;
+}
         public async Task<List<AdherentDto>> GetAllAdherentsAsync()
         {
             var adherents = await _dbContext.T_INDIVIDUs

@@ -19,6 +19,19 @@ public class ListValRepository:BaseAsyncRepository<TR_LIST_VAL>,IListValReposito
     {
         var query = base.TableNoTracking.AsQueryable();
         return await PagedList<TR_LIST_VAL>.CreateAsync(query, paginationParams.PageNumber, paginationParams.PageSize);
+    }   
+        
+    public async Task<List<TR_LIST_VAL>> GetAllTListValsByTypeAsync(string type)
+    {
+        var query = base.TableNoTracking.AsQueryable().Where(p => p.TYP_LIST_VAL.ToUpper() == type.ToUpper());
+        return query.ToList();
+    }   
+    
+    
+    public async Task<List<TR_LIST_VAL>> GetFormJuridique()
+    {
+        var query = base.TableNoTracking.AsQueryable().Where(p =>p.TYP_LIST_VAL == "Forme juridique");
+        return query.ToList();
     }
 
     public async Task<TR_LIST_VAL> AddTListValAsync(TR_LIST_VAL listVal)

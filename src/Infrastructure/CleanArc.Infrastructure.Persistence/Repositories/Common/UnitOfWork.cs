@@ -1,11 +1,13 @@
 ﻿using CleanArc.Application.Contracts.Persistence;
+using CleanArc.Application.Features.Bordereaux.Commands.ValidateBordereauCommand;
+using Microsoft.Extensions.Logging;
 
 namespace CleanArc.Infrastructure.Persistence.Repositories.Common;
 
 public class UnitOfWork : IUnitOfWork
 {
     private readonly ApplicationDbContext _db;
-    
+   
     public IPostalCodesRepository PostalCodesRepository { get; } 
     
     public ITR_CPRepository TR_CPRepository { get; }
@@ -51,9 +53,10 @@ public class UnitOfWork : IUnitOfWork
     public IT_DET_BORD_Repository TDetBordRepository { get; }
     public ITJ_DOCUMENT_DET_BORD_Repository TjDocumentDetBordRepository { get; }
     public IBordereauxRepository BordereauxRepository { get; }
-    public UnitOfWork(ApplicationDbContext db )
+    public UnitOfWork(ApplicationDbContext db ,ILogger<ValidateBordereauCommandHandler> logger)
     {
         _db = db;
+       
         JcirRepository = new TJcirRepository(_db);
         UserRefreshTokenRepository = new UserRefreshTokenRepository(_db);
         OrderRepository = new OrderRepository(_db);

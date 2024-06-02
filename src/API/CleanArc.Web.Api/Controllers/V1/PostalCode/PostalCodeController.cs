@@ -11,7 +11,7 @@ namespace CleanArc.Web.Api.Controllers.V1.PostalCode;
 
 [ApiVersion("1")]
 [ApiController]
-[Route("api/v{version:apiVersion}/Imapye")]
+[Route("api/v{version:apiVersion}/PostalCode")]
 //[Authorize]
 public class PostalCodeController:BaseController
 {
@@ -47,6 +47,7 @@ public class PostalCodeController:BaseController
 
         return base.OperationResult(query);
     }
+
     [HttpGet("GetPostalCodeById/{id}")]
     public async Task<IActionResult> GetJobById(int id)
     {

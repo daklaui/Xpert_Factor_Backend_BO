@@ -31,12 +31,13 @@ public class TJobsController:BaseController
     }
     
     [HttpGet("GetAllJobs")]
-    public async Task<IActionResult> GetAllJobs([FromQuery] PaginationParams paginationParams)
+    public async Task<IActionResult> GetAllJobs()
     {
-        var query = await _sender.Send(new GetAllTJobsQuery(paginationParams));
+        var query = await _sender.Send(new GetAllTJobsQuery());
 
         return base.OperationResult(query);
     }
+    
     [HttpPut("UpdateJob/{id}")]
     public async Task<IActionResult> UpdateJob(int id, UpdateTJobsCommand model)
     {

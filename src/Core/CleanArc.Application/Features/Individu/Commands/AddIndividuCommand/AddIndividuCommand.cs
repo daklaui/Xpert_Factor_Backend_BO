@@ -4,5 +4,5 @@ using Mediator;
 
 namespace CleanArc.Application.Features.Individu.Commands.AddIndividuCommand
 {
-    public record AddIndividuCommand(IndividualDTO IndividualDTO) : IRequest<OperationResult<bool>>;
+    public record AddIndividuCommand(IndividualDTO individual) : IRequest<OperationResult<bool>>;
 }

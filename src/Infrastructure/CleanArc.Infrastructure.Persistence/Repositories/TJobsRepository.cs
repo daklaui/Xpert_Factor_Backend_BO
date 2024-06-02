@@ -20,12 +20,10 @@ internal class TJobsRepository:BaseAsyncRepository<TR_ACTPROF_BCT>,ITJobsReposit
         await base.AddAsync(actprofBct);
     }
 
-    public async Task<PagedList<TR_ACTPROF_BCT>> GetAllTJobsAsync(PaginationParams paginationParams)
+    public async Task<List<TR_ACTPROF_BCT>> GetAllTJobsAsync()
     {
         var query = base.TableNoTracking.AsQueryable();
-        var result = await PagedList<TR_ACTPROF_BCT>.CreateAsync(query, paginationParams.PageNumber, paginationParams.PageSize);
-        
-        return result;
+        return await query.ToListAsync();
     }
 
    
