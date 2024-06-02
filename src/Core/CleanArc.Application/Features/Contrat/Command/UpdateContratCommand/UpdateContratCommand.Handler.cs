@@ -2,6 +2,7 @@
 using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Application.Models.Common;
 using CleanArc.Domain.DTO;
+using CleanArc.Domain.Entities;
 using Mediator;
 using Exception = System.Exception;
 
@@ -231,24 +232,56 @@ namespace CleanArc.Application.Features.Contrat.Commands.UpdateContratCommand
 
         public async ValueTask<OperationResult<bool>> Handle(UpdateContratCommand request, CancellationToken cancellationToken)
         {
-            var existingContrat = await _unitOfWork.ContratRepository.GetContratById(request.Contrat.Contrat.REF_CTR);
+            var existingContrat = await _unitOfWork.ContratRepository.GetContratById(request.Contrat.ContratDetail.REF_CTR);
 
             if (existingContrat == null)
             {
-                return OperationResult<bool>.FailureResult($"Contrat with id {request.Contrat.Contrat.REF_CTR} not found.");
+                return OperationResult<bool>.FailureResult($"Contrat with id {request.Contrat.ContratDetail.REF_CTR} not found.");
             }
 
             _mapper.Map(request.Contrat, existingContrat);
-
+            ContractDetailsDTO Contrat = request.Contrat.ContratDetail;
             try
             {
-                await _unitOfWork.ContratRepository.UpdateContratAsync(existingContrat.REF_CTR, request.Contrat.Contrat);
-                await UpdateFraisDiversAsync(request.Contrat.fraisDivers, request.Contrat.Contrat.REF_CTR);
-                await UpdateFondGarantieAsync(request.Contrat.tFondGaranties, request.Contrat.Contrat.REF_CTR);
-                await UpdateFraisPaiementAsync(request.Contrat.fraisPaiements, request.Contrat.Contrat.REF_CTR);
-                await UpdateDemandeLimiteAsync(request.Contrat.tDemLimites, request.Contrat.Contrat.REF_CTR);
+                T_CONTRAT validerContrat = new T_CONTRAT();
+
+                validerContrat.REF_CTR = Contrat.REF_CTR;
+                validerContrat.STATUT_CTR = Contrat.STATUT_CTR;
+                validerContrat.REF_CTR_PAPIER_CTR = Contrat.REF_CTR_PAPIER_CTR;
+                validerContrat.SERVICE_CTR = Contrat.SERVICE_CTR;
+                validerContrat.TYP_CTR = Contrat.TYP_CTR;
+                validerContrat.DAT_SIGN_CTR = Contrat.DAT_SIGN_CTR;
+                validerContrat.DAT_DEB_CTR = Contrat.DAT_DEB_CTR;
+                validerContrat.DAT_RESIL_CTR = Contrat.DAT_RESIL_CTR;
+                validerContrat.DAT_PROCH_VERS_CTR = Contrat.DAT_PROCH_VERS_CTR;
+                validerContrat.CA_CTR = ParseDecimalOrDefault(Contrat.CA_CTR);
+                validerContrat.CA_EXP_CTR = ParseDecimalOrDefault(Contrat.CA_EXP_CTR);
+                validerContrat.CA_IMP_CTR = ParseDecimalOrDefault(Contrat.CA_IMP_CTR);
+                validerContrat.LIM_FIN_CTR = ParseDecimalOrDefault(Contrat.LIM_FIN_CTR);
+                validerContrat.DEVISE_CTR = Contrat.DEVISE_CTR;
+                validerContrat.NB_ACH_PREVU_CTR = Contrat.NB_ACH_PREVU_CTR;
+                validerContrat.NB_FACT_PREVU_CTR = Contrat.NB_FACT_PREVU_CTR;
+                validerContrat.NB_AVOIRS_PREVU_CTR = Contrat.NB_AVOIRS_PREVU_CTR;
+                validerContrat.NB_REMISES_PREVU_CTR = Contrat.NB_REMISES_PREVU_CTR;
+                validerContrat.DELAI_MOYEN_REG_CTR = Contrat.DELAI_MOYEN_REG_CTR;
+                validerContrat.DELAI_MAX_REG_CTR = Contrat.DELAI_MAX_REG_CTR;
+                validerContrat.FACT_REG_CTR = Contrat.FACT_REG_CTR;
+                validerContrat.DERN_MONT_DISP_2 = ParseDecimalOrDefault(Contrat.DERN_MONT_DISP_2);
+                validerContrat.MIN_COMM_FACT = ParseDecimalOrDefault(Contrat.MIN_COMM_FACT);
+                validerContrat.IS_NOTIFIED = Contrat.IS_NOTIFIED;
+                validerContrat.OLD_STATUT_CTR = Contrat.OLD_STATUT_CTR;
+                validerContrat.DAT_CREATION_CTR = DateTime.Now;
+                validerContrat.RESP_CTR_1 = Contrat.RESP_CTR_1;
+                validerContrat.RESP_CTR_2 = Contrat.RESP_CTR_2;
+
+
+                await _unitOfWork.ContratRepository.UpdateContratAsync(existingContrat.REF_CTR, validerContrat);
+                await UpdateFraisDiversAsync(request.Contrat.fraisDivers, request.Contrat.ContratDetail.REF_CTR);
+                await UpdateFondGarantieAsync(request.Contrat.tFondGaranties, request.Contrat.ContratDetail.REF_CTR);
+                await UpdateFraisPaiementAsync(request.Contrat.fraisPaiements, request.Contrat.ContratDetail.REF_CTR);
+                await UpdateDemandeLimiteAsync(request.Contrat.tDemLimites, request.Contrat.ContratDetail.REF_CTR);
                // await UpdateIntFinanceAsync(request.Contrat.tIntFinancements, request.Contrat.Contrat.REF_CTR); 
-                await UpdateDetAssAsync(request.Contrat.tDetAss, request.Contrat.Contrat.REF_CTR);
+                await UpdateDetAssAsync(request.Contrat.tDetAss, request.Contrat.ContratDetail.REF_CTR);
                 
 
                 return OperationResult<bool>.SuccessResult(true);

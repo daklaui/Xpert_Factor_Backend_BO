@@ -246,7 +246,7 @@ private async Task CreateIntFinanceAsync(List<T_INT_FINANCEMENT_DTO> intFinancem
         public async ValueTask<OperationResult<bool>> Handle(AddContratCommand request,
             CancellationToken cancellationToken)
         {
-            T_CONTRAT Contrat = request.Contrat.Contrat;
+            ContractDetailsDTO Contrat = request.Contrat.ContratDetail;
 
             try
             {
@@ -261,10 +261,10 @@ private async Task CreateIntFinanceAsync(List<T_INT_FINANCEMENT_DTO> intFinancem
                 validerContrat.DAT_DEB_CTR = Contrat.DAT_DEB_CTR;
                 validerContrat.DAT_RESIL_CTR = Contrat.DAT_RESIL_CTR;
                 validerContrat.DAT_PROCH_VERS_CTR = Contrat.DAT_PROCH_VERS_CTR;
-                validerContrat.CA_CTR = Contrat.CA_CTR;
-                validerContrat.CA_EXP_CTR = Contrat.CA_EXP_CTR;
-                validerContrat.CA_IMP_CTR = Contrat.CA_IMP_CTR;
-                validerContrat.LIM_FIN_CTR = Contrat.LIM_FIN_CTR;
+                validerContrat.CA_CTR = ParseDecimalOrDefault(Contrat.CA_CTR);
+                validerContrat.CA_EXP_CTR = ParseDecimalOrDefault(Contrat.CA_EXP_CTR);
+                validerContrat.CA_IMP_CTR = ParseDecimalOrDefault(Contrat.CA_IMP_CTR);
+                validerContrat.LIM_FIN_CTR = ParseDecimalOrDefault(Contrat.LIM_FIN_CTR);
                 validerContrat.DEVISE_CTR = Contrat.DEVISE_CTR;
                 validerContrat.NB_ACH_PREVU_CTR = Contrat.NB_ACH_PREVU_CTR;
                 validerContrat.NB_FACT_PREVU_CTR = Contrat.NB_FACT_PREVU_CTR;
@@ -273,8 +273,8 @@ private async Task CreateIntFinanceAsync(List<T_INT_FINANCEMENT_DTO> intFinancem
                 validerContrat.DELAI_MOYEN_REG_CTR = Contrat.DELAI_MOYEN_REG_CTR;
                 validerContrat.DELAI_MAX_REG_CTR = Contrat.DELAI_MAX_REG_CTR;
                 validerContrat.FACT_REG_CTR = Contrat.FACT_REG_CTR;
-                validerContrat.DERN_MONT_DISP_2 = Contrat.DERN_MONT_DISP_2;
-                validerContrat.MIN_COMM_FACT = Contrat.MIN_COMM_FACT;
+                validerContrat.DERN_MONT_DISP_2 = ParseDecimalOrDefault(Contrat.DERN_MONT_DISP_2);
+                validerContrat.MIN_COMM_FACT = ParseDecimalOrDefault(Contrat.MIN_COMM_FACT);
                 validerContrat.IS_NOTIFIED = Contrat.IS_NOTIFIED;
                 validerContrat.OLD_STATUT_CTR = Contrat.OLD_STATUT_CTR;
                 validerContrat.DAT_CREATION_CTR = DateTime.Now;
@@ -288,7 +288,7 @@ private async Task CreateIntFinanceAsync(List<T_INT_FINANCEMENT_DTO> intFinancem
             await CreateFraisDiversAsync(request.Contrat.fraisDivers, ctrCreated.REF_CTR);
             await CreateFondGarantieAsync(request.Contrat.tFondGaranties, ctrCreated.REF_CTR); 
             await CreateCommFactoringAsync(request.Contrat.commFactorings, ctrCreated.REF_CTR);
-            await AddAdherent(ctrCreated.REF_CTR,request.Contrat.individualRelationContract,request.Contrat.refAdh,request.Contrat.Contrat.TYP_CTR );
+            await AddAdherent(ctrCreated.REF_CTR,request.Contrat.individualRelationContract,request.Contrat.refAdh,request.Contrat.ContratDetail.TYP_CTR );
             await CreateFraisPaiementAsync(request.Contrat.fraisPaiements, ctrCreated.REF_CTR);
             await CreateDemandeLimiteAsync(request.Contrat.tDemLimites, ctrCreated.REF_CTR); 
             await CreateIntFinanceAsync(request.Contrat.tIntFinancements, ctrCreated.REF_CTR); 
