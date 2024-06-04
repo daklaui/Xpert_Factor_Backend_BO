@@ -4,4 +4,4 @@ using Mediator;
 
 namespace CleanArc.Application.Features.Individu.Queries.GetAllDetailsAdherents;
 
-public record GetAllDetailsAdherentsQuery (int refIndiv) :  IRequest<OperationResult<List<AdherentDetailDto>>>;
+public record GetAllDetailsAdherentsQuery (int refCTR) :  IRequest<OperationResult<List<AdherentDetailDto>>>;

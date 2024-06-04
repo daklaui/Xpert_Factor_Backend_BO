@@ -219,14 +219,10 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
 
                 return nomIndividuDtos;
             }
-
-
-
-            
-         public async Task<List<AdherentDetailDto>> GetAdherentDetailsByAdherentAsync(int refIndiv)
+         public async Task<List<AdherentDetailDto>> GetAdherentDetailsByAdherentAsync(int refcTR)
          {
              var adherentDetails = await _dbContext.TJ_CIRs
-                 .Where(cir => cir.ID_ROLE_CIR == "ach" && cir.REF_IND_CIR==refIndiv)  
+                 .Where(cir => cir.ID_ROLE_CIR == "ADH" && cir.REF_CTR_CIR==refcTR)  
                  .Join(_dbContext.T_INDIVIDUs,
                      cir => cir.REF_IND_CIR,
                      individu => individu.REF_IND,
@@ -238,10 +234,8 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
                          NumDocIdInd = individu.NUM_DOC_ID_IND
                      })
                  .ToListAsync();
-
              return adherentDetails;
          }
-       
          public async Task<List<NomIndividuDto>> GetAcheteurSansContrat(int refctr)
          {
              var individusSansContrat = await base.Table

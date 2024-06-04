@@ -17,7 +17,7 @@ public class GetAllDetailsAdherentsQueryHandler:IRequestHandler<GetAllDetailsAdh
     public async ValueTask<OperationResult<List<AdherentDetailDto>>> Handle(GetAllDetailsAdherentsQuery request, CancellationToken cancellationToken)
     {
         var adherents =
-            await _unitOfWork.IndividualRepository.GetAdherentDetailsByAdherentAsync(request.refIndiv);
+            await _unitOfWork.IndividualRepository.GetAdherentDetailsByAdherentAsync(request.refCTR);
        Console.WriteLine($"Adherents count: {adherents.Count}");
         return OperationResult<List<AdherentDetailDto>>.SuccessResult(adherents);
     }

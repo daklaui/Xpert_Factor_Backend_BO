@@ -126,9 +126,9 @@ namespace CleanArc.Web.Api.Controllers.V1.Individu
         }
         
         [HttpGet("GetAllDetailsAdherents")]
-        public async Task<IActionResult> GetAllDetailsAdherents(int refIndiv)
+        public async Task<IActionResult> GetAllDetailsAdherents(int refCTR)
         {
-            var query = new GetAllDetailsAdherentsQuery(refIndiv);
+            var query = new GetAllDetailsAdherentsQuery(refCTR);
             var result = await _sender.Send(query);
             Console.WriteLine($"OperationResult Success: {result.IsSuccess}");
             return base.OperationResult(result);
