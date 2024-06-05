@@ -5,5 +5,5 @@ using Mediator;
 
 namespace CleanArc.Application.Features.Individu.Commands.UpdateIndividuCommand
 {
-    public record UpdateIndividuCommand(IndividualDTO IndividualDTO) : IRequest<OperationResult<bool>>;
+    public record UpdateIndividuCommand(IndividualDTO individual) : IRequest<OperationResult<bool>>;
 }
