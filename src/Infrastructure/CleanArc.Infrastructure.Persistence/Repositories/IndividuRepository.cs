@@ -253,12 +253,13 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
          }
          
        
-         public async Task<List<NomIndividuDto>> GetAcheteurPourContrat(int refctr)
+         public async Task<List<NomIndividuDto>> GetAcheteurPourContrat(int ref_adh)
          {
              var acheteursPourContrat = await base.Table
                  .Where(individu =>
                      _dbContext.TJ_CIRs.Any(cir =>
-                         cir.REF_IND_CIR == individu.REF_IND && cir.REF_CTR_CIR == refctr && cir.ID_ROLE_CIR == "ACH"))
+                         cir.REF_IND_CIR == individu.REF_IND && cir.ID_ROLE_CIR == "ACH" &&
+                         _dbContext.TJ_CIRs.Any(cirAdh => cirAdh.REF_IND_CIR == ref_adh && cirAdh.REF_CTR_CIR == cir.REF_CTR_CIR)))
                  .Select(individu => new NomIndividuDto
                  {
                      RefInd = individu.REF_IND,
