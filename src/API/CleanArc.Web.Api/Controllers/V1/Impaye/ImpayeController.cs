@@ -21,23 +21,21 @@ public class ImpayeController:BaseController
     {
         _sender = sender;
     }
-
+ [HttpGet("GetListOfImpaye")]
+    public async Task<IActionResult> GetListOfImpaye([FromQuery] PaginationParams paginationParams)
+    {
+        var query = await _sender.Send(new GetListOfImpayeQuery(paginationParams));
+        return base.OperationResult(query);
+    }
     [HttpPost("CreateNewImpaye")]
     public async Task<IActionResult> CreateNewImpaye(AddImpayeCommand model)
     {
         
         var command = await _sender.Send(model);
-
         return base.OperationResult(command);
     }
     
-    [HttpGet("GetListOfImpaye")]
-    public async Task<IActionResult> GetListOfImpaye([FromQuery] PaginationParams paginationParams)
-    {
-        var query = await _sender.Send(new GetListOfImpayeQuery(paginationParams));
-
-        return base.OperationResult(query);
-    }
+   
     [HttpGet("GetListeHistorical")]
     public async Task<IActionResult> GetListeHistorical([FromQuery] PaginationParams paginationParams)
     {
@@ -45,14 +43,13 @@ public class ImpayeController:BaseController
 
         return base.OperationResult(query);
     }
-    [HttpGet("GetListeResolutionDesImpayesQuery")]
+    [HttpGet("GetListeResolutionDesImpayes")]
     public async Task<IActionResult> GetListeResolutionDesImpayesQuery([FromQuery] PaginationParams paginationParams)
     {
         var query = await _sender.Send(new GetListeResolutionDesImpayesQuery(paginationParams));
-
         return base.OperationResult(query);
     }
 
-    
+
  
 }

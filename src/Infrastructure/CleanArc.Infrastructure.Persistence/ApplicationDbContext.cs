@@ -190,6 +190,8 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
     public DbSet<T_LITIGE_DTO>usp_Rapport_Factures_En_Litige_VersionII { get; set; }
 
     public virtual DbSet<ListeDesContrats_Result> ListeDesContrats_Result { get; set; }
+    public virtual DbSet< SelectRefEncaissementParCtrETAch_Result> SelectRefEncaissementParCtrETAch{ get; set; }
+    public virtual DbSet< SelectRefEncaissementParCtr> SelectRefEncaissementParCtr{ get; set; }
 
     public DbSet<TR_LIST_VAL> TRListVals { get; set; }
     

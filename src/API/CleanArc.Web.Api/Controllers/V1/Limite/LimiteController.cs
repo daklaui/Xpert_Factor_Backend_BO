@@ -3,6 +3,7 @@ using CleanArc.Application.Features.Limite.Commands.AddLimiteCommand;
 using CleanArc.Application.Features.Limite.Commands.ValidateLimiteCommand;
 using CleanArc.Application.Features.Limite.Queries;
 using CleanArc.Application.Features.Limite.Queries.checkExistingLimiteNoActif;
+using CleanArc.Application.Features.Limite.Queries.GetAllListOfDemLimitNoActif;
 using CleanArc.Application.Features.Limite.Queries.GetListOfDemLimit;
 using CleanArc.WebFramework.BaseController;
 using Mediator;
@@ -40,14 +41,14 @@ public class LimiteController:BaseController
         return base.OperationResult(query);
     }
     
-    [HttpPut("ValidateLimite/{id}")]
-    public async Task<IActionResult> ValidateLimite(int id, ValidateLimiteCommand model)
+    [HttpPut("ValidateLimite")]
+    public async Task<IActionResult> ValidateLimite([FromBody] ValidateLimiteCommand model)
     {
         if (model == null)
         {
             return BadRequest("Invalid model");
         }
-        var command = await _sender.Send(model);
+        var command = await _sender.Send(new ValidateLimiteCommand(model.REF_DEM_LIM));
 
         return base.OperationResult(command);
     }
@@ -67,7 +68,13 @@ public class LimiteController:BaseController
 
         return base.OperationResult(query);
     }
-    
+    [HttpGet("GetAllListOfDemLimitNoActif")]
+    public async Task<IActionResult> GetAllListOfDemLimitNoActif([FromQuery] PaginationParams paginationParams)
+    {
+        var query = await _sender.Send(new GetAllListOfDemLimitNoActifQuery(paginationParams));
+
+        return base.OperationResult(query);
+    }
 
     
 }

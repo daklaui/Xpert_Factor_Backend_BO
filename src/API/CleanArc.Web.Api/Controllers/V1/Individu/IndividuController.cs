@@ -1,6 +1,7 @@
 ﻿using CleanArc.Application.Common;
 using CleanArc.Application.Features.Individu.Commands.AddIndividuCommand;
 using CleanArc.Application.Features.Individu.Commands.UpdateIndividuCommand;
+using CleanArc.Application.Features.Individu.Queries.GetAcheteurPourContrat;
 using CleanArc.Application.Features.Individu.Queries.GetAllAdherents;
 using CleanArc.Application.Features.Individu.Queries.GetAllDetailsAdherents;
 using CleanArc.Application.Features.Individu.Queries.GetAllIndividus;
@@ -109,11 +110,11 @@ namespace CleanArc.Web.Api.Controllers.V1.Individu
         
         
         [HttpGet("GetAllNomIndividus")]
-        public async Task<IActionResult> GetAllNomIndividus([FromQuery] PaginationParams paginationParams)
+        public async Task<IActionResult> GetAllNomIndividus()
         {
             try
             {
-                var query = new GetAllNomIndivQuery(paginationParams);
+                var query = new GetAllNomIndivQuery();
                 var result = await _sender.Send(query);
                 return base.OperationResult(result);
             }
@@ -125,9 +126,9 @@ namespace CleanArc.Web.Api.Controllers.V1.Individu
         }
         
         [HttpGet("GetAllDetailsAdherents")]
-        public async Task<IActionResult> GetAllDetailsAdherents(int refIndiv)
+        public async Task<IActionResult> GetAllDetailsAdherents(int refCTR)
         {
-            var query = new GetAllDetailsAdherentsQuery(refIndiv);
+            var query = new GetAllDetailsAdherentsQuery(refCTR);
             var result = await _sender.Send(query);
             Console.WriteLine($"OperationResult Success: {result.IsSuccess}");
             return base.OperationResult(result);
@@ -137,6 +138,16 @@ namespace CleanArc.Web.Api.Controllers.V1.Individu
         public async Task<IActionResult> GetIndividusSansContrat(int refctr)
         {
             var query = new GetIndividusSansContratQuery(refctr);
+            var result = await _sender.Send(query);
+            Console.WriteLine($"OperationResult Success: {result.IsSuccess}");
+            return base.OperationResult(result);
+        }
+        
+       
+        [HttpGet("GetAcheteursPourContrat")]
+        public async Task<IActionResult> GetAcheteursPourContrat(int refctr)
+        {
+            var query = new GetAcheteurPourContratQuery(refctr);
             var result = await _sender.Send(query);
             Console.WriteLine($"OperationResult Success: {result.IsSuccess}");
             return base.OperationResult(result);

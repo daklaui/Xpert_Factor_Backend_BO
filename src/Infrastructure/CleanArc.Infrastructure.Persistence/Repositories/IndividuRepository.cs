@@ -206,20 +206,23 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
 
             return result;
         }
-        public async Task<PagedList<NomIndividuDto>> GetAllNomIndivAsync(PaginationParams paginationParams)
-        {
-            var query = base.TableNoTracking.AsQueryable()
-                .Select(ind => new NomIndividuDto { RefInd = ind.REF_IND, NomInd = ind.NOM_IND });
+      
+            public async Task<List<NomIndividuDto>> GetAllNomIndivAsync()
+            {
+                var nomIndividuDtos = await base.Table.AsQueryable()
+                    .Select(ind => new NomIndividuDto 
+                    { 
+                        RefInd = ind.REF_IND, 
+                        NomInd = ind.NOM_IND 
+                    })
+                    .ToListAsync();
 
-            var result =
-                await PagedList<NomIndividuDto>.CreateAsync(query, paginationParams.PageNumber, paginationParams.PageSize);
-
-            return result;
-        }
-         public async Task<List<AdherentDetailDto>> GetAdherentDetailsByAdherentAsync(int refIndiv)
+                return nomIndividuDtos;
+            }
+         public async Task<List<AdherentDetailDto>> GetAdherentDetailsByAdherentAsync(int refcTR)
          {
              var adherentDetails = await _dbContext.TJ_CIRs
-                 .Where(cir => cir.ID_ROLE_CIR == "ach" && cir.REF_IND_CIR==refIndiv)  
+                 .Where(cir => cir.ID_ROLE_CIR == "ADH" && cir.REF_CTR_CIR==refcTR)  
                  .Join(_dbContext.T_INDIVIDUs,
                      cir => cir.REF_IND_CIR,
                      individu => individu.REF_IND,
@@ -231,11 +234,9 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
                          NumDocIdInd = individu.NUM_DOC_ID_IND
                      })
                  .ToListAsync();
-
              return adherentDetails;
          }
-       
-         public async Task<List<NomIndividuDto>> GetIndividusSansContrat(int refctr)
+         public async Task<List<NomIndividuDto>> GetAcheteurSansContrat(int refctr)
          {
              var individusSansContrat = await base.Table
                  .Where(individu =>
@@ -250,13 +251,24 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
 
              return individusSansContrat;
          }
+         
+       
+         public async Task<List<NomIndividuDto>> GetAcheteurPourContrat(int refctr)
+         {
+             var acheteursPourContrat = await base.Table
+                 .Where(individu =>
+                     _dbContext.TJ_CIRs.Any(cir =>
+                         cir.REF_IND_CIR == individu.REF_IND && cir.REF_CTR_CIR == refctr && cir.ID_ROLE_CIR == "ACH"))
+                 .Select(individu => new NomIndividuDto
+                 {
+                     RefInd = individu.REF_IND,
+                     NomInd = individu.NOM_IND
+                 })
+                 .ToListAsync();
 
-         
-         
-         
-         
-         
-         
+             return acheteursPourContrat;
+         }
+
 
          
 
