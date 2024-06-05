@@ -103,10 +103,10 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
             return numberCtr;
         }
 
-        public async Task<List<ListeFactureValiderk>> GetAllInvoicesByContratAndBuyer(int id, int id2)
+        public async Task<List<ListeFactureValiderk>> GetAllInvoicesByContratAndBuyer(int refadh, int refach)
         {
             var listFactures = await _dbContext.ListeFactureValiderk
-                .FromSqlRaw("exec ListeFactureValiderk @param_RefAdh = {0}, @param_RefAch = {1}", id, id2)
+                .FromSqlRaw("exec ListeFactureValiderk @param_RefAdh = {0}, @param_RefAch = {1}", refadh, refach)
                 .ToListAsync();
         
             return listFactures;

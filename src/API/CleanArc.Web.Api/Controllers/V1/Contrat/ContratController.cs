@@ -60,9 +60,9 @@ namespace CleanArc.Web.Api.Controllers.V1.Contrat
         }
         
         [HttpGet("GetAllInvoicesByContratAndBuyer")]
-        public async Task<IActionResult> GetAllInvoicesByContratAndBuyer(int id1 ,int id2)
+        public async Task<IActionResult> GetAllInvoicesByContratAndBuyer(int refadh, int refach)
         {
-            var query = new GetAllInvoicesByContratAndBuyerQuery(id1,id2);
+            var query = new GetAllInvoicesByContratAndBuyerQuery(refadh,  refach);
             var result = await _sender.Send(query);
             Console.WriteLine($"OperationResult Success: {result.IsSuccess}");
             return base.OperationResult(result);
