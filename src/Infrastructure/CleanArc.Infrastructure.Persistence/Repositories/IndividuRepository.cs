@@ -268,9 +268,9 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
 
              return acheteursPourContrat;
          }
-
-
          
-
+         
+       
+        
     }
 }

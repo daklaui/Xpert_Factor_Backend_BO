@@ -2,6 +2,7 @@
 using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Domain.DTO;
 using CleanArc.Domain.Entities;
+using CleanArc.Domain.StoredProcuderModel;
 using CleanArc.Infrastructure.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
 
@@ -102,6 +103,13 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
             return numberCtr;
         }
 
+        public async Task<List<ListeFactureValiderk>> GetAllInvoicesByContratAndBuyer(int id, int id2)
+        {
+            var listFactures = await _dbContext.ListeFactureValiderk
+                .FromSqlRaw("exec ListeFactureValiderk @param_RefAdh = {0}, @param_RefAch = {1}", id, id2)
+                .ToListAsync();
         
+            return listFactures;
+        }
     }
 }

@@ -8,7 +8,8 @@ using CleanArc.WebFramework.BaseController;
 using Mediator;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using CleanArc.Application.Contracts.Persistence; // Ajout de l'importation nécessaire
+using CleanArc.Application.Contracts.Persistence;
+using CleanArc.Application.Features.Contrat.Queries.GetAllInvoicesByContratAndBuyer; // Ajout de l'importation nécessaire
 
 namespace CleanArc.Web.Api.Controllers.V1.Contrat
 {
@@ -58,6 +59,14 @@ namespace CleanArc.Web.Api.Controllers.V1.Contrat
             return Ok(queryResult);
         }
         
-       
+        [HttpGet("GetAllInvoicesByContratAndBuyer")]
+        public async Task<IActionResult> GetAllInvoicesByContratAndBuyer(int id1 ,int id2)
+        {
+            var query = new GetAllInvoicesByContratAndBuyerQuery(id1,id2);
+            var result = await _sender.Send(query);
+            Console.WriteLine($"OperationResult Success: {result.IsSuccess}");
+            return base.OperationResult(result);
+        }
+
     }
 }

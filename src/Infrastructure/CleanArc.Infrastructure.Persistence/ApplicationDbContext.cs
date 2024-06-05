@@ -192,7 +192,9 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
     public virtual DbSet<ListeDesContrats_Result> ListeDesContrats_Result { get; set; }
     public virtual DbSet< SelectRefEncaissementParCtrETAch_Result> SelectRefEncaissementParCtrETAch{ get; set; }
     public virtual DbSet< SelectRefEncaissementParCtr> SelectRefEncaissementParCtr{ get; set; }
-
+    
+    public virtual DbSet< ListeFactureValiderk> ListeFactureValiderk{ get; set; }
+    
     public DbSet<TR_LIST_VAL> TRListVals { get; set; }
     
     public ApplicationDbContext(DbContextOptions options)
