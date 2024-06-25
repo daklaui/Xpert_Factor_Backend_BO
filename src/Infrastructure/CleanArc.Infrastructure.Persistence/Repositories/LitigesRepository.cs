@@ -1,4 +1,5 @@
-﻿using CleanArc.Application.Contracts.Persistence;
+﻿using CleanArc.Application.Common;
+using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Domain.Entities;
 using CleanArc.Domain.Entities.DTO;
 using CleanArc.Infrastructure.Persistence.Repositories.Common;
@@ -57,5 +58,13 @@ public class LitigesRepository:BaseAsyncRepository<T_LITIGE>,ILitigesRepository
     public async Task AddLitige(T_LITIGE litige)
     {
        await  base.AddAsync(litige);
+    }
+
+    public async Task<PagedList<T_LITIGE>> GetAllLitigesAsync(PaginationParams paginationParams)
+    {
+        var query = base.TableNoTracking.AsQueryable();
+        var result = await PagedList<T_LITIGE>.CreateAsync(query, paginationParams.PageNumber, paginationParams.PageSize);
+
+        return result;
     }
 }

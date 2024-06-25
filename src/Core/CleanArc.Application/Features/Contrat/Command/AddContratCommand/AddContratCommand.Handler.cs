@@ -10,12 +10,10 @@ namespace CleanArc.Application.Features.Contrat.Commands.AddContratCommand
     internal class AddContratCommandHandler : IRequestHandler<AddContratCommand, OperationResult<bool>>
     {
         private readonly IUnitOfWork _unitOfWork;
-
         public AddContratCommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
-
         private decimal ParseDecimalOrDefault(string value)
         {
             decimal result;
@@ -26,9 +24,6 @@ namespace CleanArc.Application.Features.Contrat.Commands.AddContratCommand
 
             return 0;
         }
-
-
-       
         private async Task CreateFraisDiversAsync(List<T_FRAIS_DIVERS_DTO> fraisDivers, int refContract)
         {
             try
@@ -52,9 +47,6 @@ namespace CleanArc.Application.Features.Contrat.Commands.AddContratCommand
                 
             }
         }
-
-        
-        
         private async Task CreateFondGarantieAsync(List<T_FOND_GARANTIE_DTO> fonds, int refContract)
         {
             try
@@ -81,8 +73,7 @@ namespace CleanArc.Application.Features.Contrat.Commands.AddContratCommand
                 
             }
         }
-
-
+        
         private async Task CreateCommFactoringAsync(List<T_COMM_FACTORING_DTO> commFactorings, int refContract)
         {
             try
@@ -241,8 +232,7 @@ private async Task CreateIntFinanceAsync(List<T_INT_FINANCEMENT_DTO> intFinancem
                 Console.WriteLine("   Error d enregistrement Adhérent ");
             }
         }
-
-
+        
         public async ValueTask<OperationResult<bool>> Handle(AddContratCommand request,
             CancellationToken cancellationToken)
         {
@@ -280,8 +270,6 @@ private async Task CreateIntFinanceAsync(List<T_INT_FINANCEMENT_DTO> intFinancem
                 validerContrat.DAT_CREATION_CTR = DateTime.Now;
                 validerContrat.RESP_CTR_1 = Contrat.RESP_CTR_1;
                 validerContrat.RESP_CTR_2 = Contrat.RESP_CTR_2;
-           
-
             await _unitOfWork.ContratRepository.AddContratAsync(validerContrat);
             await _unitOfWork.CommitAsync();
             T_CONTRAT ctrCreated = await _unitOfWork.ContratRepository.GetContratByRefCtrPapier(Contrat.REF_CTR_PAPIER_CTR);
@@ -293,12 +281,7 @@ private async Task CreateIntFinanceAsync(List<T_INT_FINANCEMENT_DTO> intFinancem
             await CreateDemandeLimiteAsync(request.Contrat.tDemLimites, ctrCreated.REF_CTR); 
             await CreateIntFinanceAsync(request.Contrat.tIntFinancements, ctrCreated.REF_CTR); 
             await CreateDetAssAsync(request.Contrat.tDetAss, ctrCreated.REF_CTR); 
-            
-
-
-
             await _unitOfWork.CommitAsync();
-            
             }
             catch (Exception e)
             {

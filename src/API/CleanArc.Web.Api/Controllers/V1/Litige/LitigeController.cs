@@ -1,6 +1,7 @@
 ﻿using CleanArc.Application.Common;
 using CleanArc.Application.Features.Litige.Commands.Add;
 using CleanArc.Application.Features.Litige.Commands.AddLitige;
+using CleanArc.Application.Features.Litige.Queries.GetAllLitiges;
 using CleanArc.Application.Features.Litige.Queries.GetAllRapportFacturesEnLitige;
 using CleanArc.WebFramework.BaseController;
 using Mediator;
@@ -40,6 +41,13 @@ public class LitigeController : BaseController
     public async Task<IActionResult> GetListRapportFacturesEnLitige([FromQuery] PaginationParams paginationParams)
     {
         var query = await _sender.Send(new GetAllRapportFacturesEnLitigeQuery(paginationParams));
+
+        return base.OperationResult(query);
+    }
+    [HttpGet("GetAllLitiges")]
+    public async Task<IActionResult> GetAllLitiges([FromQuery] PaginationParams paginationParams)
+    {
+        var query = await _sender.Send(new GetAllLitigesQuery(paginationParams));
 
         return base.OperationResult(query);
     }

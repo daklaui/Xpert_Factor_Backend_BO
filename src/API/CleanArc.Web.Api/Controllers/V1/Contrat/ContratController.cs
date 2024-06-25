@@ -9,42 +9,35 @@ using Mediator;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using CleanArc.Application.Contracts.Persistence;
-using CleanArc.Application.Features.Contrat.Queries.GetAllInvoicesByContratAndBuyer; // Ajout de l'importation nécessaire
-
+using CleanArc.Application.Features.Contrat.Command;
+using CleanArc.Application.Features.Contrat.Queries.GetAllInvoicesByContratAndBuyer;
+using Microsoft.AspNetCore.Authorization; // Ajout de l'importation nécessaire
 namespace CleanArc.Web.Api.Controllers.V1.Contrat
 {
     [ApiVersion("1")]
     [ApiController]
     [Route("api/v{version:apiVersion}/Contrat")]
-    //[Authorize]
+    [Authorize]
     public class ContratController : BaseController
     {
         private readonly ISender _sender;
-
-
         public ContratController(ISender sender) // Ajout de IContratRepository dans le constructeur
         {
             _sender = sender;
-          
         }
-
         [HttpPost("CreateNewContrat")]
         public async Task<IActionResult> CreateNewContrat(AddContratCommand model)
         {
             var command = await _sender.Send(model);
             return OperationResult(command);
         }
-
-        
         [HttpGet("GetContratById/{id}")]
         public async Task<IActionResult> GetContratById(int id)
         {
             var queryResult = await _sender.Send(new GetContratByIdQuery(id));
             return OperationResult(queryResult);
         }
-
         
-
         [HttpPut("UpdateContrat")]
         public async Task<IActionResult> UpdateContrat(UpdateContratCommand command)
         {
@@ -67,6 +60,11 @@ namespace CleanArc.Web.Api.Controllers.V1.Contrat
             Console.WriteLine($"OperationResult Success: {result.IsSuccess}");
             return base.OperationResult(result);
         }
-
+        [HttpPost("CreateNewInvoic")]
+        public async Task<IActionResult> CreateNewInvoice(AddInvoiceCommand model)
+        {
+            var command = await _sender.Send(model);
+            return OperationResult(command);
+        }
     }
 }

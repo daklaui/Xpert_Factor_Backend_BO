@@ -5,26 +5,19 @@ using CleanArc.Domain.Entities;
 using CleanArc.Domain.StoredProcuderModel;
 using CleanArc.Infrastructure.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
-
 namespace CleanArc.Infrastructure.Persistence.Repositories
 {
     internal class ContratRepository : BaseAsyncRepository<T_CONTRAT>, IContratRepository
     {
         private readonly ApplicationDbContext _dbContext;
-
         public ContratRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }
-
-        
-
-
         public async Task AddContratAsync(T_CONTRAT contrat)
         {
             await base.AddAsync(contrat);
         }
-        
       public async Task<PagedList<ListeDesContrats_Result>> GetAllContratAsync(PaginationParams paginationParams)
       {
           var resultList = await _dbContext.ListeDesContrats_Result
@@ -86,9 +79,6 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
 
             return true;
         }
-
-        
-
         public async Task<int> GetContractsForCurrentYearasync()
         {
             int currentYear = DateTime.Now.Year;
@@ -110,6 +100,11 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
                 .ToListAsync();
         
             return listFactures;
+        }
+        public async Task AddInvoiceAsync(ListeFactureValiderk invoice)
+        {
+            await _dbContext.ListeFactureValiderk.AddAsync(invoice);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

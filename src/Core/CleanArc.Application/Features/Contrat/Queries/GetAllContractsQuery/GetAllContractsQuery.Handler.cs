@@ -11,16 +11,11 @@ namespace CleanArc.Application.Features.Contrat.Queries.GetAllContracts
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-
         public GetAllContractsQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-
-
-        
-
         public async ValueTask<OperationResult<PageInfo<GetAllContractsQueryResult>>> Handle(GetAllContractsQuery request, CancellationToken cancellationToken)
         {
             try

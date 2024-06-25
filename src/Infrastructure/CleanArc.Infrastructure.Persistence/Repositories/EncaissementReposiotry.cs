@@ -23,50 +23,8 @@ public class EncaissementReposiotry:BaseAsyncRepository<T_ENCAISSEMENT>, IEncais
     
     public async Task<bool> AddEncaissementAsync(T_ENCAISSEMENT encaissement)
     {
-        if (encaissement.DAT_VAL_ENC.Value.Date >= DateTime.Now.Date)
-        {
-            List<T_ENCAISSEMENT> enclist = new List<T_ENCAISSEMENT>();
-            try
-            {
-                enclist = base.Table
-                    .Where(p => p.REF_ACH_ENC == encaissement.REF_ACH_ENC && p.REF_ENC == encaissement.REF_ENC &&
-                                p.VALIDE_ENC == true)
-                    .ToList();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-            if (enclist.Count == 0)
-            {
-                try
-                {
-                    if (encaissement.TYP_ENC == "Ret")
-                    {
-                        encaissement.TYP_ENC = "A";
-                        encaissement.REF_ENC = "Ret" + encaissement.REF_ENC;
-                    } 
-                    encaissement.MONT_ENC =
-                        decimal.Parse(encaissement.MONT_ENC.ToString().Replace(" ", "").Replace(",", "."));
-                    encaissement.VALIDE_ENC = true;
-                    encaissement.REF_CTR_ENC = _dbContext.T_CONTRATs
-                        .Where(p => p.REF_CTR_PAPIER_CTR == encaissement.REF_CTR_ENC.ToString()).FirstOrDefault()
-                        .REF_CTR;
-                    await base.AddAsync(encaissement);
-                    await _dbContext.SaveChangesAsync();
-                
-                   
-                    return true;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
-        }
-      
-
+        await base.AddAsync(encaissement);
+        await _dbContext.SaveChangesAsync();
         return false;
     }
     public async Task<List<T_RECOUVREMENT_DTO>> GetAllRecouvrementFactures()

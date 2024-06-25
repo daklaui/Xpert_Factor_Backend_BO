@@ -15,8 +15,6 @@ namespace CleanArc.Application.Contracts.Persistence
         Task<bool> UpdateContratAsync(int id, T_CONTRAT updatedContrat);
         Task<int> GetContractsForCurrentYearasync();
         Task<List<ListeFactureValiderk>> GetAllInvoicesByContratAndBuyer(int id, int id2);
-
-
-
+        Task AddInvoiceAsync(ListeFactureValiderk invoice);
     }
 }
