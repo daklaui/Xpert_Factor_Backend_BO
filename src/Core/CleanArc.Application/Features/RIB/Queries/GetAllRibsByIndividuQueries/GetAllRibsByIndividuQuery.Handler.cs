@@ -24,17 +24,25 @@ public class GetAllRibsByIndividuQuery_Handler: IRequestHandler<GetAllRibsByIndi
 
     public async ValueTask<OperationResult<PageInfo<GetAllRibsByIndividuQueryResult>>> Handle(GetAllRibsByIndividuQuery request, CancellationToken cancellationToken)
     {
-        var  rib = await _unitOfWork.ribRepository.GetAllRibsByIndividuAsync(request.refIndRib,request.PaginationParams);
- 
-        var result = new PageInfo<GetAllRibsByIndividuQueryResult>
+        try
         {
-            PageSize = rib.PageSize,
-            CurrentPage = rib.CurrentPage,
-            TotalPages = rib.TotalPages,
-            TotalCount = rib.TotalCount,
-            Result = rib.Select(_mapper.Map<TR_RIB, GetAllRibsByIndividuQueryResult>).ToList()
+            var ribs = await _unitOfWork.ribRepository.GetAllRibsAsync(request.PaginationParams);
 
-        };
-        return OperationResult<PageInfo<GetAllRibsByIndividuQueryResult>>.SuccessResult(result);
+         
+            var result = new PageInfo<GetAllRibsByIndividuQueryResult>
+            {
+                PageSize = ribs.PageSize,
+                CurrentPage = ribs.CurrentPage,
+                TotalPages = ribs.TotalPages,
+                TotalCount = ribs.TotalCount,
+                Result = ribs.Select(_mapper.Map<TR_RIB, GetAllRibsByIndividuQueryResult>).ToList()
+            };
+
+            return OperationResult<PageInfo<GetAllRibsByIndividuQueryResult>>.SuccessResult(result);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error fetching RIBs", ex);
+        }
     }
     }

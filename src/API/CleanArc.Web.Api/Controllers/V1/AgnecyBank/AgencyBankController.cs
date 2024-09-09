@@ -46,17 +46,17 @@ public class AgencyBankController : BaseController
     }
     
     [HttpGet("SearchBank")]
-    public async Task<IActionResult> SearchBank(string code )
+    public async Task<IActionResult> SearchBank(string codeBank )
     {
-        var query = await _sender.Send(new SearchBankQuery(code));
+        var query = await _sender.Send(new SearchBankQuery(codeBank));
 
         return base.OperationResult(query);
     }
      
     [HttpGet("SearchAgency")]
-    public async Task<IActionResult> SearchAgency(string code )
+    public async Task<IActionResult> SearchAgency(string codeAgency )
     {
-        var query = await _sender.Send(new SearchAgencyQuery(code));
+        var query = await _sender.Send(new SearchAgencyQuery(codeAgency));
 
         return base.OperationResult(query);
     }

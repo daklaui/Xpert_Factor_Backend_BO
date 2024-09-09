@@ -38,43 +38,34 @@ internal class AgencyBankRepositoryRepository : BaseAsyncRepository<TR_Ag_Bq>, I
         return await base.TableNoTracking.FirstOrDefaultAsync(p => p.Code_Bq_Ag == code);
     }
 
-    public async Task<string> RechercheBanque(string id)
+    public async Task<string> SearchBank(string codeBank)
     {
-        string nomBanque = "";
+        string nameBank = "";
         try
         {
-            nomBanque = base.Table.Where(p => p.Code_Bq == id).Select(p => p.Banque).FirstOrDefault();
-                
-            
-           /* nomBanque = await _dbContext.TR_Ag_Bqs
-                .Where(p => p.Code_Bq == id)
-                .Select(p => p.Banque)
-                .FirstOrDefaultAsync();*/
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.Message);
-        }
-        return nomBanque;
-    }
-    public async Task <string>  RechercheAgence(string id)
-    {
-        string nom_Agence = "";
-       
-        try
-        {
-            nom_Agence = base.Table.Where(p => p.Code_Bq_Ag == id).Select(p => p.Agence).FirstOrDefault();
-           /* nom_Agence =  _dbContext.TR_Ag_Bqs
-                .Where(p => p.Code_Bq_Ag == id)
-                .Select(p => p.Agence)
-                .FirstOrDefault();*/
+            nameBank = base.Table.Where(p => p.Code_Bq == codeBank).Select(p => p.Banque).FirstOrDefault();
         }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
         }
 
-        return nom_Agence;
+        return nameBank;
+    }
+    public async Task <string>  ResearchAgency(string codeAgency)
+    {
+        string nameAgency = "";
+       
+        try
+        {
+            nameAgency = base.Table.Where(p => p.Code_Ag== codeAgency).Select(p => p.Agence).FirstOrDefault();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+
+        return nameAgency;
 
     }
 

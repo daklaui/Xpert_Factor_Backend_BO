@@ -4,4 +4,4 @@ using Mediator;
 
 namespace CleanArc.Application.Features.Contact.Command.UpdateContact;
 
-public record UpdateContactCommand(int id, T_CONTACT Contact) : IRequest<OperationResult<bool>>;
+public record UpdateContactCommand(T_CONTACT Contact) : IRequest<OperationResult<bool>>;

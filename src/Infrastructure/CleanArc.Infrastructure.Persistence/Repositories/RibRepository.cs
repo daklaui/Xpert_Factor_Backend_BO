@@ -21,84 +21,81 @@ internal class RibRepository : BaseAsyncRepository<TR_RIB>, IRibRepository
     {
         try
         {
-            var ribs = new TR_RIB_DTO();
-            var fullRib = ribs.RIB_RIB1 + ribs.RIB_RIB2 + ribs.RIB_RIB3;
-
-            if (!await verifExistingRib(fullRib))
+            if (!await verifExistingRib(rib.RIB_RIB))
             {
-                rib.RIB_RIB = fullRib;
-                rib.ACTIF_RIB = true;
-                //_dbContext.TR_RIBs.Add(rib);
                 await base.AddAsync(rib);
                 return true;
             }
             else
             {
-                return false;
+
+                throw new Exception($"Le RIB '{rib.RIB_RIB}' existe déjà.");
             }
         }
         catch (Exception ex)
         {
+
             throw new Exception("Erreur lors de l'ajout du RIB.", ex);
         }
-    }
-    
-    public async Task<PagedList<TR_RIB>> GetAllRibsByIndividuAsync(int refIndRib, PaginationParams paginationParams)
-    {
-        var query = base.TableNoTracking.Where(r => r.REF_IND_RIB == refIndRib).AsQueryable();
-        var result = await PagedList<TR_RIB>.CreateAsync(query, paginationParams.PageNumber, paginationParams.PageSize);
-        return result;
-    }
-
-
-    public async Task<TR_RIB> GetRibById(string id)
-    {
-        return await base.TableNoTracking.FirstAsync(p=>p.RIB_RIB == id);
     }
 
     private Task<bool> verifExistingRib(string rib)
     {
+
         return Task.FromResult(base.Table.Any(p => p.RIB_RIB == rib));
     }
 
-    public async Task<TR_RIB_DTO> EditRibIndividu(TR_RIB_DTO rib)
+
+    public async Task<PagedList<TR_RIB>> GetAllRibsAsync(PaginationParams paginationParams)
     {
-        var currentRib = base.Table.FirstOrDefault(p => p.RIB_RIB == rib.OLD_RIB_RIB);
-        var newRib = rib.RIB_RIB1 + rib.RIB_RIB2 + rib.RIB_RIB3;
-        if (currentRib != null)
-        {
-            if (currentRib.RIB_RIB != newRib)
-            {
-                var ribExists = await verifExistingRib(newRib);
-                if (!ribExists)
-                {
-                    _dbContext.TR_RIBs.Remove(currentRib);
-                    var trRib= new TR_RIB
-                    {
-                        RIB_RIB =newRib,
-                        REF_IND_RIB = currentRib.REF_IND_RIB,
-                        ACTIF_RIB = rib.ACTIF_RIB
-                    };
-                    _dbContext.TR_RIBs.Add(trRib);
-                }
-                else
-                {
-                    return new TR_RIB_DTO { Success= false, Message = $"Le RIB '{newRib}' existe." };
-                }
-            }
-            else
-            {
-                currentRib.ACTIF_RIB = rib.ACTIF_RIB;
-                _dbContext.Entry(currentRib).State = EntityState.Modified;
-            }
-            await _dbContext.SaveChangesAsync();
-            return new TR_RIB_DTO { Success = true, Message = $"Le RIB a été modifié avec succès." };
-        }
-        else
-        {
-            
-            return new TR_RIB_DTO { Success = false, Message = $"Le RIB '{rib.OLD_RIB_RIB}' n'existe pas." };
-        }
+        var query = base.TableNoTracking.AsQueryable();
+        var result = await PagedList<TR_RIB>.CreateAsync(query, paginationParams.PageNumber, paginationParams.PageSize);
+
+        return result;
     }
 
+
+    public async Task<TR_RIB> GetRibById(int id)
+    {
+        return await base.TableNoTracking.FirstAsync(p => p.ID_RIB == id);
+    }
+
+
+    public async Task<TR_RIB> EditRibIndividu(int id, TR_RIB rib)
+    {
+  
+        var currentRib = await _dbContext.TR_RIBs.FirstOrDefaultAsync(p => p.ID_RIB == id);
+
+        if (currentRib == null)
+        {
+            throw new InvalidOperationException("Le RIB spécifié n'existe pas.");
+        }
+
+        if (await _dbContext.TR_RIBs.AnyAsync(p => p.RIB_RIB == rib.RIB_RIB && p.ID_RIB != id))
+        {
+            throw new InvalidOperationException($"Le RIB '{rib.RIB_RIB}' existe déjà.");
+        }
+
+  
+        currentRib.RIB_RIB = rib.RIB_RIB;
+        currentRib.ACTIF_RIB = rib.ACTIF_RIB;
+
+        
+        await _dbContext.SaveChangesAsync();
+
+        return currentRib;
+    }
+    public async Task<TR_RIB> GetRibByRibValueAsync(string ribValue)
+    {
+        return await base.TableNoTracking.FirstOrDefaultAsync(p => p.RIB_RIB == ribValue);
+    }
 }
+
+
+
+
+
+    
+    
+    
+

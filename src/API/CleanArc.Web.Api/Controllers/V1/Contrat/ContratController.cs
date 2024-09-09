@@ -7,9 +7,6 @@ using CleanArc.Application.Features.Contrat.Queries.GetContratByIdQuery;
 using CleanArc.WebFramework.BaseController;
 using Mediator;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using CleanArc.Application.Contracts.Persistence;
-using CleanArc.Application.Features.Contrat.Command;
 using CleanArc.Application.Features.Contrat.Queries.GetAllInvoicesByContratAndBuyer;
 using Microsoft.AspNetCore.Authorization; // Ajout de l'importation nécessaire
 namespace CleanArc.Web.Api.Controllers.V1.Contrat
@@ -59,12 +56,6 @@ namespace CleanArc.Web.Api.Controllers.V1.Contrat
             var result = await _sender.Send(query);
             Console.WriteLine($"OperationResult Success: {result.IsSuccess}");
             return base.OperationResult(result);
-        }
-        [HttpPost("CreateNewInvoic")]
-        public async Task<IActionResult> CreateNewInvoice(AddInvoiceCommand model)
-        {
-            var command = await _sender.Send(model);
-            return OperationResult(command);
         }
     }
 }

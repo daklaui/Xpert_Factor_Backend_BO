@@ -5,6 +5,5 @@ using Mediator;
 
 namespace CleanArc.Application.Features.RIB.Queries.GetAllRibsByIndividuQueries;
 
-public record GetAllRibsByIndividuQuery
-    (int refIndRib, PaginationParams PaginationParams) : IRequest<
-        OperationResult<PageInfo<GetAllRibsByIndividuQueryResult>>>;
+public record GetAllRibsByIndividuQuery( PaginationParams PaginationParams) : IRequest<OperationResult<PageInfo<GetAllRibsByIndividuQueryResult>>>;
+

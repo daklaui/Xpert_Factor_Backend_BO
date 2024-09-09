@@ -1,18 +1,15 @@
-﻿using CleanArc.Domain.Common;
-using System;
-using System.Collections.Generic;
+using CleanArc.Application.Profiles;
+using CleanArc.Domain.Entities;
 
-namespace CleanArc.Domain.Entities;
+namespace CleanArc.Application.Features.Contact.Queries.GetIsContactBelongsToContract;
 
-public  class T_CONTACT : IEntity
+public class VerifContactExistsQuery_Response :ICreateMapper<T_CONTACT>
 {
-    public short ID_CONTACT { get; set; }
 
-    public int REF_IND_CONTACT { get; set; }
 
     public string NOM_PRE_CONTACT { get; set; }
 
-    public int POS_CONTACT { get; set; }
+    public string POS_CONTACT { get; set; }
 
     public string TEL1_CONTACT { get; set; }
 
@@ -25,5 +22,4 @@ public  class T_CONTACT : IEntity
     public string FAX_CONTACT { get; set; }
 
     public bool? ACTIF_CONTACT { get; set; }
-    
 }

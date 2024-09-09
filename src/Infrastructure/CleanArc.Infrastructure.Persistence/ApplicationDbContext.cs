@@ -598,17 +598,17 @@ public class ApplicationDbContext: IdentityDbContext<User, Role, int, UserClaim,
                 .IsFixedLength();
         });
 
-        modelBuilder.Entity<TR_RIB>(entity =>
+       /* modelBuilder.Entity<TR_RIB>(entity =>
         {
-            entity.HasKey(e => e.RIB_RIB).HasName("PK__TR_RIB__2CA2FF07803A45B1");
+            entity.HasKey(e => e.ID_RIB).HasName("PK__TR_RIB__2CA2FF07803A45B1");
 
             entity.ToTable("TR_RIB");
 
-            entity.Property(e => e.RIB_RIB)
+            entity.Property(e => e.ID_RIB)
                 .HasMaxLength(20)
                 .IsUnicode(false);
         });
-
+**/
         modelBuilder.Entity<TR_TMM>(entity =>
         {
             entity.HasKey(e => e.ID_TMM);

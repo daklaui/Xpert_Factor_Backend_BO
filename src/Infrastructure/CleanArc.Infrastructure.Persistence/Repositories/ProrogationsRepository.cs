@@ -36,7 +36,7 @@ public class ProrogationsRepository : BaseAsyncRepository<T_PROROGATION>, IProro
         _dbContext.T_PROROGATIONs.Add(prorogation);
         await _dbContext.SaveChangesAsync();
 
-        // Utiliser la date d'échéance passée comme paramètre
+       
         TimeSpan ts = prorogation.ECH_PROG - echeanceFacturePro;
         short diff = (short)ts.TotalDays;
     

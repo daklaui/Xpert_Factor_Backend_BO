@@ -56,8 +56,8 @@ namespace CleanArc.Web.Api.Controllers.V1.Individu
             }
         }
         
-        [HttpPut("UpdateIndividu/{id}")]
-        public async Task<IActionResult> UpdateIndividu(int id, [FromBody] UpdateIndividuCommand model)
+        [HttpPut("UpdateIndividu")]
+        public async Task<IActionResult> UpdateIndividu( [FromBody] UpdateIndividuCommand model)
         {
             if (model == null)
             {

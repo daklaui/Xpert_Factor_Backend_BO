@@ -1,7 +1,7 @@
 ﻿using CleanArc.Application.Common;
 using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Domain.Entities;
-using CleanArc.Domain.Entities.Order;
+
 using CleanArc.Infrastructure.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,17 +10,14 @@ namespace CleanArc.Infrastructure.Persistence.Repositories;
 internal class ContactRepository : BaseAsyncRepository<T_CONTACT>, IContactRepository
 {
     private ApplicationDbContext _dbContext;
-
     public ContactRepository(ApplicationDbContext dbContext) : base(dbContext)
     {
         _dbContext = dbContext;
     }
-
     public async Task AddContactAsync(T_CONTACT contact)
     {
         await base.AddAsync(contact);
     }
-
     public async Task<PagedList<T_CONTACT>> GetAllContactsAsync(PaginationParams paginationParams)
     {
         var query = base.TableNoTracking.AsQueryable();
@@ -28,12 +25,10 @@ internal class ContactRepository : BaseAsyncRepository<T_CONTACT>, IContactRepos
         
         return result;
     }
-
     public async Task<T_CONTACT> GetContactById(int id)
     {
         return await base.TableNoTracking.FirstAsync(p=>p.ID_CONTACT == id);
     }
-
     public  async Task<bool> UpdateContactAsync(int id, T_CONTACT updatedContact)
     {
         var existingContact = await base.Table.FirstOrDefaultAsync(e => e.ID_CONTACT == id);
@@ -54,4 +49,30 @@ internal class ContactRepository : BaseAsyncRepository<T_CONTACT>, IContactRepos
         await base.UpdateAsync(existingContact);
         return true;
     }
+
+    public  async Task<T_CONTACT> VerifContactExists(int id)
+    {
+        return await base.TableNoTracking.FirstAsync(p=>p.ID_CONTACT == id);
+    }
+    public async Task<bool> ContactExistsTelAsync(int refIndiv, string phoneNumber)
+    {
+        return await base.TableNoTracking
+            .AnyAsync(c => c.REF_IND_CONTACT == refIndiv && c.TEL1_CONTACT == phoneNumber || c.TEL2_CONTACT == phoneNumber  );
+    }
+    public async Task<bool> ContactExistsEmailAsync(int refIndiv, string email)
+    {
+        return await base.TableNoTracking
+            .AnyAsync(c => c.REF_IND_CONTACT == refIndiv && c.MAIL1_COONTACT == email || c.MAIL2_COONTACT == email );
+    }
+    public async Task<bool> ContactExistsByPositionAsync(int refIndiv, int position)
+    {
+        
+     
+
+        return await base.TableNoTracking
+            .AnyAsync(c => c.REF_IND_CONTACT == refIndiv && 
+                           c.POS_CONTACT == position);
+    }
+
+
 }

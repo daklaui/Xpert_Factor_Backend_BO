@@ -5,6 +5,7 @@ namespace CleanArc.Application.Features.RIB.Queries.GetAllRibsByIndividuQueries;
 
 public class GetAllRibsByIndividuQueryResult: ICreateMapper<TR_RIB>
 {
+    public int ID_RIB { get; set; }
     public string RIB_RIB { get; set; }
 
     public int REF_IND_RIB { get; set; }

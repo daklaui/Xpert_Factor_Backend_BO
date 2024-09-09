@@ -17,7 +17,7 @@ internal class SearchAgencyQuery_Handler:IRequestHandler<SearchAgencyQuery,Opera
 
     public async  ValueTask<OperationResult<SearchAgencyQueryResult>> Handle(SearchAgencyQuery request, CancellationToken cancellationToken)
     {
-        var nomAgency = await _unitOfWork.AgencyBankRepository.RechercheAgence(request.id);
+        var nomAgency = await _unitOfWork.AgencyBankRepository.ResearchAgency(request.codeAgency);
         if (nomAgency == null)
         {
          return OperationResult<SearchAgencyQueryResult>.FailureResult("Bank not found");

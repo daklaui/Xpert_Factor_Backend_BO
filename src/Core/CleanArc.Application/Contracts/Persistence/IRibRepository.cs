@@ -9,7 +9,8 @@ namespace CleanArc.Application.Contracts.Persistence;
 public interface IRibRepository
 {
     Task<bool> AddRibAsync(TR_RIB rib);
-    Task<PagedList<TR_RIB>> GetAllRibsByIndividuAsync(int refIndRib, PaginationParams paginationParams);
-    Task<TR_RIB> GetRibById(string id);
-    Task<TR_RIB_DTO> EditRibIndividu(TR_RIB_DTO rib);
+    Task<PagedList<TR_RIB>> GetAllRibsAsync( PaginationParams paginationParams);
+    Task<TR_RIB> GetRibById(int id);
+    Task<TR_RIB> EditRibIndividu(int id, TR_RIB rib);
+    Task<TR_RIB> GetRibByRibValueAsync(string ribValue);
 }

@@ -16,28 +16,45 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
         {
             _dbContext = dbContext;
         }
-
         public async Task AddIndividualDTOAsync(IndividualDTO individualDTO)
         {
+
             await _dbContext.T_INDIVIDUs.AddAsync(individualDTO.Individu);
+            await _dbContext.SaveChangesAsync();
+
+            var generatedRefInd = await _dbContext.T_INDIVIDUs
+                .Where(p => p.NUM_DOC_ID_IND == individualDTO.Individu.NUM_DOC_ID_IND)
+                .Select(p => p.REF_IND)
+                .FirstOrDefaultAsync();
 
             if (individualDTO.TrRibs != null)
             {
+                foreach (var rib in individualDTO.TrRibs)
+                {
+                    rib.REF_IND_RIB = generatedRefInd;
+                }
                 await _dbContext.TR_RIBs.AddRangeAsync(individualDTO.TrRibs);
             }
 
             if (individualDTO.Contacts != null)
             {
+                foreach (var contact in individualDTO.Contacts)
+                {
+                    contact.REF_IND_CONTACT = generatedRefInd;
+                }
                 await _dbContext.T_CONTACTs.AddRangeAsync(individualDTO.Contacts);
             }
 
-            if (individualDTO.TsUsers != null && individualDTO.TsUsers.LOGIN_WEB != null)
+            if (individualDTO.TsUsers != null)
             {
+                individualDTO.TsUsers.REF_IND_WEB = generatedRefInd;
                 await _dbContext.TS_USERS_WEBs.AddAsync(individualDTO.TsUsers);
             }
 
             await _dbContext.SaveChangesAsync();
+            
         }
+
 
         public async Task<PagedList<T_INDIVIDU>> GetAllIndividusAsync(PaginationParams paginationParams)
         {
@@ -93,7 +110,6 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
             var contacts = await _dbContext.T_CONTACTs.Where(c => c.REF_IND_CONTACT == id).ToListAsync();
             var tsUsers = await _dbContext.TS_USERS_WEBs.FirstOrDefaultAsync(u => u.REF_IND_WEB == id);
 
-            // Map to IndividualDTO
             var individualDTO = new IndividualDTO
             {
                 Individu = individu,
@@ -103,9 +119,8 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
             };
 
             return individualDTO;
-        }
-
-       public async Task<bool> UpdateIndividuAsync(int id, IndividualDTO updatedIndividualDTO)
+        } 
+     public async Task<bool> UpdateIndividuAsync(int id, IndividualDTO updatedIndividualDTO)
 {
     var existingIndividu = await base.Table.FirstOrDefaultAsync(e => e.REF_IND == id);
 
@@ -114,7 +129,7 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
         throw new InvalidOperationException($"Individu with id {id} not found");
     }
 
-    // Update the T_INDIVIDU entity
+ 
     var updatedIndividu = updatedIndividualDTO.Individu;
     existingIndividu.GENRE_IND = updatedIndividu.GENRE_IND;
     existingIndividu.TYP_DOC_ID_IND = updatedIndividu.TYP_DOC_ID_IND;
@@ -156,6 +171,12 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
     {
         var existingTrRibs = await _dbContext.TR_RIBs.Where(r => r.REF_IND_RIB == id).ToListAsync();
         _dbContext.TR_RIBs.RemoveRange(existingTrRibs);
+
+        foreach (var rib in updatedIndividualDTO.TrRibs)
+        {
+            rib.REF_IND_RIB = id; 
+        }
+
         await _dbContext.TR_RIBs.AddRangeAsync(updatedIndividualDTO.TrRibs);
     }
 
@@ -163,6 +184,10 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
     {
         var existingContacts = await _dbContext.T_CONTACTs.Where(c => c.REF_IND_CONTACT == id).ToListAsync();
         _dbContext.T_CONTACTs.RemoveRange(existingContacts);
+        foreach (var contact in updatedIndividualDTO.Contacts)
+        {
+            contact.REF_IND_CONTACT = id;
+        }
         await _dbContext.T_CONTACTs.AddRangeAsync(updatedIndividualDTO.Contacts);
     }
 
@@ -172,7 +197,9 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
         if (existingTsUsers != null)
         {
             _dbContext.TS_USERS_WEBs.Remove(existingTsUsers);
+         
         }
+        updatedIndividualDTO.TsUsers.REF_IND_WEB = id;
         await _dbContext.TS_USERS_WEBs.AddAsync(updatedIndividualDTO.TsUsers);
     }
 
@@ -180,6 +207,9 @@ namespace CleanArc.Infrastructure.Persistence.Repositories
 
     return true;
 }
+       
+       
+       
         public async Task<List<AdherentDto>> GetAllAdherentsAsync()
         {
             var adherents = await _dbContext.T_INDIVIDUs

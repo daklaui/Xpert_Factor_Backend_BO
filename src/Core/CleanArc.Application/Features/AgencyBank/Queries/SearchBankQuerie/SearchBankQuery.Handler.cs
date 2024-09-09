@@ -17,7 +17,7 @@ internal class SearchBankQuery_Handler :IRequestHandler<SearchBankQuery,Operatio
 
     public async ValueTask<OperationResult<SearchBankQueryResult>> Handle(SearchBankQuery request, CancellationToken cancellationToken)
     {
-        var nomBanque = await _unitOfWork.AgencyBankRepository.RechercheBanque(request.id);
+        var nomBanque = await _unitOfWork.AgencyBankRepository.SearchBank(request.codeBank);
         
         if (nomBanque == null)
         {

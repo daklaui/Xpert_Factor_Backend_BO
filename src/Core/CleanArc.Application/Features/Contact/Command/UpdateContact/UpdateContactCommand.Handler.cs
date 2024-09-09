@@ -15,7 +15,8 @@ public class AddContactCommand_Handler:IRequestHandler<UpdateContactCommand,Oper
 
     public async ValueTask<OperationResult<bool>> Handle(UpdateContactCommand request, CancellationToken cancellationToken)
     {
-        await _unitOfWork.contactRepository.UpdateContactAsync(request.id, request.Contact);
+        var existingContact = await _unitOfWork.contactRepository.GetContactById(request.Contact.ID_CONTACT);
+        await _unitOfWork.contactRepository.UpdateContactAsync(existingContact.ID_CONTACT,request.Contact);
         await _unitOfWork.CommitAsync();
 
         return OperationResult<bool>.SuccessResult(true);
