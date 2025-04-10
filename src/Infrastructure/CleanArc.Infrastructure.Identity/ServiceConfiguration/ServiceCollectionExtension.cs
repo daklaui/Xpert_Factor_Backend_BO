@@ -1,19 +1,13 @@
-﻿using System.Security.Claims;
+using System.Security.Claims;
 using System.Text;
 using CleanArc.Application.Contracts;
 using CleanArc.Application.Contracts.Identity;
 using CleanArc.Application.Contracts.Persistence;
 using CleanArc.Application.Models.ApiResult;
-using CleanArc.Domain.Entities.User;
 using CleanArc.Infrastructure.Identity.Identity;
 using CleanArc.Infrastructure.Identity.Identity.Dtos;
 using CleanArc.Infrastructure.Identity.Identity.Extensions;
-using CleanArc.Infrastructure.Identity.Identity.Manager;
 using CleanArc.Infrastructure.Identity.Identity.PermissionManager;
-using CleanArc.Infrastructure.Identity.Identity.SeedDatabaseService;
-using CleanArc.Infrastructure.Identity.Identity.Store;
-using CleanArc.Infrastructure.Identity.Identity.validator;
-using CleanArc.Infrastructure.Identity.Jwt;
 using CleanArc.Infrastructure.Identity.UserManager;
 using CleanArc.Infrastructure.Persistence.Repositories;
 using CleanArc.SharedKernel.Extensions;
@@ -30,60 +24,22 @@ public static class ServiceCollectionExtension
 {
     public static IServiceCollection RegisterIdentityServices(this IServiceCollection services,IdentitySettings identitySettings)
     {
-        services.AddScoped<IJwtService, JwtService>();
-        services.AddScoped<IAppUserManager, AppUserManagerImplementation>();
-        services.AddScoped<ISeedDataBase, SeedDataBase>();
 
-        services.AddScoped<IUserValidator<User>, AppUserValidator>();
-        services.AddScoped<UserValidator<User>, AppUserValidator>();
 
-        services.AddScoped<IUserClaimsPrincipalFactory<User>, AppUserClaimsPrincipleFactory>();
 
-        services.AddScoped<IRoleValidator<Role>, AppRoleValidator>();
-        services.AddScoped<RoleValidator<Role>, AppRoleValidator>();
 
         services.AddScoped<IAuthorizationHandler, DynamicPermissionHandler>();
         services.AddScoped<IDynamicPermissionService, DynamicPermissionService>();
-        services.AddScoped<IRoleStore<Role>, RoleStore>();
-        services.AddScoped<IUserStore<User>, AppUserStore>();
-        services.AddScoped<IRoleManagerService, RoleManagerService>();
         
 
 
 
 
-        services.AddIdentity<User, Role>(options =>
-            {
-                options.Stores.ProtectPersonalData = false;
-
-                options.Password.RequireDigit = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequiredUniqueChars = 0;
-                options.Password.RequireUppercase = false;
-
-                options.SignIn.RequireConfirmedEmail = false;
-                options.SignIn.RequireConfirmedPhoneNumber = true;
-
-                options.Lockout.MaxFailedAccessAttempts = 5;
-                options.Lockout.AllowedForNewUsers = false;
-                options.User.RequireUniqueEmail = false;
-
-                //options.Stores.ProtectPersonalData = true;
-
-
-            }).AddUserStore<AppUserStore>()
-            .AddRoleStore<RoleStore>().
+       
             //.AddUserValidator<AppUserValidator>().
             //AddRoleValidator<AppRoleValidator>().
-            AddUserManager<AppUserManager>().
-            AddRoleManager<AppRoleManager>().
-            AddErrorDescriber<AppErrorDescriber>()
             //.AddClaimsPrincipalFactory<AppUserClaimsPrincipleFactory>()
-            .AddDefaultTokenProviders().
-            AddSignInManager<AppSignInManager>()
-            .AddDefaultTokenProviders()
-            .AddPasswordlessLoginTotpTokenProvider();
+     
 
 
         //For [ProtectPersonalData] Attribute In Identity
@@ -149,7 +105,6 @@ public static class ServiceCollectionExtension
                 },
                 OnTokenValidated = async context =>
                 {
-                    var signInManager = context.HttpContext.RequestServices.GetRequiredService<AppSignInManager>();
 
                     var claimsIdentity = context.Principal.Identity as ClaimsIdentity;
                     if (claimsIdentity.Claims?.Any() != true)
@@ -167,10 +122,7 @@ public static class ServiceCollectionExtension
                     //if (user.SecurityStamp != Guid.Parse(securityStamp))
                     //    context.Fail("Token secuirty stamp is not valid.");
 
-                    var validatedUser = await signInManager.ValidateSecurityStampAsync(context.Principal);
-                    if (validatedUser == null)
-                        context.Fail("Token secuirty stamp is not valid.");
-
+                    
                 },
                 OnChallenge = async context =>
                 {

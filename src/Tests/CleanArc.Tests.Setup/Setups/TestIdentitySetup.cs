@@ -21,9 +21,10 @@ namespace CleanArc.Tests.Setup.Setups;
 
 public abstract class TestIdentitySetup
 {
-    protected IAppUserManager TestAppUserManager { get; }
+    protected IAppUserManager TestAppUserManager { get; } 
     protected AppRoleManager TestAppRoleManager { get; }
     public AppSignInManager TestSignInManager { get; }
+    
     public IAppUserManager User { get; }
     public IJwtService JwtService { get; }
 

@@ -33,8 +33,24 @@ public interface IUnitOfWork
     public IDetAssRepository DetAssRepository { get; }
     public IFondGarantieRepository FondGarantieRepository { get; }
     public IT_DET_BORD_Repository TDetBordRepository { get; }
-    ITJ_DOCUMENT_DET_BORD_Repository TjDocumentDetBordRepository { get; }
+     public ITJ_DOCUMENT_DET_BORD_Repository TjDocumentDetBordRepository { get; }
     public IBordereauxRepository BordereauxRepository { get; }
+    public ITvaRepository TvaRepository { get; }
+    public ILettrageRepository LettrageRepository { get; }
+  
+    public  IActprofRepository ActprofRepository { get; }
+    public IHistoriqueRepository HistoriqueRepository { get; }
+    public IUserRepository UserRepository  { get; }
+    public IGroupSocietyRepository GroupSocietyRepository   { get; }
+    public IT_DOC_PHYSIQUERepositroy T_DOC_PHYSIQUERepositroy { get; }
+    public IT_SIGNATAIRES_DU_CONTRATRepository T_SIGNATAIRES_DU_CONTRATRepository { get; }
+    public ICOMMENTRepository COMMENTRepository { get; }
+    public IResoluRepository ResoluRepository{ get; }
+    public IRoleUser RoleUser { get; }
+    public ITR_CPRepository CpRepository { get; }
+    Task BeginTransactionAsync();
     Task CommitAsync();
-    ValueTask RollBackAsync();
+    Task RollbackAsync();
+    Task SaveChangesAsync();
+    Task CommitMultipleTransactionAsync();
 }
